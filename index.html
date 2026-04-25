@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Espresso">
+<meta name="theme-color" content="#1a0f0a">
+<title>Espresso Bewertung</title>
+<style>
+:root {
+  --bg: #1a0f0a;
+  --bg2: #241408;
+  --card: rgba(255,255,255,0.04);
+  --crema: #C8974A;
+  --crema2: rgba(200,151,74,0.15);
+  --cream: #F0E6CC;
+  --mid: #7a5a3a;
+  --light: #d4b896;
+  --border: rgba(200,151,74,0.25);
+  --border2: rgba(200,151,74,0.12);
+  --green: #5ab83a;
+  --red: #b83a3a;
+  --safe-top: env(safe-area-inset-top, 44px);
+  --safe-bot: env(safe-area-inset-bottom, 20px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Georgia', serif;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* App shell */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Header */
+#header {
+  padding: calc(var(--safe-top) + 10px) 18px 12px;
+  background: linear-gradient(180deg, #0e0705 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border2);
+  flex-shrink: 0;
+  text-align: center;
+}
+#header h1 {
+  font-size: 1.25rem;
+  color: var(--crema);
+  letter-spacing: 0.08em;
+  font-weight: normal;
+}
+#header p {
+  font-size: 0.58rem;
+  color: var(--mid);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Tab bar */
+#tabbar {
+  display: flex;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border2);
+  flex-shrink: 0;
+}
+.tab {
+  flex: 1;
+  padding: 10px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+}
+.tab.active {
+  color: var(--crema);
+  border-bottom-color: var(--crema);
+}
+
+/* Scroll area */
+#content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px 14px calc(var(--safe-bot) + 14px);
+}
+
+/* Kaffee pills */
+#kaffee-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+.pill {
+  font-family: 'Courier New', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 11px;
+  border-radius: 20px;
+  border: 1px solid var(--mid);
+  background: none;
+  color: var(--light);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.pill.has-data { border-color: var(--crema); color: var(--crema); }
+.pill.active { background: var(--crema); color: var(--bg); border-color: var(--crema); font-weight: bold; }
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+.card-title {
+  font-size: 0.95rem;
+  color: var(--crema);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.badge {
+  font-family: 'Courier New', monospace;
+  font-size: 0.55rem;
+  background: rgba(90,184,58,0.15);
+  border: 1px solid rgba(90,184,58,0.4);
+  color: var(--green);
+  padding: 2px 7px;
+  border-radius: 10px;
+  letter-spacing: 0.1em;
+}
+
+/* Section label */
+.sl {
+  font-family: 'Courier New', monospace;
+  font-size: 0.58rem;
+  color: var(--crema);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 14px 0 9px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sl::after { content:''; flex:1; height:1px; background: var(--border2); }
+
+/* Grid inputs */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 4px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; margin-bottom: 4px; }
+.field label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.55rem;
+  color: var(--mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+.field input[type=number], .field input[type=text] {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--cream);
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  padding: 9px 10px;
+  outline: none;
+  -webkit-appearance: none;
+}
+.field input:focus { border-color: var(--crema); }
+
+/* Ratio display */
+#ratio-display {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: var(--crema);
+  text-align: center;
+  margin: 8px 0 4px;
+  min-height: 18px;
+}
+
+/* Sliders */
+.slider-row { margin-bottom: 12px; }
+.slider-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.slider-name { font-size: 0.72rem; color: var(--light); }
+.slider-val { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--crema); font-weight: bold; }
+.slider-hints { display: flex; justify-content: space-between; font-family: 'Courier New', monospace; font-size: 0.52rem; color: var(--mid); margin-top: 2px; }
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 3px;
+  background: var(--border2);
+  border-radius: 2px;
+  outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--crema);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(200,151,74,0.5);
+}
+
+/* Aroma chips */
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 4px; }
+.chip {
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--mid);
+  background: none;
+  color: var(--light);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.chip.on { border-color: var(--crema); background: var(--crema2); color: var(--crema); }
+
+/* Stars */
+#stars { display: flex; gap: 10px; justify-content: center; margin: 4px 0 12px; }
+.star { font-size: 2rem; cursor: pointer; color: rgba(200,151,74,0.2); transition: color 0.12s; user-select: none; }
+.star.on { color: var(--crema); }
+
+/* Score display */
+#score-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px;
+  background: rgba(200,151,74,0.07);
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+#score-num {
+  font-size: 3rem;
+  color: var(--crema);
+  line-height: 1;
+}
+#score-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.58rem;
+  color: var(--mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--cream);
+  font-family: 'Georgia', serif;
+  font-size: 0.82rem;
+  padding: 9px 11px;
+  min-height: 54px;
+  resize: none;
+  outline: none;
+  margin-bottom: 4px;
+}
+textarea:focus { border-color: var(--crema); }
+
+/* Empfehlung */
+#empf-row { display: flex; gap: 8px; margin-bottom: 14px; }
+.empf-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: 1px solid var(--mid);
+  background: none;
+  color: var(--light);
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.empf-btn.ja.on  { background: #1e3d14; border-color: #4a9e2a; color: #8fdc5a; }
+.empf-btn.vl.on  { background: #3d2e10; border-color: var(--crema); color: var(--crema); }
+.empf-btn.nein.on{ background: #3d1414; border-color: #9e2a2a; color: #dc5a5a; }
+
+/* Save button */
+#btn-save {
+  width: 100%;
+  padding: 14px;
+  background: var(--crema);
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bold;
+  transition: opacity 0.2s;
+  margin-bottom: 8px;
+}
+#btn-save:disabled { opacity: 0.35; }
+#btn-reset {
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--mid);
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.62rem;
+  cursor: pointer;
+}
+
+/* Shot history */
+.shot-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border2);
+  border-radius: 9px;
+  padding: 9px 11px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+.shot-info { flex: 1; }
+.shot-main { font-family: 'Courier New', monospace; font-size: 0.68rem; color: var(--cream); line-height: 1.7; }
+.shot-meta { font-family: 'Courier New', monospace; font-size: 0.58rem; color: var(--mid); margin-top: 1px; }
+.shot-note { font-size: 0.62rem; color: var(--mid); font-style: italic; margin-top: 2px; }
+.shot-del { background: none; border: none; color: var(--mid); font-size: 1rem; cursor: pointer; padding: 2px 4px; flex-shrink: 0; }
+.shots-footer { font-family: 'Courier New', monospace; font-size: 0.58rem; color: var(--mid); text-align: right; margin-top: 4px; }
+
+/* Rangliste */
+.rank-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rank-item.top { border-color: rgba(200,151,74,0.5); }
+.rank-num { font-size: 1.5rem; color: rgba(200,151,74,0.3); min-width: 28px; text-align: center; }
+.rank-item.top .rank-num { color: var(--crema); }
+.rank-info { flex: 1; }
+.rank-name { font-size: 0.78rem; color: var(--cream); margin-bottom: 3px; }
+.rank-detail { font-family: 'Courier New', monospace; font-size: 0.58rem; color: var(--mid); line-height: 1.8; }
+.rank-score { font-size: 1.6rem; color: var(--crema); }
+.rank-bar-wrap { height: 3px; background: var(--border2); border-radius: 2px; margin-top: 5px; }
+.rank-bar { height: 100%; background: var(--crema); border-radius: 2px; transition: width 0.6s ease; }
+.warn { font-family: 'Courier New', monospace; font-size: 0.55rem; color: var(--mid); margin-top: 2px; }
+
+/* Ref box */
+.ref-box {
+  background: rgba(200,151,74,0.06);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 13px;
+  margin-bottom: 14px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.62rem;
+  color: var(--light);
+  line-height: 2;
+}
+.ref-box span { color: var(--crema); }
+
+.empty { text-align: center; color: var(--mid); font-family: 'Courier New', monospace; font-size: 0.68rem; padding: 32px 0; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="header">
+    <h1>☕ Espresso Bewertung</h1>
+    <p>Lelit Victoria · Eureka Libra · Doppio</p>
+  </div>
+  <div id="tabbar">
+    <button class="tab active" data-tab="bewertung" onclick="switchTab('bewertung')">Bewertung</button>
+    <button class="tab" data-tab="rangliste" onclick="switchTab('rangliste')">Rangliste</button>
+  </div>
+  <div id="content">
+    <!-- Bewertung Tab -->
+    <div id="tab-bewertung">
+      <div class="ref-box">
+        <span>Ref A:</span> 18g→36g / 30s = 1:2 · kräftig<br>
+        <span>Ref B ★:</span> 18g→42g / 30s = 1:2,33 · Sweetspot<br>
+        <span>Profil:</span> wenig Säure · wenig Asche · cremig
+      </div>
+
+      <div id="kaffee-pills"></div>
+
+      <div id="form-area" style="display:none">
+        <div class="card">
+          <div class="card-title">
+            <span id="form-kaffee-name"></span>
+            <span id="form-badge" class="badge" style="display:none"></span>
+          </div>
+
+          <div class="sl">Bezug</div>
+          <div class="grid2">
+            <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="18" step="0.1" inputmode="decimal"></div>
+            <div class="field"><label>Yield Aus (g)</label><input type="number" id="f-doseOut" placeholder="z.B. 42" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
+            <div class="field"><label>Zeit (Sek)</label><input type="number" id="f-zeit" placeholder="z.B. 30" inputmode="numeric"></div>
+            <div class="field"><label>Mahlgrad</label><input type="number" id="f-mahlgrad" placeholder="z.B. 12" inputmode="decimal" step="0.5"></div>
+            <div class="field"><label>Brühtemp (°C)</label><input type="number" id="f-temp" placeholder="z.B. 93" inputmode="numeric"></div>
+          </div>
+          <div id="ratio-display"></div>
+
+          <div class="sl">Geschmack</div>
+          <div id="sliders"></div>
+
+          <div class="sl">Aromen</div>
+          <div class="chips" id="aromen-chips"></div>
+
+          <div class="sl">Crema</div>
+          <div class="chips" id="crema-chips"></div>
+
+          <div class="sl">Gesamteindruck</div>
+          <div id="stars"></div>
+
+          <div id="score-display" style="display:none">
+            <div id="score-num">–</div>
+            <div id="score-label">Gesamtpunkte<br><span style="font-size:0.55rem;opacity:0.6">von 100</span></div>
+          </div>
+
+          <div class="sl">Notizen</div>
+          <textarea id="f-notizen" placeholder="Freie Notizen, Verbesserungsideen…"></textarea>
+
+          <div class="sl">Wieder kaufen?</div>
+          <div id="empf-row">
+            <button class="empf-btn ja" onclick="setEmpf('ja')">✓ Ja</button>
+            <button class="empf-btn vl" onclick="setEmpf('vl')">? Vielleicht</button>
+            <button class="empf-btn nein" onclick="setEmpf('nein')">✗ Nein</button>
+          </div>
+
+          <button id="btn-save" onclick="saveShot()" disabled>Bezug speichern</button>
+          <button id="btn-reset" onclick="resetForm()">↺ Formular leeren</button>
+        </div>
+
+        <div class="card" id="history-card" style="display:none">
+          <div class="card-title">Gespeicherte Bezüge</div>
+          <div id="history-list"></div>
+        </div>
+      </div>
+      <div id="no-selection" class="empty">Kaffee oben antippen ↑</div>
+    </div>
+
+    <!-- Rangliste Tab -->
+    <div id="tab-rangliste" style="display:none">
+      <div id="rank-list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const KAFFEES = ["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia"];
+const AROMEN  = ["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz"];
+const CREMAS  = ["Dicht & Haselnuss ✓","Dunkel & Stark","Hell & Dünn","Grobporig"];
+const SLIDERS = [
+  {id:"saeure",  label:"Säure",           lo:"niedrig", hi:"hoch"},
+  {id:"bitter",  label:"Bitterkeit",      lo:"mild",    hi:"stark"},
+  {id:"suesse",  label:"Süße",            lo:"kaum",    hi:"ausgeprägt"},
+  {id:"koerper", label:"Körper/Cremigkeit",lo:"dünn",   hi:"vollmundig"},
+  {id:"nachklang",label:"Nachklang",      lo:"kurz",    hi:"lang"},
+];
+const KEY = "espresso_pwa_v1";
+
+let data = {};
+let curKaffee = null;
+let curSterne = 0;
+let curEmpf = null;
+let curAromen = [];
+let curCrema = null;
+
+// Load
+try { const s = localStorage.getItem(KEY); if(s) data = JSON.parse(s); } catch(e){}
+
+function save() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){} }
+
+// Build sliders
+const slidersEl = document.getElementById('sliders');
+SLIDERS.forEach(sl => {
+  slidersEl.innerHTML += `
+    <div class="slider-row">
+      <div class="slider-header">
+        <span class="slider-name">${sl.label}</span>
+        <span class="slider-val" id="sv-${sl.id}">5</span>
+      </div>
+      <input type="range" min="1" max="10" value="5" id="sr-${sl.id}" oninput="onSlider('${sl.id}')">
+      <div class="slider-hints"><span>${sl.lo}</span><span>${sl.hi}</span></div>
+    </div>`;
+});
+
+// Build aroma chips
+const aromaEl = document.getElementById('aromen-chips');
+AROMEN.forEach(a => {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.textContent = a; b.dataset.val = a;
+  b.onclick = () => {
+    const i = curAromen.indexOf(a);
+    if(i>=0) curAromen.splice(i,1); else curAromen.push(a);
+    b.classList.toggle('on', curAromen.includes(a));
+    updateScore();
+  };
+  aromaEl.appendChild(b);
+});
+
+// Build crema chips
+const cremaEl = document.getElementById('crema-chips');
+CREMAS.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.textContent = c; b.dataset.val = c;
+  b.onclick = () => {
+    curCrema = c;
+    document.querySelectorAll('#crema-chips .chip').forEach(x => x.classList.toggle('on', x.dataset.val===c));
+    updateScore();
+  };
+  cremaEl.appendChild(b);
+});
+
+// Build stars
+const starsEl = document.getElementById('stars');
+for(let i=1;i<=5;i++){
+  const s = document.createElement('span');
+  s.className='star'; s.textContent='★'; s.dataset.v=i;
+  s.onclick=()=>{ curSterne=i; updateStars(); updateScore(); document.getElementById('btn-save').disabled=false; };
+  starsEl.appendChild(s);
+}
+
+function updateStars() {
+  document.querySelectorAll('.star').forEach(s => s.classList.toggle('on', parseInt(s.dataset.v)<=curSterne));
+}
+
+function onSlider(id) {
+  document.getElementById('sv-'+id).textContent = document.getElementById('sr-'+id).value;
+  updateScore();
+}
+
+function calcScore() {
+  if(!curSterne) return 0;
+  const g = v => parseInt(document.getElementById('sr-'+v).value);
+  const geschmack = (10-g('saeure'))*1.5 + (10-g('bitter'))*1.0 + g('suesse')*1.5 + g('koerper')*1.5 + g('nachklang')*1.0;
+  return Math.round((geschmack/65)*70 + (curSterne/5)*30);
+}
+
+function updateScore() {
+  if(!curSterne) { document.getElementById('score-display').style.display='none'; return; }
+  const sc = calcScore();
+  document.getElementById('score-num').textContent = sc;
+  document.getElementById('score-display').style.display='flex';
+}
+
+function updateRatio() {
+  const dIn  = parseFloat(document.getElementById('f-doseIn').value)||18;
+  const dOut = parseFloat(document.getElementById('f-doseOut').value)||0;
+  const el = document.getElementById('ratio-display');
+  if(!dOut){ el.textContent=''; return; }
+  const r = dOut/dIn;
+  let tag = '';
+  if(r>=2.2&&r<=2.5) tag=' ★ Sweetspot';
+  else if(r<2) tag=' → zu kurz';
+  else if(r>2.7) tag=' → zu lang';
+  el.textContent = `Ratio 1:${r.toFixed(2)}${tag}`;
+}
+
+function setEmpf(v) {
+  curEmpf = v;
+  document.querySelectorAll('.empf-btn').forEach(b => b.classList.remove('on'));
+  document.querySelector(`.empf-btn.${v}`).classList.add('on');
+}
+
+// Build kaffee pills
+function buildPills() {
+  const el = document.getElementById('kaffee-pills');
+  el.innerHTML = '';
+  KAFFEES.forEach(k => {
+    const cnt = (data[k]||[]).length;
+    const b = document.createElement('button');
+    b.className = 'pill' + (cnt>0?' has-data':'') + (curKaffee===k?' active':'');
+    b.textContent = k + (cnt>0?` (${cnt})`:'');
+    b.onclick = () => selectKaffee(k);
+    el.appendChild(b);
+  });
+}
+
+function selectKaffee(k) {
+  curKaffee = k;
+  resetForm();
+  document.getElementById('no-selection').style.display='none';
+  document.getElementById('form-area').style.display='block';
+  document.getElementById('form-kaffee-name').textContent = k;
+  const shots = data[k]||[];
+  const badge = document.getElementById('form-badge');
+  if(shots.length>0){ badge.textContent=`${shots.length} Bezug${shots.length>1?'e':''}`; badge.style.display='inline-block'; }
+  else badge.style.display='none';
+  buildPills();
+  renderHistory();
+}
+
+function resetForm() {
+  curSterne=0; curEmpf=null; curAromen=[]; curCrema=null;
+  document.getElementById('f-doseIn').value='18';
+  document.getElementById('f-doseOut').value='';
+  document.getElementById('f-zeit').value='';
+  document.getElementById('f-mahlgrad').value='';
+  document.getElementById('f-temp').value='';
+  document.getElementById('f-notizen').value='';
+  document.getElementById('ratio-display').textContent='';
+  SLIDERS.forEach(sl => {
+    document.getElementById('sr-'+sl.id).value=5;
+    document.getElementById('sv-'+sl.id).textContent=5;
+  });
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  updateStars();
+  document.getElementById('score-display').style.display='none';
+  document.querySelectorAll('.empf-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('btn-save').disabled=true;
+}
+
+function saveShot() {
+  if(!curKaffee||!curSterne) return;
+  const doseIn  = parseFloat(document.getElementById('f-doseIn').value)||18;
+  const doseOut = parseFloat(document.getElementById('f-doseOut').value)||0;
+  const now = new Date();
+  const ts = now.toLocaleDateString('de-DE')+' '+now.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+  const shot = {
+    doseIn, doseOut,
+    zeit:     document.getElementById('f-zeit').value,
+    mahlgrad: document.getElementById('f-mahlgrad').value,
+    temp:     document.getElementById('f-temp').value,
+    ratio:    doseOut?(doseOut/doseIn).toFixed(2):null,
+    saeure:   parseInt(document.getElementById('sr-saeure').value),
+    bitter:   parseInt(document.getElementById('sr-bitter').value),
+    suesse:   parseInt(document.getElementById('sr-suesse').value),
+    koerper:  parseInt(document.getElementById('sr-koerper').value),
+    nachklang:parseInt(document.getElementById('sr-nachklang').value),
+    aromen: [...curAromen], crema: curCrema,
+    sterne: curSterne, empfehlung: curEmpf,
+    notizen: document.getElementById('f-notizen').value,
+    score: calcScore(), ts
+  };
+  if(!data[curKaffee]) data[curKaffee]=[];
+  data[curKaffee].push(shot);
+  save();
+  selectKaffee(curKaffee);
+  // haptic if available
+  if(navigator.vibrate) navigator.vibrate(30);
+}
+
+function deleteShot(k, idx) {
+  if(!confirm('Bezug löschen?')) return;
+  data[k].splice(idx,1);
+  if(!data[k].length) delete data[k];
+  save();
+  selectKaffee(k);
+  renderRangliste();
+}
+
+function renderHistory() {
+  const shots = data[curKaffee]||[];
+  const card = document.getElementById('history-card');
+  const list = document.getElementById('history-list');
+  if(!shots.length){ card.style.display='none'; return; }
+  card.style.display='block';
+  list.innerHTML = shots.map((s,i) => `
+    <div class="shot-item">
+      <div class="shot-info">
+        <div class="shot-main">#${i+1} · ${s.doseIn}g → <strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG ${s.mahlgrad||'?'}${s.temp?` · ${s.temp}°C`:''} · ${'★'.repeat(s.sterne)}</div>
+        <div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}${s.empfehlung?' · '+(s.empfehlung==='ja'?'✓':s.empfehlung==='nein'?'✗':'?'):''}</div>
+        ${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}
+      </div>
+      <button class="shot-del" onclick="deleteShot('${curKaffee}',${i})">✕</button>
+    </div>
+  `).join('');
+
+  if(shots.length>1){
+    const avgS = Math.round(shots.reduce((a,s)=>a+s.score,0)/shots.length);
+    const best = Math.max(...shots.map(s=>s.score));
+    list.innerHTML += `<div class="shots-footer">Ø Score ${avgS} · Bester ${best} · Top-3 Ø ${top3Avg(shots)}</div>`;
+  }
+}
+
+function top3Avg(shots) {
+  const top = [...shots].sort((a,b)=>b.score-a.score).slice(0,3);
+  return Math.round(top.reduce((a,s)=>a+s.score,0)/top.length);
+}
+
+function renderRangliste() {
+  const el = document.getElementById('rank-list');
+  const entries = Object.entries(data).map(([name,shots])=>{
+    const sorted = [...shots].sort((a,b)=>b.score-a.score);
+    const top = sorted.slice(0,3);
+    const rankScore = top3Avg(shots);
+    const best = sorted[0];
+    const ratios = top.map(s=>s.ratio).filter(Boolean);
+    const avgRatio = ratios.length?(ratios.reduce((a,r)=>a+parseFloat(r),0)/ratios.length).toFixed(2):null;
+    return {name,best,rankScore,count:shots.length,avgRatio,topCount:top.length};
+  }).sort((a,b)=>b.rankScore-a.rankScore);
+
+  if(!entries.length){ el.innerHTML='<div class="empty">Noch keine Bewertungen gespeichert.</div>'; return; }
+  const max = entries[0].rankScore;
+  el.innerHTML = entries.map(({name,best,rankScore,count,avgRatio,topCount},i)=>`
+    <div class="rank-item${i===0?' top':''}">
+      <div class="rank-num">${i+1}</div>
+      <div class="rank-info">
+        <div class="rank-name">${name}</div>
+        <div class="rank-detail">
+          Bester: ${best.doseIn}g→${best.doseOut||'?'}g · ${best.zeit||'?'}s${best.temp?` · ${best.temp}°C`:''} · ${'★'.repeat(best.sterne)}<br>
+          ${count} Bezug${count>1?'e':''} · Top-${topCount} Ø <strong style="color:var(--crema)">${rankScore}</strong>${avgRatio?` · Ø 1:${avgRatio}`:''}
+        </div>
+        ${count<3?`<div class="warn">⚠ Noch ${3-count} Bezug${3-count>1?'e':''} für vollständige Top-3</div>`:''}
+        <div class="rank-bar-wrap"><div class="rank-bar" style="width:${(rankScore/max)*100}%"></div></div>
+      </div>
+      <div class="rank-score">${rankScore}</div>
+    </div>
+  `).join('');
+}
+
+function switchTab(t) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab===t));
+  document.getElementById('tab-bewertung').style.display = t==='bewertung'?'block':'none';
+  document.getElementById('tab-rangliste').style.display = t==='rangliste'?'block':'none';
+  if(t==='rangliste') renderRangliste();
+}
+
+// Init
+buildPills();
+</script>
+</body>
+</html>
