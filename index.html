@@ -36,15 +36,8 @@ html, body {
   overflow: hidden;
 }
 
-/* App shell */
-#app {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  height: 100dvh;
-}
+#app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
 
-/* Header */
 #header {
   padding: calc(var(--safe-top) + 10px) 18px 12px;
   background: linear-gradient(180deg, #0e0705 0%, var(--bg) 100%);
@@ -52,321 +45,226 @@ html, body {
   flex-shrink: 0;
   text-align: center;
 }
-#header h1 {
-  font-size: 1.25rem;
-  color: var(--crema);
-  letter-spacing: 0.08em;
-  font-weight: normal;
-}
-#header p {
-  font-size: 0.58rem;
-  color: var(--mid);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-top: 2px;
-  font-family: 'Courier New', monospace;
-}
+#header h1 { font-size: 1.25rem; color: var(--crema); letter-spacing: 0.08em; font-weight: normal; }
+#header p { font-size: 0.58rem; color: var(--mid); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 2px; font-family: 'Courier New', monospace; }
 
-/* Tab bar */
-#tabbar {
-  display: flex;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border2);
-  flex-shrink: 0;
-}
+#tabbar { display: flex; background: var(--bg2); border-bottom: 1px solid var(--border2); flex-shrink: 0; }
 .tab {
-  flex: 1;
-  padding: 10px 0;
-  font-family: 'Courier New', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--mid);
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: all 0.2s;
-  border-bottom: 2px solid transparent;
+  flex: 1; padding: 10px 0;
+  font-family: 'Courier New', monospace; font-size: 0.58rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--mid);
+  border: none; background: none; cursor: pointer;
+  transition: all 0.2s; border-bottom: 2px solid transparent;
 }
-.tab.active {
-  color: var(--crema);
-  border-bottom-color: var(--crema);
-}
+.tab.active { color: var(--crema); border-bottom-color: var(--crema); }
 
-/* Scroll area */
-#content {
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 14px 14px calc(var(--safe-bot) + 14px);
-}
+#content { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 14px 14px calc(var(--safe-bot) + 14px); }
 
-/* Kaffee pills */
-#kaffee-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 16px;
-  justify-content: center;
-}
+#kaffee-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; justify-content: center; }
 .pill {
-  font-family: 'Courier New', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 7px 11px;
-  border-radius: 20px;
-  border: 1px solid var(--mid);
-  background: none;
-  color: var(--light);
-  cursor: pointer;
-  transition: all 0.18s;
+  font-family: 'Courier New', monospace; font-size: 0.58rem; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 7px 11px; border-radius: 20px;
+  border: 1px solid var(--mid); background: none; color: var(--light);
+  cursor: pointer; transition: all 0.18s;
 }
 .pill.has-data { border-color: var(--crema); color: var(--crema); }
 .pill.active { background: var(--crema); color: var(--bg); border-color: var(--crema); font-weight: bold; }
 
-/* Cards */
 .card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 14px;
-  margin-bottom: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 14px; margin-bottom: 14px;
 }
 .card-title {
-  font-size: 0.95rem;
-  color: var(--crema);
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border2);
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 0.95rem; color: var(--crema); margin-bottom: 12px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border2);
+  display: flex; align-items: center; gap: 8px;
 }
 .badge {
-  font-family: 'Courier New', monospace;
-  font-size: 0.55rem;
-  background: rgba(90,184,58,0.15);
-  border: 1px solid rgba(90,184,58,0.4);
-  color: var(--green);
-  padding: 2px 7px;
-  border-radius: 10px;
-  letter-spacing: 0.1em;
+  font-family: 'Courier New', monospace; font-size: 0.55rem;
+  background: rgba(90,184,58,0.15); border: 1px solid rgba(90,184,58,0.4);
+  color: var(--green); padding: 2px 7px; border-radius: 10px; letter-spacing: 0.1em;
 }
 
-/* Section label */
 .sl {
-  font-family: 'Courier New', monospace;
-  font-size: 0.58rem;
-  color: var(--crema);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin: 14px 0 9px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-family: 'Courier New', monospace; font-size: 0.58rem; color: var(--crema);
+  letter-spacing: 0.18em; text-transform: uppercase; margin: 14px 0 9px;
+  display: flex; align-items: center; gap: 8px;
 }
-.sl::after { content:''; flex:1; height:1px; background: var(--border2); }
+.sl::after { content: ''; flex: 1; height: 1px; background: var(--border2); }
 
-/* Grid inputs */
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 4px; }
-.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; margin-bottom: 4px; }
 .field label {
-  font-family: 'Courier New', monospace;
-  font-size: 0.55rem;
-  color: var(--mid);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 4px;
+  font-family: 'Courier New', monospace; font-size: 0.55rem; color: var(--mid);
+  letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 4px;
 }
 .field input[type=number], .field input[type=text] {
-  width: 100%;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--cream);
-  font-family: 'Courier New', monospace;
-  font-size: 1rem;
-  padding: 9px 10px;
-  outline: none;
-  -webkit-appearance: none;
+  width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--cream); font-family: 'Courier New', monospace;
+  font-size: 1rem; padding: 9px 10px; outline: none; -webkit-appearance: none;
 }
 .field input:focus { border-color: var(--crema); }
 
-/* Ratio display */
+.prefilled { color: var(--crema) !important; opacity: 0.7; }
+
 #ratio-display {
+  font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--crema);
+  text-align: center; margin: 8px 0 4px; min-height: 18px;
+}
+
+#live-tip {
+  margin: 10px 0 6px;
+  padding: 10px 12px;
+  background: rgba(200,151,74,0.08);
+  border: 1px dashed var(--border);
+  border-left: 3px solid var(--crema);
+  border-radius: 6px;
+  font-size: 0.7rem;
+  color: var(--light);
+  line-height: 1.6;
+}
+#live-tip strong {
+  display: block;
   font-family: 'Courier New', monospace;
-  font-size: 0.72rem;
+  font-size: 0.55rem;
   color: var(--crema);
-  text-align: center;
-  margin: 8px 0 4px;
-  min-height: 18px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+#live-tip .live-tip-item { margin-top: 6px; }
+#live-tip .live-tip-item:first-of-type { margin-top: 0; }
+
+.dot-row { margin-bottom: 13px; }
+.dot-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; gap: 6px; }
+.dot-name { font-size: 0.72rem; color: var(--light); display: flex; align-items: center; gap: 6px; }
+.info-btn {
+  background: rgba(200,151,74,0.15); border: 1px solid var(--border);
+  color: var(--crema); width: 16px; height: 16px; border-radius: 50%;
+  font-size: 0.58rem; cursor: pointer; display: inline-flex;
+  align-items: center; justify-content: center; padding: 0;
+  font-family: 'Georgia', serif; font-style: italic;
+}
+.dot-hints { display: flex; justify-content: space-between; font-family: 'Courier New', monospace; font-size: 0.52rem; color: var(--mid); margin-top: 4px; }
+.dot-selector { display: flex; gap: 7px; align-items: center; }
+.dot-btn {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--mid);
+  background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Courier New', monospace; font-size: 0.6rem; color: var(--mid);
+  transition: all 0.12s; flex-shrink: 0;
+}
+.dot-btn.on {
+  background: var(--crema); border-color: var(--crema); color: var(--bg);
+  font-weight: bold;
+}
+.dot-btn.half-on {
+  background: var(--crema2); border-color: var(--crema); color: var(--crema);
 }
 
-/* Sliders */
-.slider-row { margin-bottom: 12px; }
-.slider-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
-.slider-name { font-size: 0.72rem; color: var(--light); }
-.slider-val { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--crema); font-weight: bold; }
-.slider-hints { display: flex; justify-content: space-between; font-family: 'Courier New', monospace; font-size: 0.52rem; color: var(--mid); margin-top: 2px; }
-input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 3px;
-  background: var(--border2);
-  border-radius: 2px;
-  outline: none;
-}
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--crema);
-  cursor: pointer;
-  box-shadow: 0 0 6px rgba(200,151,74,0.5);
-}
-
-/* Aroma chips */
 .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 4px; }
 .chip {
-  font-family: 'Courier New', monospace;
-  font-size: 0.6rem;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid var(--mid);
-  background: none;
-  color: var(--light);
-  cursor: pointer;
-  transition: all 0.15s;
+  font-family: 'Courier New', monospace; font-size: 0.6rem;
+  padding: 6px 10px; border-radius: 6px; border: 1px solid var(--mid);
+  background: none; color: var(--light); cursor: pointer; transition: all 0.15s;
 }
 .chip.on { border-color: var(--crema); background: var(--crema2); color: var(--crema); }
 
-/* Stars */
 #stars { display: flex; gap: 10px; justify-content: center; margin: 4px 0 12px; }
 .star { font-size: 2rem; cursor: pointer; color: rgba(200,151,74,0.2); transition: color 0.12s; user-select: none; }
 .star.on { color: var(--crema); }
 
-/* Score display */
 #score-display {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 14px;
-  background: rgba(200,151,74,0.07);
-  border-radius: 10px;
-  margin-bottom: 12px;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 14px; background: rgba(200,151,74,0.07); border-radius: 10px; margin-bottom: 12px;
 }
-#score-num {
-  font-size: 3rem;
-  color: var(--crema);
-  line-height: 1;
-}
-#score-label {
-  font-family: 'Courier New', monospace;
-  font-size: 0.58rem;
-  color: var(--mid);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
+#score-num { font-size: 3rem; color: var(--crema); line-height: 1; }
+#score-label { font-family: 'Courier New', monospace; font-size: 0.58rem; color: var(--mid); letter-spacing: 0.1em; text-transform: uppercase; }
 
-/* Textarea */
 textarea {
-  width: 100%;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--cream);
-  font-family: 'Georgia', serif;
-  font-size: 0.82rem;
-  padding: 9px 11px;
-  min-height: 54px;
-  resize: none;
-  outline: none;
-  margin-bottom: 4px;
+  width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--cream); font-family: 'Georgia', serif;
+  font-size: 0.82rem; padding: 9px 11px; min-height: 54px; resize: none;
+  outline: none; margin-bottom: 4px;
 }
 textarea:focus { border-color: var(--crema); }
 
-/* Empfehlung */
 #empf-row { display: flex; gap: 8px; margin-bottom: 14px; }
 .empf-btn {
-  flex: 1;
-  padding: 10px 0;
-  border-radius: 8px;
-  border: 1px solid var(--mid);
-  background: none;
-  color: var(--light);
-  font-family: 'Courier New', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.15s;
+  flex: 1; padding: 10px 0; border-radius: 8px; border: 1px solid var(--mid);
+  background: none; color: var(--light);
+  font-family: 'Courier New', monospace; font-size: 0.6rem;
+  letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.15s;
 }
-.empf-btn.ja.on  { background: #1e3d14; border-color: #4a9e2a; color: #8fdc5a; }
-.empf-btn.vl.on  { background: #3d2e10; border-color: var(--crema); color: var(--crema); }
-.empf-btn.nein.on{ background: #3d1414; border-color: #9e2a2a; color: #dc5a5a; }
+.empf-btn.ja.on { background: #1e3d14; border-color: #4a9e2a; color: #8fdc5a; }
+.empf-btn.vl.on { background: #3d2e10; border-color: var(--crema); color: var(--crema); }
+.empf-btn.nein.on { background: #3d1414; border-color: #9e2a2a; color: #dc5a5a; }
 
-/* Save button */
 #btn-save {
-  width: 100%;
-  padding: 14px;
-  background: var(--crema);
-  color: var(--bg);
-  border: none;
-  border-radius: 10px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: bold;
-  transition: opacity 0.2s;
-  margin-bottom: 8px;
+  width: 100%; padding: 14px; background: var(--crema); color: var(--bg);
+  border: none; border-radius: 10px; font-family: 'Courier New', monospace;
+  font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; font-weight: bold; transition: opacity 0.2s; margin-bottom: 8px;
 }
 #btn-save:disabled { opacity: 0.35; }
 #btn-reset {
-  width: 100%;
-  padding: 10px;
-  background: none;
-  border: 1px solid var(--border2);
-  color: var(--mid);
-  border-radius: 8px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.62rem;
-  cursor: pointer;
+  width: 100%; padding: 10px; background: none; border: 1px solid var(--border2);
+  color: var(--mid); border-radius: 8px; font-family: 'Courier New', monospace;
+  font-size: 0.62rem; cursor: pointer;
 }
 
-/* Shot history */
 .shot-item {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border2);
-  border-radius: 9px;
-  padding: 9px 11px;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border2);
+  border-radius: 9px; padding: 9px 11px; margin-bottom: 8px;
 }
+.shot-row-top { display: flex; align-items: flex-start; gap: 9px; }
 .shot-info { flex: 1; }
 .shot-main { font-family: 'Courier New', monospace; font-size: 0.68rem; color: var(--cream); line-height: 1.7; }
 .shot-meta { font-family: 'Courier New', monospace; font-size: 0.58rem; color: var(--mid); margin-top: 1px; }
 .shot-note { font-size: 0.62rem; color: var(--mid); font-style: italic; margin-top: 2px; }
 .shot-del { background: none; border: none; color: var(--mid); font-size: 1rem; cursor: pointer; padding: 2px 4px; flex-shrink: 0; }
+.shot-tip {
+  margin-top: 8px; padding: 8px 10px; background: rgba(200,151,74,0.07);
+  border-left: 2px solid var(--crema); border-radius: 4px;
+  font-size: 0.65rem; color: var(--light); line-height: 1.5;
+}
+.shot-tip strong { color: var(--crema); display: block; margin-bottom: 2px; font-family: 'Courier New', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.shot-tip-followup {
+  margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border2);
+  font-size: 0.62rem; color: var(--mid);
+}
+.shot-tip-followup .yn-row { display: flex; gap: 6px; margin-top: 4px; }
+.shot-tip-followup button {
+  flex: 1; padding: 5px; background: none; border: 1px solid var(--mid);
+  color: var(--light); border-radius: 4px; font-family: 'Courier New', monospace;
+  font-size: 0.56rem; cursor: pointer;
+}
+.shot-tip-followup button:hover { border-color: var(--crema); color: var(--crema); }
+.shot-tip-resolved { color: var(--green); font-style: italic; }
+
+.shot-compare {
+  margin-top: 7px; padding: 7px 10px;
+  background: rgba(255,255,255,0.03);
+  border-left: 2px solid var(--mid);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.62rem; color: var(--mid); line-height: 1.6;
+}
+.shot-compare strong {
+  display: block; font-size: 0.52rem; color: var(--mid);
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2px;
+}
+.shot-compare.best {
+  border-left-color: var(--crema); color: var(--crema);
+  background: rgba(200,151,74,0.06);
+}
+
 .shots-footer { font-family: 'Courier New', monospace; font-size: 0.58rem; color: var(--mid); text-align: right; margin-top: 4px; }
 
-/* Rangliste */
 .rank-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 14px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 14px; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 12px;
 }
 .rank-item.top { border-color: rgba(200,151,74,0.5); }
 .rank-num { font-size: 1.5rem; color: rgba(200,151,74,0.3); min-width: 28px; text-align: center; }
@@ -379,21 +277,67 @@ textarea:focus { border-color: var(--crema); }
 .rank-bar { height: 100%; background: var(--crema); border-radius: 2px; transition: width 0.6s ease; }
 .warn { font-family: 'Courier New', monospace; font-size: 0.55rem; color: var(--mid); margin-top: 2px; }
 
-/* Ref box */
 .ref-box {
-  background: rgba(200,151,74,0.06);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 13px;
-  margin-bottom: 14px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.62rem;
-  color: var(--light);
-  line-height: 2;
+  background: rgba(200,151,74,0.06); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 13px; margin-bottom: 14px;
+  font-family: 'Courier New', monospace; font-size: 0.62rem; color: var(--light); line-height: 2;
 }
 .ref-box span { color: var(--crema); }
 
+/* Stats card */
+.stats-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stats-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border2); border-radius: 8px; padding: 11px; }
+.stats-label { font-family: 'Courier New', monospace; font-size: 0.55rem; color: var(--mid); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+.stats-value { font-size: 1.3rem; color: var(--crema); font-family: 'Georgia', serif; }
+.stats-sub { font-family: 'Courier New', monospace; font-size: 0.55rem; color: var(--light); margin-top: 2px; }
+
+/* All shots list */
+.all-shot-item {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border2);
+  border-radius: 9px; padding: 10px 12px; margin-bottom: 7px;
+}
+.all-shot-name { font-size: 0.74rem; color: var(--crema); margin-bottom: 3px; }
+.all-shot-detail { font-family: 'Courier New', monospace; font-size: 0.6rem; color: var(--cream); line-height: 1.6; }
+.all-shot-meta { font-family: 'Courier New', monospace; font-size: 0.55rem; color: var(--mid); margin-top: 2px; }
+
 .empty { text-align: center; color: var(--mid); font-family: 'Courier New', monospace; font-size: 0.68rem; padding: 32px 0; }
+
+.export-btn {
+  flex: 1; padding: 9px 0; background: rgba(200,151,74,0.1);
+  border: 1px solid var(--border); color: var(--crema);
+  border-radius: 8px; font-family: 'Courier New', monospace;
+  font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.15s;
+}
+.export-btn:hover, .export-btn:active {
+  background: var(--crema); color: var(--bg);
+}
+
+/* Modal */
+.modal-bg {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7); z-index: 100;
+  display: none; align-items: center; justify-content: center;
+  padding: 20px; backdrop-filter: blur(4px);
+}
+.modal-bg.show { display: flex; }
+.modal {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 18px; max-width: 380px; width: 100%;
+  max-height: 80vh; overflow-y: auto;
+}
+.modal h3 {
+  color: var(--crema); font-size: 1rem; margin-bottom: 10px;
+  font-family: 'Georgia', serif; font-weight: normal;
+}
+.modal p { font-size: 0.78rem; color: var(--cream); line-height: 1.6; margin-bottom: 8px; }
+.modal-close {
+  margin-top: 10px; width: 100%; padding: 10px;
+  background: var(--crema); color: var(--bg); border: none; border-radius: 8px;
+  font-family: 'Courier New', monospace; font-size: 0.65rem;
+  letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -405,8 +349,10 @@ textarea:focus { border-color: var(--crema); }
   <div id="tabbar">
     <button class="tab active" data-tab="bewertung" onclick="switchTab('bewertung')">Bewertung</button>
     <button class="tab" data-tab="rangliste" onclick="switchTab('rangliste')">Rangliste</button>
+    <button class="tab" data-tab="alle" onclick="switchTab('alle')">Alle</button>
   </div>
   <div id="content">
+
     <!-- Bewertung Tab -->
     <div id="tab-bewertung">
       <div class="ref-box">
@@ -426,13 +372,14 @@ textarea:focus { border-color: var(--crema); }
 
           <div class="sl">Bezug</div>
           <div class="grid2">
-            <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="18" step="0.1" inputmode="decimal"></div>
+            <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="18" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
             <div class="field"><label>Yield Aus (g)</label><input type="number" id="f-doseOut" placeholder="z.B. 42" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
-            <div class="field"><label>Zeit (Sek)</label><input type="number" id="f-zeit" placeholder="z.B. 30" inputmode="numeric"></div>
-            <div class="field"><label>Mahlgrad</label><input type="number" id="f-mahlgrad" placeholder="z.B. 12" inputmode="decimal" step="0.5"></div>
-            <div class="field"><label>Brühtemp (°C)</label><input type="number" id="f-temp" placeholder="z.B. 93" inputmode="numeric"></div>
+            <div class="field"><label>Zeit (Sek)</label><input type="number" id="f-zeit" placeholder="z.B. 30" inputmode="numeric" oninput="updateLiveTip()"></div>
+            <div class="field"><label>Mahlgrad</label><input type="number" id="f-mahlgrad" placeholder="z.B. 12" inputmode="decimal" step="0.5" oninput="updateLiveTip()"></div>
+            <div class="field"><label>Brühtemp (°C)</label><input type="number" id="f-temp" placeholder="z.B. 93" inputmode="numeric" oninput="updateLiveTip()"></div>
           </div>
           <div id="ratio-display"></div>
+          <div id="live-tip" style="display:none"></div>
 
           <div class="sl">Geschmack</div>
           <div id="sliders"></div>
@@ -462,7 +409,7 @@ textarea:focus { border-color: var(--crema); }
           </div>
 
           <button id="btn-save" onclick="saveShot()" disabled>Bezug speichern</button>
-          <button id="btn-reset" onclick="resetForm()">↺ Formular leeren</button>
+          <button id="btn-reset" onclick="resetForm(false)">↺ Formular leeren</button>
         </div>
 
         <div class="card" id="history-card" style="display:none">
@@ -475,23 +422,61 @@ textarea:focus { border-color: var(--crema); }
 
     <!-- Rangliste Tab -->
     <div id="tab-rangliste" style="display:none">
+      <div style="display:flex;gap:8px;margin-bottom:14px;">
+        <button class="export-btn" onclick="exportRangliste('csv')">📋 CSV</button>
+        <button class="export-btn" onclick="exportRangliste('text')">📝 Text</button>
+      </div>
       <div id="rank-list"></div>
     </div>
+
+    <!-- Alle Bezüge Tab -->
+    <div id="tab-alle" style="display:none">
+      <div id="stats-area"></div>
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <button class="export-btn" onclick="exportAlle('csv')">📋 CSV</button>
+        <button class="export-btn" onclick="exportAlle('text')">📝 Text</button>
+        <button class="export-btn" onclick="backupData()" style="background:rgba(90,184,58,0.1);border-color:rgba(90,184,58,0.4);color:var(--green);">💾 Backup</button>
+        <button class="export-btn" onclick="document.getElementById('restore-input').click()" style="background:rgba(90,184,58,0.1);border-color:rgba(90,184,58,0.4);color:var(--green);">📂 Restore</button>
+        <input type="file" id="restore-input" accept=".json" style="display:none" onchange="restoreData(event)">
+      </div>
+      <div class="sl">Alle Bezüge (chronologisch)</div>
+      <div id="all-shots-list"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal for info popups -->
+<div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 id="modal-title"></h3>
+    <div id="modal-body"></div>
+    <button class="modal-close" onclick="closeModal()">Verstanden</button>
   </div>
 </div>
 
 <script>
-const KAFFEES = ["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia"];
+const KAFFEES_DEFAULT = ["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia"];
+const CUSTOM_KEY = "espresso_custom_kaffees_v1";
+
+let customKaffees = [];
+try { const c = localStorage.getItem(CUSTOM_KEY); if(c) customKaffees = JSON.parse(c); } catch(e){}
+
+function getAllKaffees() {
+  return [...KAFFEES_DEFAULT, ...customKaffees];
+}
+
+function saveCustom() { try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(customKaffees)); } catch(e){} }
 const AROMEN  = ["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz"];
 const CREMAS  = ["Dicht & Haselnuss ✓","Dunkel & Stark","Hell & Dünn","Grobporig"];
 const SLIDERS = [
-  {id:"saeure",  label:"Säure",           lo:"niedrig", hi:"hoch"},
-  {id:"bitter",  label:"Bitterkeit",      lo:"mild",    hi:"stark"},
-  {id:"suesse",  label:"Süße",            lo:"kaum",    hi:"ausgeprägt"},
-  {id:"koerper", label:"Körper/Cremigkeit",lo:"dünn",   hi:"vollmundig"},
-  {id:"nachklang",label:"Nachklang",      lo:"kurz",    hi:"lang"},
+  {id:"saeure",   label:"Säure",            lo:"niedrig", hi:"hoch",       info:{title:"Säure",text:"Wahrgenommene Säurigkeit beim ersten Schluck. Helle Röstungen oder unterextrahierter Espresso schmecken oft sauer/zitronig. Klassische italienische Röstungen wie Passalacqua haben sehr wenig Säure (Wert 2-4). Wenn Säure stark stört: Mahlgrad feiner, Temperatur höher, oder andere Bohne wählen."}},
+  {id:"bitter",   label:"Bitterkeit",       lo:"mild",    hi:"stark",      info:{title:"Bitterkeit",text:"Bitterkeit kommt von Überextraktion oder dunkler Röstung. Aschig-bittere Note (Gorilla-Problem) ist negativ. Etwas Bitterkeit ist okay – wie bei Schokolade. Wenn zu bitter: Mahlgrad gröber, Zeit verkürzen, Temperatur niedriger."}},
+  {id:"suesse",   label:"Süße",             lo:"kaum",    hi:"ausgeprägt", info:{title:"Süße",text:"Natürliche Süße entsteht bei guter Extraktion ohne Über- oder Unterextraktion. Karamell- und Schokoladennoten sind Indikatoren. Wenig Süße = Bohne ist über- oder unterextrahiert. Hohe Süße = perfekter Sweetspot."}},
+  {id:"koerper",  label:"Körper / Cremigkeit", lo:"dünn", hi:"vollmundig", info:{title:"Körper / Cremigkeit",text:"Wie vollmundig und ölig der Espresso wirkt. Klassische Doppio-Röstungen sollten sehr cremig sein. Dünner Körper = zu wenig Druck, falsche Ratio oder zu kurze Extraktion. Vollmundig = idealer Doppio."}},
+  {id:"nachklang",label:"Nachklang",        lo:"kurz",    hi:"lang",       info:{title:"Nachklang",text:"Wie lange der Geschmack im Mund bleibt. Guter Espresso hat einen langen, angenehmen Nachklang. Kurzer Nachklang = Extraktion war zu schwach. Bitterer Nachklang = überextrahiert."}}
 ];
-const KEY = "espresso_pwa_v1";
+const KEY = "espresso_pwa_v2";
 
 let data = {};
 let curKaffee = null;
@@ -500,26 +485,83 @@ let curEmpf = null;
 let curAromen = [];
 let curCrema = null;
 
-// Load
 try { const s = localStorage.getItem(KEY); if(s) data = JSON.parse(s); } catch(e){}
+
+// Migrate from v1 if present
+try {
+  const old = localStorage.getItem("espresso_pwa_v1");
+  if(old && Object.keys(data).length === 0) {
+    data = JSON.parse(old);
+    save();
+  }
+} catch(e){}
 
 function save() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){} }
 
-// Build sliders
+// === Dot selectors (replacing sliders) ===
+// Scale 1-7, stored as values 1-7 mapped to old 1-10 scale internally
+const DOT_SCALE = 7;
+// Map dot value (1-7) to internal score value (1-10)
+function dotToScore(v) { return Math.round(1 + (v-1) * (9/6)); }
+// Map internal score (1-10) to dot value (1-7)
+function scoreToDot(s) { return Math.round(1 + (s-1) * (6/9)); }
+
 const slidersEl = document.getElementById('sliders');
 SLIDERS.forEach(sl => {
+  const dots = Array.from({length: DOT_SCALE}, (_,i) => {
+    const v = i + 1;
+    return `<button class="dot-btn${v<=4?'':''}" id="dot-${sl.id}-${v}" data-val="${v}" onclick="onDot('${sl.id}',${v})">${v}</button>`;
+  }).join('');
   slidersEl.innerHTML += `
-    <div class="slider-row">
-      <div class="slider-header">
-        <span class="slider-name">${sl.label}</span>
-        <span class="slider-val" id="sv-${sl.id}">5</span>
+    <div class="dot-row">
+      <div class="dot-header">
+        <span class="dot-name">
+          ${sl.label}
+          <button class="info-btn" onclick="showInfo('${sl.id}')">i</button>
+        </span>
       </div>
-      <input type="range" min="1" max="10" value="5" id="sr-${sl.id}" oninput="onSlider('${sl.id}')">
-      <div class="slider-hints"><span>${sl.lo}</span><span>${sl.hi}</span></div>
+      <div class="dot-selector">${dots}</div>
+      <div class="dot-hints"><span>${sl.lo}</span><span>${sl.hi}</span></div>
     </div>`;
 });
 
-// Build aroma chips
+// Track current dot values (1-7)
+const dotValues = { saeure: 4, bitter: 4, suesse: 4, koerper: 4, nachklang: 4 };
+
+function onDot(id, val) {
+  dotValues[id] = val;
+  updateDotDisplay(id);
+  updateScore();
+  updateLiveTip();
+}
+
+function updateDotDisplay(id) {
+  const v = dotValues[id];
+  for (let i = 1; i <= DOT_SCALE; i++) {
+    const btn = document.getElementById(`dot-${id}-${i}`);
+    if (!btn) continue;
+    btn.classList.remove('on','half-on');
+    if (i <= v) btn.classList.add('on');
+  }
+}
+
+function updateAllDots() {
+  SLIDERS.forEach(sl => updateDotDisplay(sl.id));
+}
+
+function showInfo(id) {
+  const sl = SLIDERS.find(x => x.id === id);
+  if(!sl) return;
+  document.getElementById('modal-title').textContent = sl.info.title;
+  document.getElementById('modal-body').innerHTML = `<p>${sl.info.text}</p>`;
+  document.getElementById('modal-bg').classList.add('show');
+}
+function closeModal(e) {
+  if(e && e.target.closest('.modal') && !e.target.classList.contains('modal-close')) return;
+  document.getElementById('modal-bg').classList.remove('show');
+}
+
+// === Aroma chips ===
 const aromaEl = document.getElementById('aromen-chips');
 AROMEN.forEach(a => {
   const b = document.createElement('button');
@@ -533,7 +575,7 @@ AROMEN.forEach(a => {
   aromaEl.appendChild(b);
 });
 
-// Build crema chips
+// === Crema chips ===
 const cremaEl = document.getElementById('crema-chips');
 CREMAS.forEach(c => {
   const b = document.createElement('button');
@@ -546,7 +588,7 @@ CREMAS.forEach(c => {
   cremaEl.appendChild(b);
 });
 
-// Build stars
+// === Stars ===
 const starsEl = document.getElementById('stars');
 for(let i=1;i<=5;i++){
   const s = document.createElement('span');
@@ -560,21 +602,22 @@ function updateStars() {
 }
 
 function onSlider(id) {
-  document.getElementById('sv-'+id).textContent = document.getElementById('sr-'+id).value;
+  // Legacy: no longer used for sliders, kept for compatibility
   updateScore();
+  updateLiveTip();
 }
 
 function calcScore() {
   if(!curSterne) return 0;
-  const g = v => parseInt(document.getElementById('sr-'+v).value);
+  // Convert dot values (1-7) to internal (1-10) for scoring
+  const g = id => dotToScore(dotValues[id]);
   const geschmack = (10-g('saeure'))*1.5 + (10-g('bitter'))*1.0 + g('suesse')*1.5 + g('koerper')*1.5 + g('nachklang')*1.0;
   return Math.round((geschmack/65)*70 + (curSterne/5)*30);
 }
 
 function updateScore() {
   if(!curSterne) { document.getElementById('score-display').style.display='none'; return; }
-  const sc = calcScore();
-  document.getElementById('score-num').textContent = sc;
+  document.getElementById('score-num').textContent = calcScore();
   document.getElementById('score-display').style.display='flex';
 }
 
@@ -582,13 +625,60 @@ function updateRatio() {
   const dIn  = parseFloat(document.getElementById('f-doseIn').value)||18;
   const dOut = parseFloat(document.getElementById('f-doseOut').value)||0;
   const el = document.getElementById('ratio-display');
-  if(!dOut){ el.textContent=''; return; }
-  const r = dOut/dIn;
-  let tag = '';
-  if(r>=2.2&&r<=2.5) tag=' ★ Sweetspot';
-  else if(r<2) tag=' → zu kurz';
-  else if(r>2.7) tag=' → zu lang';
-  el.textContent = `Ratio 1:${r.toFixed(2)}${tag}`;
+  if(!dOut){ el.textContent=''; }
+  else {
+    const r = dOut/dIn;
+    let tag = '';
+    if(r>=2.2&&r<=2.5) tag=' ★ Sweetspot';
+    else if(r<2) tag=' → zu kurz';
+    else if(r>2.7) tag=' → zu lang';
+    el.textContent = `Ratio 1:${r.toFixed(2)}${tag}`;
+  }
+  updateLiveTip();
+}
+
+function updateLiveTip() {
+  // Build a "preview" shot from current form state
+  const dIn = parseFloat(document.getElementById('f-doseIn').value) || 18;
+  const dOut = parseFloat(document.getElementById('f-doseOut').value) || 0;
+  const zeit = document.getElementById('f-zeit').value;
+  const mahlgrad = document.getElementById('f-mahlgrad').value;
+  const temp = document.getElementById('f-temp').value;
+
+  const previewShot = {
+    doseIn: dIn,
+    doseOut: dOut,
+    ratio: dOut ? (dOut/dIn).toFixed(2) : null,
+    zeit, mahlgrad, temp,
+    saeure: dotToScore(dotValues.saeure),
+    bitter: dotToScore(dotValues.bitter),
+    suesse: dotToScore(dotValues.suesse),
+    koerper: dotToScore(dotValues.koerper),
+    nachklang: dotToScore(dotValues.nachklang),
+    sterne: curSterne || 3,
+    score: calcScore() || 65
+  };
+
+  // Need at least some flow data to give meaningful tips
+  const hasData = dOut > 0 || zeit || mahlgrad || temp ||
+    dotValues.saeure !== 4 || dotValues.bitter !== 4 || dotValues.suesse !== 4 ||
+    dotValues.koerper !== 4 || dotValues.nachklang !== 4;
+
+  const el = document.getElementById('live-tip');
+  if (!hasData) {
+    el.style.display = 'none';
+    return;
+  }
+
+  const tips = generateTips(previewShot);
+  if (tips.length === 0) {
+    el.style.display = 'none';
+    return;
+  }
+
+  const itemsHtml = tips.map(t => `<div class="live-tip-item">${t.tip}</div>`).join('');
+  el.innerHTML = `<strong>Live-Tipp${tips.length>1?'s':''}</strong>${itemsHtml}`;
+  el.style.display = 'block';
 }
 
 function setEmpf(v) {
@@ -597,23 +687,228 @@ function setEmpf(v) {
   document.querySelector(`.empf-btn.${v}`).classList.add('on');
 }
 
-// Build kaffee pills
+// === Improvement suggestion engine ===
+// Returns array of { tip, followup } objects, max 2, prioritized
+function generateTips(shot) {
+  const tips = [];
+  const ratio = shot.doseOut && shot.doseIn ? shot.doseOut / shot.doseIn : null;
+  const zeit = parseFloat(shot.zeit) || null;
+  const temp = parseFloat(shot.temp) || null;
+  const sa = shot.saeure, bi = shot.bitter, su = shot.suesse;
+
+  // === PRIORITY 1: Major flow problems (Mahlgrad/Durchfluss) ===
+  if (ratio && zeit) {
+    if (ratio < 2 && zeit > 32) {
+      tips.push({
+        tip: "Bezug zu langsam und zu wenig Output. Mahlgrad einen Klick gröber stellen.",
+        followup: "Lief der Bezug danach besser?"
+      });
+    } else if (ratio > 2.7 && zeit < 25) {
+      tips.push({
+        tip: "Bezug zu schnell und zu viel Output. Mahlgrad einen Klick feiner stellen.",
+        followup: "Lief der Bezug danach besser?"
+      });
+    } else if (zeit < 22) {
+      tips.push({
+        tip: "Sehr kurze Bezugszeit (<22s). Mahlgrad feiner für mehr Widerstand.",
+        followup: "Wurde die Bezugszeit länger?"
+      });
+    } else if (zeit > 38) {
+      tips.push({
+        tip: "Sehr lange Bezugszeit (>38s). Mahlgrad gröber, sonst überextrahiert.",
+        followup: "Wurde die Bezugszeit kürzer?"
+      });
+    }
+  }
+
+  // === PRIORITY 2: Taste problems ===
+  if (sa >= 7 && bi <= 4) {
+    tips.push({
+      tip: "Stark sauer, kaum bitter → unterextrahiert. Mahlgrad feiner oder Temperatur erhöhen (+1°C).",
+      followup: "Hat sich die Säure reduziert?"
+    });
+  } else if (bi >= 7 && su <= 4) {
+    tips.push({
+      tip: "Stark bitter, wenig Süße → überextrahiert. Mahlgrad gröber oder Temperatur senken (-1°C).",
+      followup: "Hat sich die Bitterkeit reduziert?"
+    });
+  }
+
+  // === PRIORITY 3: Ratio not in sweetspot but flow ok ===
+  if (ratio && ratio < 2.1 && tips.length < 2) {
+    // Skip if already have similar tip from priority 1
+    const hasFlowTip = tips.some(t => t.tip.includes("Mahlgrad"));
+    if (!hasFlowTip) {
+      tips.push({
+        tip: "Ratio unter 1:2 – sehr kräftig/ristretto-nah. Für Doppio etwas mehr Output anstreben (~42g).",
+        followup: "War der Doppio mit mehr Output ausgewogener?"
+      });
+    }
+  } else if (ratio && ratio > 2.6 && tips.length < 2) {
+    const hasFlowTip = tips.some(t => t.tip.includes("Mahlgrad"));
+    if (!hasFlowTip) {
+      tips.push({
+        tip: "Ratio über 1:2,6 – wirkt evtl. wässrig. Für klassischen Doppio Richtung 1:2,3 ziehen (~42g).",
+        followup: "War der Doppio konzentrierter?"
+      });
+    }
+  }
+
+  // === PRIORITY 4: Temperature ===
+  if (tips.length < 2) {
+    if (temp && temp < 90) {
+      tips.push({
+        tip: "Brühtemperatur unter 90°C ist niedrig. Für klassische Röstungen 92-94°C testen.",
+        followup: "War der Geschmack bei höherer Temperatur runder?"
+      });
+    } else if (temp && temp > 96) {
+      tips.push({
+        tip: "Brühtemperatur über 96°C ist hoch – kann verbrannt schmecken. Auf 93-94°C senken.",
+        followup: "Schmeckt es bei niedrigerer Temperatur weniger verbrannt?"
+      });
+    }
+  }
+
+  // === PRIORITY 5: Body issues ===
+  if (tips.length < 2 && shot.koerper && shot.koerper <= 3) {
+    tips.push({
+      tip: "Dünner Körper. Mehr Dose (z.B. 19g statt 18g) oder feinerer Mahlgrad für mehr Cremigkeit.",
+      followup: "War der Körper voller?"
+    });
+  }
+
+  // === Positive feedback ===
+  if (tips.length === 0 && shot.score >= 80) {
+    tips.push({
+      tip: "Sehr guter Bezug! Diese Einstellungen merken: " + (shot.mahlgrad?`Mahlgrad ${shot.mahlgrad}`:"") + (shot.temp?` · ${shot.temp}°C`:"") + ".",
+      followup: null
+    });
+  }
+
+  // === Fallback for low scores without specific issue ===
+  if (tips.length === 0 && shot.score < 60 && shot.sterne <= 3) {
+    tips.push({
+      tip: "Werte im normalen Bereich, aber Gesamteindruck schwach. Vielleicht andere Bohne testen oder bei nächstem Bezug Einstellungen variieren.",
+      followup: null
+    });
+  }
+
+  // === Mittlerer Score (60-79): konstruktive Optimierungshinweise ===
+  if (tips.length === 0 && shot.score >= 60 && shot.score < 80) {
+    // Was könnte als nächstes optimiert werden?
+    const candidates = [];
+
+    // Süße könnte besser sein
+    if (su <= 5) candidates.push({
+      score: 10 - su,
+      tip: "Süße ist noch ausbaufähig. Versuche Mahlgrad minimal feiner – das holt mehr Süße raus, ohne überzuextrahieren.",
+      followup: "War die Süße ausgeprägter?"
+    });
+
+    // Körper könnte besser sein
+    if (shot.koerper <= 5) candidates.push({
+      score: 10 - shot.koerper,
+      tip: "Körper noch dünn. 19g statt 18g probieren oder Mahlgrad einen Tick feiner für mehr Cremigkeit.",
+      followup: "War der Körper voller?"
+    });
+
+    // Nachklang könnte besser sein
+    if (shot.nachklang <= 5) candidates.push({
+      score: 10 - shot.nachklang,
+      tip: "Nachklang kurz. Höhere Brühtemperatur (1°C mehr) oder feinerer Mahlgrad verlängern den Abgang.",
+      followup: "War der Nachklang länger?"
+    });
+
+    // Ratio nicht ideal
+    if (ratio && (ratio < 2.2 || ratio > 2.5)) candidates.push({
+      score: Math.abs(2.35 - ratio) * 10,
+      tip: ratio < 2.2
+        ? "Ratio noch ristretto-nah. Etwas mehr Output (~42g) probieren für klassischeren Doppio."
+        : "Ratio etwas hoch. Output reduzieren auf ~42g für mehr Konzentration.",
+      followup: "War der Doppio ausgewogener?"
+    });
+
+    // Wähle den stärksten Kandidaten
+    if (candidates.length > 0) {
+      candidates.sort((a,b) => b.score - a.score);
+      tips.push({ tip: candidates[0].tip, followup: candidates[0].followup });
+    } else {
+      // Generischer Hinweis wenn nichts spezifisches
+      tips.push({
+        tip: "Solider Bezug ohne offensichtliches Problem. Für Feintuning: probiere mal 1°C mehr/weniger Brühtemperatur und vergleiche.",
+        followup: null
+      });
+    }
+  }
+
+  return tips.slice(0, 2);
+}
+
+// === Pills / Kaffee selection ===
 function buildPills() {
   const el = document.getElementById('kaffee-pills');
   el.innerHTML = '';
-  KAFFEES.forEach(k => {
+  getAllKaffees().forEach(k => {
     const cnt = (data[k]||[]).length;
+    const isCustom = customKaffees.includes(k);
     const b = document.createElement('button');
     b.className = 'pill' + (cnt>0?' has-data':'') + (curKaffee===k?' active':'');
     b.textContent = k + (cnt>0?` (${cnt})`:'');
     b.onclick = () => selectKaffee(k);
+    // Long-press on custom kaffees to delete
+    if (isCustom) {
+      let pressTimer;
+      b.addEventListener('touchstart', () => {
+        pressTimer = setTimeout(() => removeCustomKaffee(k), 800);
+      });
+      b.addEventListener('touchend', () => clearTimeout(pressTimer));
+      b.addEventListener('contextmenu', e => { e.preventDefault(); removeCustomKaffee(k); });
+    }
     el.appendChild(b);
   });
+
+  // Add "+ Kaffee" button
+  const addBtn = document.createElement('button');
+  addBtn.className = 'pill';
+  addBtn.style.borderStyle = 'dashed';
+  addBtn.textContent = '+ Kaffee';
+  addBtn.onclick = addCustomKaffee;
+  el.appendChild(addBtn);
+}
+
+function addCustomKaffee() {
+  const name = prompt('Name des Kaffees:');
+  if (!name || !name.trim()) return;
+  const trimmed = name.trim();
+  if (getAllKaffees().includes(trimmed)) {
+    alert('Dieser Kaffee existiert bereits.');
+    return;
+  }
+  customKaffees.push(trimmed);
+  saveCustom();
+  buildPills();
+}
+
+function removeCustomKaffee(k) {
+  if (!customKaffees.includes(k)) return;
+  const hasShots = (data[k] || []).length > 0;
+  const msg = hasShots
+    ? `"${k}" hat ${data[k].length} Bezug${data[k].length>1?'e':''}. Wirklich löschen? (Bezüge bleiben in den Daten erhalten)`
+    : `"${k}" entfernen?`;
+  if (!confirm(msg)) return;
+  customKaffees = customKaffees.filter(x => x !== k);
+  saveCustom();
+  if (curKaffee === k) {
+    curKaffee = null;
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('no-selection').style.display = 'block';
+  }
+  buildPills();
 }
 
 function selectKaffee(k) {
   curKaffee = k;
-  resetForm();
+  resetForm(true); // prefill from last shot
   document.getElementById('no-selection').style.display='none';
   document.getElementById('form-area').style.display='block';
   document.getElementById('form-kaffee-name').textContent = k;
@@ -625,24 +920,49 @@ function selectKaffee(k) {
   renderHistory();
 }
 
-function resetForm() {
+function resetForm(prefill) {
   curSterne=0; curEmpf=null; curAromen=[]; curCrema=null;
-  document.getElementById('f-doseIn').value='18';
-  document.getElementById('f-doseOut').value='';
-  document.getElementById('f-zeit').value='';
-  document.getElementById('f-mahlgrad').value='';
-  document.getElementById('f-temp').value='';
-  document.getElementById('f-notizen').value='';
-  document.getElementById('ratio-display').textContent='';
+
+  // Defaults
+  let doseIn = '18', mahlgrad = '', temp = '';
+
+  // Prefill from last shot of this coffee if requested
+  if (prefill && curKaffee && data[curKaffee] && data[curKaffee].length > 0) {
+    const last = data[curKaffee][data[curKaffee].length - 1];
+    doseIn = last.doseIn || '18';
+    mahlgrad = last.mahlgrad || '';
+    temp = last.temp || '';
+  }
+
+  document.getElementById('f-doseIn').value = doseIn;
+  document.getElementById('f-doseOut').value = '';
+  document.getElementById('f-zeit').value = '';
+  document.getElementById('f-mahlgrad').value = mahlgrad;
+  document.getElementById('f-temp').value = temp;
+  document.getElementById('f-notizen').value = '';
+  document.getElementById('ratio-display').textContent = '';
+
+  // Mark prefilled fields visually
+  ['f-doseIn','f-mahlgrad','f-temp'].forEach(id => {
+    const el = document.getElementById(id);
+    if (prefill && el.value) el.classList.add('prefilled');
+    else el.classList.remove('prefilled');
+    // Remove prefilled class on user input
+    el.onfocus = () => el.classList.remove('prefilled');
+  });
+
   SLIDERS.forEach(sl => {
-    document.getElementById('sr-'+sl.id).value=5;
-    document.getElementById('sv-'+sl.id).textContent=5;
+    dotValues[sl.id] = 4; // reset to middle of 1-7
+    updateDotDisplay(sl.id);
   });
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
   updateStars();
   document.getElementById('score-display').style.display='none';
   document.querySelectorAll('.empf-btn').forEach(b=>b.classList.remove('on'));
   document.getElementById('btn-save').disabled=true;
+  // Reset live tip and refresh based on prefilled values
+  document.getElementById('live-tip').style.display = 'none';
+  updateLiveTip();
 }
 
 function saveShot() {
@@ -657,21 +977,32 @@ function saveShot() {
     mahlgrad: document.getElementById('f-mahlgrad').value,
     temp:     document.getElementById('f-temp').value,
     ratio:    doseOut?(doseOut/doseIn).toFixed(2):null,
-    saeure:   parseInt(document.getElementById('sr-saeure').value),
-    bitter:   parseInt(document.getElementById('sr-bitter').value),
-    suesse:   parseInt(document.getElementById('sr-suesse').value),
-    koerper:  parseInt(document.getElementById('sr-koerper').value),
-    nachklang:parseInt(document.getElementById('sr-nachklang').value),
+    saeure:   dotToScore(dotValues.saeure),
+    bitter:   dotToScore(dotValues.bitter),
+    suesse:   dotToScore(dotValues.suesse),
+    koerper:  dotToScore(dotValues.koerper),
+    nachklang:dotToScore(dotValues.nachklang),
+    // Also store raw dot values for display
+    dotSaeure: dotValues.saeure, dotBitter: dotValues.bitter,
+    dotSuesse: dotValues.suesse, dotKoerper: dotValues.koerper,
+    dotNachklang: dotValues.nachklang,
     aromen: [...curAromen], crema: curCrema,
     sterne: curSterne, empfehlung: curEmpf,
     notizen: document.getElementById('f-notizen').value,
-    score: calcScore(), ts
+    score: calcScore(), ts,
+    timestamp: now.getTime()
   };
+
+  // Generate tips (array)
+  const tipsResult = generateTips(shot);
+  if (tipsResult.length > 0) {
+    shot.tips = tipsResult.map(t => ({ ...t, resolved: null }));
+  }
+
   if(!data[curKaffee]) data[curKaffee]=[];
   data[curKaffee].push(shot);
   save();
   selectKaffee(curKaffee);
-  // haptic if available
   if(navigator.vibrate) navigator.vibrate(30);
 }
 
@@ -682,6 +1013,14 @@ function deleteShot(k, idx) {
   save();
   selectKaffee(k);
   renderRangliste();
+  renderAlle();
+}
+
+function answerFollowup(k, idx, tipIdx, answer) {
+  if (!data[k][idx].tips) return;
+  data[k][idx].tips[tipIdx].resolved = answer;
+  save();
+  renderHistory();
 }
 
 function renderHistory() {
@@ -690,16 +1029,92 @@ function renderHistory() {
   const list = document.getElementById('history-list');
   if(!shots.length){ card.style.display='none'; return; }
   card.style.display='block';
-  list.innerHTML = shots.map((s,i) => `
-    <div class="shot-item">
-      <div class="shot-info">
-        <div class="shot-main">#${i+1} · ${s.doseIn}g → <strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG ${s.mahlgrad||'?'}${s.temp?` · ${s.temp}°C`:''} · ${'★'.repeat(s.sterne)}</div>
-        <div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}${s.empfehlung?' · '+(s.empfehlung==='ja'?'✓':s.empfehlung==='nein'?'✗':'?'):''}</div>
-        ${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}
-      </div>
-      <button class="shot-del" onclick="deleteShot('${curKaffee}',${i})">✕</button>
-    </div>
-  `).join('');
+
+  // newest first
+  list.innerHTML = shots.slice().reverse().map((s, revIdx) => {
+    const i = shots.length - 1 - revIdx;
+    let tipHtml = '';
+
+    // Backward-compat: convert old single tip format to array
+    let tipsArr = s.tips;
+    if (!tipsArr && s.tip) {
+      tipsArr = [{ tip: s.tip, followup: s.tipFollowup, resolved: s.tipResolved }];
+    }
+
+    if (tipsArr && tipsArr.length > 0) {
+      tipHtml = tipsArr.map((t, tIdx) => {
+        let followupHtml = '';
+        if (t.followup) {
+          if (t.resolved === null || t.resolved === undefined) {
+            followupHtml = `
+              <div class="shot-tip-followup">
+                ${t.followup}
+                <div class="yn-row">
+                  <button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'ja')">Ja, besser</button>
+                  <button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'nein')">Nein</button>
+                  <button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'skip')">Übersprungen</button>
+                </div>
+              </div>`;
+          } else {
+            const label = t.resolved === 'ja' ? '✓ Verbessert' : t.resolved === 'nein' ? '✗ Nicht besser' : '— Übersprungen';
+            followupHtml = `<div class="shot-tip-followup shot-tip-resolved">${label}</div>`;
+          }
+        }
+        return `
+          <div class="shot-tip">
+            <strong>Vorschlag${tipsArr.length > 1 ? ' '+(tIdx+1)+'/'+tipsArr.length : ''}</strong>
+            ${t.tip}
+            ${followupHtml}
+          </div>`;
+      }).join('');
+    }
+
+    // Comparison with best shot (only if not already the best)
+    let compareHtml = '';
+    const bestShot = shots.reduce((a,b) => b.score > a.score ? b : a);
+    if (shots.length > 1 && s !== bestShot && bestShot.score > s.score) {
+      const diff = s.score - bestShot.score;
+      const compareItems = [];
+      if (s.mahlgrad && bestShot.mahlgrad && s.mahlgrad !== bestShot.mahlgrad) {
+        const d = parseFloat(s.mahlgrad) - parseFloat(bestShot.mahlgrad);
+        compareItems.push(`MG ${d>0?'+':''}${d.toFixed(1)} vs. Bester`);
+      }
+      if (s.temp && bestShot.temp && s.temp !== bestShot.temp) {
+        const d = parseFloat(s.temp) - parseFloat(bestShot.temp);
+        compareItems.push(`Temp ${d>0?'+':''}${d.toFixed(0)}°C vs. Bester`);
+      }
+      if (s.ratio && bestShot.ratio && Math.abs(parseFloat(s.ratio)-parseFloat(bestShot.ratio)) > 0.05) {
+        const d = parseFloat(s.ratio) - parseFloat(bestShot.ratio);
+        compareItems.push(`Ratio ${d>0?'+':''}${d.toFixed(2)} vs. Bester`);
+      }
+      if (s.zeit && bestShot.zeit && s.zeit !== bestShot.zeit) {
+        const d = parseFloat(s.zeit) - parseFloat(bestShot.zeit);
+        compareItems.push(`Zeit ${d>0?'+':''}${d.toFixed(0)}s vs. Bester`);
+      }
+      compareHtml = `
+        <div class="shot-compare">
+          <strong>vs. Bester Bezug</strong>
+          Score ${s.score} vs. ${bestShot.score} <span style="color:var(--red)">(${diff})</span>
+          ${compareItems.length ? '<br>' + compareItems.join(' · ') : ''}
+        </div>`;
+    } else if (shots.length > 1 && s === bestShot) {
+      compareHtml = `<div class="shot-compare best">⭐ Bester Bezug dieser Bohne</div>`;
+    }
+
+    return `
+      <div class="shot-item">
+        <div class="shot-row-top">
+          <div class="shot-info">
+            <div class="shot-main">#${i+1} · ${s.doseIn}g → <strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG ${s.mahlgrad||'?'}${s.temp?` · ${s.temp}°C`:''} · ${'★'.repeat(s.sterne)}</div>
+            <div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}${s.empfehlung?' · '+(s.empfehlung==='ja'?'✓':s.empfehlung==='nein'?'✗':'?'):''}</div>
+            ${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}
+          </div>
+          <button class="shot-del" onclick="deleteShot('${curKaffee.replace(/'/g,"\\'")}',${i})">✕</button>
+        </div>
+        ${compareHtml}
+        ${tipHtml}
+      </div>`;
+  }).join('');
 
   if(shots.length>1){
     const avgS = Math.round(shots.reduce((a,s)=>a+s.score,0)/shots.length);
@@ -744,14 +1159,274 @@ function renderRangliste() {
   `).join('');
 }
 
+function renderAlle() {
+  const statsEl = document.getElementById('stats-area');
+  const listEl = document.getElementById('all-shots-list');
+
+  // collect all shots
+  const all = [];
+  Object.entries(data).forEach(([name, shots]) => {
+    shots.forEach(s => all.push({...s, kaffee: name}));
+  });
+
+  if (!all.length) {
+    statsEl.innerHTML = '<div class="empty">Noch keine Bezüge vorhanden.</div>';
+    listEl.innerHTML = '';
+    return;
+  }
+
+  // Stats
+  const total = all.length;
+  const avgScore = Math.round(all.reduce((a,s)=>a+s.score,0)/total);
+  const ratios = all.map(s=>parseFloat(s.ratio)).filter(r=>!isNaN(r));
+  const avgRatio = ratios.length?(ratios.reduce((a,r)=>a+r,0)/ratios.length).toFixed(2):'–';
+  const avgSterne = (all.reduce((a,s)=>a+s.sterne,0)/total).toFixed(1);
+  const bestShot = all.reduce((a,b)=>b.score>a.score?b:a);
+  const totalKaffees = Object.keys(data).length;
+
+  // Most used grind, temp
+  const tempVals = all.map(s=>parseFloat(s.temp)).filter(t=>!isNaN(t));
+  const avgTemp = tempVals.length?(tempVals.reduce((a,t)=>a+t,0)/tempVals.length).toFixed(1):'–';
+
+  // Count tips: handle both old single-tip and new tips array format
+  let tipsResolved = 0, tipsTotal = 0;
+  all.forEach(s => {
+    let arr = s.tips;
+    if (!arr && s.tip) arr = [{ tip: s.tip, followup: s.tipFollowup, resolved: s.tipResolved }];
+    if (arr) {
+      arr.forEach(t => {
+        if (t.followup) {
+          tipsTotal++;
+          if (t.resolved === 'ja') tipsResolved++;
+        }
+      });
+    }
+  });
+
+  statsEl.innerHTML = `
+    <div class="stats-card">
+      <div class="card-title" style="margin-bottom:14px">Statistik</div>
+      <div class="stats-grid">
+        <div class="stats-item">
+          <div class="stats-label">Bezüge gesamt</div>
+          <div class="stats-value">${total}</div>
+          <div class="stats-sub">über ${totalKaffees} Kaffee${totalKaffees>1?'s':''}</div>
+        </div>
+        <div class="stats-item">
+          <div class="stats-label">Ø Score</div>
+          <div class="stats-value">${avgScore}</div>
+          <div class="stats-sub">Bester: ${bestShot.score}</div>
+        </div>
+        <div class="stats-item">
+          <div class="stats-label">Ø Ratio</div>
+          <div class="stats-value">1:${avgRatio}</div>
+          <div class="stats-sub">${avgRatio>=2.2&&avgRatio<=2.5?'★ Sweetspot':'außerhalb'}</div>
+        </div>
+        <div class="stats-item">
+          <div class="stats-label">Ø Sterne</div>
+          <div class="stats-value">${avgSterne}</div>
+          <div class="stats-sub">von 5</div>
+        </div>
+        <div class="stats-item">
+          <div class="stats-label">Ø Brühtemp</div>
+          <div class="stats-value">${avgTemp}${avgTemp!=='–'?'°':''}</div>
+          <div class="stats-sub">${tempVals.length} Bezüge mit Temp</div>
+        </div>
+        <div class="stats-item">
+          <div class="stats-label">Tipps verbessert</div>
+          <div class="stats-value">${tipsResolved}/${tipsTotal||'–'}</div>
+          <div class="stats-sub">${tipsTotal?Math.round(tipsResolved/tipsTotal*100)+'%':'noch keine'}</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding:10px 12px;background:rgba(200,151,74,0.08);border-radius:8px;border-left:2px solid var(--crema);">
+        <div class="stats-label">Bester Bezug bisher</div>
+        <div style="font-size:0.78rem;color:var(--crema);margin-top:4px;">${bestShot.kaffee}</div>
+        <div style="font-family:'Courier New',monospace;font-size:0.6rem;color:var(--light);margin-top:2px;">
+          ${bestShot.doseIn}g→${bestShot.doseOut||'?'}g · ${bestShot.zeit||'?'}s · MG ${bestShot.mahlgrad||'?'}${bestShot.temp?` · ${bestShot.temp}°C`:''} · Score ${bestShot.score}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // All shots, newest first
+  const sorted = [...all].sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+  listEl.innerHTML = sorted.map(s => `
+    <div class="all-shot-item">
+      <div class="all-shot-name">${s.kaffee} <span style="color:var(--mid);font-size:0.62rem;">${'★'.repeat(s.sterne)}</span></div>
+      <div class="all-shot-detail">${s.doseIn}g → ${s.doseOut||'?'}g · 1:${s.ratio||'?'} · ${s.zeit||'?'}s · MG ${s.mahlgrad||'?'}${s.temp?` · ${s.temp}°C`:''}</div>
+      <div class="all-shot-meta">Score ${s.score} · ${s.ts}${s.empfehlung?' · '+(s.empfehlung==='ja'?'✓':s.empfehlung==='nein'?'✗':'?'):''}</div>
+    </div>
+  `).join('');
+}
+
+// === Export functions ===
+function downloadFile(content, filename, mime) {
+  const blob = new Blob([content], { type: mime + ';charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 100);
+}
+
+function csvEscape(v) {
+  if (v === null || v === undefined) return '';
+  const s = String(v);
+  if (s.includes(',') || s.includes('"') || s.includes('\n')) {
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  return s;
+}
+
+function exportRangliste(format) {
+  const entries = Object.entries(data).map(([name, shots]) => {
+    const sorted = [...shots].sort((a,b)=>b.score-a.score);
+    const top = sorted.slice(0,3);
+    const rankScore = top3Avg(shots);
+    const best = sorted[0];
+    const ratios = top.map(s=>s.ratio).filter(Boolean);
+    const avgRatio = ratios.length?(ratios.reduce((a,r)=>a+parseFloat(r),0)/ratios.length).toFixed(2):'';
+    return { name, best, rankScore, count: shots.length, avgRatio, topCount: top.length };
+  }).sort((a,b)=>b.rankScore-a.rankScore);
+
+  if (!entries.length) { alert('Keine Daten zum Exportieren.'); return; }
+
+  const ts = new Date().toISOString().slice(0,10);
+
+  if (format === 'csv') {
+    const headers = ['Rang','Kaffee','Top-3 Score','Bezüge','Bester Score','Bester: Dose Ein','Bester: Yield','Bester: Ratio','Bester: Zeit','Bester: Mahlgrad','Bester: Temp','Bester: Sterne','Ø Ratio (Top-3)'];
+    const rows = entries.map((e,i) => [
+      i+1, e.name, e.rankScore, e.count, e.best.score,
+      e.best.doseIn, e.best.doseOut, e.best.ratio?'1:'+e.best.ratio:'',
+      e.best.zeit, e.best.mahlgrad, e.best.temp, e.best.sterne,
+      e.avgRatio?'1:'+e.avgRatio:''
+    ]);
+    const csv = [headers, ...rows].map(r => r.map(csvEscape).join(',')).join('\n');
+    downloadFile('\uFEFF'+csv, `espresso-rangliste-${ts}.csv`, 'text/csv');
+  } else {
+    const lines = ['ESPRESSO RANGLISTE','='.repeat(40),`Exportiert: ${new Date().toLocaleString('de-DE')}`,''];
+    entries.forEach((e,i) => {
+      lines.push(`${i+1}. ${e.name}`);
+      lines.push(`   Top-3 Ø Score: ${e.rankScore} (${e.count} Bezug${e.count>1?'e':''})`);
+      lines.push(`   Bester: ${e.best.doseIn}g → ${e.best.doseOut||'?'}g · 1:${e.best.ratio||'?'} · ${e.best.zeit||'?'}s · MG ${e.best.mahlgrad||'?'}${e.best.temp?` · ${e.best.temp}°C`:''} · ${'★'.repeat(e.best.sterne)}`);
+      if (e.avgRatio) lines.push(`   Ø Ratio (Top-3): 1:${e.avgRatio}`);
+      lines.push('');
+    });
+    downloadFile(lines.join('\n'), `espresso-rangliste-${ts}.txt`, 'text/plain');
+  }
+}
+
+function exportAlle(format) {
+  const all = [];
+  Object.entries(data).forEach(([name, shots]) => {
+    shots.forEach(s => all.push({...s, kaffee: name}));
+  });
+
+  if (!all.length) { alert('Keine Daten zum Exportieren.'); return; }
+
+  const sorted = [...all].sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+  const ts = new Date().toISOString().slice(0,10);
+
+  if (format === 'csv') {
+    const headers = ['Datum','Kaffee','Dose Ein (g)','Yield Aus (g)','Ratio','Zeit (s)','Mahlgrad','Brühtemp (°C)','Säure','Bitterkeit','Süße','Körper','Nachklang','Aromen','Crema','Sterne','Score','Empfehlung','Notizen'];
+    const rows = sorted.map(s => [
+      s.ts, s.kaffee, s.doseIn, s.doseOut,
+      s.ratio?'1:'+s.ratio:'',
+      s.zeit, s.mahlgrad, s.temp,
+      s.saeure, s.bitter, s.suesse, s.koerper, s.nachklang,
+      (s.aromen||[]).join('; '), s.crema||'',
+      s.sterne, s.score,
+      s.empfehlung==='ja'?'Ja':s.empfehlung==='nein'?'Nein':s.empfehlung==='vl'?'Vielleicht':'',
+      s.notizen||''
+    ]);
+    const csv = [headers, ...rows].map(r => r.map(csvEscape).join(',')).join('\n');
+    downloadFile('\uFEFF'+csv, `espresso-alle-bezuege-${ts}.csv`, 'text/csv');
+  } else {
+    // Stats summary
+    const total = all.length;
+    const avgScore = Math.round(all.reduce((a,s)=>a+s.score,0)/total);
+    const ratios = all.map(s=>parseFloat(s.ratio)).filter(r=>!isNaN(r));
+    const avgRatio = ratios.length?(ratios.reduce((a,r)=>a+r,0)/ratios.length).toFixed(2):'–';
+
+    const lines = [
+      'ESPRESSO BEZUGSPROTOKOLL', '='.repeat(40),
+      `Exportiert: ${new Date().toLocaleString('de-DE')}`,
+      `Bezüge gesamt: ${total} · Ø Score: ${avgScore} · Ø Ratio: 1:${avgRatio}`,
+      ''
+    ];
+
+    sorted.forEach((s, i) => {
+      lines.push(`#${total-i} · ${s.ts} · ${s.kaffee}`);
+      lines.push(`  ${s.doseIn}g → ${s.doseOut||'?'}g · 1:${s.ratio||'?'} · ${s.zeit||'?'}s · MG ${s.mahlgrad||'?'}${s.temp?` · ${s.temp}°C`:''}`);
+      lines.push(`  Säure ${s.saeure}/10 · Bitter ${s.bitter}/10 · Süße ${s.suesse}/10 · Körper ${s.koerper}/10 · Nachklang ${s.nachklang}/10`);
+      lines.push(`  ${'★'.repeat(s.sterne)} · Score ${s.score}${s.empfehlung?' · '+(s.empfehlung==='ja'?'✓ Ja':s.empfehlung==='nein'?'✗ Nein':'? Vielleicht'):''}`);
+      if (s.aromen && s.aromen.length) lines.push(`  Aromen: ${s.aromen.join(', ')}`);
+      if (s.crema) lines.push(`  Crema: ${s.crema}`);
+      if (s.notizen) lines.push(`  Notiz: "${s.notizen}"`);
+      lines.push('');
+    });
+
+    downloadFile(lines.join('\n'), `espresso-alle-bezuege-${ts}.txt`, 'text/plain');
+  }
+}
+
+// === Backup / Restore ===
+function backupData() {
+  const backup = {
+    version: 2,
+    exportedAt: new Date().toISOString(),
+    data,
+    customKaffees
+  };
+  const ts = new Date().toISOString().slice(0,10);
+  downloadFile(JSON.stringify(backup, null, 2), `espresso-backup-${ts}.json`, 'application/json');
+}
+
+function restoreData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const backup = JSON.parse(e.target.result);
+      if (!backup.data) throw new Error('Ungültiges Backup-Format');
+
+      const shotCount = Object.values(backup.data).reduce((a,s)=>a+s.length,0);
+      const msg = `Backup vom ${backup.exportedAt ? new Date(backup.exportedAt).toLocaleDateString('de-DE') : 'unbekannt'}\n${shotCount} Bezüge über ${Object.keys(backup.data).length} Kaffeesorten.\n\nAktuelle Daten werden überschrieben. Fortfahren?`;
+
+      if (!confirm(msg)) return;
+
+      data = backup.data;
+      if (backup.customKaffees) {
+        customKaffees = backup.customKaffees;
+        saveCustom();
+      }
+      save();
+      buildPills();
+      renderAlle();
+      renderRangliste();
+      alert(`✓ ${shotCount} Bezüge erfolgreich wiederhergestellt.`);
+    } catch(err) {
+      alert('Fehler beim Lesen des Backups: ' + err.message);
+    }
+    // Reset file input
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
 function switchTab(t) {
   document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab===t));
   document.getElementById('tab-bewertung').style.display = t==='bewertung'?'block':'none';
   document.getElementById('tab-rangliste').style.display = t==='rangliste'?'block':'none';
+  document.getElementById('tab-alle').style.display = t==='alle'?'block':'none';
   if(t==='rangliste') renderRangliste();
+  if(t==='alle') renderAlle();
 }
 
-// Init
 buildPills();
 </script>
 </body>
