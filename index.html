@@ -1053,7 +1053,46 @@ function restoreData(event){
   };reader.readAsText(file);
 }
 
-function clearAllData(){if(!confirm('Alle Daten löschen?'))return;if(!confirm('Wirklich? Nicht rückgängig machbar!'))return;data={};saveData();curKaffee=null;document.getElementById('form-area').style.display='none';document.getElementById('no-selection').style.display='block';buildPills();renderDashboard();alert('Daten gelöscht.');}
+function clearAllData(){
+  const total=Object.values(data).reduce((a,s)=>a+s.length,0);
+  const el=document.createElement('div');
+  el.id='delete-overlay';
+  el.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.88);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;';
+  el.innerHTML=`
+    <div style="background:var(--bg2);border:1px solid var(--red);border-radius:16px;padding:24px;max-width:340px;width:100%;text-align:center">
+      <div style="font-size:2rem;margin-bottom:10px">⚠️</div>
+      <div style="font-family:'Georgia',serif;font-size:calc(1rem*var(--font-scale));color:var(--red);margin-bottom:8px">Alle Daten löschen</div>
+      <div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));color:var(--mid);line-height:1.9;margin-bottom:6px">
+        <strong style="color:var(--light)">${total} Bezüge</strong> werden unwiderruflich gelöscht.<br>
+        Diese Aktion kann <strong style="color:var(--red)">nicht rückgängig</strong> gemacht werden.
+      </div>
+      <div style="background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);border-radius:8px;padding:9px;margin-bottom:16px;font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--light)">
+        💡 Empfehlung: Erst ein Backup erstellen,<br>dann löschen.
+      </div>
+      <button onclick="backupData();document.getElementById('delete-overlay').remove();clearAllData();" style="width:100%;padding:12px;background:var(--crema);color:var(--bg);border:none;border-radius:9px;font-family:'Courier New',monospace;font-size:calc(.66rem*var(--font-scale));letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-weight:bold;margin-bottom:8px">
+        💾 Backup erstellen & dann löschen
+      </button>
+      <button onclick="confirmDelete()" style="width:100%;padding:10px;background:rgba(192,57,43,.15);border:1px solid var(--red);color:var(--red);border-radius:9px;font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;margin-bottom:8px">
+        🗑 Ohne Backup löschen
+      </button>
+      <button onclick="document.getElementById('delete-overlay').remove()" style="width:100%;padding:10px;background:none;border:1px solid var(--border2);color:var(--mid);border-radius:9px;font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer">
+        Abbrechen
+      </button>
+    </div>`;
+  document.body.appendChild(el);
+}
+
+function confirmDelete(){
+  document.getElementById('delete-overlay')?.remove();
+  if(!confirm('Wirklich alle Daten löschen? Nicht rückgängig machbar!'))return;
+  data={};saveData();
+  customKaffees=[];saveCustom();
+  curKaffee=null;
+  document.getElementById('form-area').style.display='none';
+  document.getElementById('no-selection').style.display='block';
+  buildPills();renderDashboard();
+  alert('Alle Daten gelöscht.');
+}
 
 // ============================================================
 // TAB SWITCHING
@@ -1280,6 +1319,47 @@ function applyTrainerRec(values) {
 // ============================================================
 buildPills();
 renderDashboard();
+
+// Auto-restore: wenn keine Bezüge vorhanden, Backup anbieten
+setTimeout(()=>{
+  const total=Object.values(data).reduce((a,s)=>a+s.length,0);
+  if(total>0) return;
+  const el=document.createElement('div');
+  el.id='auto-restore-overlay';
+  el.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.88);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;';
+  el.innerHTML=`
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px;max-width:340px;width:100%;text-align:center">
+      <div style="font-size:2rem;margin-bottom:12px">☕</div>
+      <div style="font-family:'Georgia',serif;font-size:calc(1rem*var(--font-scale));color:var(--crema);margin-bottom:8px">Keine Bezüge gefunden</div>
+      <div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));color:var(--mid);line-height:1.9;margin-bottom:20px">
+        Hast du bereits Bezüge in Safari<br>oder einem Backup gespeichert?
+      </div>
+      <button onclick="document.getElementById('ar-input').click()" style="width:100%;padding:12px;background:var(--crema);color:var(--bg);border:none;border-radius:9px;font-family:'Courier New',monospace;font-size:calc(.66rem*var(--font-scale));letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-weight:bold;margin-bottom:8px">📂 Backup wiederherstellen</button>
+      <button onclick="document.getElementById('auto-restore-overlay').remove()" style="width:100%;padding:10px;background:none;border:1px solid var(--border2);color:var(--mid);border-radius:9px;font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer">Neu starten</button>
+      <input type="file" id="ar-input" accept=".json" style="display:none" onchange="autoRestore(event)">
+    </div>`;
+  document.body.appendChild(el);
+},600);
+
+function autoRestore(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const backup=JSON.parse(e.target.result);
+      if(!backup.data)throw new Error('Ungültiges Backup');
+      const cnt=Object.values(backup.data).reduce((a,s)=>a+s.length,0);
+      data=backup.data;
+      if(backup.customKaffees){customKaffees=backup.customKaffees;saveCustom();}
+      if(backup.settings){settings={...settings,...backup.settings};saveSettings();applyTheme();}
+      saveData();
+      document.getElementById('auto-restore-overlay')?.remove();
+      buildPills();renderDashboard();
+      alert(`✓ ${cnt} Bezüge wiederhergestellt!`);
+    }catch(err){alert('Fehler: '+err.message);}
+  };
+  reader.readAsText(file);
+}
 </script>
 </body>
 </html>
