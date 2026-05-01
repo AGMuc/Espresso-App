@@ -270,8 +270,8 @@ textarea:focus{border-color:var(--crema);}
 
     <!-- BEWERTUNG -->
     <div id="tab-bewertung" style="display:none">
-      <div class="ref-box">
-        <span>Ref A:</span> 18g→36g/30s=1:2 kräftig &nbsp;|&nbsp; <span>Ref B★:</span> 18g→42g/30s=1:2,33 Sweetspot
+      <div class="ref-box" id="ref-box">
+        <span>Ref A:</span> 19g→38g/30s=1:2 kräftig &nbsp;|&nbsp; <span>Ref B★:</span> 19g→44g/30s=1:2,33 Sweetspot
       </div>
       <div id="kaffee-pills"></div>
       <div id="form-area" style="display:none">
@@ -283,7 +283,7 @@ textarea:focus{border-color:var(--crema);}
           </div>
           <div class="sl">Bezug</div>
           <div class="grid2">
-            <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="18" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
+            <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="19" step="0.5" inputmode="decimal" oninput="updateRatio()"></div>
             <div class="field"><label>Yield Aus (g)</label><input type="number" id="f-doseOut" placeholder="z.B. 42" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
             <div class="field"><label>Zeit (Sek)</label><input type="number" id="f-zeit" placeholder="z.B. 30" inputmode="numeric" oninput="updateLiveTip()"></div>
             <div class="field"><label>Mahlgrad</label><input type="number" id="f-mahlgrad" placeholder="z.B. 4" inputmode="decimal" step="0.5" oninput="updateLiveTip()"></div>
@@ -419,7 +419,7 @@ const SLIDERS=[
   {id:"suesse",label:"Süße",lo:"kaum",hi:"ausgeprägt",
    info:{title:"Süße",text:"Natürliche Süße aus karamellisierten Zuckern. Entsteht bei optimaler Extraktion (Ratio 1:2,2-1:2,4, 91-93°C, 28-32s). Fehlt bei Unter- UND Überextraktion. Karamell+Nuss = gut extrahierter Dark Roast. Ziel: 4-7."}},
   {id:"koerper",label:"Körper",lo:"dünn",hi:"vollmundig",
-   info:{title:"Körper",text:"Textur und Fülle im Mund. Guter Doppio fühlt sich ölig-cremig an. Dünner Körper: zu hohe Ratio (>1:2,6), zu wenig Dose, zu kurze Extraktion. Mit IMS 26.5er und 18g sollte Körper bei 4-5 liegen. Pre-Infusion (3-5s) kann Körper verbessern."}},
+   info:{title:"Körper",text:"Textur und Fülle im Mund. Guter Doppio fühlt sich ölig-cremig an. Dünner Körper: zu hohe Ratio (>1:2,6), zu wenig Dose, zu kurze Extraktion. Mit IMS 26.5er und 19g sollte Körper bei 4-5 liegen. Pre-Infusion (3-5s) kann Körper verbessern."}},
   {id:"nachklang",label:"Nachklang",lo:"kurz",hi:"lang",
    info:{title:"Nachklang",text:"Wie lange Geschmack nach dem Schlucken anhält. Guter Espresso: 30-60s Schokolade/Nuss-Abgang. Kurz: Unterextraktion. Bitter-lang: Überextraktion. Verbesserung: Ratio auf 1:2,1-1:2,3 kürzen oder Temperatur +1°C."}}
 ];
@@ -501,7 +501,7 @@ function generateTips(shot){
   // FLOW PROBLEMS
   if(ratio&&zeit){
     if(ratio<2&&zeit>32){tips.push({tip:"Zu langsam & zu wenig Output (<1:2, >32s): Mahlgrad 1 Klick gröber. Eureka Libra: Mahlrad nach oben. Prüfe ob Puck-Screen nicht zu nass ist (begrenzt Durchfluss).",followup:"War Zeit/Output danach besser?"});}
-    else if(ratio>2.7&&zeit<25){tips.push({tip:"Zu schnell & zu viel Output (>1:2,7, <25s): Channeling oder Mahlgrad zu grob. 1 Klick feiner + WDT sorgfältig wiederholen. IMS 26.5er: Ziel 28-32s bei ~42g.",followup:"War Durchlauf danach gleichmäßiger?"});}
+    else if(ratio>2.7&&zeit<25){tips.push({tip:"Zu schnell & zu viel Output (>1:2,7, <25s): Channeling oder Mahlgrad zu grob. 1 Klick feiner + WDT sorgfältig wiederholen. IMS 26.5er: Ziel 28-32s bei ~44g bei 19g.",followup:"War Durchlauf danach gleichmäßiger?"});}
     else if(zeit<22){tips.push({tip:"Sehr kurze Bezugszeit (<22s): 2 Klicks feiner. Bei der Eureka Libra nach langer Pause: Einlauf-Shot verwerfen, Scheiben sind kalt und mahlen initial gröber.",followup:"Wurde die Zeit länger?"});}
     else if(zeit>38){tips.push({tip:"Sehr lange Bezugszeit (>38s): 1-2 Klicks gröber. Prüfe auch Puck-Screen auf Verstopfung. Wenn Puck-Screen neu → kurz reinigen.",followup:"War die Zeit danach kürzer?"});}
   }
@@ -519,7 +519,7 @@ function generateTips(shot){
   if(temp&&temp>95&&tips.length<2){tips.push({tip:`Brühtemp ${temp}°C ist hoch für dunkle Röstungen. Victoria: auf 91-92°C senken. Dunkle Röstungen brauchen weniger Hitze – die Aromastoffe sind bereits freigesetzt.`,followup:"Weniger Bitterkeit bei niedrigerer Temp?"});}
 
   // RATIO OPTIMIZATION
-  if(ratio&&ratio<2.1&&!tips.some(t=>t.tip.includes('Mahlgrad'))&&tips.length<2){tips.push({tip:`Ratio 1:${ratio.toFixed(2)} = Ristretto-Bereich. Für klassischen Doppio mehr Output anstreben: ~42g bei 18g. Bezug länger laufen lassen oder Mahlgrad 0.5 gröber.`,followup:"Ausgewogener mit mehr Output?"});}
+  if(ratio&&ratio<2.1&&!tips.some(t=>t.tip.includes('Mahlgrad'))&&tips.length<2){tips.push({tip:`Ratio 1:${ratio.toFixed(2)} = Ristretto-Bereich. Für klassischen Doppio mehr Output anstreben: ~45g bei 19g. Bezug länger laufen lassen oder Mahlgrad 0.5 gröber.`,followup:"Ausgewogener mit mehr Output?"});}
   if(ratio&&ratio>2.6&&!tips.some(t=>t.tip.includes('Mahlgrad'))&&tips.length<2){tips.push({tip:`Ratio 1:${ratio.toFixed(2)} = Lungo-Bereich, wirkt wässrig. Bezug bei ~42g stoppen. Mahlgrad 0.5 feiner für mehr Körper.`,followup:"Konzentrierter mit weniger Output?"});}
 
   // GRINDER (Eureka Libra specific)
@@ -529,7 +529,7 @@ function generateTips(shot){
   if(tips.length===0&&shot.score>=60&&shot.score<80){
     const candidates=[];
     if(su<=5)candidates.push({s:10-su,tip:"Süße ausbaufähig: Mahlgrad 0.5 feiner oder Temp +1°C. Sweetspot für Dinzler/Passalacqua: 91-92°C, Ratio 1:2,2-1:2,4, 29-31s.",followup:"Süße ausgeprägter?"});
-    if(ko<=5)candidates.push({s:10-ko,tip:"Körper dünn: Dose auf 18.5g erhöhen oder Ratio auf 1:2-1:2,2 kürzen. Pre-Infusion 3-4s kann Körper verbessern.",followup:"Körper voller?"});
+    if(ko<=5)candidates.push({s:10-ko,tip:"Körper dünn: Dose auf 19.5g erhöhen (max. 20g) oder Ratio auf 1:2-1:2,2 kürzen. Pre-Infusion 3-4s kann Körper verbessern.",followup:"Körper voller?"});
     if(na<=5)candidates.push({s:10-na,tip:"Kurzer Nachklang: Output früher bei ~40g stoppen. Schokoladiger Nachklang entsteht bei etwas knapperer Ratio.",followup:"Nachklang länger?"});
     if(pi===0)candidates.push({s:6,tip:"Pre-Infusion noch nicht getestet: 3-4s PI für gleichmäßigere Extraktion und mehr Körper. Victoria: Taste kurz antippen, dann 3-4s warten, dann normaler Bezug.",followup:"Mit PI gleichmäßiger?"});
     if(candidates.length){candidates.sort((a,b)=>b.s-a.s);tips.push({tip:candidates[0].tip,followup:candidates[0].followup});}
@@ -731,6 +731,23 @@ function buildPills(){
 function addCustomKaffee(){const name=prompt('Name des Kaffees:');if(!name||!name.trim())return;const t=name.trim();if(getAllKaffees().includes(t)){alert('Existiert bereits.');return;}customKaffees.push(t);saveCustom();buildPills();}
 function removeCustomKaffee(k){if(!customKaffees.includes(k))return;const s=(data[k]||[]).length;if(!confirm(`"${k}" entfernen?${s>0?' ('+s+' Bezüge bleiben)':''}`))return;customKaffees=customKaffees.filter(x=>x!==k);saveCustom();if(curKaffee===k){curKaffee=null;document.getElementById('form-area').style.display='none';document.getElementById('no-selection').style.display='block';}buildPills();}
 
+function updateRefBox(kaffee){
+  const el=document.getElementById('ref-box');if(!el)return;
+  const profile=kaffee?getBeanProfile(kaffee):null;
+  let refC='';
+  if(profile&&profile.key!=='default'){
+    const dose=19;
+    const outMin=Math.round(profile.output[0]/18*19);
+    const outMax=Math.round(profile.output[1]/18*19);
+    const rMin=(outMin/dose).toFixed(2),rMax=(outMax/dose).toFixed(2);
+    const tMin=profile.temp[0],tMax=profile.temp[1];
+    const taste=profile.taste&&profile.taste!=='–'?` · ${profile.taste}`:'';
+    const name=kaffee.split(' ').slice(0,3).join(' ');
+    refC=`<br><span>Ref C ★ ${name}:</span> 19g→${outMin}-${outMax}g (1:${rMin}-1:${rMax}) · ${tMin}-${tMax}°C${taste}`;
+  }
+  el.innerHTML=`<span>Ref A:</span> 19g→38g/30s=1:2 kräftig &nbsp;|&nbsp; <span>Ref B★:</span> 19g→44g/30s=1:2,33 Sweetspot${refC}`;
+}
+
 function selectKaffee(k){
   curKaffee=k;resetForm(true);
   document.getElementById('no-selection').style.display='none';
@@ -738,7 +755,7 @@ function selectKaffee(k){
   document.getElementById('form-kaffee-name').textContent=k;
   const shots=data[k]||[];const badge=document.getElementById('form-badge');
   if(shots.length>0){badge.textContent=`${shots.length} Bezug${shots.length>1?'e':''}`;badge.style.display='inline-block';}else badge.style.display='none';
-  buildPills();renderHistory();renderTrainerRec(k);
+  buildPills();renderHistory();renderTrainerRec(k);updateRefBox(k);
 }
 
 // ============================================================
@@ -746,7 +763,7 @@ function selectKaffee(k){
 // ============================================================
 function resetForm(prefill){
   curSterne=0;curEmpf=null;curAromen=[];curCrema=null;
-  let doseIn='18',mahlgrad='',temp='',pi='';
+  let doseIn='19',mahlgrad='',temp='',pi='';
   if(prefill&&curKaffee&&data[curKaffee]&&data[curKaffee].length>0){
     const last=data[curKaffee][data[curKaffee].length-1];
     doseIn=last.doseIn||'18';mahlgrad=last.mahlgrad||'';temp=last.temp||'';pi=last.pi||'';
@@ -1066,22 +1083,18 @@ if('serviceWorker' in navigator){
 
 // Bean profiles – standard recommendations per bean type
 const BEAN_PROFILES = {
-  // Dinzler
-  "dinzler roma":      { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   notes:"Klassisch-neapolitanisch, niedrige Säure, Schokolade/Nuss" },
-  "dinzler modena":    { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   notes:"Vollmundig, wenig Säure, cremig" },
-  "dinzler il gustoso":{ mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", notes:"Ausgewogen, etwas mehr Säure als Roma" },
-  "dinzler lazise":    { mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", notes:"Milder, fruchtige Note möglich" },
-  "dinzler venezia":   { mahlgrad:[4,5],     temp:[92,93], output:[42,46], roast:"medium", notes:"Ausgewogen, klassisch-venezianisch" },
-  // Gorilla
-  "gorilla":           { mahlgrad:[4,5.5],   temp:[90,91], output:[38,42], roast:"dark",   notes:"Vorsicht Asche: kurze Bezugszeit, niedrige Temp" },
-  // Passalacqua
-  "passalacqua":       { mahlgrad:[3,4.5],   temp:[91,93], output:[40,44], roast:"dark",   notes:"Neapolitanisch, sehr cremig, Robusta-Anteil" },
-  // Oh Harvey
-  "oh harvey":         { mahlgrad:[4,5.5],   temp:[92,94], output:[42,46], roast:"medium", notes:"Specialty-orientiert, etwas mehr Säure" },
-  // Geisenhofer
-  "geisenhofer house blend": { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark", notes:"60% Arabica/40% Robusta · säurearm · lokale Rösterei München · ähnlich Passalacqua" },
-  "geisenhofer first roast": { mahlgrad:[4,5.5],   temp:[92,94], output:[42,46], roast:"medium", notes:"Heller geröstet · mehr Säure möglich" },
-  "default":           { mahlgrad:[3.5,5],   temp:[91,93], output:[40,44], roast:"medium", notes:"Standard-Empfehlung für dein Setup" }
+  "gorilla superbar crema":   { mahlgrad:[4,5.5],   temp:[90,91], output:[38,42], roast:"dark",   blend:"80% Arabica / 20% Robusta", taste:"Schokolade, Nuss, leicht aschig",         notes:"Vorsicht Asche: kurze Bezugszeit, niedrige Temp" },
+  "gorilla":                  { mahlgrad:[4,5.5],   temp:[90,91], output:[38,42], roast:"dark",   blend:"80% Arabica / 20% Robusta", taste:"Schokolade, Nuss, leicht aschig",         notes:"Vorsicht Asche: kurze Bezugszeit, niedrige Temp" },
+  "dinzler roma":             { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   blend:"100% Arabica",              taste:"Schokolade, Karamell, wenig Säure",       notes:"Klassisch-neapolitanisch, niedrige Säure" },
+  "dinzler modena":           { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   blend:"100% Arabica",              taste:"Vollmundig, Nuss, Karamell",              notes:"Vollmundig, wenig Säure, cremig" },
+  "dinzler il gustoso":       { mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", blend:"100% Arabica",              taste:"Ausgewogen, Frucht, Schokolade",          notes:"Ausgewogen, etwas mehr Säure als Roma" },
+  "dinzler lazise":           { mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", blend:"100% Arabica",              taste:"Mild, Nuss, leichte Frucht",              notes:"Milder, fruchtige Note möglich" },
+  "dinzler venezia":          { mahlgrad:[4,5],     temp:[92,93], output:[42,46], roast:"medium", blend:"100% Arabica",              taste:"Klassisch, Karamell, ausgewogen",         notes:"Ausgewogen, klassisch-venezianisch" },
+  "passalacqua":              { mahlgrad:[3,4.5],   temp:[91,93], output:[40,44], roast:"dark",   blend:"80% Arabica / 20% Robusta", taste:"Cremig, Schokolade, Nuss, kaum Säure",   notes:"Neapolitanisch, sehr cremig, Robusta-Anteil" },
+  "oh harvey":                { mahlgrad:[4,5.5],   temp:[92,94], output:[42,46], roast:"medium", blend:"100% Arabica",              taste:"Specialty, fruchtig, komplex",            notes:"Specialty-orientiert, etwas mehr Säure" },
+  "geisenhofer house blend":  { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   blend:"60% Arabica / 40% Robusta", taste:"Säurearm, fruchtig, kräftig, gute Crema", notes:"Lokale Rösterei München · ähnlich Passalacqua" },
+  "geisenhofer first roast":  { mahlgrad:[4,5.5],   temp:[92,94], output:[42,46], roast:"medium", blend:"100% Arabica",              taste:"Heller, fruchtig, mehr Säure",            notes:"Heller geröstet · mehr Säure möglich" },
+  "default":                  { mahlgrad:[3.5,5],   temp:[91,93], output:[40,44], roast:"medium", blend:"unbekannt",                 taste:"–",                                       notes:"Standard-Empfehlung für dein Setup" }
 };
 
 function getBeanProfile(kaffee) {
@@ -1188,7 +1201,8 @@ function renderTrainerRec(kaffee) {
   const applyValues = {
     mahlgrad: rec.mahlgrad ? ((rec.mahlgrad[0]+rec.mahlgrad[1])/2).toFixed(1) : '',
     temp: rec.temp ? Math.round((rec.temp[0]+rec.temp[1])/2) : '',
-    pi: rec.pi || ''
+    pi: rec.pi || '',
+    dose: 19
   };
 
   el.innerHTML = `
@@ -1214,15 +1228,24 @@ function renderTrainerRec(kaffee) {
         <div class="trainer-param">
           <div class="trainer-param-label">Output</div>
           <div class="trainer-param-value">${fmtRange(rec.output, 'g')}</div>
-          <div class="trainer-param-sub">bei 18g</div>
+          <div class="trainer-param-sub">bei 19g · (18-20g)</div>
         </div>
       </div>
       <div class="trainer-source">
         ${useAdaptive
           ? `⚡ Lernend – verbessert sich mit jedem Bezug`
-          : `📚 Standard · ${profile.notes}`}
+          : `📚 ${profile.roast === 'dark' ? 'Dark Roast' : 'Medium Roast'} · ${profile.blend||''}`}
         ${rec.pi ? ` · PI ${rec.pi}s empfohlen` : ''}
       </div>
+      <div style="font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);text-align:center;margin-bottom:8px">
+        Basis 19g · Bereich 18-20g · Änderung in 0,5g Schritten · Mahlgrad zuerst anpassen
+      </div>
+      ${!useAdaptive && profile.taste && profile.taste !== '–' ? `
+      <div style="background:rgba(0,0,0,.1);border-radius:7px;padding:8px 10px;margin-bottom:8px;font-family:'Courier New',monospace;font-size:calc(.56rem*var(--font-scale));color:var(--light);line-height:1.8">
+        <span style="color:var(--crema);letter-spacing:.1em;text-transform:uppercase;font-size:calc(.48rem*var(--font-scale))">Typische Aromen</span><br>
+        ${profile.taste}
+        ${profile.warning ? `<br><span style="color:var(--red)">⚠ ${profile.warning}</span>` : ''}
+      </div>` : ''}
       ${historyHtml}
       <button class="trainer-apply-btn" onclick="applyTrainerRec(${JSON.stringify(applyValues).replace(/"/g,'&quot;')})">
         ↓ Mittelwert ins Formular übernehmen
@@ -1234,20 +1257,22 @@ function renderTrainerRec(kaffee) {
 function applyTrainerRec(values) {
   if (values.mahlgrad) {
     const el = document.getElementById('f-mahlgrad');
-    el.value = values.mahlgrad;
-    el.classList.remove('prefilled');
+    el.value = values.mahlgrad; el.classList.remove('prefilled');
   }
   if (values.temp) {
     const el = document.getElementById('f-temp');
-    el.value = values.temp;
-    el.classList.remove('prefilled');
+    el.value = values.temp; el.classList.remove('prefilled');
   }
   if (values.pi) {
     const el = document.getElementById('f-pi');
-    el.value = values.pi;
-    el.classList.remove('prefilled');
+    el.value = values.pi; el.classList.remove('prefilled');
   }
-  updateLiveTip();
+  // Set base dose to 19g
+  const doseEl = document.getElementById('f-doseIn');
+  if (doseEl && (!doseEl.value || parseFloat(doseEl.value) === 18)) {
+    doseEl.value = '19'; doseEl.classList.remove('prefilled');
+  }
+  updateRatio(); updateLiveTip();
 }
 
 // ============================================================
