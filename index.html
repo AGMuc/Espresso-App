@@ -227,6 +227,26 @@ textarea:focus{border-color:var(--crema);}
 #sw-toast{position:fixed;bottom:calc(var(--safe-bot)+60px);left:50%;transform:translateX(-50%);background:var(--crema);color:var(--bg);padding:7px 15px;border-radius:18px;font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));z-index:200;display:none;white-space:nowrap;}
 
 .empty{text-align:center;color:var(--mid);font-family:'Courier New',monospace;font-size:calc(.64rem*var(--font-scale));padding:28px 0;}
+
+/* TRAINER RECOMMENDATION */
+.trainer-card{background:linear-gradient(135deg,rgba(200,151,74,0.12),rgba(200,151,74,0.04));border:1px solid var(--crema);border-radius:12px;padding:13px;margin-bottom:12px;}
+.trainer-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.trainer-icon{font-size:1.2rem;}
+.trainer-title{font-size:calc(.82rem*var(--font-scale));color:var(--crema);font-weight:normal;}
+.trainer-subtitle{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);}
+.trainer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
+.trainer-param{background:rgba(0,0,0,.15);border-radius:8px;padding:9px;text-align:center;}
+.trainer-param-label{font-family:'Courier New',monospace;font-size:calc(.49rem*var(--font-scale));color:var(--mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.trainer-param-value{font-size:calc(1.05rem*var(--font-scale));color:var(--crema);line-height:1.2;}
+.trainer-param-sub{font-family:'Courier New',monospace;font-size:calc(.48rem*var(--font-scale));color:var(--mid);margin-top:2px;}
+.trainer-source{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);text-align:center;margin-bottom:8px;}
+.trainer-history{margin-top:8px;padding-top:8px;border-top:1px solid var(--border2);}
+.trainer-history-title{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.trainer-shot-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+.trainer-shot-bar-wrap{flex:1;height:5px;background:var(--border2);border-radius:3px;}
+.trainer-shot-bar{height:100%;border-radius:3px;transition:width .4s;}
+.trainer-shot-info{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);min-width:80px;text-align:right;}
+.trainer-apply-btn{width:100%;padding:8px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-top:8px;}
 </style>
 </head>
 <body class="theme-dark">
@@ -255,6 +275,7 @@ textarea:focus{border-color:var(--crema);}
       </div>
       <div id="kaffee-pills"></div>
       <div id="form-area" style="display:none">
+        <div id="trainer-rec" style="display:none"></div>
         <div class="card">
           <div class="card-title">
             <span id="form-kaffee-name"></span>
@@ -384,7 +405,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia"];
+const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
 const KEY="espresso_pwa_v2",CUSTOM_KEY="espresso_custom_v1",SETTINGS_KEY="espresso_settings_v1";
@@ -717,7 +738,7 @@ function selectKaffee(k){
   document.getElementById('form-kaffee-name').textContent=k;
   const shots=data[k]||[];const badge=document.getElementById('form-badge');
   if(shots.length>0){badge.textContent=`${shots.length} Bezug${shots.length>1?'e':''}`;badge.style.display='inline-block';}else badge.style.display='none';
-  buildPills();renderHistory();
+  buildPills();renderHistory();renderTrainerRec(k);
 }
 
 // ============================================================
@@ -785,6 +806,7 @@ function saveShot(){
   if(!data[curKaffee])data[curKaffee]=[];
   data[curKaffee].push(shot);saveData();
   selectKaffee(curKaffee);
+  renderTrainerRec(curKaffee);
   if(navigator.vibrate)navigator.vibrate(30);
 }
 
@@ -1038,7 +1060,199 @@ if('serviceWorker' in navigator){
   }).catch(()=>{});
 }
 
+// ============================================================
+// TRAINER RECOMMENDATION ENGINE
+// ============================================================
+
+// Bean profiles – standard recommendations per bean type
+const BEAN_PROFILES = {
+  // Dinzler
+  "dinzler roma":      { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   notes:"Klassisch-neapolitanisch, niedrige Säure, Schokolade/Nuss" },
+  "dinzler modena":    { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   notes:"Vollmundig, wenig Säure, cremig" },
+  "dinzler il gustoso":{ mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", notes:"Ausgewogen, etwas mehr Säure als Roma" },
+  "dinzler lazise":    { mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", notes:"Milder, fruchtige Note möglich" },
+  "dinzler venezia":   { mahlgrad:[4,5],     temp:[92,93], output:[42,46], roast:"medium", notes:"Ausgewogen, klassisch-venezianisch" },
+  // Gorilla
+  "gorilla":           { mahlgrad:[4,5.5],   temp:[90,91], output:[38,42], roast:"dark",   notes:"Vorsicht Asche: kurze Bezugszeit, niedrige Temp" },
+  // Passalacqua
+  "passalacqua":       { mahlgrad:[3,4.5],   temp:[91,93], output:[40,44], roast:"dark",   notes:"Neapolitanisch, sehr cremig, Robusta-Anteil" },
+  // Oh Harvey
+  "oh harvey":         { mahlgrad:[4,5.5],   temp:[92,94], output:[42,46], roast:"medium", notes:"Specialty-orientiert, etwas mehr Säure" },
+  // Geisenhofer
+  "geisenhofer house blend": { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark", notes:"60% Arabica/40% Robusta · säurearm · lokale Rösterei München · ähnlich Passalacqua" },
+  "geisenhofer first roast": { mahlgrad:[4,5.5],   temp:[92,94], output:[42,46], roast:"medium", notes:"Heller geröstet · mehr Säure möglich" },
+  "default":           { mahlgrad:[3.5,5],   temp:[91,93], output:[40,44], roast:"medium", notes:"Standard-Empfehlung für dein Setup" }
+};
+
+function getBeanProfile(kaffee) {
+  const k = kaffee.toLowerCase();
+  for (const [key, profile] of Object.entries(BEAN_PROFILES)) {
+    if (key !== 'default' && k.includes(key)) return { ...profile, key };
+  }
+  return { ...BEAN_PROFILES.default, key: 'default' };
+}
+
+// Adaptive learning: calculate recommendation from good shots
+function calcAdaptiveRec(shots) {
+  if (!shots || shots.length < 5) return null;
+
+  // Take shots with score >= 65, sorted by score desc, up to last 5
+  const goodShots = [...shots]
+    .filter(s => s.score >= 65 && s.mahlgrad && s.temp && s.doseOut)
+    .sort((a,b) => b.score - a.score)
+    .slice(0, 5);
+
+  if (goodShots.length < 3) return null; // need at least 3 good shots
+
+  // Weighted average (higher score = more weight)
+  const totalWeight = goodShots.reduce((a,s) => a + s.score, 0);
+  const wAvg = (field) => {
+    const val = goodShots.reduce((a,s) => {
+      const v = parseFloat(s[field]);
+      return isNaN(v) ? a : a + v * s.score;
+    }, 0);
+    const validWeight = goodShots.filter(s => !isNaN(parseFloat(s[field]))).reduce((a,s) => a + s.score, 0);
+    return validWeight > 0 ? val / validWeight : null;
+  };
+
+  const avgMahlgrad = wAvg('mahlgrad');
+  const avgTemp = wAvg('temp');
+  const avgOutput = wAvg('doseOut');
+  const avgPI = wAvg('pi');
+  const avgScore = Math.round(totalWeight / goodShots.length);
+
+  // Range: ±0.5 for mahlgrad, ±1 for temp, ±2 for output
+  return {
+    mahlgrad: avgMahlgrad ? [
+      Math.round((avgMahlgrad - 0.5) * 2) / 2,
+      Math.round((avgMahlgrad + 0.5) * 2) / 2
+    ] : null,
+    temp: avgTemp ? [
+      Math.round(avgTemp - 1),
+      Math.round(avgTemp + 1)
+    ] : null,
+    output: avgOutput ? [
+      Math.round(avgOutput - 2),
+      Math.round(avgOutput + 2)
+    ] : null,
+    pi: avgPI > 0 ? Math.round(avgPI * 2) / 2 : null,
+    basedOn: goodShots.length,
+    avgScore,
+    shots: goodShots
+  };
+}
+
+function renderTrainerRec(kaffee) {
+  const el = document.getElementById('trainer-rec');
+  if (!el) return;
+  const shots = data[kaffee] || [];
+  const profile = getBeanProfile(kaffee);
+  const adaptive = calcAdaptiveRec(shots);
+  const useAdaptive = adaptive !== null;
+
+  // Decide which values to show
+  const rec = useAdaptive ? {
+    mahlgrad: adaptive.mahlgrad,
+    temp: adaptive.temp,
+    output: adaptive.output,
+    pi: adaptive.pi
+  } : {
+    mahlgrad: profile.mahlgrad,
+    temp: profile.temp,
+    output: profile.output,
+    pi: null
+  };
+
+  // Format ranges
+  const fmtRange = (r, unit='') => r ? `${r[0]}–${r[1]}${unit}` : '–';
+  const fmtPI = (pi) => pi ? `${pi}s` : '0-4s';
+
+  // Last 5 shots for history visualization
+  const lastShots = [...shots].sort((a,b)=>(b.timestamp||0)-(a.timestamp||0)).slice(0,5).reverse();
+  const maxScore = lastShots.length ? Math.max(...lastShots.map(s=>s.score), 1) : 1;
+
+  const historyHtml = lastShots.length > 0 ? `
+    <div class="trainer-history">
+      <div class="trainer-history-title">Letzte ${lastShots.length} Bezüge</div>
+      ${lastShots.map(s => {
+        const pct = Math.round((s.score/maxScore)*100);
+        const col = s.score >= 80 ? 'var(--green)' : s.score >= 65 ? 'var(--crema)' : 'var(--mid)';
+        return `<div class="trainer-shot-row">
+          <div class="trainer-shot-bar-wrap"><div class="trainer-shot-bar" style="width:${pct}%;background:${col}"></div></div>
+          <div class="trainer-shot-info">MG${s.mahlgrad||'?'} ${s.temp||'?'}°C ${s.doseOut||'?'}g → ${s.score}pt</div>
+        </div>`;
+      }).join('')}
+    </div>` : '';
+
+  // Apply button prefills form
+  const applyValues = {
+    mahlgrad: rec.mahlgrad ? ((rec.mahlgrad[0]+rec.mahlgrad[1])/2).toFixed(1) : '',
+    temp: rec.temp ? Math.round((rec.temp[0]+rec.temp[1])/2) : '',
+    pi: rec.pi || ''
+  };
+
+  el.innerHTML = `
+    <div class="trainer-card">
+      <div class="trainer-header">
+        <span class="trainer-icon">🎯</span>
+        <div>
+          <div class="trainer-title">Trainer-Empfehlung</div>
+          <div class="trainer-subtitle">${useAdaptive ? `Adaptiv – aus ${adaptive.basedOn} guten Bezügen (Ø Score ${adaptive.avgScore})` : `Standard-Profil · ${profile.roast === 'dark' ? 'Dark Roast' : 'Medium Roast'}`}</div>
+        </div>
+      </div>
+      <div class="trainer-grid">
+        <div class="trainer-param">
+          <div class="trainer-param-label">Mahlgrad</div>
+          <div class="trainer-param-value">${fmtRange(rec.mahlgrad)}</div>
+          <div class="trainer-param-sub">Finecoar</div>
+        </div>
+        <div class="trainer-param">
+          <div class="trainer-param-label">Brühtemp</div>
+          <div class="trainer-param-value">${fmtRange(rec.temp, '°')}</div>
+          <div class="trainer-param-sub">°C</div>
+        </div>
+        <div class="trainer-param">
+          <div class="trainer-param-label">Output</div>
+          <div class="trainer-param-value">${fmtRange(rec.output, 'g')}</div>
+          <div class="trainer-param-sub">bei 18g</div>
+        </div>
+      </div>
+      <div class="trainer-source">
+        ${useAdaptive
+          ? `⚡ Lernend – verbessert sich mit jedem Bezug`
+          : `📚 Standard · ${profile.notes}`}
+        ${rec.pi ? ` · PI ${rec.pi}s empfohlen` : ''}
+      </div>
+      ${historyHtml}
+      <button class="trainer-apply-btn" onclick="applyTrainerRec(${JSON.stringify(applyValues).replace(/"/g,'&quot;')})">
+        ↓ Mittelwert ins Formular übernehmen
+      </button>
+    </div>`;
+  el.style.display = 'block';
+}
+
+function applyTrainerRec(values) {
+  if (values.mahlgrad) {
+    const el = document.getElementById('f-mahlgrad');
+    el.value = values.mahlgrad;
+    el.classList.remove('prefilled');
+  }
+  if (values.temp) {
+    const el = document.getElementById('f-temp');
+    el.value = values.temp;
+    el.classList.remove('prefilled');
+  }
+  if (values.pi) {
+    const el = document.getElementById('f-pi');
+    el.value = values.pi;
+    el.classList.remove('prefilled');
+  }
+  updateLiveTip();
+}
+
+// ============================================================
 // INIT
+// ============================================================
 buildPills();
 renderDashboard();
 </script>
