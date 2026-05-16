@@ -424,7 +424,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend"];
+const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Espresso","Mehari Espresso"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
 const KEY="espresso_pwa_v2",CUSTOM_KEY="espresso_custom_v1",SETTINGS_KEY="espresso_settings_v1";
@@ -590,18 +590,12 @@ let curGesamt = 0;
 
 function setGesamt(v) {
   curGesamt = v;
-  // Sterne-Mapping: 1→1, 2→2, 3→4, 4→5
   const sterneMap = {1:1, 2:2, 3:4, 4:5};
   curSterne = sterneMap[v];
-  // Visuelles Feedback
   document.querySelectorAll('.gesamt-btn').forEach(btn => {
     const bv = parseInt(btn.dataset.v);
-    btn.style.border = bv === v
-      ? '2px solid var(--crema)'
-      : '1.5px solid var(--border)';
-    btn.style.background = bv === v
-      ? 'rgba(200,151,74,0.18)'
-      : 'var(--crema2)';
+    btn.style.border = bv === v ? '2px solid var(--crema)' : '1.5px solid var(--border)';
+    btn.style.background = bv === v ? 'rgba(200,151,74,0.18)' : 'var(--crema2)';
   });
   updateScore();
   updateLiveTip();
@@ -853,7 +847,7 @@ CREMAS.forEach(c=>{const b=document.createElement('button');b.className='chip';b
 const starsEl=document.getElementById('stars');
 // Stars replaced by Gesamteindruck 4-option buttons
 function updateStars(){} // kept for compatibility
-function updateScore(){if(!curSterne){document.getElementById('score-display').style.display='none';return;}document.getElementById('score-num').textContent=calcScore();document.getElementById('score-display').style.display='flex';}
+function updateScore(){if(!curGesamt&&!curSterne){document.getElementById('score-display').style.display='none';return;}document.getElementById('score-num').textContent=calcScore();document.getElementById('score-display').style.display='flex';}
 
 function updateRatio(){
   const dIn=parseFloat(document.getElementById('f-doseIn').value)||18;
@@ -935,7 +929,7 @@ function resetForm(prefill){
 // SAVE SHOT
 // ============================================================
 function saveShot(){
-  if(!curKaffee||!curSterne)return;
+  if(!curKaffee||(!curSterne && !curGesamt))return;
   const doseIn=parseFloat(document.getElementById('f-doseIn').value)||18;
   const doseOut=parseFloat(document.getElementById('f-doseOut').value)||0;
   const now=new Date();
