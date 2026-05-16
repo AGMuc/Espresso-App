@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -17,239 +16,238 @@ html,body{height:100%;overflow:hidden;}
 body{font-family:'Georgia',serif;}
 
 /* THEMES */
-body.theme-dark{–bg:#1a0f0a;–bg2:#241408;–bg3:#2d1a0d;–crema:#C8974A;–crema2:rgba(200,151,74,0.13);–cream:#F0E6CC;–mid:#7a5a3a;–light:#d4b896;–border:rgba(200,151,74,0.25);–border2:rgba(200,151,74,0.12);–green:#5ab83a;–red:#c0392b;–card:rgba(255,255,255,0.04);–text:#F0E6CC;–text2:#d4b896;–text3:#7a5a3a;}
-body.theme-light{–bg:#f5f0e8;–bg2:#ede5d5;–bg3:#e5dac8;–crema:#8B5E1A;–crema2:rgba(139,94,26,0.1);–cream:#2C1810;–mid:#6B4F2A;–light:#4a3520;–border:rgba(139,94,26,0.3);–border2:rgba(139,94,26,0.15);–green:#2d7a0f;–red:#8a1f1f;–card:rgba(0,0,0,0.04);–text:#2C1810;–text2:#4a3520;–text3:#6B4F2A;}
-body.theme-contrast{–bg:#000;–bg2:#111;–bg3:#1a1a1a;–crema:#FFB347;–crema2:rgba(255,179,71,0.18);–cream:#fff;–mid:#aaa;–light:#ddd;–border:rgba(255,179,71,0.45);–border2:rgba(255,179,71,0.22);–green:#00FF88;–red:#FF4444;–card:rgba(255,255,255,0.06);–text:#fff;–text2:#ddd;–text3:#aaa;}
+body.theme-dark{--bg:#1a0f0a;--bg2:#241408;--bg3:#2d1a0d;--crema:#C8974A;--crema2:rgba(200,151,74,0.13);--cream:#F0E6CC;--mid:#7a5a3a;--light:#d4b896;--border:rgba(200,151,74,0.25);--border2:rgba(200,151,74,0.12);--green:#5ab83a;--red:#c0392b;--card:rgba(255,255,255,0.04);--text:#F0E6CC;--text2:#d4b896;--text3:#7a5a3a;}
+body.theme-light{--bg:#f5f0e8;--bg2:#ede5d5;--bg3:#e5dac8;--crema:#8B5E1A;--crema2:rgba(139,94,26,0.1);--cream:#2C1810;--mid:#6B4F2A;--light:#4a3520;--border:rgba(139,94,26,0.3);--border2:rgba(139,94,26,0.15);--green:#2d7a0f;--red:#8a1f1f;--card:rgba(0,0,0,0.04);--text:#2C1810;--text2:#4a3520;--text3:#6B4F2A;}
+body.theme-contrast{--bg:#000;--bg2:#111;--bg3:#1a1a1a;--crema:#FFB347;--crema2:rgba(255,179,71,0.18);--cream:#fff;--mid:#aaa;--light:#ddd;--border:rgba(255,179,71,0.45);--border2:rgba(255,179,71,0.22);--green:#00FF88;--red:#FF4444;--card:rgba(255,255,255,0.06);--text:#fff;--text2:#ddd;--text3:#aaa;}
 
-body{background:var(–bg);color:var(–text);}
+body{background:var(--bg);color:var(--text);}
 
 /* HEADER */
-#header{padding:calc(var(–safe-top)+8px) 16px 10px;background:var(–bg2);border-bottom:1px solid var(–border2);flex-shrink:0;text-align:center;position:relative;}
-#header h1{font-size:calc(1.15rem*var(–font-scale));color:var(–crema);letter-spacing:.08em;font-weight:normal;}
-#header p{font-size:calc(.54rem*var(–font-scale));color:var(–mid);letter-spacing:.18em;text-transform:uppercase;margin-top:2px;font-family:‘Courier New’,monospace;}
+#header{padding:calc(var(--safe-top)+8px) 16px 10px;background:var(--bg2);border-bottom:1px solid var(--border2);flex-shrink:0;text-align:center;position:relative;}
+#header h1{font-size:calc(1.15rem*var(--font-scale));color:var(--crema);letter-spacing:.08em;font-weight:normal;}
+#header p{font-size:calc(.54rem*var(--font-scale));color:var(--mid);letter-spacing:.18em;text-transform:uppercase;margin-top:2px;font-family:'Courier New',monospace;}
 
 /* TABS */
-#tabbar{display:flex;background:var(–bg2);border-bottom:1px solid var(–border2);flex-shrink:0;}
-.tab{flex:1;padding:9px 0;font-family:‘Courier New’,monospace;font-size:calc(.52rem*var(–font-scale));letter-spacing:.07em;text-transform:uppercase;color:var(–mid);border:none;background:none;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;}
-.tab.active{color:var(–crema);border-bottom-color:var(–crema);}
+#tabbar{display:flex;background:var(--bg2);border-bottom:1px solid var(--border2);flex-shrink:0;}
+.tab{flex:1;padding:9px 0;font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));letter-spacing:.07em;text-transform:uppercase;color:var(--mid);border:none;background:none;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;}
+.tab.active{color:var(--crema);border-bottom-color:var(--crema);}
 
 /* CONTENT */
-#content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px calc(var(–safe-bot)+12px);}
+#content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px calc(var(--safe-bot)+12px);}
 
 /* CARDS */
-.card{background:var(–card);border:1px solid var(–border);border-radius:12px;padding:13px;margin-bottom:12px;}
-.card-title{font-size:calc(.9rem*var(–font-scale));color:var(–crema);margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(–border2);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.badge{font-family:‘Courier New’,monospace;font-size:calc(.5rem*var(–font-scale));background:rgba(90,184,58,0.15);border:1px solid rgba(90,184,58,0.4);color:var(–green);padding:2px 6px;border-radius:10px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px;margin-bottom:12px;}
+.card-title{font-size:calc(.9rem*var(--font-scale));color:var(--crema);margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.badge{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));background:rgba(90,184,58,0.15);border:1px solid rgba(90,184,58,0.4);color:var(--green);padding:2px 6px;border-radius:10px;}
 
 /* SECTION LABELS */
-.sl{font-family:‘Courier New’,monospace;font-size:calc(.54rem*var(–font-scale));color:var(–crema);letter-spacing:.16em;text-transform:uppercase;margin:12px 0 8px;display:flex;align-items:center;gap:8px;}
-.sl::after{content:’’;flex:1;height:1px;background:var(–border2);}
+.sl{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--crema);letter-spacing:.16em;text-transform:uppercase;margin:12px 0 8px;display:flex;align-items:center;gap:8px;}
+.sl::after{content:'';flex:1;height:1px;background:var(--border2);}
 
 /* INPUTS */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:4px;}
-.field label{font-family:‘Courier New’,monospace;font-size:calc(.51rem*var(–font-scale));color:var(–mid);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;}
-.field input[type=number]{width:100%;background:rgba(128,128,128,.07);border:1px solid var(–border);border-radius:7px;color:var(–text);font-family:‘Courier New’,monospace;font-size:calc(.92rem*var(–font-scale));padding:8px 9px;outline:none;-webkit-appearance:none;}
-.field input:focus{border-color:var(–crema);}
-.prefilled{color:var(–crema)!important;opacity:.75;}
+.field label{font-family:'Courier New',monospace;font-size:calc(.51rem*var(--font-scale));color:var(--mid);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;}
+.field input[type=number]{width:100%;background:rgba(128,128,128,.07);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:'Courier New',monospace;font-size:calc(.92rem*var(--font-scale));padding:8px 9px;outline:none;-webkit-appearance:none;}
+.field input:focus{border-color:var(--crema);}
+.prefilled{color:var(--crema)!important;opacity:.75;}
 
 /* RATIO */
-#ratio-display{font-family:‘Courier New’,monospace;font-size:calc(.68rem*var(–font-scale));color:var(–crema);text-align:center;margin:7px 0 3px;min-height:16px;}
+#ratio-display{font-family:'Courier New',monospace;font-size:calc(.68rem*var(--font-scale));color:var(--crema);text-align:center;margin:7px 0 3px;min-height:16px;}
 
 /* LIVE TIP */
-#live-tip{margin:9px 0 5px;padding:9px 11px;background:var(–crema2);border:1px dashed var(–border);border-left:3px solid var(–crema);border-radius:6px;font-size:calc(.66rem*var(–font-scale));color:var(–light);line-height:1.6;display:none;}
-#live-tip strong{display:block;font-family:‘Courier New’,monospace;font-size:calc(.5rem*var(–font-scale));color:var(–crema);letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px;}
+#live-tip{margin:9px 0 5px;padding:9px 11px;background:var(--crema2);border:1px dashed var(--border);border-left:3px solid var(--crema);border-radius:6px;font-size:calc(.66rem*var(--font-scale));color:var(--light);line-height:1.6;display:none;}
+#live-tip strong{display:block;font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--crema);letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px;}
 .live-tip-item+.live-tip-item{margin-top:5px;}
 
 /* DOTS */
 .dot-row{margin-bottom:11px;}
 .dot-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px;}
-.dot-name{font-size:calc(.68rem*var(–font-scale));color:var(–light);display:flex;align-items:center;gap:6px;}
-.info-btn{background:var(–crema2);border:1px solid var(–border);color:var(–crema);width:15px;height:15px;border-radius:50%;font-size:calc(.53rem*var(–font-scale));cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-family:‘Georgia’,serif;font-style:italic;flex-shrink:0;}
-.dot-hints{display:flex;justify-content:space-between;font-family:‘Courier New’,monospace;font-size:calc(.49rem*var(–font-scale));color:var(–mid);margin-top:3px;}
+.dot-name{font-size:calc(.68rem*var(--font-scale));color:var(--light);display:flex;align-items:center;gap:6px;}
+.info-btn{background:var(--crema2);border:1px solid var(--border);color:var(--crema);width:15px;height:15px;border-radius:50%;font-size:calc(.53rem*var(--font-scale));cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-family:'Georgia',serif;font-style:italic;flex-shrink:0;}
+.dot-hints{display:flex;justify-content:space-between;font-family:'Courier New',monospace;font-size:calc(.49rem*var(--font-scale));color:var(--mid);margin-top:3px;}
 .dot-selector{display:flex;gap:6px;align-items:center;}
-.dot-btn{width:30px;height:30px;border-radius:50%;border:2px solid var(–mid);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:‘Courier New’,monospace;font-size:calc(.58rem*var(–font-scale));color:var(–mid);transition:all .12s;flex-shrink:0;}
-.dot-btn.on{background:var(–crema);border-color:var(–crema);color:var(–bg);font-weight:bold;}
+.dot-btn{width:30px;height:30px;border-radius:50%;border:2px solid var(--mid);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));color:var(--mid);transition:all .12s;flex-shrink:0;}
+.dot-btn.on{background:var(--crema);border-color:var(--crema);color:var(--bg);font-weight:bold;}
 
 /* CHIPS */
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
-.chip{font-family:‘Courier New’,monospace;font-size:calc(.56rem*var(–font-scale));padding:5px 9px;border-radius:6px;border:1px solid var(–mid);background:none;color:var(–light);cursor:pointer;transition:all .15s;}
-.chip.on{border-color:var(–crema);background:var(–crema2);color:var(–crema);}
+.chip{font-family:'Courier New',monospace;font-size:calc(.56rem*var(--font-scale));padding:5px 9px;border-radius:6px;border:1px solid var(--mid);background:none;color:var(--light);cursor:pointer;transition:all .15s;}
+.chip.on{border-color:var(--crema);background:var(--crema2);color:var(--crema);}
 .chips-header{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
-.chips-label{font-family:‘Courier New’,monospace;font-size:calc(.54rem*var(–font-scale));color:var(–crema);letter-spacing:.16em;text-transform:uppercase;}
+.chips-label{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--crema);letter-spacing:.16em;text-transform:uppercase;}
 
 /* STARS */
 #stars{display:flex;gap:9px;justify-content:center;margin:3px 0 11px;}
-.star{font-size:calc(1.85rem*var(–font-scale));cursor:pointer;color:rgba(200,151,74,.2);transition:color .12s;user-select:none;}
-.star.on{color:var(–crema);}
+.star{font-size:calc(1.85rem*var(--font-scale));cursor:pointer;color:rgba(200,151,74,.2);transition:color .12s;user-select:none;}
+.star.on{color:var(--crema);}
 
 /* SCORE */
-#score-display{display:flex;align-items:center;justify-content:center;gap:13px;padding:13px;background:var(–crema2);border-radius:9px;margin-bottom:11px;}
-#score-num{font-size:calc(2.7rem*var(–font-scale));color:var(–crema);line-height:1;}
-#score-label{font-family:‘Courier New’,monospace;font-size:calc(.54rem*var(–font-scale));color:var(–mid);letter-spacing:.1em;text-transform:uppercase;}
+#score-display{display:flex;align-items:center;justify-content:center;gap:13px;padding:13px;background:var(--crema2);border-radius:9px;margin-bottom:11px;}
+#score-num{font-size:calc(2.7rem*var(--font-scale));color:var(--crema);line-height:1;}
+#score-label{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--mid);letter-spacing:.1em;text-transform:uppercase;}
 
 /* TEXTAREA */
-textarea{width:100%;background:rgba(128,128,128,.06);border:1px solid var(–border);border-radius:7px;color:var(–text);font-family:‘Georgia’,serif;font-size:calc(.78rem*var(–font-scale));padding:8px 10px;min-height:50px;resize:none;outline:none;margin-bottom:3px;}
-textarea:focus{border-color:var(–crema);}
+textarea{width:100%;background:rgba(128,128,128,.06);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:'Georgia',serif;font-size:calc(.78rem*var(--font-scale));padding:8px 10px;min-height:50px;resize:none;outline:none;margin-bottom:3px;}
+textarea:focus{border-color:var(--crema);}
 
 /* EMPFEHLUNG */
 #empf-row{display:flex;gap:7px;margin-bottom:12px;}
-.empf-btn{flex:1;padding:9px 0;border-radius:7px;border:1px solid var(–mid);background:none;color:var(–light);font-family:‘Courier New’,monospace;font-size:calc(.56rem*var(–font-scale));letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .15s;}
+.empf-btn{flex:1;padding:9px 0;border-radius:7px;border:1px solid var(--mid);background:none;color:var(--light);font-family:'Courier New',monospace;font-size:calc(.56rem*var(--font-scale));letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .15s;}
 .empf-btn.ja.on{background:#1e3d14;border-color:#4a9e2a;color:#8fdc5a;}
-.empf-btn.vl.on{background:#3d2e10;border-color:var(–crema);color:var(–crema);}
+.empf-btn.vl.on{background:#3d2e10;border-color:var(--crema);color:var(--crema);}
 .empf-btn.nein.on{background:#3d1414;border-color:#9e2a2a;color:#dc5a5a;}
 
 /* BUTTONS */
-#btn-save{width:100%;padding:13px;background:var(–crema);color:var(–bg);border:none;border-radius:9px;font-family:‘Courier New’,monospace;font-size:calc(.68rem*var(–font-scale));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-weight:bold;margin-bottom:7px;transition:opacity .2s;}
+#btn-save{width:100%;padding:13px;background:var(--crema);color:var(--bg);border:none;border-radius:9px;font-family:'Courier New',monospace;font-size:calc(.68rem*var(--font-scale));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-weight:bold;margin-bottom:7px;transition:opacity .2s;}
 #btn-save:disabled{opacity:.35;}
-#btn-reset{width:100%;padding:9px;background:none;border:1px solid var(–border2);color:var(–mid);border-radius:7px;font-family:‘Courier New’,monospace;font-size:calc(.58rem*var(–font-scale));cursor:pointer;}
+#btn-reset{width:100%;padding:9px;background:none;border:1px solid var(--border2);color:var(--mid);border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));cursor:pointer;}
 
 /* AI BUTTON */
-#btn-ai{width:100%;padding:11px;background:linear-gradient(135deg,rgba(200,151,74,0.2),rgba(200,151,74,0.05));color:var(–crema);border:1px solid var(–border);border-radius:9px;font-family:‘Courier New’,monospace;font-size:calc(.64rem*var(–font-scale));letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-bottom:7px;display:flex;align-items:center;justify-content:center;gap:7px;}
+#btn-ai{width:100%;padding:11px;background:linear-gradient(135deg,rgba(200,151,74,0.2),rgba(200,151,74,0.05));color:var(--crema);border:1px solid var(--border);border-radius:9px;font-family:'Courier New',monospace;font-size:calc(.64rem*var(--font-scale));letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-bottom:7px;display:flex;align-items:center;justify-content:center;gap:7px;}
 
 /* SHOT ITEMS */
-.shot-item{background:rgba(128,128,128,.04);border:1px solid var(–border2);border-radius:8px;padding:9px 10px;margin-bottom:7px;}
+.shot-item{background:rgba(128,128,128,.04);border:1px solid var(--border2);border-radius:8px;padding:9px 10px;margin-bottom:7px;}
 .shot-row-top{display:flex;align-items:flex-start;gap:8px;}
 .shot-info{flex:1;}
-.shot-main{font-family:‘Courier New’,monospace;font-size:calc(.64rem*var(–font-scale));color:var(–text);line-height:1.7;}
-.shot-meta{font-family:‘Courier New’,monospace;font-size:calc(.54rem*var(–font-scale));color:var(–mid);margin-top:1px;}
-.shot-note{font-size:calc(.58rem*var(–font-scale));color:var(–mid);font-style:italic;margin-top:2px;}
-.shot-del{background:none;border:none;color:var(–mid);font-size:1rem;cursor:pointer;padding:2px 4px;flex-shrink:0;}
+.shot-main{font-family:'Courier New',monospace;font-size:calc(.64rem*var(--font-scale));color:var(--text);line-height:1.7;}
+.shot-meta{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--mid);margin-top:1px;}
+.shot-note{font-size:calc(.58rem*var(--font-scale));color:var(--mid);font-style:italic;margin-top:2px;}
+.shot-del{background:none;border:none;color:var(--mid);font-size:1rem;cursor:pointer;padding:2px 4px;flex-shrink:0;}
 
 /* COMPARE */
-.shot-compare{margin-top:6px;padding:6px 9px;background:rgba(128,128,128,.04);border-left:2px solid var(–mid);border-radius:4px;font-family:‘Courier New’,monospace;font-size:calc(.58rem*var(–font-scale));color:var(–mid);line-height:1.6;}
-.shot-compare strong{display:block;font-size:calc(.49rem*var(–font-scale));color:var(–mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
-.shot-compare.best{border-left-color:var(–crema);color:var(–crema);background:var(–crema2);}
+.shot-compare{margin-top:6px;padding:6px 9px;background:rgba(128,128,128,.04);border-left:2px solid var(--mid);border-radius:4px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));color:var(--mid);line-height:1.6;}
+.shot-compare strong{display:block;font-size:calc(.49rem*var(--font-scale));color:var(--mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
+.shot-compare.best{border-left-color:var(--crema);color:var(--crema);background:var(--crema2);}
 
 /* TIPS */
-.shot-tip{margin-top:7px;padding:7px 9px;background:var(–crema2);border-left:2px solid var(–crema);border-radius:4px;font-size:calc(.62rem*var(–font-scale));color:var(–light);line-height:1.5;}
-.shot-tip strong{display:block;font-family:‘Courier New’,monospace;font-size:calc(.49rem*var(–font-scale));color:var(–crema);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
-.shot-tip-followup{margin-top:5px;padding-top:5px;border-top:1px dashed var(–border2);font-size:calc(.58rem*var(–font-scale));color:var(–mid);}
+.shot-tip{margin-top:7px;padding:7px 9px;background:var(--crema2);border-left:2px solid var(--crema);border-radius:4px;font-size:calc(.62rem*var(--font-scale));color:var(--light);line-height:1.5;}
+.shot-tip strong{display:block;font-family:'Courier New',monospace;font-size:calc(.49rem*var(--font-scale));color:var(--crema);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
+.shot-tip-followup{margin-top:5px;padding-top:5px;border-top:1px dashed var(--border2);font-size:calc(.58rem*var(--font-scale));color:var(--mid);}
 .yn-row{display:flex;gap:5px;margin-top:4px;}
-.yn-row button{flex:1;padding:5px;background:none;border:1px solid var(–mid);color:var(–light);border-radius:4px;font-family:‘Courier New’,monospace;font-size:calc(.52rem*var(–font-scale));cursor:pointer;}
-.shot-tip-resolved{color:var(–green);font-style:italic;}
-.shots-footer{font-family:‘Courier New’,monospace;font-size:calc(.54rem*var(–font-scale));color:var(–mid);text-align:right;margin-top:4px;}
+.yn-row button{flex:1;padding:5px;background:none;border:1px solid var(--mid);color:var(--light);border-radius:4px;font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));cursor:pointer;}
+.shot-tip-resolved{color:var(--green);font-style:italic;}
+.shots-footer{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--mid);text-align:right;margin-top:4px;}
 
 /* PROGRESS BARS */
-.progress-bar-wrap{height:4px;background:var(–border2);border-radius:2px;margin-top:5px;}
-.progress-bar{height:100%;background:var(–crema);border-radius:2px;transition:width .5s;}
+.progress-bar-wrap{height:4px;background:var(--border2);border-radius:2px;margin-top:5px;}
+.progress-bar{height:100%;background:var(--crema);border-radius:2px;transition:width .5s;}
 
 /* RANGLISTE */
-.rank-item{background:var(–card);border:1px solid var(–border);border-radius:11px;padding:11px 13px;margin-bottom:9px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:border-color .15s;}
-.rank-item:active{border-color:var(–crema);}
+.rank-item{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:11px 13px;margin-bottom:9px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:border-color .15s;}
+.rank-item:active{border-color:var(--crema);}
 .rank-item.top{border-color:rgba(200,151,74,.45);}
-.rank-num{font-size:calc(1.35rem*var(–font-scale));color:rgba(200,151,74,.3);min-width:26px;text-align:center;}
-.rank-item.top .rank-num{color:var(–crema);}
+.rank-num{font-size:calc(1.35rem*var(--font-scale));color:rgba(200,151,74,.3);min-width:26px;text-align:center;}
+.rank-item.top .rank-num{color:var(--crema);}
 .rank-info{flex:1;}
-.rank-name{font-size:calc(.74rem*var(–font-scale));color:var(–text);margin-bottom:3px;}
-.rank-detail{font-family:‘Courier New’,monospace;font-size:calc(.54rem*var(–font-scale));color:var(–mid);line-height:1.8;}
-.rank-score{font-size:calc(1.45rem*var(–font-scale));color:var(–crema);}
-.rank-bar-wrap{height:3px;background:var(–border2);border-radius:2px;margin-top:5px;}
-.rank-bar{height:100%;background:var(–crema);border-radius:2px;transition:width .6s;}
-.warn{font-family:‘Courier New’,monospace;font-size:calc(.51rem*var(–font-scale));color:var(–mid);margin-top:2px;}
+.rank-name{font-size:calc(.74rem*var(--font-scale));color:var(--text);margin-bottom:3px;}
+.rank-detail{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--mid);line-height:1.8;}
+.rank-score{font-size:calc(1.45rem*var(--font-scale));color:var(--crema);}
+.rank-bar-wrap{height:3px;background:var(--border2);border-radius:2px;margin-top:5px;}
+.rank-bar{height:100%;background:var(--crema);border-radius:2px;transition:width .6s;}
+.warn{font-family:'Courier New',monospace;font-size:calc(.51rem*var(--font-scale));color:var(--mid);margin-top:2px;}
 
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.stats-item{background:rgba(128,128,128,.04);border:1px solid var(–border2);border-radius:7px;padding:10px;}
-.stats-label{font-family:‘Courier New’,monospace;font-size:calc(.51rem*var(–font-scale));color:var(–mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;}
-.stats-value{font-size:calc(1.2rem*var(–font-scale));color:var(–crema);}
-.stats-sub{font-family:‘Courier New’,monospace;font-size:calc(.51rem*var(–font-scale));color:var(–light);margin-top:2px;}
+.stats-item{background:rgba(128,128,128,.04);border:1px solid var(--border2);border-radius:7px;padding:10px;}
+.stats-label{font-family:'Courier New',monospace;font-size:calc(.51rem*var(--font-scale));color:var(--mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;}
+.stats-value{font-size:calc(1.2rem*var(--font-scale));color:var(--crema);}
+.stats-sub{font-family:'Courier New',monospace;font-size:calc(.51rem*var(--font-scale));color:var(--light);margin-top:2px;}
 
 /* TREND CHART */
 .trend-chart{height:60px;margin:10px 0;position:relative;display:flex;align-items:flex-end;gap:3px;}
-.trend-bar{flex:1;background:var(–crema2);border-radius:2px 2px 0 0;position:relative;min-height:4px;cursor:pointer;transition:background .15s;}
-.trend-bar.best{background:var(–crema);}
+.trend-bar{flex:1;background:var(--crema2);border-radius:2px 2px 0 0;position:relative;min-height:4px;cursor:pointer;transition:background .15s;}
+.trend-bar.best{background:var(--crema);}
 .trend-bar:hover{background:rgba(200,151,74,.4);}
 
 /* ALL SHOTS */
-.all-shot-item{background:rgba(128,128,128,.03);border:1px solid var(–border2);border-radius:8px;padding:9px 11px;margin-bottom:6px;}
-.all-shot-name{font-size:calc(.7rem*var(–font-scale));color:var(–crema);margin-bottom:2px;}
-.all-shot-detail{font-family:‘Courier New’,monospace;font-size:calc(.56rem*var(–font-scale));color:var(–text);line-height:1.6;}
-.all-shot-meta{font-family:‘Courier New’,monospace;font-size:calc(.51rem*var(–font-scale));color:var(–mid);margin-top:2px;}
+.all-shot-item{background:rgba(128,128,128,.03);border:1px solid var(--border2);border-radius:8px;padding:9px 11px;margin-bottom:6px;}
+.all-shot-name{font-size:calc(.7rem*var(--font-scale));color:var(--crema);margin-bottom:2px;}
+.all-shot-detail{font-family:'Courier New',monospace;font-size:calc(.56rem*var(--font-scale));color:var(--text);line-height:1.6;}
+.all-shot-meta{font-family:'Courier New',monospace;font-size:calc(.51rem*var(--font-scale));color:var(--mid);margin-top:2px;}
 
 /* REF BOX */
-.ref-box{background:var(–crema2);border:1px solid var(–border);border-radius:9px;padding:9px 12px;margin-bottom:12px;font-family:‘Courier New’,monospace;font-size:calc(.58rem*var(–font-scale));color:var(–light);line-height:2;}
-.ref-box span{color:var(–crema);}
+.ref-box{background:var(--crema2);border:1px solid var(--border);border-radius:9px;padding:9px 12px;margin-bottom:12px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));color:var(--light);line-height:2;}
+.ref-box span{color:var(--crema);}
 
 /* ACTION BUTTONS */
 .action-row{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
-.action-btn{flex:1;min-width:70px;padding:8px 5px;background:var(–crema2);border:1px solid var(–border);color:var(–crema);border-radius:7px;font-family:‘Courier New’,monospace;font-size:calc(.55rem*var(–font-scale));letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:all .15s;text-align:center;}
-.action-btn.green{background:rgba(90,184,58,.1);border-color:rgba(90,184,58,.4);color:var(–green);}
-.action-btn.ai{background:linear-gradient(135deg,rgba(200,151,74,.2),rgba(200,151,74,.05));border-color:var(–crema);}
+.action-btn{flex:1;min-width:70px;padding:8px 5px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.55rem*var(--font-scale));letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:all .15s;text-align:center;}
+.action-btn.green{background:rgba(90,184,58,.1);border-color:rgba(90,184,58,.4);color:var(--green);}
+.action-btn.ai{background:linear-gradient(135deg,rgba(200,151,74,.2),rgba(200,151,74,.05));border-color:var(--crema);}
 .action-btn:active{opacity:.7;}
 
 /* PILLS */
 #kaffee-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px;justify-content:center;}
-.pill{font-family:‘Courier New’,monospace;font-size:calc(.54rem*var(–font-scale));letter-spacing:.05em;text-transform:uppercase;padding:6px 10px;border-radius:18px;border:1px solid var(–mid);background:none;color:var(–light);cursor:pointer;transition:all .18s;}
-.pill.has-data{border-color:var(–crema);color:var(–crema);}
-.pill.active{background:var(–crema);color:var(–bg);border-color:var(–crema);font-weight:bold;}
+.pill{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));letter-spacing:.05em;text-transform:uppercase;padding:6px 10px;border-radius:18px;border:1px solid var(--mid);background:none;color:var(--light);cursor:pointer;transition:all .18s;}
+.pill.has-data{border-color:var(--crema);color:var(--crema);}
+.pill.active{background:var(--crema);color:var(--bg);border-color:var(--crema);font-weight:bold;}
 .pill.add-pill{border-style:dashed;}
 
 /* SETTINGS */
-.setting-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(–border2);}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border2);}
 .setting-row:last-child{border-bottom:none;}
-.setting-label{font-size:calc(.76rem*var(–font-scale));color:var(–text);}
-.setting-sub{font-family:‘Courier New’,monospace;font-size:calc(.54rem*var(–font-scale));color:var(–mid);margin-top:2px;}
+.setting-label{font-size:calc(.76rem*var(--font-scale));color:var(--text);}
+.setting-sub{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--mid);margin-top:2px;}
 .setting-control{display:flex;gap:6px;align-items:center;}
-.skin-btn{padding:5px 9px;border-radius:5px;border:1px solid var(–mid);background:none;color:var(–mid);font-family:‘Courier New’,monospace;font-size:calc(.58rem*var(–font-scale));cursor:pointer;transition:all .15s;}
-.skin-btn.active{background:var(–crema);border-color:var(–crema);color:var(–bg);}
-.font-btn{width:30px;height:30px;border-radius:5px;border:1px solid var(–mid);background:none;color:var(–mid);font-family:‘Courier New’,monospace;font-size:calc(.88rem*var(–font-scale));cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.skin-btn{padding:5px 9px;border-radius:5px;border:1px solid var(--mid);background:none;color:var(--mid);font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));cursor:pointer;transition:all .15s;}
+.skin-btn.active{background:var(--crema);border-color:var(--crema);color:var(--bg);}
+.font-btn{width:30px;height:30px;border-radius:5px;border:1px solid var(--mid);background:none;color:var(--mid);font-family:'Courier New',monospace;font-size:calc(.88rem*var(--font-scale));cursor:pointer;display:flex;align-items:center;justify-content:center;}
 
 /* DASHBOARD */
 .dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.dash-card{background:var(–card);border:1px solid var(–border);border-radius:10px;padding:12px;text-align:center;}
-.dash-num{font-size:calc(1.8rem*var(–font-scale));color:var(–crema);line-height:1;margin-bottom:3px;}
-.dash-label{font-family:‘Courier New’,monospace;font-size:calc(.52rem*var(–font-scale));color:var(–mid);letter-spacing:.1em;text-transform:uppercase;}
+.dash-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.dash-num{font-size:calc(1.8rem*var(--font-scale));color:var(--crema);line-height:1;margin-bottom:3px;}
+.dash-label{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);letter-spacing:.1em;text-transform:uppercase;}
 .calibration-bar{margin:8px 0;}
 .cal-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
-.cal-name{font-family:‘Courier New’,monospace;font-size:calc(.54rem*var(–font-scale));color:var(–light);min-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.cal-bar-wrap{flex:1;height:6px;background:var(–border2);border-radius:3px;}
+.cal-name{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--light);min-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cal-bar-wrap{flex:1;height:6px;background:var(--border2);border-radius:3px;}
 .cal-bar{height:100%;border-radius:3px;transition:width .5s;}
-.cal-count{font-family:‘Courier New’,monospace;font-size:calc(.5rem*var(–font-scale));color:var(–mid);min-width:30px;text-align:right;}
+.cal-count{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);min-width:30px;text-align:right;}
 
 /* MODAL */
 .modal-bg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:100;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(3px);}
 .modal-bg.show{display:flex;}
-.modal{background:var(–bg2);border:1px solid var(–border);border-radius:16px 16px 0 0;padding:18px 16px calc(var(–safe-bot)+18px);width:100%;max-width:500px;max-height:85vh;overflow-y:auto;}
-.modal h3{color:var(–crema);font-size:calc(.96rem*var(–font-scale));margin-bottom:10px;font-weight:normal;}
-.modal p{font-size:calc(.74rem*var(–font-scale));color:var(–text);line-height:1.7;margin-bottom:8px;}
-.modal-close{margin-top:12px;width:100%;padding:11px;background:var(–crema);color:var(–bg);border:none;border-radius:8px;font-family:‘Courier New’,monospace;font-size:calc(.63rem*var(–font-scale));letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-weight:bold;}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px 16px 0 0;padding:18px 16px calc(var(--safe-bot)+18px);width:100%;max-width:500px;max-height:85vh;overflow-y:auto;}
+.modal h3{color:var(--crema);font-size:calc(.96rem*var(--font-scale));margin-bottom:10px;font-weight:normal;}
+.modal p{font-size:calc(.74rem*var(--font-scale));color:var(--text);line-height:1.7;margin-bottom:8px;}
+.modal-close{margin-top:12px;width:100%;padding:11px;background:var(--crema);color:var(--bg);border:none;border-radius:8px;font-family:'Courier New',monospace;font-size:calc(.63rem*var(--font-scale));letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-weight:bold;}
 .crema-examples{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0;}
-.crema-ex{border-radius:8px;overflow:hidden;border:1px solid var(–border);text-align:center;}
+.crema-ex{border-radius:8px;overflow:hidden;border:1px solid var(--border);text-align:center;}
 .crema-ex-img{width:100%;height:70px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;}
-.crema-ex-label{font-family:‘Courier New’,monospace;font-size:calc(.52rem*var(–font-scale));color:var(–mid);padding:4px;background:var(–bg3);}
+.crema-ex-label{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);padding:4px;background:var(--bg3);}
 
 /* AI JSON MODAL */
-.ai-json-area{width:100%;height:180px;font-family:‘Courier New’,monospace;font-size:calc(.58rem*var(–font-scale));background:var(–bg3);color:var(–light);border:1px solid var(–border);border-radius:7px;padding:8px;resize:none;margin:8px 0;}
-.copy-btn{width:100%;padding:10px;background:var(–crema);color:var(–bg);border:none;border-radius:7px;font-family:‘Courier New’,monospace;font-size:calc(.62rem*var(–font-scale));letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-weight:bold;margin-bottom:7px;}
-.copy-btn.copied{background:var(–green);color:#fff;}
+.ai-json-area{width:100%;height:180px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));background:var(--bg3);color:var(--light);border:1px solid var(--border);border-radius:7px;padding:8px;resize:none;margin:8px 0;}
+.copy-btn{width:100%;padding:10px;background:var(--crema);color:var(--bg);border:none;border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-weight:bold;margin-bottom:7px;}
+.copy-btn.copied{background:var(--green);color:#fff;}
 
 /* TOAST */
-#sw-toast{position:fixed;bottom:calc(var(–safe-bot)+60px);left:50%;transform:translateX(-50%);background:var(–crema);color:var(–bg);padding:7px 15px;border-radius:18px;font-family:‘Courier New’,monospace;font-size:calc(.6rem*var(–font-scale));z-index:200;display:none;white-space:nowrap;}
+#sw-toast{position:fixed;bottom:calc(var(--safe-bot)+60px);left:50%;transform:translateX(-50%);background:var(--crema);color:var(--bg);padding:7px 15px;border-radius:18px;font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));z-index:200;display:none;white-space:nowrap;}
 
-.empty{text-align:center;color:var(–mid);font-family:‘Courier New’,monospace;font-size:calc(.64rem*var(–font-scale));padding:28px 0;}
+.empty{text-align:center;color:var(--mid);font-family:'Courier New',monospace;font-size:calc(.64rem*var(--font-scale));padding:28px 0;}
 
 /* TRAINER RECOMMENDATION */
-.trainer-card{background:linear-gradient(135deg,rgba(200,151,74,0.12),rgba(200,151,74,0.04));border:1px solid var(–crema);border-radius:12px;padding:13px;margin-bottom:12px;}
+.trainer-card{background:linear-gradient(135deg,rgba(200,151,74,0.12),rgba(200,151,74,0.04));border:1px solid var(--crema);border-radius:12px;padding:13px;margin-bottom:12px;}
 .trainer-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
 .trainer-icon{font-size:1.2rem;}
-.trainer-title{font-size:calc(.82rem*var(–font-scale));color:var(–crema);font-weight:normal;}
-.trainer-subtitle{font-family:‘Courier New’,monospace;font-size:calc(.52rem*var(–font-scale));color:var(–mid);}
+.trainer-title{font-size:calc(.82rem*var(--font-scale));color:var(--crema);font-weight:normal;}
+.trainer-subtitle{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);}
 .trainer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
 .trainer-param{background:rgba(0,0,0,.15);border-radius:8px;padding:9px;text-align:center;}
-.trainer-param-label{font-family:‘Courier New’,monospace;font-size:calc(.49rem*var(–font-scale));color:var(–mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
-.trainer-param-value{font-size:calc(1.05rem*var(–font-scale));color:var(–crema);line-height:1.2;}
-.trainer-param-sub{font-family:‘Courier New’,monospace;font-size:calc(.48rem*var(–font-scale));color:var(–mid);margin-top:2px;}
-.trainer-source{font-family:‘Courier New’,monospace;font-size:calc(.52rem*var(–font-scale));color:var(–mid);text-align:center;margin-bottom:8px;}
-.trainer-history{margin-top:8px;padding-top:8px;border-top:1px solid var(–border2);}
-.trainer-history-title{font-family:‘Courier New’,monospace;font-size:calc(.5rem*var(–font-scale));color:var(–mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.trainer-param-label{font-family:'Courier New',monospace;font-size:calc(.49rem*var(--font-scale));color:var(--mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.trainer-param-value{font-size:calc(1.05rem*var(--font-scale));color:var(--crema);line-height:1.2;}
+.trainer-param-sub{font-family:'Courier New',monospace;font-size:calc(.48rem*var(--font-scale));color:var(--mid);margin-top:2px;}
+.trainer-source{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);text-align:center;margin-bottom:8px;}
+.trainer-history{margin-top:8px;padding-top:8px;border-top:1px solid var(--border2);}
+.trainer-history-title{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
 .trainer-shot-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
-.trainer-shot-bar-wrap{flex:1;height:5px;background:var(–border2);border-radius:3px;}
+.trainer-shot-bar-wrap{flex:1;height:5px;background:var(--border2);border-radius:3px;}
 .trainer-shot-bar{height:100%;border-radius:3px;transition:width .4s;}
-.trainer-shot-info{font-family:‘Courier New’,monospace;font-size:calc(.5rem*var(–font-scale));color:var(–mid);min-width:80px;text-align:right;}
-.trainer-apply-btn{width:100%;padding:8px;background:var(–crema2);border:1px solid var(–border);color:var(–crema);border-radius:7px;font-family:‘Courier New’,monospace;font-size:calc(.58rem*var(–font-scale));letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-top:8px;}
+.trainer-shot-info{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);min-width:80px;text-align:right;}
+.trainer-apply-btn{width:100%;padding:8px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-top:8px;}
 </style>
-
 </head>
 <body class="theme-dark">
 <div id="app">
@@ -265,156 +263,153 @@ textarea:focus{border-color:var(–crema);}
   </div>
   <div id="content">
 
-```
-<!-- DASHBOARD -->
-<div id="tab-dashboard">
-  <div id="dashboard-content"></div>
-</div>
+    <!-- DASHBOARD -->
+    <div id="tab-dashboard">
+      <div id="dashboard-content"></div>
+    </div>
 
-<!-- BEWERTUNG -->
-<div id="tab-bewertung" style="display:none">
-  <div class="ref-box">
-    <span>Ref A:</span> 18g→36g/30s=1:2 kräftig &nbsp;|&nbsp; <span>Ref B★:</span> 18g→42g/30s=1:2,33 Sweetspot
-  </div>
-  <div id="kaffee-pills"></div>
-  <div id="form-area" style="display:none">
-    <div id="trainer-rec" style="display:none"></div>
-    <div class="card">
-      <div class="card-title">
-        <span id="form-kaffee-name"></span>
-        <span id="form-badge" class="badge" style="display:none"></span>
+    <!-- BEWERTUNG -->
+    <div id="tab-bewertung" style="display:none">
+      <div class="ref-box">
+        <span>Ref A:</span> 18g→36g/30s=1:2 kräftig &nbsp;|&nbsp; <span>Ref B★:</span> 18g→42g/30s=1:2,33 Sweetspot
       </div>
-      <div class="sl">Bezug</div>
-      <div class="grid2">
-        <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="18" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
-        <div class="field"><label>Yield Aus (g)</label><input type="number" id="f-doseOut" placeholder="z.B. 42" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
-        <div class="field"><label>Zeit (Sek)</label><input type="number" id="f-zeit" placeholder="z.B. 30" inputmode="numeric" oninput="updateLiveTip()"></div>
-        <div class="field"><label>Mahlgrad</label><input type="number" id="f-mahlgrad" placeholder="z.B. 4" inputmode="decimal" step="0.5" oninput="updateLiveTip()"></div>
-        <div class="field"><label>Brühtemp (°C)</label><input type="number" id="f-temp" placeholder="z.B. 93" inputmode="numeric" oninput="updateLiveTip()"></div>
-        <div class="field"><label>Pre-Infusion (s)</label><input type="number" id="f-pi" placeholder="0-8" inputmode="decimal" step="0.5" oninput="updateLiveTip()"></div>
-      </div>
-      <div id="ratio-display"></div>
-      <div id="live-tip"></div>
-      <div class="sl">Geschmack</div>
-      <div id="sliders"></div>
-      <div class="chips-header">
-        <span class="chips-label">Aromen</span>
-        <button class="info-btn" onclick="showAromaInfo()">i</button>
-      </div>
-      <div class="chips" id="aromen-chips"></div>
-      <div class="chips-header" style="margin-top:10px">
-        <span class="chips-label">Crema</span>
-        <button class="info-btn" onclick="showCremaInfo()">i</button>
-      </div>
-      <div class="chips" id="crema-chips"></div>
-      <!-- GEFÜHRTE VERKOSTUNG -->
-      <div class="sl" style="margin-top:14px">Geführte Verkostung <button class="info-btn" onclick="toggleVerkostung()" id="verk-toggle-btn" style="margin-left:6px;font-size:.7rem;padding:2px 7px">▶ starten</button></div>
-      <div id="verk-assistant" style="display:none"></div>
+      <div id="kaffee-pills"></div>
+      <div id="form-area" style="display:none">
+        <div id="trainer-rec" style="display:none"></div>
+        <div class="card">
+          <div class="card-title">
+            <span id="form-kaffee-name"></span>
+            <span id="form-badge" class="badge" style="display:none"></span>
+          </div>
+          <div class="sl">Bezug</div>
+          <div class="grid2">
+            <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="18" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
+            <div class="field"><label>Yield Aus (g)</label><input type="number" id="f-doseOut" placeholder="z.B. 42" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
+            <div class="field"><label>Zeit (Sek)</label><input type="number" id="f-zeit" placeholder="z.B. 30" inputmode="numeric" oninput="updateLiveTip()"></div>
+            <div class="field"><label>Mahlgrad</label><input type="number" id="f-mahlgrad" placeholder="z.B. 4" inputmode="decimal" step="0.5" oninput="updateLiveTip()"></div>
+            <div class="field"><label>Brühtemp (°C)</label><input type="number" id="f-temp" placeholder="z.B. 93" inputmode="numeric" oninput="updateLiveTip()"></div>
+            <div class="field"><label>Pre-Infusion (s)</label><input type="number" id="f-pi" placeholder="0-8" inputmode="decimal" step="0.5" oninput="updateLiveTip()"></div>
+          </div>
+          <div id="ratio-display"></div>
+          <div id="live-tip"></div>
+          <div class="sl">Geschmack</div>
+          <div id="sliders"></div>
+          <div class="chips-header">
+            <span class="chips-label">Aromen</span>
+            <button class="info-btn" onclick="showAromaInfo()">i</button>
+          </div>
+          <div class="chips" id="aromen-chips"></div>
+          <div class="chips-header" style="margin-top:10px">
+            <span class="chips-label">Crema</span>
+            <button class="info-btn" onclick="showCremaInfo()">i</button>
+          </div>
+          <div class="chips" id="crema-chips"></div>
+          <!-- GEFÜHRTE VERKOSTUNG -->
+          <div class="sl" style="margin-top:14px">Geführte Verkostung <button class="info-btn" onclick="toggleVerkostung()" id="verk-toggle-btn" style="margin-left:6px;font-size:.7rem;padding:2px 7px">▶ starten</button></div>
+          <div id="verk-assistant" style="display:none"></div>
 
-      <div class="sl" style="margin-top:14px">Gesamteindruck</div>
-      <!-- 4 Optionen statt Sterne -->
-      <div id="gesamt-row" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-        <button class="gesamt-btn" data-v="1" onclick="setGesamt(1)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
-          😖<br><strong>Nicht gut</strong><br><span style="font-size:.8em;color:var(--mid)">Würde ich nochmal anders machen</span>
-        </button>
-        <button class="gesamt-btn" data-v="2" onclick="setGesamt(2)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
-          😐<br><strong>Geht so</strong><br><span style="font-size:.8em;color:var(--mid)">Trinkbar, aber ausbaufähig</span>
-        </button>
-        <button class="gesamt-btn" data-v="3" onclick="setGesamt(3)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
-          😊<br><strong>Gut</strong><br><span style="font-size:.8em;color:var(--mid)">Sauber, würde ich wiederholen</span>
-        </button>
-        <button class="gesamt-btn" data-v="4" onclick="setGesamt(4)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
-          😋<br><strong>Ausgezeichnet</strong><br><span style="font-size:.8em;color:var(--mid)">Referenz-Bezug!</span>
-        </button>
-      </div>
-      <div id="score-display" style="display:none">
-        <div id="score-num">–</div>
-        <div id="score-label">Score<br><span style="font-size:.85em;opacity:.6">von 100</span></div>
-      </div>
+          <div class="sl" style="margin-top:14px">Gesamteindruck</div>
+          <!-- 4 Optionen statt Sterne -->
+          <div id="gesamt-row" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+            <button class="gesamt-btn" data-v="1" onclick="setGesamt(1)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+              😖<br><strong>Nicht gut</strong><br><span style="font-size:.8em;color:var(--mid)">Würde ich nochmal anders machen</span>
+            </button>
+            <button class="gesamt-btn" data-v="2" onclick="setGesamt(2)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+              😐<br><strong>Geht so</strong><br><span style="font-size:.8em;color:var(--mid)">Trinkbar, aber ausbaufähig</span>
+            </button>
+            <button class="gesamt-btn" data-v="3" onclick="setGesamt(3)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+              😊<br><strong>Gut</strong><br><span style="font-size:.8em;color:var(--mid)">Sauber, würde ich wiederholen</span>
+            </button>
+            <button class="gesamt-btn" data-v="4" onclick="setGesamt(4)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+              😋<br><strong>Ausgezeichnet</strong><br><span style="font-size:.8em;color:var(--mid)">Referenz-Bezug!</span>
+            </button>
+          </div>
+          <div id="score-display" style="display:none">
+            <div id="score-num">–</div>
+            <div id="score-label">Score<br><span style="font-size:.85em;opacity:.6">von 100</span></div>
+          </div>
 
-      <div class="sl">Notizen</div>
-      <textarea id="f-notizen" placeholder="Freie Notizen…"></textarea>
-      <div class="sl">Wieder kaufen?</div>
-      <div id="empf-row">
-        <button class="empf-btn ja" onclick="setEmpf('ja')">✓ Ja</button>
-        <button class="empf-btn vl" onclick="setEmpf('vl')">? Vielleicht</button>
-        <button class="empf-btn nein" onclick="setEmpf('nein')">✗ Nein</button>
+          <div class="sl">Notizen</div>
+          <textarea id="f-notizen" placeholder="Freie Notizen…"></textarea>
+          <div class="sl">Wieder kaufen?</div>
+          <div id="empf-row">
+            <button class="empf-btn ja" onclick="setEmpf('ja')">✓ Ja</button>
+            <button class="empf-btn vl" onclick="setEmpf('vl')">? Vielleicht</button>
+            <button class="empf-btn nein" onclick="setEmpf('nein')">✗ Nein</button>
+          </div>
+          <button id="btn-save" onclick="saveShot()" disabled>Bezug speichern</button>
+          <button id="btn-ai" onclick="showAIPrompt(null)">🤖 KI-Hilfe für diesen Bezug</button>
+          <button id="btn-reset" onclick="resetForm(false)">↺ Formular leeren</button>
+        </div>
+        <div class="card" id="history-card" style="display:none">
+          <div class="card-title">Gespeicherte Bezüge</div>
+          <div id="history-list"></div>
+        </div>
       </div>
-      <button id="btn-save" onclick="saveShot()" disabled>Bezug speichern</button>
-      <button id="btn-ai" onclick="showAIPrompt(null)">🤖 KI-Hilfe für diesen Bezug</button>
-      <button id="btn-reset" onclick="resetForm(false)">↺ Formular leeren</button>
+      <div id="no-selection" class="empty">Kaffee oben antippen ↑</div>
     </div>
-    <div class="card" id="history-card" style="display:none">
-      <div class="card-title">Gespeicherte Bezüge</div>
-      <div id="history-list"></div>
-    </div>
-  </div>
-  <div id="no-selection" class="empty">Kaffee oben antippen ↑</div>
-</div>
 
-<!-- RANGLISTE -->
-<div id="tab-rangliste" style="display:none">
-  <div class="action-row">
-    <button class="action-btn" onclick="exportRangliste('csv')">📋 CSV</button>
-    <button class="action-btn" onclick="exportRangliste('text')">📝 Text</button>
-    <button class="action-btn ai" onclick="showAIPrompt('rangliste')">🤖 KI-Analyse</button>
-  </div>
-  <div id="rank-list"></div>
-</div>
+    <!-- RANGLISTE -->
+    <div id="tab-rangliste" style="display:none">
+      <div class="action-row">
+        <button class="action-btn" onclick="exportRangliste('csv')">📋 CSV</button>
+        <button class="action-btn" onclick="exportRangliste('text')">📝 Text</button>
+        <button class="action-btn ai" onclick="showAIPrompt('rangliste')">🤖 KI-Analyse</button>
+      </div>
+      <div id="rank-list"></div>
+    </div>
 
-<!-- EINSTELLUNGEN -->
-<div id="tab-einstellungen" style="display:none">
-  <div class="card">
-    <div class="card-title">Darstellung</div>
-    <div class="setting-row">
-      <div><div class="setting-label">Farbschema</div><div class="setting-sub">Dunkel · Hell · Kontrast</div></div>
-      <div class="setting-control">
-        <button class="skin-btn active" id="skin-dark" onclick="setSkin('dark')">🌙</button>
-        <button class="skin-btn" id="skin-light" onclick="setSkin('light')">☀️</button>
-        <button class="skin-btn" id="skin-contrast" onclick="setSkin('contrast')">◐</button>
+    <!-- EINSTELLUNGEN -->
+    <div id="tab-einstellungen" style="display:none">
+      <div class="card">
+        <div class="card-title">Darstellung</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Farbschema</div><div class="setting-sub">Dunkel · Hell · Kontrast</div></div>
+          <div class="setting-control">
+            <button class="skin-btn active" id="skin-dark" onclick="setSkin('dark')">🌙</button>
+            <button class="skin-btn" id="skin-light" onclick="setSkin('light')">☀️</button>
+            <button class="skin-btn" id="skin-contrast" onclick="setSkin('contrast')">◐</button>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Schriftgröße</div><div class="setting-sub" id="font-scale-label">Normal (100%)</div></div>
+          <div class="setting-control">
+            <button class="font-btn" onclick="changeFontScale(-0.1)">A−</button>
+            <button class="font-btn" onclick="changeFontScale(0)">↺</button>
+            <button class="font-btn" onclick="changeFontScale(0.1)">A+</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Daten & Export</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Bezüge</div><div class="setting-sub" id="data-info">–</div></div>
+        </div>
+        <div class="action-row" style="margin-top:10px">
+          <button class="action-btn green" onclick="backupData()">💾 Backup</button>
+          <button class="action-btn green" onclick="document.getElementById('restore-input').click()">📂 Restore</button>
+          <input type="file" id="restore-input" accept=".json" style="display:none" onchange="restoreData(event)">
+        </div>
+        <div class="action-row">
+          <button class="action-btn" onclick="exportAlle('csv')">📋 Alle CSV</button>
+          <button class="action-btn" onclick="exportAlle('text')">📝 Alle Text</button>
+          <button class="action-btn" style="background:rgba(192,57,43,.1);border-color:var(--red);color:var(--red)" onclick="clearAllData()">🗑 Löschen</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Setup</div>
+        <div class="setting-row"><div><div class="setting-label">Maschine</div><div class="setting-sub">Lelit Victoria PL91T · OPV ~9 Bar</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v14.0 · Mai 2026 · Geführte Verkostung · Selbstlernend</div></div></div>
       </div>
     </div>
-    <div class="setting-row">
-      <div><div class="setting-label">Schriftgröße</div><div class="setting-sub" id="font-scale-label">Normal (100%)</div></div>
-      <div class="setting-control">
-        <button class="font-btn" onclick="changeFontScale(-0.1)">A−</button>
-        <button class="font-btn" onclick="changeFontScale(0)">↺</button>
-        <button class="font-btn" onclick="changeFontScale(0.1)">A+</button>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-title">Daten & Export</div>
-    <div class="setting-row">
-      <div><div class="setting-label">Bezüge</div><div class="setting-sub" id="data-info">–</div></div>
-    </div>
-    <div class="action-row" style="margin-top:10px">
-      <button class="action-btn green" onclick="backupData()">💾 Backup</button>
-      <button class="action-btn green" onclick="document.getElementById('restore-input').click()">📂 Restore</button>
-      <input type="file" id="restore-input" accept=".json" style="display:none" onchange="restoreData(event)">
-    </div>
-    <div class="action-row">
-      <button class="action-btn" onclick="exportAlle('csv')">📋 Alle CSV</button>
-      <button class="action-btn" onclick="exportAlle('text')">📝 Alle Text</button>
-      <button class="action-btn" style="background:rgba(192,57,43,.1);border-color:var(--red);color:var(--red)" onclick="clearAllData()">🗑 Löschen</button>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-title">Setup</div>
-    <div class="setting-row"><div><div class="setting-label">Maschine</div><div class="setting-sub">Lelit Victoria PL91T · OPV ~9 Bar</div></div></div>
-    <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
-    <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
-    <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v14.0 · Mai 2026 · Geführte Verkostung · Selbstlernend</div></div></div>
-  </div>
-</div>
-```
 
   </div>
 </div>
 
 <!-- MODAL -->
-
 <div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
     <h3 id="modal-title"></h3>
@@ -786,361 +781,374 @@ function showAIPrompt(context){
   document.getElementById('modal-body').innerHTML=`
     <p style="font-size:calc(.7rem*var(--font-scale));color:var(--mid);margin-bottom:8px">Kopiere diesen JSON-Prompt und füge ihn in Claude oder ChatGPT ein:</p>
     <textarea class="ai-json-area" id="ai-json-output" readonly>${json}</textarea>
-
-```
-<button class="copy-btn" id="copy-json-btn" onclick="copyAIJson()">📋 In Zwischenablage kopieren</button>
-<p style="font-size:calc(.62rem*var(--font-scale));color:var(--mid)">Tipp: Öffne Claude.ai oder ChatGPT, füge den Text ein und schicke ab. Der Prompt enthält dein gesamtes Setup und die Bezugshistorie.</p>`;
-```
-
-document.getElementById(‘modal-bg’).classList.add(‘show’);
+    <button class="copy-btn" id="copy-json-btn" onclick="copyAIJson()">📋 In Zwischenablage kopieren</button>
+    <p style="font-size:calc(.62rem*var(--font-scale));color:var(--mid)">Tipp: Öffne Claude.ai oder ChatGPT, füge den Text ein und schicke ab. Der Prompt enthält dein gesamtes Setup und die Bezugshistorie.</p>`;
+  document.getElementById('modal-bg').classList.add('show');
 }
 
 function copyAIJson(){
-const el=document.getElementById(‘ai-json-output’);
-el.select();
-try{
-if(navigator.clipboard){navigator.clipboard.writeText(el.value);}
-else{document.execCommand(‘copy’);}
-const btn=document.getElementById(‘copy-json-btn’);
-btn.textContent=‘✓ Kopiert!’;btn.classList.add(‘copied’);
-setTimeout(()=>{btn.textContent=‘📋 In Zwischenablage kopieren’;btn.classList.remove(‘copied’);},2000);
-}catch(e){el.focus();el.select();}
+  const el=document.getElementById('ai-json-output');
+  el.select();
+  try{
+    if(navigator.clipboard){navigator.clipboard.writeText(el.value);}
+    else{document.execCommand('copy');}
+    const btn=document.getElementById('copy-json-btn');
+    btn.textContent='✓ Kopiert!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='📋 In Zwischenablage kopieren';btn.classList.remove('copied');},2000);
+  }catch(e){el.focus();el.select();}
 }
 
 // ============================================================
 // LIVE TIP
 // ============================================================
 function updateLiveTip(){
-const dIn=parseFloat(document.getElementById(‘f-doseIn’).value)||18;
-const dOut=parseFloat(document.getElementById(‘f-doseOut’).value)||0;
-const preview={
-doseIn:dIn,doseOut:dOut,ratio:dOut?(dOut/dIn).toFixed(2):null,
-zeit:document.getElementById(‘f-zeit’).value,
-mahlgrad:document.getElementById(‘f-mahlgrad’).value,
-temp:document.getElementById(‘f-temp’).value,
-pi:document.getElementById(‘f-pi’).value,
-saeure:dotToScore(dotValues.saeure),bitter:dotToScore(dotValues.bitter),
-suesse:dotToScore(dotValues.suesse),koerper:dotToScore(dotValues.koerper),
-nachklang:dotToScore(dotValues.nachklang),
-aromen:[…curAromen],crema:curCrema,sterne:curSterne||3,score:calcScore()||65
-};
-const hasData=dOut>0||preview.zeit||preview.mahlgrad||preview.temp||preview.pi||
-Object.values(dotValues).some(v=>v!==4);
-const el=document.getElementById(‘live-tip’);
-if(!hasData){el.style.display=‘none’;return;}
-const tips=generateTips(preview);
-if(!tips.length){el.style.display=‘none’;return;}
-el.innerHTML=`<strong>Live-Tipp${tips.length>1?'s':''}</strong>`+tips.map(t=>`<div class="live-tip-item">${t.tip}</div>`).join(’’);
-el.style.display=‘block’;
+  const dIn=parseFloat(document.getElementById('f-doseIn').value)||18;
+  const dOut=parseFloat(document.getElementById('f-doseOut').value)||0;
+  const preview={
+    doseIn:dIn,doseOut:dOut,ratio:dOut?(dOut/dIn).toFixed(2):null,
+    zeit:document.getElementById('f-zeit').value,
+    mahlgrad:document.getElementById('f-mahlgrad').value,
+    temp:document.getElementById('f-temp').value,
+    pi:document.getElementById('f-pi').value,
+    saeure:dotToScore(dotValues.saeure),bitter:dotToScore(dotValues.bitter),
+    suesse:dotToScore(dotValues.suesse),koerper:dotToScore(dotValues.koerper),
+    nachklang:dotToScore(dotValues.nachklang),
+    aromen:[...curAromen],crema:curCrema,sterne:curSterne||3,score:calcScore()||65
+  };
+  const hasData=dOut>0||preview.zeit||preview.mahlgrad||preview.temp||preview.pi||
+    Object.values(dotValues).some(v=>v!==4);
+  const el=document.getElementById('live-tip');
+  if(!hasData){el.style.display='none';return;}
+  const tips=generateTips(preview);
+  if(!tips.length){el.style.display='none';return;}
+  el.innerHTML=`<strong>Live-Tipp${tips.length>1?'s':''}</strong>`+tips.map(t=>`<div class="live-tip-item">${t.tip}</div>`).join('');
+  el.style.display='block';
 }
 
 // ============================================================
 // DOT SELECTORS
 // ============================================================
-const slidersEl=document.getElementById(‘sliders’);
+const slidersEl=document.getElementById('sliders');
 SLIDERS.forEach(sl=>{
-const dots=Array.from({length:DOT_SCALE},(_,i)=>{
-const v=i+1;
-return `<button class="dot-btn" id="dot-${sl.id}-${v}" onclick="onDot('${sl.id}',${v})">${v}</button>`;
-}).join(’’);
-slidersEl.innerHTML+=`<div class="dot-row"><div class="dot-header"><span class="dot-name">${sl.label}<button class="info-btn" onclick="showSliderInfo('${sl.id}')">i</button></span></div><div class="dot-selector">${dots}</div><div class="dot-hints"><span>${sl.lo}</span><span>${sl.hi}</span></div></div>`;
+  const dots=Array.from({length:DOT_SCALE},(_,i)=>{
+    const v=i+1;
+    return `<button class="dot-btn" id="dot-${sl.id}-${v}" onclick="onDot('${sl.id}',${v})">${v}</button>`;
+  }).join('');
+  slidersEl.innerHTML+=`<div class="dot-row"><div class="dot-header"><span class="dot-name">${sl.label}<button class="info-btn" onclick="showSliderInfo('${sl.id}')">i</button></span></div><div class="dot-selector">${dots}</div><div class="dot-hints"><span>${sl.lo}</span><span>${sl.hi}</span></div></div>`;
 });
 
 function onDot(id,val){dotValues[id]=val;updateDotDisplay(id);updateScore();updateLiveTip();}
-function updateDotDisplay(id){const v=dotValues[id];for(let i=1;i<=DOT_SCALE;i++){const b=document.getElementById(`dot-${id}-${i}`);if(b)b.classList.toggle(‘on’,i<=v);}}
+function updateDotDisplay(id){const v=dotValues[id];for(let i=1;i<=DOT_SCALE;i++){const b=document.getElementById(`dot-${id}-${i}`);if(b)b.classList.toggle('on',i<=v);}}
 function updateAllDots(){SLIDERS.forEach(sl=>updateDotDisplay(sl.id));}
 
 // Aromen chips
-const aromaEl=document.getElementById(‘aromen-chips’);
-AROMEN.forEach(a=>{const b=document.createElement(‘button’);b.className=‘chip’;b.textContent=a;b.dataset.val=a;b.onclick=()=>{const i=curAromen.indexOf(a);if(i>=0)curAromen.splice(i,1);else curAromen.push(a);b.classList.toggle(‘on’,curAromen.includes(a));updateScore();updateLiveTip();};aromaEl.appendChild(b);});
+const aromaEl=document.getElementById('aromen-chips');
+AROMEN.forEach(a=>{const b=document.createElement('button');b.className='chip';b.textContent=a;b.dataset.val=a;b.onclick=()=>{const i=curAromen.indexOf(a);if(i>=0)curAromen.splice(i,1);else curAromen.push(a);b.classList.toggle('on',curAromen.includes(a));updateScore();updateLiveTip();};aromaEl.appendChild(b);});
 
 // Crema chips
-const cremaEl=document.getElementById(‘crema-chips’);
-CREMAS.forEach(c=>{const b=document.createElement(‘button’);b.className=‘chip’;b.textContent=c;b.dataset.val=c;b.onclick=()=>{curCrema=c;document.querySelectorAll(’#crema-chips .chip’).forEach(x=>x.classList.toggle(‘on’,x.dataset.val===c));updateScore();};cremaEl.appendChild(b);});
+const cremaEl=document.getElementById('crema-chips');
+CREMAS.forEach(c=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.dataset.val=c;b.onclick=()=>{curCrema=c;document.querySelectorAll('#crema-chips .chip').forEach(x=>x.classList.toggle('on',x.dataset.val===c));updateScore();};cremaEl.appendChild(b);});
 
 // Stars
-const starsEl=document.getElementById(‘stars’);
+const starsEl=document.getElementById('stars');
 // Stars replaced by Gesamteindruck 4-option buttons
 function updateStars(){} // kept for compatibility
-function updateScore(){if(!curSterne){document.getElementById(‘score-display’).style.display=‘none’;return;}document.getElementById(‘score-num’).textContent=calcScore();document.getElementById(‘score-display’).style.display=‘flex’;}
+function updateScore(){if(!curSterne){document.getElementById('score-display').style.display='none';return;}document.getElementById('score-num').textContent=calcScore();document.getElementById('score-display').style.display='flex';}
 
 function updateRatio(){
-const dIn=parseFloat(document.getElementById(‘f-doseIn’).value)||18;
-const dOut=parseFloat(document.getElementById(‘f-doseOut’).value)||0;
-const el=document.getElementById(‘ratio-display’);
-if(!dOut){el.textContent=’’;}else{const r=dOut/dIn;let tag=’’;if(r>=2.2&&r<=2.5)tag=’ ★ Sweetspot’;else if(r<2)tag=’ → zu kurz’;else if(r>2.7)tag=’ → zu lang’;el.textContent=`Ratio 1:${r.toFixed(2)}${tag}`;}
-updateLiveTip();
+  const dIn=parseFloat(document.getElementById('f-doseIn').value)||18;
+  const dOut=parseFloat(document.getElementById('f-doseOut').value)||0;
+  const el=document.getElementById('ratio-display');
+  if(!dOut){el.textContent='';}else{const r=dOut/dIn;let tag='';if(r>=2.2&&r<=2.5)tag=' ★ Sweetspot';else if(r<2)tag=' → zu kurz';else if(r>2.7)tag=' → zu lang';el.textContent=`Ratio 1:${r.toFixed(2)}${tag}`;}
+  updateLiveTip();
 }
 
-function setEmpf(v){curEmpf=v;document.querySelectorAll(’.empf-btn’).forEach(b=>b.classList.remove(‘on’));document.querySelector(`.empf-btn.${v}`).classList.add(‘on’);}
+function setEmpf(v){curEmpf=v;document.querySelectorAll('.empf-btn').forEach(b=>b.classList.remove('on'));document.querySelector(`.empf-btn.${v}`).classList.add('on');}
 
 // ============================================================
 // PILLS
 // ============================================================
 function buildPills(){
-const el=document.getElementById(‘kaffee-pills’);el.innerHTML=’’;
-getAllKaffees().forEach(k=>{
-const cnt=(data[k]||[]).length;const isCustom=customKaffees.includes(k);
-const b=document.createElement(‘button’);
-b.className=‘pill’+(cnt>0?’ has-data’:’’)+(curKaffee===k?’ active’:’’);
-b.textContent=k+(cnt>0?` (${cnt})`:’’);b.onclick=()=>selectKaffee(k);
-if(isCustom){let pt;b.addEventListener(‘touchstart’,()=>{pt=setTimeout(()=>removeCustomKaffee(k),800);});b.addEventListener(‘touchend’,()=>clearTimeout(pt));b.addEventListener(‘contextmenu’,e=>{e.preventDefault();removeCustomKaffee(k);});}
-el.appendChild(b);
-});
-const add=document.createElement(‘button’);add.className=‘pill add-pill’;add.textContent=’+ Kaffee’;add.onclick=addCustomKaffee;el.appendChild(add);
+  const el=document.getElementById('kaffee-pills');el.innerHTML='';
+  getAllKaffees().forEach(k=>{
+    const cnt=(data[k]||[]).length;const isCustom=customKaffees.includes(k);
+    const b=document.createElement('button');
+    b.className='pill'+(cnt>0?' has-data':'')+(curKaffee===k?' active':'');
+    b.textContent=k+(cnt>0?` (${cnt})`:'');b.onclick=()=>selectKaffee(k);
+    if(isCustom){let pt;b.addEventListener('touchstart',()=>{pt=setTimeout(()=>removeCustomKaffee(k),800);});b.addEventListener('touchend',()=>clearTimeout(pt));b.addEventListener('contextmenu',e=>{e.preventDefault();removeCustomKaffee(k);});}
+    el.appendChild(b);
+  });
+  const add=document.createElement('button');add.className='pill add-pill';add.textContent='+ Kaffee';add.onclick=addCustomKaffee;el.appendChild(add);
 }
-function addCustomKaffee(){const name=prompt(‘Name des Kaffees:’);if(!name||!name.trim())return;const t=name.trim();if(getAllKaffees().includes(t)){alert(‘Existiert bereits.’);return;}customKaffees.push(t);saveCustom();buildPills();}
-function removeCustomKaffee(k){if(!customKaffees.includes(k))return;const s=(data[k]||[]).length;if(!confirm(`"${k}" entfernen?${s>0?' ('+s+' Bezüge bleiben)':''}`))return;customKaffees=customKaffees.filter(x=>x!==k);saveCustom();if(curKaffee===k){curKaffee=null;document.getElementById(‘form-area’).style.display=‘none’;document.getElementById(‘no-selection’).style.display=‘block’;}buildPills();}
+function addCustomKaffee(){const name=prompt('Name des Kaffees:');if(!name||!name.trim())return;const t=name.trim();if(getAllKaffees().includes(t)){alert('Existiert bereits.');return;}customKaffees.push(t);saveCustom();buildPills();}
+function removeCustomKaffee(k){if(!customKaffees.includes(k))return;const s=(data[k]||[]).length;if(!confirm(`"${k}" entfernen?${s>0?' ('+s+' Bezüge bleiben)':''}`))return;customKaffees=customKaffees.filter(x=>x!==k);saveCustom();if(curKaffee===k){curKaffee=null;document.getElementById('form-area').style.display='none';document.getElementById('no-selection').style.display='block';}buildPills();}
 
 function selectKaffee(k){
-curKaffee=k;resetForm(true);
-document.getElementById(‘no-selection’).style.display=‘none’;
-document.getElementById(‘form-area’).style.display=‘block’;
-document.getElementById(‘form-kaffee-name’).textContent=k;
-const shots=data[k]||[];const badge=document.getElementById(‘form-badge’);
-if(shots.length>0){badge.textContent=`${shots.length} Bezug${shots.length>1?'e':''}`;badge.style.display=‘inline-block’;}else badge.style.display=‘none’;
-buildPills();renderHistory();renderTrainerRec(k);
+  curKaffee=k;resetForm(true);
+  document.getElementById('no-selection').style.display='none';
+  document.getElementById('form-area').style.display='block';
+  document.getElementById('form-kaffee-name').textContent=k;
+  const shots=data[k]||[];const badge=document.getElementById('form-badge');
+  if(shots.length>0){badge.textContent=`${shots.length} Bezug${shots.length>1?'e':''}`;badge.style.display='inline-block';}else badge.style.display='none';
+  buildPills();renderHistory();renderTrainerRec(k);
 }
 
 // ============================================================
 // FORM
 // ============================================================
 function resetForm(prefill){
-curSterne=0;curEmpf=null;curAromen=[];curCrema=null;curGesamt=0;
-// Reset Gesamteindruck Buttons
-document.querySelectorAll(’.gesamt-btn’).forEach(btn => {
-btn.style.border = ‘1.5px solid var(–border)’;
-btn.style.background = ‘var(–crema2)’;
-});
-let doseIn=‘18’,mahlgrad=’’,temp=’’,pi=’’;
-if(prefill&&curKaffee&&data[curKaffee]&&data[curKaffee].length>0){
-const last=data[curKaffee][data[curKaffee].length-1];
-doseIn=last.doseIn||‘18’;mahlgrad=last.mahlgrad||’’;temp=last.temp||’’;pi=last.pi||’’;
-}
-[‘f-doseIn’,‘f-doseOut’,‘f-zeit’,‘f-mahlgrad’,‘f-temp’,‘f-pi’,‘f-notizen’].forEach(id=>{
-const el=document.getElementById(id);
-if(el)el.value=’’;
-});
-document.getElementById(‘f-doseIn’).value=doseIn;
-document.getElementById(‘f-mahlgrad’).value=mahlgrad;
-document.getElementById(‘f-temp’).value=temp;
-document.getElementById(‘f-pi’).value=pi;
-document.getElementById(‘ratio-display’).textContent=’’;
-[‘f-doseIn’,‘f-mahlgrad’,‘f-temp’,‘f-pi’].forEach(id=>{
-const el=document.getElementById(id);if(!el)return;
-if(prefill&&el.value)el.classList.add(‘prefilled’);else el.classList.remove(‘prefilled’);
-el.onfocus=()=>el.classList.remove(‘prefilled’);
-});
-SLIDERS.forEach(sl=>{dotValues[sl.id]=4;updateDotDisplay(sl.id);});
-document.querySelectorAll(’.chip’).forEach(c=>c.classList.remove(‘on’));
-updateStars();document.getElementById(‘score-display’).style.display=‘none’;
-document.querySelectorAll(’.empf-btn’).forEach(b=>b.classList.remove(‘on’));
-document.getElementById(‘btn-save’).disabled=true;
-document.getElementById(‘live-tip’).style.display=‘none’;
-updateLiveTip();
+  curSterne=0;curEmpf=null;curAromen=[];curCrema=null;curGesamt=0;
+  // Reset Gesamteindruck Buttons
+  document.querySelectorAll('.gesamt-btn').forEach(btn => {
+    btn.style.border = '1.5px solid var(--border)';
+    btn.style.background = 'var(--crema2)';
+  });
+  let doseIn='18',mahlgrad='',temp='',pi='';
+  if(prefill&&curKaffee&&data[curKaffee]&&data[curKaffee].length>0){
+    const last=data[curKaffee][data[curKaffee].length-1];
+    doseIn=last.doseIn||'18';mahlgrad=last.mahlgrad||'';temp=last.temp||'';pi=last.pi||'';
+  }
+  ['f-doseIn','f-doseOut','f-zeit','f-mahlgrad','f-temp','f-pi','f-notizen'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.value='';
+  });
+  document.getElementById('f-doseIn').value=doseIn;
+  document.getElementById('f-mahlgrad').value=mahlgrad;
+  document.getElementById('f-temp').value=temp;
+  document.getElementById('f-pi').value=pi;
+  document.getElementById('ratio-display').textContent='';
+  ['f-doseIn','f-mahlgrad','f-temp','f-pi'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    if(prefill&&el.value)el.classList.add('prefilled');else el.classList.remove('prefilled');
+    el.onfocus=()=>el.classList.remove('prefilled');
+  });
+  SLIDERS.forEach(sl=>{dotValues[sl.id]=4;updateDotDisplay(sl.id);});
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  updateStars();document.getElementById('score-display').style.display='none';
+  document.querySelectorAll('.empf-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('btn-save').disabled=true;
+  document.getElementById('live-tip').style.display='none';
+  updateLiveTip();
 }
 
 // ============================================================
 // SAVE SHOT
 // ============================================================
 function saveShot(){
-if(!curKaffee||!curSterne)return;
-const doseIn=parseFloat(document.getElementById(‘f-doseIn’).value)||18;
-const doseOut=parseFloat(document.getElementById(‘f-doseOut’).value)||0;
-const now=new Date();
-const shot={
-doseIn,doseOut,
-zeit:document.getElementById(‘f-zeit’).value,
-mahlgrad:document.getElementById(‘f-mahlgrad’).value,
-temp:document.getElementById(‘f-temp’).value,
-pi:document.getElementById(‘f-pi’).value,
-ratio:doseOut?(doseOut/doseIn).toFixed(2):null,
-saeure:dotToScore(dotValues.saeure),bitter:dotToScore(dotValues.bitter),
-suesse:dotToScore(dotValues.suesse),koerper:dotToScore(dotValues.koerper),
-nachklang:dotToScore(dotValues.nachklang),
-dotSaeure:dotValues.saeure,dotBitter:dotValues.bitter,
-dotSuesse:dotValues.suesse,dotKoerper:dotValues.koerper,dotNachklang:dotValues.nachklang,
-aromen:[…curAromen],crema:curCrema,
-sterne:curSterne,empfehlung:curEmpf,
-notizen:document.getElementById(‘f-notizen’).value,
-score:calcScore(),
-ts:now.toLocaleDateString(‘de-DE’)+’ ’+now.toLocaleTimeString(‘de-DE’,{hour:‘2-digit’,minute:‘2-digit’}),
-timestamp:now.getTime()
-};
-const tipsResult=generateTips(shot);
-if(tipsResult.length)shot.tips=tipsResult.map(t=>({…t,resolved:null}));
-if(!data[curKaffee])data[curKaffee]=[];
-data[curKaffee].push(shot);saveData();
-selectKaffee(curKaffee);
-renderTrainerRec(curKaffee);
-if(navigator.vibrate)navigator.vibrate(30);
+  if(!curKaffee||!curSterne)return;
+  const doseIn=parseFloat(document.getElementById('f-doseIn').value)||18;
+  const doseOut=parseFloat(document.getElementById('f-doseOut').value)||0;
+  const now=new Date();
+  const shot={
+    doseIn,doseOut,
+    zeit:document.getElementById('f-zeit').value,
+    mahlgrad:document.getElementById('f-mahlgrad').value,
+    temp:document.getElementById('f-temp').value,
+    pi:document.getElementById('f-pi').value,
+    ratio:doseOut?(doseOut/doseIn).toFixed(2):null,
+    saeure:dotToScore(dotValues.saeure),bitter:dotToScore(dotValues.bitter),
+    suesse:dotToScore(dotValues.suesse),koerper:dotToScore(dotValues.koerper),
+    nachklang:dotToScore(dotValues.nachklang),
+    dotSaeure:dotValues.saeure,dotBitter:dotValues.bitter,
+    dotSuesse:dotValues.suesse,dotKoerper:dotValues.koerper,dotNachklang:dotValues.nachklang,
+    aromen:[...curAromen],crema:curCrema,
+    sterne:curSterne,empfehlung:curEmpf,
+    notizen:document.getElementById('f-notizen').value,
+    score:calcScore(),
+    ts:now.toLocaleDateString('de-DE')+' '+now.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}),
+    timestamp:now.getTime()
+  };
+  const tipsResult=generateTips(shot);
+  if(tipsResult.length)shot.tips=tipsResult.map(t=>({...t,resolved:null}));
+  if(!data[curKaffee])data[curKaffee]=[];
+  data[curKaffee].push(shot);saveData();
+  selectKaffee(curKaffee);
+  renderTrainerRec(curKaffee);
+  if(navigator.vibrate)navigator.vibrate(30);
 }
 
-function deleteShot(k,idx){if(!confirm(‘Bezug löschen?’))return;data[k].splice(idx,1);if(!data[k].length)delete data[k];saveData();selectKaffee(k);renderRangliste();}
+function deleteShot(k,idx){if(!confirm('Bezug löschen?'))return;data[k].splice(idx,1);if(!data[k].length)delete data[k];saveData();selectKaffee(k);renderRangliste();}
 function answerFollowup(k,idx,tIdx,ans){if(!data[k][idx].tips)return;data[k][idx].tips[tIdx].resolved=ans;saveData();renderHistory();}
 
 // ============================================================
 // RENDER HISTORY
 // ============================================================
 function renderHistory(){
-const shots=data[curKaffee]||[];
-const card=document.getElementById(‘history-card’),list=document.getElementById(‘history-list’);
-if(!shots.length){card.style.display=‘none’;return;}
-card.style.display=‘block’;
-const bestShot=shots.reduce((a,b)=>b.score>a.score?b:a);
+  const shots=data[curKaffee]||[];
+  const card=document.getElementById('history-card'),list=document.getElementById('history-list');
+  if(!shots.length){card.style.display='none';return;}
+  card.style.display='block';
+  const bestShot=shots.reduce((a,b)=>b.score>a.score?b:a);
 
-list.innerHTML=shots.slice().reverse().map((s,revIdx)=>{
-const i=shots.length-1-revIdx;
-let tipsArr=s.tips;
-if(!tipsArr&&s.tip)tipsArr=[{tip:s.tip,followup:s.tipFollowup,resolved:s.tipResolved}];
-let tipHtml=’’;
-if(tipsArr&&tipsArr.length){
-tipHtml=tipsArr.map((t,tIdx)=>{
-let fHtml=’’;
-if(t.followup){
-if(t.resolved===null||t.resolved===undefined){fHtml=`<div class="shot-tip-followup">${t.followup}<div class="yn-row"><button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'ja')">Ja, besser</button><button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'nein')">Nein</button><button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'skip')">Skip</button></div></div>`;}
-else{const lbl=t.resolved===‘ja’?‘✓ Verbessert’:t.resolved===‘nein’?‘✗ Nicht besser’:’— Skip’;fHtml=`<div class="shot-tip-followup shot-tip-resolved">${lbl}</div>`;}
-}
-return `<div class="shot-tip"><strong>Tipp${tipsArr.length>1?' '+(tIdx+1)+'/'+tipsArr.length:''}</strong>${t.tip}${fHtml}</div>`;
-}).join(’’);
-}
+  list.innerHTML=shots.slice().reverse().map((s,revIdx)=>{
+    const i=shots.length-1-revIdx;
+    let tipsArr=s.tips;
+    if(!tipsArr&&s.tip)tipsArr=[{tip:s.tip,followup:s.tipFollowup,resolved:s.tipResolved}];
+    let tipHtml='';
+    if(tipsArr&&tipsArr.length){
+      tipHtml=tipsArr.map((t,tIdx)=>{
+        let fHtml='';
+        if(t.followup){
+          if(t.resolved===null||t.resolved===undefined){fHtml=`<div class="shot-tip-followup">${t.followup}<div class="yn-row"><button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'ja')">Ja, besser</button><button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'nein')">Nein</button><button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'skip')">Skip</button></div></div>`;}
+          else{const lbl=t.resolved==='ja'?'✓ Verbessert':t.resolved==='nein'?'✗ Nicht besser':'— Skip';fHtml=`<div class="shot-tip-followup shot-tip-resolved">${lbl}</div>`;}
+        }
+        return `<div class="shot-tip"><strong>Tipp${tipsArr.length>1?' '+(tIdx+1)+'/'+tipsArr.length:''}</strong>${t.tip}${fHtml}</div>`;
+      }).join('');
+    }
 
-```
-let cmpHtml='';
-if(shots.length>1&&s===bestShot){cmpHtml=`<div class="shot-compare best">⭐ Bester Bezug dieser Bohne</div>`;}
-else if(shots.length>1&&bestShot.score>s.score){
-  const diff=s.score-bestShot.score;const items=[];
-  if(s.mahlgrad&&bestShot.mahlgrad&&s.mahlgrad!==bestShot.mahlgrad)items.push(`MG ${(parseFloat(s.mahlgrad)-parseFloat(bestShot.mahlgrad)>0?'+':'')+(parseFloat(s.mahlgrad)-parseFloat(bestShot.mahlgrad)).toFixed(1)} vs.Best`);
-  if(s.temp&&bestShot.temp&&s.temp!==bestShot.temp)items.push(`${(parseFloat(s.temp)-parseFloat(bestShot.temp)>0?'+':'')+(parseFloat(s.temp)-parseFloat(bestShot.temp)).toFixed(0)}°C`);
-  if(s.ratio&&bestShot.ratio&&Math.abs(parseFloat(s.ratio)-parseFloat(bestShot.ratio))>0.05)items.push(`Ratio ${(parseFloat(s.ratio)-parseFloat(bestShot.ratio)>0?'+':'')+(parseFloat(s.ratio)-parseFloat(bestShot.ratio)).toFixed(2)}`);
-  if(s.pi!==bestShot.pi)items.push(`PI ${s.pi||0}s vs.${bestShot.pi||0}s`);
-  cmpHtml=`<div class="shot-compare"><strong>vs. Bester</strong>Score ${s.score} vs. ${bestShot.score} <span style="color:var(--red)">(${diff})</span>${items.length?' · '+items.join(' · '):''}</div>`;
-}
+    let cmpHtml='';
+    if(shots.length>1&&s===bestShot){cmpHtml=`<div class="shot-compare best">⭐ Bester Bezug dieser Bohne</div>`;}
+    else if(shots.length>1&&bestShot.score>s.score){
+      const diff=s.score-bestShot.score;const items=[];
+      if(s.mahlgrad&&bestShot.mahlgrad&&s.mahlgrad!==bestShot.mahlgrad)items.push(`MG ${(parseFloat(s.mahlgrad)-parseFloat(bestShot.mahlgrad)>0?'+':'')+(parseFloat(s.mahlgrad)-parseFloat(bestShot.mahlgrad)).toFixed(1)} vs.Best`);
+      if(s.temp&&bestShot.temp&&s.temp!==bestShot.temp)items.push(`${(parseFloat(s.temp)-parseFloat(bestShot.temp)>0?'+':'')+(parseFloat(s.temp)-parseFloat(bestShot.temp)).toFixed(0)}°C`);
+      if(s.ratio&&bestShot.ratio&&Math.abs(parseFloat(s.ratio)-parseFloat(bestShot.ratio))>0.05)items.push(`Ratio ${(parseFloat(s.ratio)-parseFloat(bestShot.ratio)>0?'+':'')+(parseFloat(s.ratio)-parseFloat(bestShot.ratio)).toFixed(2)}`);
+      if(s.pi!==bestShot.pi)items.push(`PI ${s.pi||0}s vs.${bestShot.pi||0}s`);
+      cmpHtml=`<div class="shot-compare"><strong>vs. Bester</strong>Score ${s.score} vs. ${bestShot.score} <span style="color:var(--red)">(${diff})</span>${items.length?' · '+items.join(' · '):''}</div>`;
+    }
 
-return `<div class="shot-item"><div class="shot-row-top"><div class="shot-info"><div class="shot-main">#${i+1} · ${s.doseIn}g→<strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG${s.mahlgrad||'?'}${s.temp?' · '+s.temp+'°C':''}${s.pi?' · PI'+s.pi+'s':''} · ${'★'.repeat(s.sterne)}</div><div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}</div>${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}</div><button class="shot-del" onclick="deleteShot('${curKaffee.replace(/'/g,"\\'")}',${i})">✕</button></div>${cmpHtml}${tipHtml}</div>`;
-```
+    return `<div class="shot-item"><div class="shot-row-top"><div class="shot-info"><div class="shot-main">#${i+1} · ${s.doseIn}g→<strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG${s.mahlgrad||'?'}${s.temp?' · '+s.temp+'°C':''}${s.pi?' · PI'+s.pi+'s':''} · ${'★'.repeat(s.sterne)}</div><div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}</div>${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}</div><button class="shot-del" onclick="deleteShot('${curKaffee.replace(/'/g,"\\'")}',${i})">✕</button></div>${cmpHtml}${tipHtml}</div>`;
+  }).join('');
 
-}).join(’’);
-
-if(shots.length>1){const avgS=Math.round(shots.reduce((a,s)=>a+s.score,0)/shots.length);list.innerHTML+=`<div class="shots-footer">Ø ${avgS} · Best ${Math.max(...shots.map(s=>s.score))} · Top-3 Ø ${top3Avg(shots)}</div>`;}
+  if(shots.length>1){const avgS=Math.round(shots.reduce((a,s)=>a+s.score,0)/shots.length);list.innerHTML+=`<div class="shots-footer">Ø ${avgS} · Best ${Math.max(...shots.map(s=>s.score))} · Top-3 Ø ${top3Avg(shots)}</div>`;}
 }
 
 // ============================================================
 // DASHBOARD
 // ============================================================
 function renderDashboard(){
-const el=document.getElementById(‘dashboard-content’);
-const all=[];Object.entries(data).forEach(([name,shots])=>shots.forEach(s=>all.push({…s,kaffee:name})));
-const total=all.length;
-const kCount=Object.keys(data).length;
+  const el=document.getElementById('dashboard-content');
+  const all=[];Object.entries(data).forEach(([name,shots])=>shots.forEach(s=>all.push({...s,kaffee:name})));
+  const total=all.length;
+  const kCount=Object.keys(data).length;
 
-if(!total){
-el.innerHTML=` <div class="card" style="text-align:center;padding:24px"> <div style="font-size:3rem;margin-bottom:12px">☕</div> <div style="font-size:calc(1rem*var(--font-scale));color:var(--crema);margin-bottom:8px">Willkommen beim Espresso Trainer</div> <div style="font-family:'Courier New',monospace;font-size:calc(.64rem*var(--font-scale));color:var(--mid);line-height:1.8">Wähle im Tab "Bezug" eine Bohne<br>und starte deinen ersten Bezug.</div> </div>`;
-return;
-}
+  if(!total){
+    el.innerHTML=`
+      <div class="card" style="text-align:center;padding:24px">
+        <div style="font-size:3rem;margin-bottom:12px">☕</div>
+        <div style="font-size:calc(1rem*var(--font-scale));color:var(--crema);margin-bottom:8px">Willkommen beim Espresso Trainer</div>
+        <div style="font-family:'Courier New',monospace;font-size:calc(.64rem*var(--font-scale));color:var(--mid);line-height:1.8">Wähle im Tab "Bezug" eine Bohne<br>und starte deinen ersten Bezug.</div>
+      </div>`;
+    return;
+  }
 
-const avgScore=Math.round(all.reduce((a,s)=>a+s.score,0)/total);
-const bestShot=all.reduce((a,b)=>b.score>a.score?b:a);
-const lastShot=all.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0))[0];
-const ratios=all.map(s=>parseFloat(s.ratio)).filter(r=>!isNaN(r));
-const avgRatio=ratios.length?(ratios.reduce((a,r)=>a+r,0)/ratios.length).toFixed(2):’–’;
+  const avgScore=Math.round(all.reduce((a,s)=>a+s.score,0)/total);
+  const bestShot=all.reduce((a,b)=>b.score>a.score?b:a);
+  const lastShot=all.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0))[0];
+  const ratios=all.map(s=>parseFloat(s.ratio)).filter(r=>!isNaN(r));
+  const avgRatio=ratios.length?(ratios.reduce((a,r)=>a+r,0)/ratios.length).toFixed(2):'–';
 
-// Trend (last 10 shots by time)
-const recentShots=[…all].sort((a,b)=>(a.timestamp||0)-(b.timestamp||0)).slice(-12);
-const maxScore=Math.max(…recentShots.map(s=>s.score),1);
-const trendBars=recentShots.map(s=>{
-const h=Math.max(8,Math.round((s.score/maxScore)*55));
-const isBest=s===bestShot;
-return `<div class="trend-bar${isBest?' best':''}" style="height:${h}px" title="${s.kaffee}: ${s.score}pt"></div>`;
-}).join(’’);
+  // Trend (last 10 shots by time)
+  const recentShots=[...all].sort((a,b)=>(a.timestamp||0)-(b.timestamp||0)).slice(-12);
+  const maxScore=Math.max(...recentShots.map(s=>s.score),1);
+  const trendBars=recentShots.map(s=>{
+    const h=Math.max(8,Math.round((s.score/maxScore)*55));
+    const isBest=s===bestShot;
+    return `<div class="trend-bar${isBest?' best':''}" style="height:${h}px" title="${s.kaffee}: ${s.score}pt"></div>`;
+  }).join('');
 
-// Calibration status per kaffee
-const calRows=Object.entries(data).sort((a,b)=>b[1].length-a[1].length).slice(0,5).map(([name,shots])=>{
-const cnt=shots.length;const pct=Math.min(100,cnt/5*100);
-const col=pct>=100?‘var(–green)’:pct>=60?‘var(–crema)’:‘var(–mid)’;
-const label=pct>=100?‘Kalibriert’:’’+cnt+’/5’;
-return `<div class="cal-row"><div class="cal-name">${name}</div><div class="cal-bar-wrap"><div class="cal-bar" style="width:${pct}%;background:${col}"></div></div><div class="cal-count">${label}</div></div>`;
-}).join(’’);
+  // Calibration status per kaffee
+  const calRows=Object.entries(data).sort((a,b)=>b[1].length-a[1].length).slice(0,5).map(([name,shots])=>{
+    const cnt=shots.length;const pct=Math.min(100,cnt/5*100);
+    const col=pct>=100?'var(--green)':pct>=60?'var(--crema)':'var(--mid)';
+    const label=pct>=100?'Kalibriert':''+cnt+'/5';
+    return `<div class="cal-row"><div class="cal-name">${name}</div><div class="cal-bar-wrap"><div class="cal-bar" style="width:${pct}%;background:${col}"></div></div><div class="cal-count">${label}</div></div>`;
+  }).join('');
 
-// Last shot summary
-const lastSummary=lastShot?`${lastShot.kaffee}<br>${lastShot.doseIn}g→${lastShot.doseOut||'?'}g · Score ${lastShot.score} · ${lastShot.ts}`:’–’;
+  // Last shot summary
+  const lastSummary=lastShot?`${lastShot.kaffee}<br>${lastShot.doseIn}g→${lastShot.doseOut||'?'}g · Score ${lastShot.score} · ${lastShot.ts}`:'–';
 
-el.innerHTML=`
-<div class="dashboard-grid">
-<div class="dash-card"><div class="dash-num">${total}</div><div class="dash-label">Bezüge</div></div>
-<div class="dash-card"><div class="dash-num">${avgScore}</div><div class="dash-label">Ø Score</div></div>
-<div class="dash-card"><div class="dash-num">${bestShot.score}</div><div class="dash-label">Best Score</div></div>
-<div class="dash-card"><div class="dash-num">1:${avgRatio}</div><div class="dash-label">Ø Ratio</div></div>
-</div>
+  el.innerHTML=`
+    <div class="dashboard-grid">
+      <div class="dash-card"><div class="dash-num">${total}</div><div class="dash-label">Bezüge</div></div>
+      <div class="dash-card"><div class="dash-num">${avgScore}</div><div class="dash-label">Ø Score</div></div>
+      <div class="dash-card"><div class="dash-num">${bestShot.score}</div><div class="dash-label">Best Score</div></div>
+      <div class="dash-card"><div class="dash-num">1:${avgRatio}</div><div class="dash-label">Ø Ratio</div></div>
+    </div>
 
-```
-<div class="card">
-  <div class="card-title">Score-Verlauf (letzte ${recentShots.length})</div>
-  <div class="trend-chart">${trendBars}</div>
-  <div style="font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);text-align:center">● = bester Bezug</div>
-</div>
+    <div class="card">
+      <div class="card-title">Score-Verlauf (letzte ${recentShots.length})</div>
+      <div class="trend-chart">${trendBars}</div>
+      <div style="font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);text-align:center">● = bester Bezug</div>
+    </div>
 
-<div class="card">
-  <div class="card-title">Kalibrierungs-Status</div>
-  <div style="font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--mid);margin-bottom:8px">5 Bezüge = kalibriert</div>
-  <div class="calibration-bar">${calRows}</div>
-</div>
+    <div class="card">
+      <div class="card-title">Kalibrierungs-Status</div>
+      <div style="font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--mid);margin-bottom:8px">5 Bezüge = kalibriert</div>
+      <div class="calibration-bar">${calRows}</div>
+    </div>
 
-<div class="card">
-  <div class="card-title">Letzter Bezug</div>
-  <div style="font-family:'Courier New',monospace;font-size:calc(.64rem*var(--font-scale));color:var(--light);line-height:1.8">${lastSummary}</div>
-</div>
+    <div class="card">
+      <div class="card-title">Letzter Bezug</div>
+      <div style="font-family:'Courier New',monospace;font-size:calc(.64rem*var(--font-scale));color:var(--light);line-height:1.8">${lastSummary}</div>
+    </div>
 
-<div class="card">
-  <div class="card-title">Schnell-Aktionen</div>
-  <div class="action-row">
-    <button class="action-btn" onclick="switchTab('bewertung')">+ Bezug</button>
-    <button class="action-btn" onclick="switchTab('rangliste')">Rangliste</button>
-    <button class="action-btn ai" onclick="showAIPrompt('dashboard')">🤖 KI-Hilfe</button>
-  </div>
-</div>`;
-```
-
+    <div class="card">
+      <div class="card-title">Schnell-Aktionen</div>
+      <div class="action-row">
+        <button class="action-btn" onclick="switchTab('bewertung')">+ Bezug</button>
+        <button class="action-btn" onclick="switchTab('rangliste')">Rangliste</button>
+        <button class="action-btn ai" onclick="showAIPrompt('dashboard')">🤖 KI-Hilfe</button>
+      </div>
+    </div>`;
 }
 
 // ============================================================
 // RANGLISTE
 // ============================================================
 function renderRangliste(){
-const el=document.getElementById(‘rank-list’);
-const entries=Object.entries(data).map(([name,shots])=>{
-const sorted=[…shots].sort((a,b)=>b.score-a.score);
-const top=sorted.slice(0,3);const rankScore=top3Avg(shots);const best=sorted[0];
-const ratios=top.map(s=>s.ratio).filter(Boolean);
-const avgRatio=ratios.length?(ratios.reduce((a,r)=>a+parseFloat(r),0)/ratios.length).toFixed(2):null;
-return {name,best,rankScore,count:shots.length,avgRatio,topCount:top.length};
-}).sort((a,b)=>b.rankScore-a.rankScore);
-if(!entries.length){el.innerHTML=’<div class="empty">Noch keine Bewertungen.</div>’;return;}
-const max=entries[0].rankScore;
-el.innerHTML=entries.map(({name,best,rankScore,count,avgRatio,topCount},i)=>` <div class="rank-item${i===0?' top':''}" onclick="showBestShot('${name.replace(/'/g,"\\'")}')"> <div class="rank-num">${i+1}</div> <div class="rank-info"> <div class="rank-name">${name}</div> <div class="rank-detail">Bester: ${best.doseIn}g→${best.doseOut||'?'}g · ${best.zeit||'?'}s${best.temp?' · '+best.temp+'°C':''}${best.pi?' · PI'+best.pi+'s':''} · ${'★'.repeat(best.sterne)}<br>${count} Bezug${count>1?'e':''} · Top-${topCount} Ø <strong style="color:var(--crema)">${rankScore}</strong>${avgRatio?' · Ø 1:'+avgRatio:''}</div> ${count<3?`<div class="warn">⚠ Noch ${3-count} für Top-3</div>`:''} <div class="rank-bar-wrap"><div class="rank-bar" style="width:${(rankScore/max)*100}%"></div></div> </div> <div class="rank-score">${rankScore}</div> </div>`).join(’’);
+  const el=document.getElementById('rank-list');
+  const entries=Object.entries(data).map(([name,shots])=>{
+    const sorted=[...shots].sort((a,b)=>b.score-a.score);
+    const top=sorted.slice(0,3);const rankScore=top3Avg(shots);const best=sorted[0];
+    const ratios=top.map(s=>s.ratio).filter(Boolean);
+    const avgRatio=ratios.length?(ratios.reduce((a,r)=>a+parseFloat(r),0)/ratios.length).toFixed(2):null;
+    return {name,best,rankScore,count:shots.length,avgRatio,topCount:top.length};
+  }).sort((a,b)=>b.rankScore-a.rankScore);
+  if(!entries.length){el.innerHTML='<div class="empty">Noch keine Bewertungen.</div>';return;}
+  const max=entries[0].rankScore;
+  el.innerHTML=entries.map(({name,best,rankScore,count,avgRatio,topCount},i)=>`
+    <div class="rank-item${i===0?' top':''}" onclick="showBestShot('${name.replace(/'/g,"\\'")}')">
+      <div class="rank-num">${i+1}</div>
+      <div class="rank-info">
+        <div class="rank-name">${name}</div>
+        <div class="rank-detail">Bester: ${best.doseIn}g→${best.doseOut||'?'}g · ${best.zeit||'?'}s${best.temp?' · '+best.temp+'°C':''}${best.pi?' · PI'+best.pi+'s':''} · ${'★'.repeat(best.sterne)}<br>${count} Bezug${count>1?'e':''} · Top-${topCount} Ø <strong style="color:var(--crema)">${rankScore}</strong>${avgRatio?' · Ø 1:'+avgRatio:''}</div>
+        ${count<3?`<div class="warn">⚠ Noch ${3-count} für Top-3</div>`:''}
+        <div class="rank-bar-wrap"><div class="rank-bar" style="width:${(rankScore/max)*100}%"></div></div>
+      </div>
+      <div class="rank-score">${rankScore}</div>
+    </div>`).join('');
 }
 
 function showBestShot(name){
-const shots=data[name]||[];if(!shots.length)return;
-const best=shots.reduce((a,b)=>b.score>a.score?b:a);
-document.getElementById(‘modal-title’).textContent=`⭐ Bester Bezug: ${name}`;
-document.getElementById(‘modal-body’).innerHTML=`<div style="font-family:'Courier New',monospace;font-size:calc(.66rem*var(--font-scale));color:var(--text);line-height:2"><strong style="color:var(--crema);display:block;margin-bottom:7px">Score ${best.score}/100 · ${'★'.repeat(best.sterne)}</strong>Dose: ${best.doseIn}g → ${best.doseOut||'?'}g (1:${best.ratio||'?'})<br>Zeit: ${best.zeit||'?'}s · Mahlgrad: ${best.mahlgrad||'?'}${best.temp?`<br>Temp: ${best.temp}°C`:''}${best.pi?`<br>Pre-Infusion: ${best.pi}s`:''}<br>${best.aromen&&best.aromen.length?`Aromen: ${best.aromen.join(’, ’)}<br>`:''}${best.crema?`Crema: ${best.crema}<br>`:''}${best.notizen?`<em style="color:var(--mid)">”${best.notizen}”</em><br>`:''}<span style="color:var(--mid);font-size:.9em">${best.ts}</span></div>`;
-document.getElementById(‘modal-bg’).classList.add(‘show’);
+  const shots=data[name]||[];if(!shots.length)return;
+  const best=shots.reduce((a,b)=>b.score>a.score?b:a);
+  document.getElementById('modal-title').textContent=`⭐ Bester Bezug: ${name}`;
+  document.getElementById('modal-body').innerHTML=`<div style="font-family:'Courier New',monospace;font-size:calc(.66rem*var(--font-scale));color:var(--text);line-height:2"><strong style="color:var(--crema);display:block;margin-bottom:7px">Score ${best.score}/100 · ${'★'.repeat(best.sterne)}</strong>Dose: ${best.doseIn}g → ${best.doseOut||'?'}g (1:${best.ratio||'?'})<br>Zeit: ${best.zeit||'?'}s · Mahlgrad: ${best.mahlgrad||'?'}${best.temp?`<br>Temp: ${best.temp}°C`:''}${best.pi?`<br>Pre-Infusion: ${best.pi}s`:''}<br>${best.aromen&&best.aromen.length?`Aromen: ${best.aromen.join(', ')}<br>`:''}${best.crema?`Crema: ${best.crema}<br>`:''}${best.notizen?`<em style="color:var(--mid)">"${best.notizen}"</em><br>`:''}<span style="color:var(--mid);font-size:.9em">${best.ts}</span></div>`;
+  document.getElementById('modal-bg').classList.add('show');
 }
 
 // ============================================================
 // MODALS
 // ============================================================
-function showSliderInfo(id){const sl=SLIDERS.find(x=>x.id===id);if(!sl)return;document.getElementById(‘modal-title’).textContent=sl.info.title;document.getElementById(‘modal-body’).innerHTML=`<p>${sl.info.text}</p>`;document.getElementById(‘modal-bg’).classList.add(‘show’);}
+function showSliderInfo(id){const sl=SLIDERS.find(x=>x.id===id);if(!sl)return;document.getElementById('modal-title').textContent=sl.info.title;document.getElementById('modal-body').innerHTML=`<p>${sl.info.text}</p>`;document.getElementById('modal-bg').classList.add('show');}
 
 function showBohnenInfo(kaffee) {
-const p = getBeanProfile(kaffee);
-const shots = data[kaffee] || [];
-const goodShots = shots.filter(s => s.score >= 70);
-const avgScore = shots.length ? Math.round(shots.reduce((a,s)=>a+s.score,0)/shots.length) : null;
-const html = `<div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.9"> ${p.blend ? `<strong style="color:var(--crema)">Blend:</strong> ${p.blend}<br>`: ''} ${p.herkunft ?`<strong style="color:var(--crema)">Herkunft:</strong> ${p.herkunft}<br>`: ''} ${p.taste ?`<strong style="color:var(--crema)">Aromen:</strong> ${p.taste}<br>`: ''} ${p.inei ?`<span style="color:var(--green)">✓ INEI zertifiziert</span><br>`: ''} <br><strong style="color:var(--crema)">Empfohlene Parameter:</strong><br> Mahlgrad: ${p.mahlgrad[0]}–${p.mahlgrad[1]} · Temp: ${p.temp[0]}–${p.temp[1]}°C<br> Output: ${p.output[0]}–${p.output[1]}g · Röstung: ${p.roast === 'dark' ? 'Dark' : 'Medium'}<br> <br><em style="color:var(--mid)">${p.notes}</em> ${shots.length ?`<br><br><strong style="color:var(--crema)">Deine Statistik:</strong><br>
-${shots.length} Bezüge · Ø Score ${avgScore} · ${goodShots.length} gute Bezüge` : ‘’}
-
+  const p = getBeanProfile(kaffee);
+  const shots = data[kaffee] || [];
+  const goodShots = shots.filter(s => s.score >= 70);
+  const avgScore = shots.length ? Math.round(shots.reduce((a,s)=>a+s.score,0)/shots.length) : null;
+  const html = `<div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.9">
+    ${p.blend ? `<strong style="color:var(--crema)">Blend:</strong> ${p.blend}<br>` : ''}
+    ${p.herkunft ? `<strong style="color:var(--crema)">Herkunft:</strong> ${p.herkunft}<br>` : ''}
+    ${p.taste ? `<strong style="color:var(--crema)">Aromen:</strong> ${p.taste}<br>` : ''}
+    ${p.inei ? `<span style="color:var(--green)">✓ INEI zertifiziert</span><br>` : ''}
+    <br><strong style="color:var(--crema)">Empfohlene Parameter:</strong><br>
+    Mahlgrad: ${p.mahlgrad[0]}–${p.mahlgrad[1]} · Temp: ${p.temp[0]}–${p.temp[1]}°C<br>
+    Output: ${p.output[0]}–${p.output[1]}g · Röstung: ${p.roast === 'dark' ? 'Dark' : 'Medium'}<br>
+    <br><em style="color:var(--mid)">${p.notes}</em>
+    ${shots.length ? `<br><br><strong style="color:var(--crema)">Deine Statistik:</strong><br>
+    ${shots.length} Bezüge · Ø Score ${avgScore} · ${goodShots.length} gute Bezüge` : ''}
   </div>`;
   document.getElementById('modal-title').textContent = `☕ ${kaffee}`;
   document.getElementById('modal-body').innerHTML = html;
@@ -1148,84 +1156,92 @@ ${shots.length} Bezüge · Ø Score ${avgScore} · ${goodShots.length} gute Bez�
 }
 
 function showAromaInfo(){
-document.getElementById(‘modal-title’).textContent=‘Aromen’;
-document.getElementById(‘modal-body’).innerHTML=`<p><strong style="color:var(--crema)">Dein Ziel-Profil (Dark Roast):</strong><br>Schokolade · Nuss · Karamell</p><p><strong style="color:var(--crema)">Helle/mittlere Röstungen:</strong><br>Frucht · Blume · Zitrus · Beere</p><p><strong style="color:var(--crema)">Überextraktion / Probleme:</strong><br>Asche · Rauch → Temp senken, kürzer extrahieren</p><p><strong style="color:var(--crema)">Robusta / alt:</strong><br>Tabak · Holz → andere Bohne oder frischer</p><p>Für Dinzler Roma & Passalacqua: Schokolade + Nuss + Karamell sind die Zielaromen bei optimalem Bezug.</p>`;
-document.getElementById(‘modal-bg’).classList.add(‘show’);
+  document.getElementById('modal-title').textContent='Aromen';
+  document.getElementById('modal-body').innerHTML=`<p><strong style="color:var(--crema)">Dein Ziel-Profil (Dark Roast):</strong><br>Schokolade · Nuss · Karamell</p><p><strong style="color:var(--crema)">Helle/mittlere Röstungen:</strong><br>Frucht · Blume · Zitrus · Beere</p><p><strong style="color:var(--crema)">Überextraktion / Probleme:</strong><br>Asche · Rauch → Temp senken, kürzer extrahieren</p><p><strong style="color:var(--crema)">Robusta / alt:</strong><br>Tabak · Holz → andere Bohne oder frischer</p><p>Für Dinzler Roma & Passalacqua: Schokolade + Nuss + Karamell sind die Zielaromen bei optimalem Bezug.</p>`;
+  document.getElementById('modal-bg').classList.add('show');
 }
 
 function showCremaInfo(){
-document.getElementById(‘modal-title’).textContent=‘Crema – Beurteilung’;
-document.getElementById(‘modal-body’).innerHTML=` <div class="crema-examples"> <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#8B4513,#C8974A)">🟫</div><div class="crema-ex-label">Dicht & Haselnuss ✓<br>Ideal</div></div> <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#5c3317,#8B4513,#C8974A,#8B4513)">🐯</div><div class="crema-ex-label">Tigerstreifig ★<br>Perfekt – frische Bohne</div></div> <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#2d0d00,#5c1a00)">⬛</div><div class="crema-ex-label">Dunkel & Stark<br>Überextraktion</div></div> <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#d4a96a,#f0d5a0)">🟨</div><div class="crema-ex-label">Hell & Dünn<br>Unterextr. / alte Bohne</div></div> </div> <p><strong style="color:var(--crema)">Grobporig:</strong> Löcher/Blasen in der Crema = Channeling oder zu hoher Druck (OPV checken).</p> <p>Crema sollte 3-4mm dick sein und 1-2 Min halten. Tigerstreifig = Zeichen bester Frische und Extraktion.</p>`;
-document.getElementById(‘modal-bg’).classList.add(‘show’);
+  document.getElementById('modal-title').textContent='Crema – Beurteilung';
+  document.getElementById('modal-body').innerHTML=`
+    <div class="crema-examples">
+      <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#8B4513,#C8974A)">🟫</div><div class="crema-ex-label">Dicht & Haselnuss ✓<br>Ideal</div></div>
+      <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#5c3317,#8B4513,#C8974A,#8B4513)">🐯</div><div class="crema-ex-label">Tigerstreifig ★<br>Perfekt – frische Bohne</div></div>
+      <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#2d0d00,#5c1a00)">⬛</div><div class="crema-ex-label">Dunkel & Stark<br>Überextraktion</div></div>
+      <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#d4a96a,#f0d5a0)">🟨</div><div class="crema-ex-label">Hell & Dünn<br>Unterextr. / alte Bohne</div></div>
+    </div>
+    <p><strong style="color:var(--crema)">Grobporig:</strong> Löcher/Blasen in der Crema = Channeling oder zu hoher Druck (OPV checken).</p>
+    <p>Crema sollte 3-4mm dick sein und 1-2 Min halten. Tigerstreifig = Zeichen bester Frische und Extraktion.</p>`;
+  document.getElementById('modal-bg').classList.add('show');
 }
 
-function closeModal(e){if(e&&e.target.closest&&e.target.closest(’.modal’)&&!e.target.classList.contains(‘modal-close’))return;document.getElementById(‘modal-bg’).classList.remove(‘show’);}
+function closeModal(e){if(e&&e.target.closest&&e.target.closest('.modal')&&!e.target.classList.contains('modal-close'))return;document.getElementById('modal-bg').classList.remove('show');}
 
 // ============================================================
 // EXPORT & BACKUP
 // ============================================================
-function downloadFile(content,filename,mime){const blob=new Blob([content],{type:mime+’;charset=utf-8’});const url=URL.createObjectURL(blob);const a=document.createElement(‘a’);a.href=url;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);}
-function csvEscape(v){if(v===null||v===undefined)return’’;const s=String(v);return s.includes(’,’)||s.includes(’”’)||s.includes(’\n’)?’”’+s.replace(/”/g,’””’)+’”’:s;}
+function downloadFile(content,filename,mime){const blob=new Blob([content],{type:mime+';charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);}
+function csvEscape(v){if(v===null||v===undefined)return'';const s=String(v);return s.includes(',')||s.includes('"')||s.includes('\n')?'"'+s.replace(/"/g,'""')+'"':s;}
 
 function exportRangliste(format){
-const entries=Object.entries(data).map(([name,shots])=>{const sorted=[…shots].sort((a,b)=>b.score-a.score);const top=sorted.slice(0,3);const rankScore=top3Avg(shots);const best=sorted[0];const ratios=top.map(s=>s.ratio).filter(Boolean);const avgRatio=ratios.length?(ratios.reduce((a,r)=>a+parseFloat(r),0)/ratios.length).toFixed(2):null;return{name,best,rankScore,count:shots.length,avgRatio,topCount:top.length};}).sort((a,b)=>b.rankScore-a.rankScore);
-if(!entries.length){alert(‘Keine Daten.’);return;}
-const ts=new Date().toISOString().slice(0,10);
-if(format===‘csv’){const headers=[‘Rang’,‘Kaffee’,‘Top-3 Score’,‘Bezüge’,‘Bester Score’,‘Dose’,‘Yield’,‘Ratio’,‘Zeit’,‘MG’,‘Temp’,‘PI’,‘Sterne’];const rows=entries.map((e,i)=>[i+1,e.name,e.rankScore,e.count,e.best.score,e.best.doseIn,e.best.doseOut,e.best.ratio?‘1:’+e.best.ratio:’’,e.best.zeit,e.best.mahlgrad,e.best.temp,e.best.pi,e.best.sterne]);downloadFile(’\uFEFF’+[headers,…rows].map(r=>r.map(csvEscape).join(’,’)).join(’\n’),`espresso-rangliste-${ts}.csv`,‘text/csv’);}
-else{const lines=[‘ESPRESSO RANGLISTE’,’=’.repeat(40),`Export: ${new Date().toLocaleString('de-DE')}`,’’];entries.forEach((e,i)=>{lines.push(`${i+1}. ${e.name}`);lines.push(`   Top-3 Ø: ${e.rankScore} (${e.count} Bezüge)`);lines.push(`   Bester: ${e.best.doseIn}g→${e.best.doseOut||'?'}g · 1:${e.best.ratio||'?'} · ${e.best.zeit||'?'}s${e.best.pi?' · PI'+e.best.pi+'s':''} · ${'★'.repeat(e.best.sterne)}`);lines.push(’’);});downloadFile(lines.join(’\n’),`espresso-rangliste-${ts}.txt`,‘text/plain’);}
+  const entries=Object.entries(data).map(([name,shots])=>{const sorted=[...shots].sort((a,b)=>b.score-a.score);const top=sorted.slice(0,3);const rankScore=top3Avg(shots);const best=sorted[0];const ratios=top.map(s=>s.ratio).filter(Boolean);const avgRatio=ratios.length?(ratios.reduce((a,r)=>a+parseFloat(r),0)/ratios.length).toFixed(2):null;return{name,best,rankScore,count:shots.length,avgRatio,topCount:top.length};}).sort((a,b)=>b.rankScore-a.rankScore);
+  if(!entries.length){alert('Keine Daten.');return;}
+  const ts=new Date().toISOString().slice(0,10);
+  if(format==='csv'){const headers=['Rang','Kaffee','Top-3 Score','Bezüge','Bester Score','Dose','Yield','Ratio','Zeit','MG','Temp','PI','Sterne'];const rows=entries.map((e,i)=>[i+1,e.name,e.rankScore,e.count,e.best.score,e.best.doseIn,e.best.doseOut,e.best.ratio?'1:'+e.best.ratio:'',e.best.zeit,e.best.mahlgrad,e.best.temp,e.best.pi,e.best.sterne]);downloadFile('\uFEFF'+[headers,...rows].map(r=>r.map(csvEscape).join(',')).join('\n'),`espresso-rangliste-${ts}.csv`,'text/csv');}
+  else{const lines=['ESPRESSO RANGLISTE','='.repeat(40),`Export: ${new Date().toLocaleString('de-DE')}`,''];entries.forEach((e,i)=>{lines.push(`${i+1}. ${e.name}`);lines.push(`   Top-3 Ø: ${e.rankScore} (${e.count} Bezüge)`);lines.push(`   Bester: ${e.best.doseIn}g→${e.best.doseOut||'?'}g · 1:${e.best.ratio||'?'} · ${e.best.zeit||'?'}s${e.best.pi?' · PI'+e.best.pi+'s':''} · ${'★'.repeat(e.best.sterne)}`);lines.push('');});downloadFile(lines.join('\n'),`espresso-rangliste-${ts}.txt`,'text/plain');}
 }
 
 function exportAlle(format){
-const all=[];Object.entries(data).forEach(([name,shots])=>shots.forEach(s=>all.push({…s,kaffee:name})));
-if(!all.length){alert(‘Keine Daten.’);return;}
-const sorted=[…all].sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));const ts=new Date().toISOString().slice(0,10);
-if(format===‘csv’){const headers=[‘Datum’,‘Kaffee’,‘Dose’,‘Yield’,‘Ratio’,‘Zeit’,‘MG’,‘Temp’,‘PI’,‘Säure’,‘Bitter’,‘Süße’,‘Körper’,‘Nachklang’,‘Aromen’,‘Crema’,‘Sterne’,‘Score’,‘Empfehlung’,‘Notizen’];const rows=sorted.map(s=>[s.ts,s.kaffee,s.doseIn,s.doseOut,s.ratio?‘1:’+s.ratio:’’,s.zeit,s.mahlgrad,s.temp,s.pi,s.saeure,s.bitter,s.suesse,s.koerper,s.nachklang,(s.aromen||[]).join(’; ‘),s.crema||’’,s.sterne,s.score,s.empfehlung===‘ja’?‘Ja’:s.empfehlung===‘nein’?‘Nein’:’’,s.notizen||’’]);downloadFile(’\uFEFF’+[headers,…rows].map(r=>r.map(csvEscape).join(’,’)).join(’\n’),`espresso-alle-${ts}.csv`,‘text/csv’);}
-else{const lines=[‘ESPRESSO PROTOKOLL’,’=’.repeat(40),`Export: ${new Date().toLocaleString('de-DE')}`,`${all.length} Bezüge gesamt`,’’];sorted.forEach((s,i)=>{lines.push(`#${all.length-i} ${s.ts} · ${s.kaffee}`);lines.push(`  ${s.doseIn}g→${s.doseOut||'?'}g · 1:${s.ratio||'?'} · ${s.zeit||'?'}s · MG${s.mahlgrad||'?'}${s.temp?' · '+s.temp+'°C':''}${s.pi?' · PI'+s.pi+'s':''}`);lines.push(`  ${'★'.repeat(s.sterne)} · Score ${s.score}`);if(s.notizen)lines.push(`  "${s.notizen}"`);lines.push(’’);});downloadFile(lines.join(’\n’),`espresso-alle-${ts}.txt`,‘text/plain’);}
+  const all=[];Object.entries(data).forEach(([name,shots])=>shots.forEach(s=>all.push({...s,kaffee:name})));
+  if(!all.length){alert('Keine Daten.');return;}
+  const sorted=[...all].sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));const ts=new Date().toISOString().slice(0,10);
+  if(format==='csv'){const headers=['Datum','Kaffee','Dose','Yield','Ratio','Zeit','MG','Temp','PI','Säure','Bitter','Süße','Körper','Nachklang','Aromen','Crema','Sterne','Score','Empfehlung','Notizen'];const rows=sorted.map(s=>[s.ts,s.kaffee,s.doseIn,s.doseOut,s.ratio?'1:'+s.ratio:'',s.zeit,s.mahlgrad,s.temp,s.pi,s.saeure,s.bitter,s.suesse,s.koerper,s.nachklang,(s.aromen||[]).join('; '),s.crema||'',s.sterne,s.score,s.empfehlung==='ja'?'Ja':s.empfehlung==='nein'?'Nein':'',s.notizen||'']);downloadFile('\uFEFF'+[headers,...rows].map(r=>r.map(csvEscape).join(',')).join('\n'),`espresso-alle-${ts}.csv`,'text/csv');}
+  else{const lines=['ESPRESSO PROTOKOLL','='.repeat(40),`Export: ${new Date().toLocaleString('de-DE')}`,`${all.length} Bezüge gesamt`,''];sorted.forEach((s,i)=>{lines.push(`#${all.length-i} ${s.ts} · ${s.kaffee}`);lines.push(`  ${s.doseIn}g→${s.doseOut||'?'}g · 1:${s.ratio||'?'} · ${s.zeit||'?'}s · MG${s.mahlgrad||'?'}${s.temp?' · '+s.temp+'°C':''}${s.pi?' · PI'+s.pi+'s':''}`);lines.push(`  ${'★'.repeat(s.sterne)} · Score ${s.score}`);if(s.notizen)lines.push(`  "${s.notizen}"`);lines.push('');});downloadFile(lines.join('\n'),`espresso-alle-${ts}.txt`,'text/plain');}
 }
 
-function backupData(){const backup={version:7,exportedAt:new Date().toISOString(),data,customKaffees,settings};downloadFile(JSON.stringify(backup,null,2),`espresso-backup-${new Date().toISOString().slice(0,10)}.json`,‘application/json’);}
+function backupData(){const backup={version:7,exportedAt:new Date().toISOString(),data,customKaffees,settings};downloadFile(JSON.stringify(backup,null,2),`espresso-backup-${new Date().toISOString().slice(0,10)}.json`,'application/json');}
 
 function restoreData(event){
-const file=event.target.files[0];if(!file)return;
-const reader=new FileReader();
-reader.onload=e=>{
-try{const backup=JSON.parse(e.target.result);if(!backup.data)throw new Error(‘Ungültiges Backup’);
-const cnt=Object.values(backup.data).reduce((a,s)=>a+s.length,0);
-if(!confirm(`Backup: ${cnt} Bezüge. Aktuelle Daten überschreiben?`))return;
-data=backup.data;if(backup.customKaffees){customKaffees=backup.customKaffees;saveCustom();}
-if(backup.settings){settings={…settings,…backup.settings};saveSettings();applyTheme();}
-saveData();buildPills();renderDashboard();alert(`✓ ${cnt} Bezüge wiederhergestellt.`);
-}catch(err){alert(‘Fehler: ‘+err.message);}event.target.value=’’;
-};reader.readAsText(file);
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{const backup=JSON.parse(e.target.result);if(!backup.data)throw new Error('Ungültiges Backup');
+    const cnt=Object.values(backup.data).reduce((a,s)=>a+s.length,0);
+    if(!confirm(`Backup: ${cnt} Bezüge. Aktuelle Daten überschreiben?`))return;
+    data=backup.data;if(backup.customKaffees){customKaffees=backup.customKaffees;saveCustom();}
+    if(backup.settings){settings={...settings,...backup.settings};saveSettings();applyTheme();}
+    saveData();buildPills();renderDashboard();alert(`✓ ${cnt} Bezüge wiederhergestellt.`);
+    }catch(err){alert('Fehler: '+err.message);}event.target.value='';
+  };reader.readAsText(file);
 }
 
-function clearAllData(){if(!confirm(‘Alle Daten löschen?’))return;if(!confirm(‘Wirklich? Nicht rückgängig machbar!’))return;data={};saveData();curKaffee=null;document.getElementById(‘form-area’).style.display=‘none’;document.getElementById(‘no-selection’).style.display=‘block’;buildPills();renderDashboard();alert(‘Daten gelöscht.’);}
+function clearAllData(){if(!confirm('Alle Daten löschen?'))return;if(!confirm('Wirklich? Nicht rückgängig machbar!'))return;data={};saveData();curKaffee=null;document.getElementById('form-area').style.display='none';document.getElementById('no-selection').style.display='block';buildPills();renderDashboard();alert('Daten gelöscht.');}
 
 // ============================================================
 // TAB SWITCHING
 // ============================================================
 function switchTab(t){
-document.querySelectorAll(’.tab’).forEach(b=>b.classList.toggle(‘active’,b.dataset.tab===t));
-[‘dashboard’,‘bewertung’,‘rangliste’,‘einstellungen’].forEach(tab=>{document.getElementById(‘tab-’+tab).style.display=tab===t?‘block’:‘none’;});
-if(t===‘dashboard’)renderDashboard();
-if(t===‘rangliste’)renderRangliste();
-if(t===‘einstellungen’){applyTheme();const el=document.getElementById(‘data-info’);const total=Object.values(data).reduce((a,s)=>a+s.length,0);if(el)el.textContent=`${total} Bezüge · ${Object.keys(data).length} Kaffeesorten`;}
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  ['dashboard','bewertung','rangliste','einstellungen'].forEach(tab=>{document.getElementById('tab-'+tab).style.display=tab===t?'block':'none';});
+  if(t==='dashboard')renderDashboard();
+  if(t==='rangliste')renderRangliste();
+  if(t==='einstellungen'){applyTheme();const el=document.getElementById('data-info');const total=Object.values(data).reduce((a,s)=>a+s.length,0);if(el)el.textContent=`${total} Bezüge · ${Object.keys(data).length} Kaffeesorten`;}
 }
 
 // ============================================================
 // SERVICE WORKER
 // ============================================================
-if(‘serviceWorker’ in navigator){
-// Alle alten Service Worker deregistrieren und Cache löschen
-navigator.serviceWorker.getRegistrations().then(regs=>{
-regs.forEach(reg=>reg.unregister());
-});
-caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
-const swCode=`const C='espresso-v14';const A=[location.pathname];self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(A)));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(caches.open(C).then(async c=>{const cached=await c.match(e.request);const net=fetch(e.request).then(r=>{if(r.ok)c.put(e.request,r.clone());return r;}).catch(()=>cached);return cached||net;}));});`;
-const blob=new Blob([swCode],{type:‘application/javascript’});
-navigator.serviceWorker.register(URL.createObjectURL(blob)).then(reg=>{
-reg.addEventListener(‘updatefound’,()=>{const nw=reg.installing;nw.addEventListener(‘statechange’,()=>{if(nw.state===‘installed’&&navigator.serviceWorker.controller){const t=document.getElementById(‘sw-toast’);t.style.display=‘block’;setTimeout(()=>t.style.display=‘none’,3000);}});});
-}).catch(()=>{});
+if('serviceWorker' in navigator){
+  // Alle alten Service Worker deregistrieren und Cache löschen
+  navigator.serviceWorker.getRegistrations().then(regs=>{
+    regs.forEach(reg=>reg.unregister());
+  });
+  caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
+  const swCode=`const C='espresso-v14';const A=[location.pathname];self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(A)));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(caches.open(C).then(async c=>{const cached=await c.match(e.request);const net=fetch(e.request).then(r=>{if(r.ok)c.put(e.request,r.clone());return r;}).catch(()=>cached);return cached||net;}));});`;
+  const blob=new Blob([swCode],{type:'application/javascript'});
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).then(reg=>{
+    reg.addEventListener('updatefound',()=>{const nw=reg.installing;nw.addEventListener('statechange',()=>{if(nw.state==='installed'&&navigator.serviceWorker.controller){const t=document.getElementById('sw-toast');t.style.display='block';setTimeout(()=>t.style.display='none',3000);}});});
+  }).catch(()=>{});
 }
 
 // ============================================================
@@ -1234,48 +1250,48 @@ reg.addEventListener(‘updatefound’,()=>{const nw=reg.installing;nw.addEventL
 
 // Bean profiles – standard recommendations per bean type
 const BEAN_PROFILES = {
-// Dinzler
-“dinzler roma”:      { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:“dark”,   notes:“Klassisch-neapolitanisch, niedrige Säure, Schokolade/Nuss” },
-“dinzler modena”:    { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:“dark”,   notes:“Vollmundig, wenig Säure, cremig” },
-“dinzler il gustoso”:{ mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:“medium”, notes:“Ausgewogen, etwas mehr Säure als Roma” },
-“dinzler lazise”:    { mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:“medium”, notes:“Milder, fruchtige Note möglich” },
-“dinzler venezia”:   { mahlgrad:[4,5],     temp:[92,93], output:[42,46], roast:“medium”, notes:“Ausgewogen, klassisch-venezianisch” },
-// Gorilla
-“gorilla”:           { mahlgrad:[4,5.5],   temp:[90,91], output:[38,42], roast:“dark”,   notes:“Vorsicht Asche: kurze Bezugszeit, niedrige Temp” },
-// Passalacqua
-“passalacqua”: { mahlgrad:[3,4.5], temp:[91,93], output:[40,44], roast:“dark”,
-blend:“75% Arabica / 25% Robusta”, taste:“Schokolade, Haselnuss, dichte Crema”,
-herkunft:“Neapel, seit 1936”, inei:true,
-notes:“Klassisch neapolitanisch · hoher Robusta-Anteil für stabile Crema · säurearm · optimal mit IMS Korb · Pre-Infusion 3-4s empfohlen · Mahlgrad eher fein starten” },
-// Mehari
-“mehari”: { mahlgrad:[3,4.5], temp:[90,92], output:[38,42], roast:“dark”,
-blend:“60% Arabica / 40% Robusta”, taste:“Schokolade, Tabak, Walnuss, kräftig”,
-herkunft:“Süditalien / Neapel-Stil”,
-notes:“Sehr kräftig, hoher Robusta-Anteil · niedriger Mahlgrad nötig · Temp eher 90-91°C · kurze Bezugszeit 25-28s · wenig Pre-Infusion · ähnlich Kimbo Napoli aber würziger” },
-// Oh Harvey
-“oh harvey”: { mahlgrad:[4,5.5], temp:[92,94], output:[42,46], roast:“medium”,
-blend:“80% Arabica / 20% Robusta”, taste:“Schokolade, Würze, mild-kräftig”,
-herkunft:“Hamburg, Quijote Rösterei”,
-notes:“Testsieger mehrerer Tests · Specialty-orientiert · etwas mehr Säure als Dinzler · höhere Temp nötig · Ratio 1:2,4-1:2,6 · gut für Cappuccino” },
-// Geisenhofer
-“geisenhofer house blend”: { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:“dark”,
-blend:“60% Arabica / 40% Robusta”, taste:“Nuss, Schokolade, cremig”,
-herkunft:“München, lokale Rösterei”,
-notes:“60/40 Arabica/Robusta · säurearm · ähnlich Passalacqua · Sweet Spot MG 3.5-4 · 19g Dose · lokaler Liebling” },
-“geisenhofer first roast”: { mahlgrad:[4,5.5], temp:[92,94], output:[42,46], roast:“medium”,
-blend:“100% Arabica”, taste:“fruchtig, hell, Karamell”,
-herkunft:“München, lokale Rösterei”,
-notes:“Heller geröstet · mehr Säure möglich · höhere Temp · längere Bezugszeit” },
-“default”: { mahlgrad:[3.5,5], temp:[91,93], output:[40,44], roast:“medium”,
-notes:“Standard-Empfehlung für dein Setup” }
+  // Dinzler
+  "dinzler roma":      { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   notes:"Klassisch-neapolitanisch, niedrige Säure, Schokolade/Nuss" },
+  "dinzler modena":    { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   notes:"Vollmundig, wenig Säure, cremig" },
+  "dinzler il gustoso":{ mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", notes:"Ausgewogen, etwas mehr Säure als Roma" },
+  "dinzler lazise":    { mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", notes:"Milder, fruchtige Note möglich" },
+  "dinzler venezia":   { mahlgrad:[4,5],     temp:[92,93], output:[42,46], roast:"medium", notes:"Ausgewogen, klassisch-venezianisch" },
+  // Gorilla
+  "gorilla":           { mahlgrad:[4,5.5],   temp:[90,91], output:[38,42], roast:"dark",   notes:"Vorsicht Asche: kurze Bezugszeit, niedrige Temp" },
+  // Passalacqua
+  "passalacqua": { mahlgrad:[3,4.5], temp:[91,93], output:[40,44], roast:"dark",
+    blend:"75% Arabica / 25% Robusta", taste:"Schokolade, Haselnuss, dichte Crema",
+    herkunft:"Neapel, seit 1936", inei:true,
+    notes:"Klassisch neapolitanisch · hoher Robusta-Anteil für stabile Crema · säurearm · optimal mit IMS Korb · Pre-Infusion 3-4s empfohlen · Mahlgrad eher fein starten" },
+  // Mehari
+  "mehari": { mahlgrad:[3,4.5], temp:[90,92], output:[38,42], roast:"dark",
+    blend:"60% Arabica / 40% Robusta", taste:"Schokolade, Tabak, Walnuss, kräftig",
+    herkunft:"Süditalien / Neapel-Stil",
+    notes:"Sehr kräftig, hoher Robusta-Anteil · niedriger Mahlgrad nötig · Temp eher 90-91°C · kurze Bezugszeit 25-28s · wenig Pre-Infusion · ähnlich Kimbo Napoli aber würziger" },
+  // Oh Harvey
+  "oh harvey": { mahlgrad:[4,5.5], temp:[92,94], output:[42,46], roast:"medium",
+    blend:"80% Arabica / 20% Robusta", taste:"Schokolade, Würze, mild-kräftig",
+    herkunft:"Hamburg, Quijote Rösterei",
+    notes:"Testsieger mehrerer Tests · Specialty-orientiert · etwas mehr Säure als Dinzler · höhere Temp nötig · Ratio 1:2,4-1:2,6 · gut für Cappuccino" },
+  // Geisenhofer
+  "geisenhofer house blend": { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",
+    blend:"60% Arabica / 40% Robusta", taste:"Nuss, Schokolade, cremig",
+    herkunft:"München, lokale Rösterei",
+    notes:"60/40 Arabica/Robusta · säurearm · ähnlich Passalacqua · Sweet Spot MG 3.5-4 · 19g Dose · lokaler Liebling" },
+  "geisenhofer first roast": { mahlgrad:[4,5.5], temp:[92,94], output:[42,46], roast:"medium",
+    blend:"100% Arabica", taste:"fruchtig, hell, Karamell",
+    herkunft:"München, lokale Rösterei",
+    notes:"Heller geröstet · mehr Säure möglich · höhere Temp · längere Bezugszeit" },
+  "default": { mahlgrad:[3.5,5], temp:[91,93], output:[40,44], roast:"medium",
+    notes:"Standard-Empfehlung für dein Setup" }
 };
 
 function getBeanProfile(kaffee) {
-const k = kaffee.toLowerCase();
-for (const [key, profile] of Object.entries(BEAN_PROFILES)) {
-if (key !== ‘default’ && k.includes(key)) return { …profile, key };
-}
-return { …BEAN_PROFILES.default, key: ‘default’ };
+  const k = kaffee.toLowerCase();
+  for (const [key, profile] of Object.entries(BEAN_PROFILES)) {
+    if (key !== 'default' && k.includes(key)) return { ...profile, key };
+  }
+  return { ...BEAN_PROFILES.default, key: 'default' };
 }
 
 // ============================================================
@@ -1284,240 +1300,296 @@ return { …BEAN_PROFILES.default, key: ‘default’ };
 // ============================================================
 
 function learnFromAllShots() {
-// Sammle alle guten Bezüge über alle Bohnen
-const allGood = [];
-for (const [bean, shots] of Object.entries(data)) {
-for (const s of shots) {
-if (s.score >= 70 && s.mahlgrad && s.temp) {
-allGood.push({ …s, bean });
-}
-}
-}
-if (allGood.length < 5) return null;
+  // Sammle alle guten Bezüge über alle Bohnen
+  const allGood = [];
+  for (const [bean, shots] of Object.entries(data)) {
+    for (const s of shots) {
+      if (s.score >= 70 && s.mahlgrad && s.temp) {
+        allGood.push({ ...s, bean });
+      }
+    }
+  }
+  if (allGood.length < 5) return null;
 
-// Lerne: welche Slider-Werte korrelieren mit hohem Score?
-const learnedPrefs = {};
-const sliderIds = [‘saeure’,‘bitter’,‘suesse’,‘koerper’,‘nachklang’];
+  // Lerne: welche Slider-Werte korrelieren mit hohem Score?
+  const learnedPrefs = {};
+  const sliderIds = ['saeure','bitter','suesse','koerper','nachklang'];
 
-for (const sid of sliderIds) {
-const vals = allGood.filter(s => s[sid] != null).map(s => ({
-val: s[sid], score: s.score
-}));
-if (vals.length < 3) continue;
-// Gewichteter Durchschnitt der Idealwerte
-const totalW = vals.reduce((a,v) => a + v.score, 0);
-learnedPrefs[sid] = Math.round(vals.reduce((a,v) => a + v.val * v.score, 0) / totalW * 10) / 10;
-}
+  for (const sid of sliderIds) {
+    const vals = allGood.filter(s => s[sid] != null).map(s => ({
+      val: s[sid], score: s.score
+    }));
+    if (vals.length < 3) continue;
+    // Gewichteter Durchschnitt der Idealwerte
+    const totalW = vals.reduce((a,v) => a + v.score, 0);
+    learnedPrefs[sid] = Math.round(vals.reduce((a,v) => a + v.val * v.score, 0) / totalW * 10) / 10;
+  }
 
-// Lerne: bevorzugter Mahlgrad, Temp, Ratio
-const wAvg = (field) => {
-const vals = allGood.filter(s => !isNaN(parseFloat(s[field])));
-if (!vals.length) return null;
-const tw = vals.reduce((a,s) => a + s.score, 0);
-return vals.reduce((a,s) => a + parseFloat(s[field]) * s.score, 0) / tw;
-};
+  // Lerne: bevorzugter Mahlgrad, Temp, Ratio
+  const wAvg = (field) => {
+    const vals = allGood.filter(s => !isNaN(parseFloat(s[field])));
+    if (!vals.length) return null;
+    const tw = vals.reduce((a,s) => a + s.score, 0);
+    return vals.reduce((a,s) => a + parseFloat(s[field]) * s.score, 0) / tw;
+  };
 
-const avgMG = wAvg(‘mahlgrad’);
-const avgTemp = wAvg(‘temp’);
-const avgRatio = wAvg(‘ratio’);
-const avgPI = wAvg(‘pi’);
+  const avgMG = wAvg('mahlgrad');
+  const avgTemp = wAvg('temp');
+  const avgRatio = wAvg('ratio');
+  const avgPI = wAvg('pi');
 
-// Beste Aromen aus Top-Bezügen
-const topShots = allGood.sort((a,b) => b.score - a.score).slice(0, 10);
-const aromaCount = {};
-for (const s of topShots) {
-if (s.aromen) for (const a of s.aromen) aromaCount[a] = (aromaCount[a]||0) + 1;
-}
-const topAromen = Object.entries(aromaCount).sort((a,b) => b[1]-a[1]).slice(0,3).map(x=>x[0]);
+  // Beste Aromen aus Top-Bezügen
+  const topShots = allGood.sort((a,b) => b.score - a.score).slice(0, 10);
+  const aromaCount = {};
+  for (const s of topShots) {
+    if (s.aromen) for (const a of s.aromen) aromaCount[a] = (aromaCount[a]||0) + 1;
+  }
+  const topAromen = Object.entries(aromaCount).sort((a,b) => b[1]-a[1]).slice(0,3).map(x=>x[0]);
 
-return {
-learnedPrefs,
-avgMG: avgMG ? Math.round(avgMG * 10) / 10 : null,
-avgTemp: avgTemp ? Math.round(avgTemp * 10) / 10 : null,
-avgRatio: avgRatio ? Math.round(avgRatio * 100) / 100 : null,
-avgPI: avgPI ? Math.round(avgPI * 10) / 10 : null,
-topAromen,
-basedOn: allGood.length,
-topScore: topShots[0]?.score || 0
-};
+  return {
+    learnedPrefs,
+    avgMG: avgMG ? Math.round(avgMG * 10) / 10 : null,
+    avgTemp: avgTemp ? Math.round(avgTemp * 10) / 10 : null,
+    avgRatio: avgRatio ? Math.round(avgRatio * 100) / 100 : null,
+    avgPI: avgPI ? Math.round(avgPI * 10) / 10 : null,
+    topAromen,
+    basedOn: allGood.length,
+    topScore: topShots[0]?.score || 0
+  };
 }
 
 // Passt Bean-Profil anhand gelernter Präferenzen an
 function getLearnedProfile(kaffee) {
-const base = getBeanProfile(kaffee);
-const learned = learnFromAllShots();
-if (!learned || !learned.avgMG) return { …base, learned: false };
+  const base = getBeanProfile(kaffee);
+  const learned = learnFromAllShots();
+  if (!learned || !learned.avgMG) return { ...base, learned: false };
 
-// Feinjustierung: lerne ob du tendenziell feiner/gröber mahlst als Standard
-const shots = data[kaffee] || [];
-const goodShots = shots.filter(s => s.score >= 70 && s.mahlgrad);
+  // Feinjustierung: lerne ob du tendenziell feiner/gröber mahlst als Standard
+  const shots = data[kaffee] || [];
+  const goodShots = shots.filter(s => s.score >= 70 && s.mahlgrad);
 
-// Bohnen-spezifisch gelernt?
-if (goodShots.length >= 3) {
-// Genug Daten für diese Bohne → calcAdaptiveRec macht das bereits
-return { …base, learned: true, learnedGlobal: learned };
-}
+  // Bohnen-spezifisch gelernt?
+  if (goodShots.length >= 3) {
+    // Genug Daten für diese Bohne → calcAdaptiveRec macht das bereits
+    return { ...base, learned: true, learnedGlobal: learned };
+  }
 
-// Noch wenig Daten für diese Bohne → nutze globale Lernkurve zur Anpassung
-// Offset: wie weiche ich vom Standard ab?
-const allBeanShots = Object.values(data).flat().filter(s => s.score >= 70 && s.mahlgrad);
-if (allBeanShots.length < 5) return { …base, learned: false };
+  // Noch wenig Daten für diese Bohne → nutze globale Lernkurve zur Anpassung
+  // Offset: wie weiche ich vom Standard ab?
+  const allBeanShots = Object.values(data).flat().filter(s => s.score >= 70 && s.mahlgrad);
+  if (allBeanShots.length < 5) return { ...base, learned: false };
 
-// Zeige Hinweis: “Basiert auf X Bezügen über alle Bohnen”
-return {
-…base,
-learned: true,
-learnedGlobal: learned,
-mahlgrad: learned.avgMG ? [
-Math.round((base.mahlgrad[0] + (learned.avgMG - (base.mahlgrad[0]+base.mahlgrad[1])/2) * 0.3) * 2) / 2,
-Math.round((base.mahlgrad[1] + (learned.avgMG - (base.mahlgrad[0]+base.mahlgrad[1])/2) * 0.3) * 2) / 2
-] : base.mahlgrad,
-temp: learned.avgTemp ? [
-Math.round(base.temp[0] + (learned.avgTemp - (base.temp[0]+base.temp[1])/2) * 0.2),
-Math.round(base.temp[1] + (learned.avgTemp - (base.temp[0]+base.temp[1])/2) * 0.2)
-] : base.temp,
-};
+  // Zeige Hinweis: "Basiert auf X Bezügen über alle Bohnen"
+  return {
+    ...base,
+    learned: true,
+    learnedGlobal: learned,
+    mahlgrad: learned.avgMG ? [
+      Math.round((base.mahlgrad[0] + (learned.avgMG - (base.mahlgrad[0]+base.mahlgrad[1])/2) * 0.3) * 2) / 2,
+      Math.round((base.mahlgrad[1] + (learned.avgMG - (base.mahlgrad[0]+base.mahlgrad[1])/2) * 0.3) * 2) / 2
+    ] : base.mahlgrad,
+    temp: learned.avgTemp ? [
+      Math.round(base.temp[0] + (learned.avgTemp - (base.temp[0]+base.temp[1])/2) * 0.2),
+      Math.round(base.temp[1] + (learned.avgTemp - (base.temp[0]+base.temp[1])/2) * 0.2)
+    ] : base.temp,
+  };
 }
 
 // Zeigt Lern-Status als Badge
 function getLernBadge() {
-const learned = learnFromAllShots();
-if (!learned) return ‘’;
-const total = Object.values(data).flat().length;
-const good = learned.basedOn;
-if (good < 5) return `<span class="badge" style="background:rgba(200,151,74,0.1);border-color:var(--border);color:var(--mid)">Lernend ${good}/5</span>`;
-return `<span class="badge" style="background:rgba(90,184,58,0.15);border-color:rgba(90,184,58,0.4);color:var(--green)">Gelernt · ${good} Bezüge</span>`;
+  const learned = learnFromAllShots();
+  if (!learned) return '';
+  const total = Object.values(data).flat().length;
+  const good = learned.basedOn;
+  if (good < 5) return `<span class="badge" style="background:rgba(200,151,74,0.1);border-color:var(--border);color:var(--mid)">Lernend ${good}/5</span>`;
+  return `<span class="badge" style="background:rgba(90,184,58,0.15);border-color:rgba(90,184,58,0.4);color:var(--green)">Gelernt · ${good} Bezüge</span>`;
 }
 
 // Info über gelerntes Profil anzeigen
 function showLearnedInfo(kaffee) {
-const learned = learnFromAllShots();
-const shots = data[kaffee] || [];
-const goodShots = shots.filter(s => s.score >= 70);
+  const learned = learnFromAllShots();
+  const shots = data[kaffee] || [];
+  const goodShots = shots.filter(s => s.score >= 70);
 
-let html = ‘’;
-if (!learned || learned.basedOn < 5) {
-html = `<p style="color:var(--mid)">Noch nicht genug Daten zum Lernen.<br>Mache mindestens 5 Bezüge mit Score ≥70.</p> <p>Aktuelle Bezüge mit Score ≥70: <strong style="color:var(--crema)">${learned?.basedOn||0}</strong></p>`;
-} else {
-html = `<div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.9"> <strong style="color:var(--crema);display:block;margin-bottom:8px">Aus ${learned.basedOn} guten Bezügen gelernt:</strong> ${learned.avgMG ? `Dein Ø Mahlgrad: <strong style="color:var(--crema)">${learned.avgMG}</strong><br>`: ''} ${learned.avgTemp ?`Deine Ø Temperatur: <strong style="color:var(--crema)">${learned.avgTemp}°C</strong><br>`: ''} ${learned.avgRatio ?`Deine Ø Ratio: <strong style="color:var(--crema)">1:${learned.avgRatio}</strong><br>`: ''} ${learned.avgPI ?`Deine Ø Pre-Infusion: <strong style="color:var(--crema)">${learned.avgPI}s</strong><br>`: ''} ${learned.topAromen.length ?`<br>Deine Top-Aromen:<br><strong style="color:var(--crema)">${learned.topAromen.join(’ · ’)}</strong><br>`: ''} ${goodShots.length >= 3 ?`<br>Diese Bohne: <strong style="color:var(--green)">${goodShots.length} gute Bezüge</strong> → Empfehlung ist bohnenspezifisch`:`<br>Diese Bohne: <strong style="color:var(--mid)">${goodShots.length} gute Bezüge</strong> → Empfehlung basiert auf globalen Daten`} </div>`;
-}
-document.getElementById(‘modal-title’).textContent = ‘🧠 Selbstlernende Empfehlung’;
-document.getElementById(‘modal-body’).innerHTML = html;
-document.getElementById(‘modal-bg’).classList.add(‘show’);
+  let html = '';
+  if (!learned || learned.basedOn < 5) {
+    html = `<p style="color:var(--mid)">Noch nicht genug Daten zum Lernen.<br>Mache mindestens 5 Bezüge mit Score ≥70.</p>
+    <p>Aktuelle Bezüge mit Score ≥70: <strong style="color:var(--crema)">${learned?.basedOn||0}</strong></p>`;
+  } else {
+    html = `<div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.9">
+    <strong style="color:var(--crema);display:block;margin-bottom:8px">Aus ${learned.basedOn} guten Bezügen gelernt:</strong>
+    ${learned.avgMG ? `Dein Ø Mahlgrad: <strong style="color:var(--crema)">${learned.avgMG}</strong><br>` : ''}
+    ${learned.avgTemp ? `Deine Ø Temperatur: <strong style="color:var(--crema)">${learned.avgTemp}°C</strong><br>` : ''}
+    ${learned.avgRatio ? `Deine Ø Ratio: <strong style="color:var(--crema)">1:${learned.avgRatio}</strong><br>` : ''}
+    ${learned.avgPI ? `Deine Ø Pre-Infusion: <strong style="color:var(--crema)">${learned.avgPI}s</strong><br>` : ''}
+    ${learned.topAromen.length ? `<br>Deine Top-Aromen:<br><strong style="color:var(--crema)">${learned.topAromen.join(' · ')}</strong><br>` : ''}
+    ${goodShots.length >= 3 ? `<br>Diese Bohne: <strong style="color:var(--green)">${goodShots.length} gute Bezüge</strong> → Empfehlung ist bohnenspezifisch` : `<br>Diese Bohne: <strong style="color:var(--mid)">${goodShots.length} gute Bezüge</strong> → Empfehlung basiert auf globalen Daten`}
+    </div>`;
+  }
+  document.getElementById('modal-title').textContent = '🧠 Selbstlernende Empfehlung';
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('modal-bg').classList.add('show');
 }
 
 // Adaptive learning: calculate recommendation from good shots
 function calcAdaptiveRec(shots) {
-if (!shots || shots.length < 5) return null;
+  if (!shots || shots.length < 5) return null;
 
-// Take shots with score >= 65, sorted by score desc, up to last 5
-const goodShots = […shots]
-.filter(s => s.score >= 65 && s.mahlgrad && s.temp && s.doseOut)
-.sort((a,b) => b.score - a.score)
-.slice(0, 5);
+  // Take shots with score >= 65, sorted by score desc, up to last 5
+  const goodShots = [...shots]
+    .filter(s => s.score >= 65 && s.mahlgrad && s.temp && s.doseOut)
+    .sort((a,b) => b.score - a.score)
+    .slice(0, 5);
 
-if (goodShots.length < 3) return null; // need at least 3 good shots
+  if (goodShots.length < 3) return null; // need at least 3 good shots
 
-// Weighted average (higher score = more weight)
-const totalWeight = goodShots.reduce((a,s) => a + s.score, 0);
-const wAvg = (field) => {
-const val = goodShots.reduce((a,s) => {
-const v = parseFloat(s[field]);
-return isNaN(v) ? a : a + v * s.score;
-}, 0);
-const validWeight = goodShots.filter(s => !isNaN(parseFloat(s[field]))).reduce((a,s) => a + s.score, 0);
-return validWeight > 0 ? val / validWeight : null;
-};
+  // Weighted average (higher score = more weight)
+  const totalWeight = goodShots.reduce((a,s) => a + s.score, 0);
+  const wAvg = (field) => {
+    const val = goodShots.reduce((a,s) => {
+      const v = parseFloat(s[field]);
+      return isNaN(v) ? a : a + v * s.score;
+    }, 0);
+    const validWeight = goodShots.filter(s => !isNaN(parseFloat(s[field]))).reduce((a,s) => a + s.score, 0);
+    return validWeight > 0 ? val / validWeight : null;
+  };
 
-const avgMahlgrad = wAvg(‘mahlgrad’);
-const avgTemp = wAvg(‘temp’);
-const avgOutput = wAvg(‘doseOut’);
-const avgPI = wAvg(‘pi’);
-const avgScore = Math.round(totalWeight / goodShots.length);
+  const avgMahlgrad = wAvg('mahlgrad');
+  const avgTemp = wAvg('temp');
+  const avgOutput = wAvg('doseOut');
+  const avgPI = wAvg('pi');
+  const avgScore = Math.round(totalWeight / goodShots.length);
 
-// Range: ±0.5 for mahlgrad, ±1 for temp, ±2 for output
-return {
-mahlgrad: avgMahlgrad ? [
-Math.round((avgMahlgrad - 0.5) * 2) / 2,
-Math.round((avgMahlgrad + 0.5) * 2) / 2
-] : null,
-temp: avgTemp ? [
-Math.round(avgTemp - 1),
-Math.round(avgTemp + 1)
-] : null,
-output: avgOutput ? [
-Math.round(avgOutput - 2),
-Math.round(avgOutput + 2)
-] : null,
-pi: avgPI > 0 ? Math.round(avgPI * 2) / 2 : null,
-basedOn: goodShots.length,
-avgScore,
-shots: goodShots
-};
+  // Range: ±0.5 for mahlgrad, ±1 for temp, ±2 for output
+  return {
+    mahlgrad: avgMahlgrad ? [
+      Math.round((avgMahlgrad - 0.5) * 2) / 2,
+      Math.round((avgMahlgrad + 0.5) * 2) / 2
+    ] : null,
+    temp: avgTemp ? [
+      Math.round(avgTemp - 1),
+      Math.round(avgTemp + 1)
+    ] : null,
+    output: avgOutput ? [
+      Math.round(avgOutput - 2),
+      Math.round(avgOutput + 2)
+    ] : null,
+    pi: avgPI > 0 ? Math.round(avgPI * 2) / 2 : null,
+    basedOn: goodShots.length,
+    avgScore,
+    shots: goodShots
+  };
 }
 
 function renderTrainerRec(kaffee) {
-const el = document.getElementById(‘trainer-rec’);
-if (!el) return;
-const shots = data[kaffee] || [];
-const profile = getBeanProfile(kaffee);
-const adaptive = calcAdaptiveRec(shots);
-const useAdaptive = adaptive !== null;
+  const el = document.getElementById('trainer-rec');
+  if (!el) return;
+  const shots = data[kaffee] || [];
+  const profile = getBeanProfile(kaffee);
+  const adaptive = calcAdaptiveRec(shots);
+  const useAdaptive = adaptive !== null;
 
-// Decide which values to show
-const rec = useAdaptive ? {
-mahlgrad: adaptive.mahlgrad,
-temp: adaptive.temp,
-output: adaptive.output,
-pi: adaptive.pi
-} : {
-mahlgrad: profile.mahlgrad,
-temp: profile.temp,
-output: profile.output,
-pi: null
-};
+  // Decide which values to show
+  const rec = useAdaptive ? {
+    mahlgrad: adaptive.mahlgrad,
+    temp: adaptive.temp,
+    output: adaptive.output,
+    pi: adaptive.pi
+  } : {
+    mahlgrad: profile.mahlgrad,
+    temp: profile.temp,
+    output: profile.output,
+    pi: null
+  };
 
-// Format ranges
-const fmtRange = (r, unit=’’) => r ? `${r[0]}–${r[1]}${unit}` : ‘–’;
-const fmtPI = (pi) => pi ? `${pi}s` : ‘0-4s’;
+  // Format ranges
+  const fmtRange = (r, unit='') => r ? `${r[0]}–${r[1]}${unit}` : '–';
+  const fmtPI = (pi) => pi ? `${pi}s` : '0-4s';
 
-// Last 5 shots for history visualization
-const lastShots = […shots].sort((a,b)=>(b.timestamp||0)-(a.timestamp||0)).slice(0,5).reverse();
-const maxScore = lastShots.length ? Math.max(…lastShots.map(s=>s.score), 1) : 1;
+  // Last 5 shots for history visualization
+  const lastShots = [...shots].sort((a,b)=>(b.timestamp||0)-(a.timestamp||0)).slice(0,5).reverse();
+  const maxScore = lastShots.length ? Math.max(...lastShots.map(s=>s.score), 1) : 1;
 
-const historyHtml = lastShots.length > 0 ? `<div class="trainer-history"> <div class="trainer-history-title">Letzte ${lastShots.length} Bezüge</div> ${lastShots.map(s => { const pct = Math.round((s.score/maxScore)*100); const col = s.score >= 80 ? 'var(--green)' : s.score >= 65 ? 'var(--crema)' : 'var(--mid)'; return`<div class="trainer-shot-row">
-<div class="trainer-shot-bar-wrap"><div class="trainer-shot-bar" style="width:${pct}%;background:${col}"></div></div>
-<div class="trainer-shot-info">MG${s.mahlgrad||’?’} ${s.temp||’?’}°C ${s.doseOut||’?’}g → ${s.score}pt</div>
-</div>`; }).join('')} </div>` : ‘’;
+  const historyHtml = lastShots.length > 0 ? `
+    <div class="trainer-history">
+      <div class="trainer-history-title">Letzte ${lastShots.length} Bezüge</div>
+      ${lastShots.map(s => {
+        const pct = Math.round((s.score/maxScore)*100);
+        const col = s.score >= 80 ? 'var(--green)' : s.score >= 65 ? 'var(--crema)' : 'var(--mid)';
+        return `<div class="trainer-shot-row">
+          <div class="trainer-shot-bar-wrap"><div class="trainer-shot-bar" style="width:${pct}%;background:${col}"></div></div>
+          <div class="trainer-shot-info">MG${s.mahlgrad||'?'} ${s.temp||'?'}°C ${s.doseOut||'?'}g → ${s.score}pt</div>
+        </div>`;
+      }).join('')}
+    </div>` : '';
 
-// Apply button prefills form
-const applyValues = {
-mahlgrad: rec.mahlgrad ? ((rec.mahlgrad[0]+rec.mahlgrad[1])/2).toFixed(1) : ‘’,
-temp: rec.temp ? Math.round((rec.temp[0]+rec.temp[1])/2) : ‘’,
-pi: rec.pi || ‘’
-};
+  // Apply button prefills form
+  const applyValues = {
+    mahlgrad: rec.mahlgrad ? ((rec.mahlgrad[0]+rec.mahlgrad[1])/2).toFixed(1) : '',
+    temp: rec.temp ? Math.round((rec.temp[0]+rec.temp[1])/2) : '',
+    pi: rec.pi || ''
+  };
 
-el.innerHTML = `<div class="trainer-card"> <div class="trainer-header"> <span class="trainer-icon">🎯</span> <div> <div class="trainer-title">Trainer-Empfehlung</div> <div class="trainer-subtitle">${useAdaptive ?`Adaptiv – aus ${adaptive.basedOn} guten Bezügen (Ø Score ${adaptive.avgScore})`:`Standard-Profil · ${profile.roast === ‘dark’ ? ‘Dark Roast’ : ‘Medium Roast’}`}</div> </div> <button class="info-btn" style="margin-left:auto;width:22px;height:22px;font-size:.7rem" onclick="showLearnedInfo('${kaffee.replace(/'/g,"\\'")}')">🧠</button> </div> ${getLernBadge()} <div class="trainer-grid"> <div class="trainer-param"> <div class="trainer-param-label">Mahlgrad</div> <div class="trainer-param-value">${fmtRange(rec.mahlgrad)}</div> <div class="trainer-param-sub">Finecoar</div> </div> <div class="trainer-param"> <div class="trainer-param-label">Brühtemp</div> <div class="trainer-param-value">${fmtRange(rec.temp, '°')}</div> <div class="trainer-param-sub">°C</div> </div> <div class="trainer-param"> <div class="trainer-param-label">Output</div> <div class="trainer-param-value">${fmtRange(rec.output, 'g')}</div> <div class="trainer-param-sub">bei 18g</div> </div> </div> <div class="trainer-source"> ${useAdaptive ? `⚡ Lernend – verbessert sich mit jedem Bezug`:`📚 Standard · ${profile.notes}`} ${rec.pi ? ` · PI ${rec.pi}s empfohlen`: ''} ${profile.blend || profile.herkunft ?`<br><button style=“margin-top:6px;background:var(–crema2);border:1px solid var(–border);color:var(–crema);padding:3px 10px;border-radius:6px;font-family:‘Courier New’,monospace;font-size:calc(.52rem*var(–font-scale));cursor:pointer” onclick=“showBohnenInfo(’${kaffee.replace(/’/g,”\’”)}’)”>ℹ Bohnen-Details</button>` : ''} </div> ${historyHtml} <button class="trainer-apply-btn" onclick="applyTrainerRec(${JSON.stringify(applyValues).replace(/"/g,'&quot;')})"> ↓ Mittelwert ins Formular übernehmen </button> </div>`;
-el.style.display = ‘block’;
+  el.innerHTML = `
+    <div class="trainer-card">
+      <div class="trainer-header">
+        <span class="trainer-icon">🎯</span>
+        <div>
+          <div class="trainer-title">Trainer-Empfehlung</div>
+          <div class="trainer-subtitle">${useAdaptive ? `Adaptiv – aus ${adaptive.basedOn} guten Bezügen (Ø Score ${adaptive.avgScore})` : `Standard-Profil · ${profile.roast === 'dark' ? 'Dark Roast' : 'Medium Roast'}`}</div>
+        </div>
+        <button class="info-btn" style="margin-left:auto;width:22px;height:22px;font-size:.7rem" onclick="showLearnedInfo('${kaffee.replace(/'/g,"\\'")}')">🧠</button>
+      </div>
+      ${getLernBadge()}
+      <div class="trainer-grid">
+        <div class="trainer-param">
+          <div class="trainer-param-label">Mahlgrad</div>
+          <div class="trainer-param-value">${fmtRange(rec.mahlgrad)}</div>
+          <div class="trainer-param-sub">Finecoar</div>
+        </div>
+        <div class="trainer-param">
+          <div class="trainer-param-label">Brühtemp</div>
+          <div class="trainer-param-value">${fmtRange(rec.temp, '°')}</div>
+          <div class="trainer-param-sub">°C</div>
+        </div>
+        <div class="trainer-param">
+          <div class="trainer-param-label">Output</div>
+          <div class="trainer-param-value">${fmtRange(rec.output, 'g')}</div>
+          <div class="trainer-param-sub">bei 18g</div>
+        </div>
+      </div>
+      <div class="trainer-source">
+        ${useAdaptive
+          ? `⚡ Lernend – verbessert sich mit jedem Bezug`
+          : `📚 Standard · ${profile.notes}`}
+        ${rec.pi ? ` · PI ${rec.pi}s empfohlen` : ''}
+        ${profile.blend || profile.herkunft ? `<br><button style="margin-top:6px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);padding:3px 10px;border-radius:6px;font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));cursor:pointer" onclick="showBohnenInfo('${kaffee.replace(/'/g,"\\'")}')">ℹ Bohnen-Details</button>` : ''}
+      </div>
+      ${historyHtml}
+      <button class="trainer-apply-btn" onclick="applyTrainerRec(${JSON.stringify(applyValues).replace(/"/g,'&quot;')})">
+        ↓ Mittelwert ins Formular übernehmen
+      </button>
+    </div>`;
+  el.style.display = 'block';
 }
 
 function applyTrainerRec(values) {
-if (values.mahlgrad) {
-const el = document.getElementById(‘f-mahlgrad’);
-el.value = values.mahlgrad;
-el.classList.remove(‘prefilled’);
-}
-if (values.temp) {
-const el = document.getElementById(‘f-temp’);
-el.value = values.temp;
-el.classList.remove(‘prefilled’);
-}
-if (values.pi) {
-const el = document.getElementById(‘f-pi’);
-el.value = values.pi;
-el.classList.remove(‘prefilled’);
-}
-updateLiveTip();
+  if (values.mahlgrad) {
+    const el = document.getElementById('f-mahlgrad');
+    el.value = values.mahlgrad;
+    el.classList.remove('prefilled');
+  }
+  if (values.temp) {
+    const el = document.getElementById('f-temp');
+    el.value = values.temp;
+    el.classList.remove('prefilled');
+  }
+  if (values.pi) {
+    const el = document.getElementById('f-pi');
+    el.value = values.pi;
+    el.classList.remove('prefilled');
+  }
+  updateLiveTip();
 }
 
 // ============================================================
@@ -1526,6 +1598,5 @@ updateLiveTip();
 buildPills();
 renderDashboard();
 </script>
-
 </body>
 </html>
