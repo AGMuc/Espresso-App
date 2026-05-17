@@ -1,6 +1,6 @@
 # Espresso Trainer
 
-**v15.7** · Progressive Web App für die Lelit Victoria PL91T
+**v3.7** · Progressive Web App für die Lelit Victoria PL91T
 
 Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezügen. Läuft vollständig im Browser, ohne Server oder Framework – alle Daten bleiben lokal im `localStorage`.
 
@@ -74,12 +74,12 @@ Eigene Kaffeesorten können in der App hinzugefügt werden (langer Druck zum Lö
 
 | Version | Datum | Änderungen |
 |---|---|---|
-| **v15.7** | Mai 2026 | Service Worker (Network-First) reaktiviert: PWA vom Homescreen aktualisiert sich automatisch ohne Cache-Clear; `controllerchange` → sofortiger Reload auf neue Version |
-| v15.6 | Mai 2026 | Nachträgliche Notizen zu Bezügen editierbar (✏-Button); Tipp-Followup (Ja/Nein) jetzt am Kopf des Formulars statt in der Historie; Followup-Antworten beeinflussen den Lernalgorithmus direkt (×1.3/×0.7 Gewichtung) |
-| v15.5 | Mai 2026 | Bugfix: `var(--fg)` → Gesamteindruck- & Verkostungs-Buttons zeigten keinen Text; Bohnen-Profil als Startwert bei neuem Eintrag; `top3Avg` NaN-Fix; `calcScore` robuster |
-| v15.4 | Mai 2026 | Verbessertes Selbstlern-System: Trend ↑/→/↓, adaptiv ab 3 Bezügen, Tabak/Holz- & Robusta-Tipps, 🧠-Button mit Fortschritt & bestem Bezug |
-| v15.3 | Mai 2026 | Passalacqua Mehari korrigiert: Mehari ist ein Blend von Passalacqua (50/50 A/R, Neapel seit 1948) |
-| v15.2 | Mai 2026 | Passalacqua/Mehari zu einem Eintrag zusammengeführt, Hell als Standard-Theme, README aktualisiert |
-| v15.1 | Mai 2026 | Kritische Bugfixes: `dotToScore()` definiert, Division-by-Zero, Kimbo in Standard-Liste |
-| v15.0 | Mai 2026 | Erweiterte Bohnen-Profile (blend/taste/herkunft), Kimbo Espresso Napoli, Auto-Update ohne Cache-Clear, README |
-| v14 | Mai 2026 | Service Worker entfernt, Geführte Verkostung, Selbstlernend |
+| **v3.7** | Mai 2026 | Service Worker (Network-First) reaktiviert: PWA vom Homescreen aktualisiert sich automatisch ohne Cache-Clear; `controllerchange` → sofortiger Reload auf neue Version |
+| v3.6 | Mai 2026 | Nachträgliche Notizen zu Bezügen editierbar (✏-Button); Tipp-Followup (Ja/Nein) jetzt am Kopf des Formulars statt in der Historie; Followup-Antworten beeinflussen den Lernalgorithmus direkt (×1.3/×0.7 Gewichtung) |
+| v3.5 | Mai 2026 | Bugfix: Textfarbe Gesamteindruck- & Verkostungs-Buttons; Bohnen-Profil als Startwert; `top3Avg` NaN-Fix; `calcScore` robuster |
+| v3.4 | Mai 2026 | Verbessertes Selbstlern-System: Trend ↑/→/↓, adaptiv ab 3 Bezügen, Tabak/Holz- & Robusta-Tipps, 🧠-Button |
+| v3.3 | Mai 2026 | Passalacqua Mehari korrigiert: 50/50 A/R, Neapel seit 1948 |
+| v3.2 | Mai 2026 | Passalacqua/Mehari zusammengeführt, Hell als Standard-Theme |
+| v3.1 | Mai 2026 | Kritische Bugfixes: `dotToScore()`, Division-by-Zero, Kimbo in Standard-Liste |
+| v3.0 | Mai 2026 | Erweiterte Bohnen-Profile, Kimbo Espresso Napoli, Auto-Update, README |
+| v2.0 | Mai 2026 | Service Worker entfernt, Geführte Verkostung, Selbstlernend |
