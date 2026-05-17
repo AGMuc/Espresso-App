@@ -1608,19 +1608,36 @@ function applyTrainerRec(values) {
 }
 
 // ============================================================
-// VERSION CHECK & CACHE BUST
+// AUTO-UPDATE CHECK
+// version.json wird bei jedem GitHub-Deploy neu geschrieben.
+// Der ?t= Parameter verhindert, dass der Browser version.json selbst cached.
+// Falls Build-Hash != gespeicherter Hash → hard reload → user bekommt
+// automatisch die neue Version ohne manuellen Cache-Clear.
 // ============================================================
 (function(){
-  const stored = localStorage.getItem('app_version');
-  if(stored !== APP_VERSION){
-    localStorage.setItem('app_version', APP_VERSION);
-    if(stored){
-      const t = document.getElementById('sw-toast');
-      t.textContent = 'v' + APP_VERSION + ' geladen ✓';
-      t.style.display = 'block';
-      setTimeout(()=>{ t.style.display='none'; }, 3500);
-    }
-  }
+  const BUILD_KEY = 'app_build';
+  fetch('./version.json?t=' + Date.now())
+    .then(r => r.json())
+    .then(function(json){
+      const newBuild = json.v || APP_VERSION;
+      const stored = localStorage.getItem(BUILD_KEY);
+      if(stored && stored !== newBuild){
+        localStorage.setItem(BUILD_KEY, newBuild);
+        caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); });
+        location.reload(true);
+      } else {
+        if(!stored){
+          const t = document.getElementById('sw-toast');
+          t.textContent = 'v' + APP_VERSION + ' geladen ✓';
+          t.style.display = 'block';
+          setTimeout(function(){ t.style.display='none'; }, 3000);
+        }
+        localStorage.setItem(BUILD_KEY, newBuild);
+      }
+    })
+    .catch(function(){
+      // Offline oder version.json fehlt → einfach weitermachen
+    });
 })();
 
 // ============================================================
