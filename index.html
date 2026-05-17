@@ -7,7 +7,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Espresso">
 <meta name="theme-color" content="#1a0f0a">
-<title>Espresso Trainer</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Espresso Trainer v15</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -424,6 +427,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
+const APP_VERSION='15';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Espresso","Mehari Espresso"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -1602,6 +1606,22 @@ function applyTrainerRec(values) {
   }
   updateLiveTip();
 }
+
+// ============================================================
+// VERSION CHECK & CACHE BUST
+// ============================================================
+(function(){
+  const stored = localStorage.getItem('app_version');
+  if(stored !== APP_VERSION){
+    localStorage.setItem('app_version', APP_VERSION);
+    if(stored){
+      const t = document.getElementById('sw-toast');
+      t.textContent = 'v' + APP_VERSION + ' geladen ✓';
+      t.style.display = 'block';
+      setTimeout(()=>{ t.style.display='none'; }, 3500);
+    }
+  }
+})();
 
 // ============================================================
 // INIT
