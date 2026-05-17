@@ -1729,29 +1729,35 @@ function applyTrainerRec(values) {
 // ============================================================
 // AUTO-UPDATE CHECK
 // version.json wird bei jedem GitHub-Deploy neu geschrieben.
-// Der ?t= Parameter verhindert, dass der Browser version.json selbst cached.
-// Falls Build-Hash != gespeicherter Hash → hard reload → user bekommt
-// automatisch die neue Version ohne manuellen Cache-Clear.
+// iOS PWA ignoriert location.reload(true) → stattdessen location.replace()
+// mit Timestamp: zwingt WKWebView zu echter Netzwerk-Anfrage.
 // ============================================================
 (function(){
-  const BUILD_KEY = 'app_build';
-  fetch('./version.json?t=' + Date.now())
-    .then(r => r.json())
+  // Cache-Buster-Parameter aus URL entfernen (nach Update-Redirect)
+  if(location.search.match(/_r=\d+/)){
+    history.replaceState(null,'',location.pathname);
+  }
+
+  const BUILD_KEY='app_build';
+  fetch('./version.json?t='+Date.now())
+    .then(r=>r.json())
     .then(function(json){
-      const newBuild = json.v || APP_VERSION;
-      const stored = localStorage.getItem(BUILD_KEY);
-      if(stored && stored !== newBuild){
-        localStorage.setItem(BUILD_KEY, newBuild);
-        caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); });
-        location.reload(true);
+      const newBuild=json.v||APP_VERSION;
+      const stored=localStorage.getItem(BUILD_KEY);
+      if(stored && stored!==newBuild){
+        localStorage.setItem(BUILD_KEY,newBuild);
+        // Alle Caches löschen
+        if(window.caches) caches.keys().then(function(keys){keys.forEach(function(k){caches.delete(k);});});
+        // location.replace mit Timestamp: umgeht iOS PWA Cache zuverlässig
+        location.replace(location.pathname+'?_r='+Date.now());
       } else {
         if(!stored){
-          const t = document.getElementById('sw-toast');
-          t.textContent = 'v' + APP_VERSION + ' geladen ✓';
-          t.style.display = 'block';
-          setTimeout(function(){ t.style.display='none'; }, 3000);
+          const t=document.getElementById('sw-toast');
+          t.textContent='v'+APP_VERSION+' geladen ✓';
+          t.style.display='block';
+          setTimeout(function(){t.style.display='none';},3000);
         }
-        localStorage.setItem(BUILD_KEY, newBuild);
+        localStorage.setItem(BUILD_KEY,newBuild);
       }
     })
     .catch(function(){
