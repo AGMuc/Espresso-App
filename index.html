@@ -402,7 +402,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v14.0 · Mai 2026 · Geführte Verkostung · Selbstlernend</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.0 · Mai 2026 · Erweiterte Bohnen-Profile · Kimbo Napoli</div></div></div>
       </div>
     </div>
 
@@ -1240,13 +1240,30 @@ if('serviceWorker' in navigator){
 // Bean profiles – standard recommendations per bean type
 const BEAN_PROFILES = {
   // Dinzler
-  "dinzler roma":      { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   notes:"Klassisch-neapolitanisch, niedrige Säure, Schokolade/Nuss" },
-  "dinzler modena":    { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",   notes:"Vollmundig, wenig Säure, cremig" },
-  "dinzler il gustoso":{ mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", notes:"Ausgewogen, etwas mehr Säure als Roma" },
-  "dinzler lazise":    { mahlgrad:[4,5],     temp:[92,93], output:[40,44], roast:"medium", notes:"Milder, fruchtige Note möglich" },
-  "dinzler venezia":   { mahlgrad:[4,5],     temp:[92,93], output:[42,46], roast:"medium", notes:"Ausgewogen, klassisch-venezianisch" },
+  "dinzler roma":      { mahlgrad:[3,4.5], temp:[91,93], output:[38,44], roast:"dark",
+    blend:"80% Arabica / 20% Robusta", taste:"Schokolade, Karamell, vollmundig",
+    herkunft:"Rosenheim, Dinzler Rösterei",
+    notes:"Klassiker · säurearm · 91°C Startpunkt · Zeit ab erstem Tropfen messen" },
+  "dinzler modena":    { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",
+    blend:"100% Arabica", taste:"Vollmundig, Schokolade, wenig Säure",
+    herkunft:"Rosenheim, Dinzler Rösterei",
+    notes:"Vollmundig, wenig Säure, cremig · ähnlich Roma aber reiner Arabica" },
+  "dinzler il gustoso":{ mahlgrad:[4,5], temp:[92,93], output:[40,44], roast:"medium",
+    blend:"100% Arabica", taste:"Ausgewogen, Karamell, leicht fruchtig",
+    herkunft:"Rosenheim, Dinzler Rösterei",
+    notes:"Ausgewogen, etwas mehr Säure als Roma · heller geröstet" },
+  "dinzler lazise":    { mahlgrad:[4,5], temp:[92,93], output:[40,44], roast:"medium",
+    blend:"100% Arabica", taste:"Mild, fruchtige Note, Karamell",
+    herkunft:"Rosenheim, Dinzler Rösterei",
+    notes:"Milder, fruchtige Note möglich · gut für Einsteiger" },
+  "dinzler venezia":   { mahlgrad:[4,5], temp:[92,93], output:[42,46], roast:"medium",
+    blend:"100% Arabica", taste:"Ausgewogen, klassisch, nussig",
+    herkunft:"Rosenheim, Dinzler Rösterei",
+    notes:"Ausgewogen, klassisch-venezianisch · etwas mehr Output" },
   // Gorilla
-  "gorilla":           { mahlgrad:[4,5.5],   temp:[90,91], output:[38,42], roast:"dark",   notes:"Vorsicht Asche: kurze Bezugszeit, niedrige Temp" },
+  "gorilla":           { mahlgrad:[3.5,5], temp:[90,92], output:[38,44], roast:"dark",
+    blend:"85% Arabica / 15% Robusta", taste:"Schokolade, Nuss, Karamell",
+    notes:"Neigt zu Bitterkeit bei Überextraktion · max 91°C · MG 4-4.5 · Zeit 24-26s · Vorsicht Asche" },
   // Passalacqua
   "passalacqua": { mahlgrad:[3,4.5], temp:[91,93], output:[40,44], roast:"dark",
     blend:"75% Arabica / 25% Robusta", taste:"Schokolade, Haselnuss, dichte Crema",
@@ -1257,6 +1274,11 @@ const BEAN_PROFILES = {
     blend:"60% Arabica / 40% Robusta", taste:"Schokolade, Tabak, Walnuss, kräftig",
     herkunft:"Süditalien / Neapel-Stil",
     notes:"Sehr kräftig, hoher Robusta-Anteil · niedriger Mahlgrad nötig · Temp eher 90-91°C · kurze Bezugszeit 25-28s · wenig Pre-Infusion · ähnlich Kimbo Napoli aber würziger" },
+  // Kimbo
+  "kimbo": { mahlgrad:[3,4.5], temp:[90,92], output:[38,42], roast:"dark",
+    blend:"70% Arabica / 30% Robusta", taste:"Schokolade, Haselnuss, dichte Crema",
+    herkunft:"Neapel, seit 1963",
+    notes:"Klassisch neapolitanisch · hoher Robusta für stabile Crema · säurearm · Temp max 92°C · ähnlich Passalacqua · MG 3-4 · kurze Bezugszeit" },
   // Oh Harvey
   "oh harvey": { mahlgrad:[4,5.5], temp:[92,94], output:[42,46], roast:"medium",
     blend:"80% Arabica / 20% Robusta", taste:"Schokolade, Würze, mild-kräftig",
