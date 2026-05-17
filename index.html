@@ -411,7 +411,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.5 · Mai 2026 · Bugfixes: Textfarbe, Profil-Startwerte</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v15.7 · Mai 2026 · SW Auto-Update, Notizen, Followup oben</div></div></div>
       </div>
     </div>
 
@@ -1770,6 +1770,8 @@ function applyTrainerRec(values) {
 // ============================================================
 buildPills();
 renderDashboard();
+// Versionsnummer in Einstellungen dynamisch setzen
+(function(){const el=document.getElementById('version-display');if(el)el.textContent='v'+APP_VERSION+' · Mai 2026';})();
 </script>
 </body>
 </html>
