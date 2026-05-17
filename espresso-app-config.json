@@ -1,0 +1,328 @@
+{
+  "meta": {
+    "version": "v14",
+    "datum": "2026-05-17",
+    "beschreibung": "Espresso Trainer App - Vollständige Konfiguration für Claude Code",
+    "github": "https://github.com/AGMuc/Espresso-App",
+    "url": "https://agmuc.github.io/Espresso-App/"
+  },
+  "setup": {
+    "maschine": "Lelit Victoria PL91T",
+    "muehle": "Eureka Mignon Libra + Finecoar Dial",
+    "korb": "IMS B702TH26.5M (26.5mm, ridgeless)",
+    "tamper": "Timemore Impact 58.4mm",
+    "puck_screen": true,
+    "wdt": "Umikot Tool",
+    "waage": "KC200 (Maestri House)",
+    "standard_dose": 18.5,
+    "sweet_spot_ratio": "1:2.2-1:2.3",
+    "sweet_spot_temp": "91-92°C",
+    "sweet_spot_zeit": "25-28s (ab erstem Tropfen)",
+    "pi_standard": "aus (wird separat getestet)"
+  },
+  "bohnen": {
+    "standard_liste": [
+      "Gorilla Superbar Crema",
+      "Dinzler Roma",
+      "Dinzler il Gustoso",
+      "Dinzler Lazise",
+      "Dinzler Modena",
+      "Dinzler Venezia",
+      "Geisenhofer House Blend",
+      "Passalacqua Espresso",
+      "Mehari Espresso"
+    ],
+    "profile": {
+      "gorilla superbar crema": {
+        "mahlgrad": [
+          3.5,
+          5
+        ],
+        "temp": [
+          90,
+          92
+        ],
+        "output": [
+          38,
+          44
+        ],
+        "roast": "dark",
+        "blend": "85% Arabica / 15% Robusta",
+        "taste": "Schokolade, Nuss, Karamell",
+        "notes": "Neigt zu Bitterkeit bei Überextraktion · max 91°C · MG 4-4.5 · Zeit 24-26s"
+      },
+      "dinzler roma": {
+        "mahlgrad": [
+          3,
+          4.5
+        ],
+        "temp": [
+          91,
+          93
+        ],
+        "output": [
+          38,
+          44
+        ],
+        "roast": "dark",
+        "blend": "80% Arabica / 20% Robusta",
+        "taste": "Schokolade, Karamell, vollmundig",
+        "notes": "Klassiker · säurearm · 91°C Startpunkt · Zeit ab erstem Tropfen messen"
+      },
+      "passalacqua espresso": {
+        "mahlgrad": [
+          3,
+          4.5
+        ],
+        "temp": [
+          91,
+          93
+        ],
+        "output": [
+          40,
+          44
+        ],
+        "roast": "dark",
+        "blend": "75% Arabica / 25% Robusta",
+        "taste": "Schokolade, Haselnuss, dichte Crema",
+        "herkunft": "Neapel, seit 1936",
+        "inei": true,
+        "notes": "Klassisch neapolitanisch · Pre-Infusion 3-4s empfohlen"
+      },
+      "mehari espresso": {
+        "mahlgrad": [
+          3,
+          4.5
+        ],
+        "temp": [
+          90,
+          92
+        ],
+        "output": [
+          38,
+          42
+        ],
+        "roast": "dark",
+        "blend": "60% Arabica / 40% Robusta",
+        "taste": "Schokolade, Tabak, Walnuss, kräftig",
+        "notes": "Sehr kräftig · niedrige Temp 90-91°C · kurze Zeit 25-28s"
+      },
+      "geisenhofer house blend": {
+        "mahlgrad": [
+          3.5,
+          4.5
+        ],
+        "temp": [
+          91,
+          92
+        ],
+        "output": [
+          40,
+          44
+        ],
+        "roast": "dark",
+        "blend": "60% Arabica / 40% Robusta",
+        "taste": "Nuss, Schokolade, cremig",
+        "herkunft": "München, lokale Rösterei",
+        "notes": "Sweet Spot MG 3.5-4 · ähnlich Passalacqua"
+      }
+    }
+  },
+  "kalibrierung": {
+    "punkte_ml": [
+      0,
+      200,
+      400,
+      800,
+      1200,
+      1600,
+      2200
+    ],
+    "warnung_ml": 250,
+    "voll_ml": 2200,
+    "bezug_standard_ml": 45,
+    "bezug_min_ml": 20,
+    "bezug_max_ml": 120,
+    "rueckspuelen_standard_ml": 200,
+    "rueckspuelen_min_ml": 50,
+    "rueckspuelen_max_ml": 500
+  },
+  "bewertung": {
+    "slider": [
+      {
+        "id": "saeure",
+        "label": "Säure",
+        "lo": "niedrig",
+        "hi": "hoch",
+        "scale": 7
+      },
+      {
+        "id": "bitter",
+        "label": "Bitterkeit",
+        "lo": "mild",
+        "hi": "stark",
+        "scale": 7
+      },
+      {
+        "id": "suesse",
+        "label": "Süße",
+        "lo": "kaum",
+        "hi": "ausgeprägt",
+        "scale": 7
+      },
+      {
+        "id": "koerper",
+        "label": "Körper",
+        "lo": "dünn",
+        "hi": "vollmundig",
+        "scale": 7
+      },
+      {
+        "id": "nachklang",
+        "label": "Nachklang",
+        "lo": "kurz",
+        "hi": "lang",
+        "scale": 7
+      }
+    ],
+    "gesamteindruck": [
+      {
+        "value": 1,
+        "emoji": "😖",
+        "label": "Nicht gut",
+        "score_max": 45
+      },
+      {
+        "value": 2,
+        "emoji": "😐",
+        "label": "Geht so",
+        "score_range": [
+          40,
+          65
+        ]
+      },
+      {
+        "value": 3,
+        "emoji": "😊",
+        "label": "Gut",
+        "score_min": 60
+      },
+      {
+        "value": 4,
+        "emoji": "😋",
+        "label": "Ausgezeichnet",
+        "score_min": 80
+      }
+    ],
+    "aromen": [
+      "Schokolade",
+      "Nuss",
+      "Karamell",
+      "Vanille",
+      "Beeren",
+      "Zitrus",
+      "Blumen",
+      "Tabak",
+      "Holz",
+      "Asche",
+      "Rauch",
+      "Gewürz",
+      "Honig",
+      "Trockenfrüchte",
+      "Kräuter"
+    ]
+  },
+  "algorithmen": {
+    "adaptiver_trainer": {
+      "beschreibung": "Lernt aus guten Bezügen (Score >= 70) der aktuellen Bohne",
+      "min_bezuege": 5,
+      "gewichtung_score": true,
+      "felder": [
+        "mahlgrad",
+        "temp",
+        "ratio",
+        "pi",
+        "zeit"
+      ]
+    },
+    "selbstlernend_global": {
+      "beschreibung": "Lernt über alle Bohnen hinweg Geschmackspräferenzen",
+      "min_bezuege_global": 5,
+      "glaettung": "80/20 gleitender Durchschnitt",
+      "felder": [
+        "saeure",
+        "bitter",
+        "suesse",
+        "koerper",
+        "nachklang"
+      ]
+    },
+    "plausibilitaet_bezug": {
+      "min_ml": 20,
+      "max_ml": 120,
+      "standard_ml": 45,
+      "fehler_text": "Kalibrierungsfehler - Standardwerte hinterlegt"
+    },
+    "plausibilitaet_rueckspuelen": {
+      "min_ml": 50,
+      "max_ml": 500,
+      "standard_ml": 200
+    }
+  },
+  "features": {
+    "tabs": [
+      "Dashboard",
+      "Bezug",
+      "Rangliste",
+      "Einstellungen"
+    ],
+    "themes": [
+      "dunkel",
+      "hell",
+      "kontrast"
+    ],
+    "schriftgroesse": {
+      "min": 0.7,
+      "max": 1.5,
+      "default": 1.0,
+      "schritt": 0.1
+    },
+    "gefuehrte_verkostung": {
+      "schritte": 4,
+      "felder": [
+        "crema",
+        "saeure",
+        "suesse_koerper",
+        "nachklang"
+      ]
+    },
+    "ki_hilfe": "JSON-Prompt Export für Claude/ChatGPT",
+    "backup": "JSON Export/Import",
+    "offline": false,
+    "pwa": true
+  },
+  "offene_todos": [
+    "Sweet Spot Anzeige (bester Bezug als Referenz)",
+    "Bohnen-Vergleich Dashboard (Ø Score je Bohne)",
+    "Zeitmessung-Flag (ab Knopfdruck vs ab erstem Tropfen)",
+    "Aroma-Trend Anzeige",
+    "Follow-up Erinnerung bei offenen Tips",
+    "Mahlgrad-Drift Erkennung",
+    "Kimbo Espresso Napoli Profil einbauen",
+    "Dinzler Bohnen-Profile erweitern mit Herkunft/Blend"
+  ],
+  "bekannte_probleme": [
+    "Service Worker entfernt (v14) - war Ursache für Cache-Probleme",
+    "Zeitmessung Gorilla Bezüge: -6s Korrektur nötig (ab Knopfdruck gemessen)",
+    "GitHub Actions Deploy ~1-2min nach Push"
+  ],
+  "technisch": {
+    "framework": "Vanilla JS, kein Framework",
+    "speicher": "localStorage",
+    "pwa": true,
+    "service_worker": false,
+    "deployment": "GitHub Pages via GitHub Actions",
+    "branch": "main",
+    "datei": "index.html"
+  }
+}

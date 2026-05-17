@@ -24,6 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Write version.json
+        run: echo "{\"v\":\"${GITHUB_SHA::8}\",\"t\":$(date +%s)}" > version.json
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
