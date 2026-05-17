@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v15.5</title>
+<title>Espresso Trainer v15.7</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -433,7 +433,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='15.6';
+const APP_VERSION='15.7';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -1268,12 +1268,22 @@ function switchTab(t){
 // ============================================================
 // SERVICE WORKER
 // ============================================================
-// Service Worker deregistrieren (kein Caching mehr)
+// SERVICE WORKER – Network-First für automatisches Update
+// ============================================================
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.getRegistrations().then(regs=>{
-    regs.forEach(reg=>reg.unregister());
-  });
-  caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
+  navigator.serviceWorker.register('./sw.js')
+    .then(reg=>{
+      // Wenn ein neuer SW gefunden wird: sofort aktivieren
+      reg.addEventListener('updatefound',()=>{
+        const sw=reg.installing;
+        sw.addEventListener('statechange',()=>{
+          if(sw.state==='installed') sw.postMessage({type:'SKIP_WAITING'});
+        });
+      });
+    })
+    .catch(()=>{});
+  // Wenn neuer SW übernimmt → Seite neu laden (holt frisches index.html)
+  navigator.serviceWorker.addEventListener('controllerchange',()=>location.reload());
 }
 
 // ============================================================
