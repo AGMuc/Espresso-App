@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v15</title>
+<title>Espresso Trainer v15.1</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -405,7 +405,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.0 · Mai 2026 · Erweiterte Bohnen-Profile · Kimbo Napoli</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.1 · Mai 2026 · Bugfixes: Score-Berechnung, Kimbo, Verkostung</div></div></div>
       </div>
     </div>
 
@@ -427,8 +427,8 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='15';
-const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Espresso","Mehari Espresso"];
+const APP_VERSION='15.1';
+const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Espresso","Mehari Espresso","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
 const KEY="espresso_pwa_v2",CUSTOM_KEY="espresso_custom_v1",SETTINGS_KEY="espresso_settings_v1";
@@ -446,6 +446,9 @@ const SLIDERS=[
   {id:"nachklang",label:"Nachklang",lo:"kurz",hi:"lang",
    info:{title:"Nachklang",text:`<strong style="color:var(--crema)">Was ist Nachklang?</strong><br>Wie lange und wie angenehm der Geschmack nach dem Schlucken anhält.<br><br><strong style="color:var(--crema)">Guter Nachklang:</strong><br>30-60 Sekunden Schokolade/Nuss/Karamell<br>→ Zeichen guter Extraktion und guter Bohne<br><br><strong style="color:var(--crema)">Probleme:</strong><br>• Kurzer Nachklang (&lt;15s) → Unterextraktion oder alte Bohne<br>• Bitterer langer Nachklang → Überextraktion<br>• Metallischer Nachklang → Gerät reinigen (Brühgruppe!)<br>• Wässriger Abgang → Ratio zu hoch oder Dose zu niedrig<br><br><strong style="color:var(--crema)">Tipp:</strong><br>Ratio auf 1:2,1-1:2,3 kürzen verbessert Nachklang meist deutlich.<br>Blindsieb-Backflush täglich hält Nachklang sauber.`}}
 ];
+
+// Konvertiert Dot-Skala (1-7) auf Score-Skala (1-10) für Berechnungen
+function dotToScore(v){ return Math.round(v * 10 / 7); }
 
 let data={},customKaffees=[],settings={skin:'dark',fontScale:1};
 let curKaffee=null,curSterne=0,curEmpf=null,curAromen=[],curCrema=null;
@@ -555,6 +558,7 @@ function renderVerkStep() {
     box.innerHTML = `<div style="background:rgba(90,184,58,0.1);border:1px solid rgba(90,184,58,0.3);border-radius:9px;padding:12px;font-family:'Courier New',monospace;font-size:calc(.65rem*var(--font-scale))">
       <strong style="color:var(--green)">✓ Verkostung abgeschlossen!</strong><br>
       <span style="color:var(--mid)">Slider wurden angepasst. Bitte prüfe und korrigiere falls nötig.</span><br>
+      <span style="color:var(--crema);font-size:.9em">↓ Jetzt noch Gesamteindruck wählen um zu speichern</span><br>
       <button onclick="toggleVerkostung()" style="margin-top:8px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);padding:4px 12px;border-radius:6px;font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer">Schließen</button>
     </div>`;
     updateDotDisplayAll();
@@ -1337,6 +1341,7 @@ function learnFromAllShots() {
     if (vals.length < 3) continue;
     // Gewichteter Durchschnitt der Idealwerte
     const totalW = vals.reduce((a,v) => a + v.score, 0);
+    if(!totalW) continue;
     learnedPrefs[sid] = Math.round(vals.reduce((a,v) => a + v.val * v.score, 0) / totalW * 10) / 10;
   }
 
