@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v15.1</title>
+<title>Espresso Trainer v15.5</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -130,6 +130,12 @@ textarea:focus{border-color:var(--crema);}
 .yn-row{display:flex;gap:5px;margin-top:4px;}
 .yn-row button{flex:1;padding:5px;background:none;border:1px solid var(--mid);color:var(--light);border-radius:4px;font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));cursor:pointer;}
 .shot-tip-resolved{color:var(--green);font-style:italic;}
+.note-edit-btn{background:none;border:none;color:var(--mid);cursor:pointer;font-size:calc(.52rem*var(--font-scale));padding:2px 5px;opacity:.6;}
+.note-edit-btn:hover{opacity:1;color:var(--crema);}
+.note-edit-ta{width:100%;box-sizing:border-box;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px;font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));margin-top:4px;resize:vertical;min-height:52px;}
+.followup-top-card{background:rgba(200,151,74,.1);border:1.5px solid var(--crema);border-radius:9px;padding:10px 12px;margin-bottom:10px;}
+.followup-top-title{font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));color:var(--crema);font-weight:bold;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;}
+.followup-top-q{font-size:calc(.63rem*var(--font-scale));color:var(--light);margin-bottom:5px;line-height:1.5;}
 .shots-footer{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--mid);text-align:right;margin-top:4px;}
 
 /* PROGRESS BARS */
@@ -314,16 +320,16 @@ textarea:focus{border-color:var(--crema);}
           <div class="sl" style="margin-top:14px">Gesamteindruck</div>
           <!-- 4 Optionen statt Sterne -->
           <div id="gesamt-row" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-            <button class="gesamt-btn" data-v="1" onclick="setGesamt(1)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+            <button class="gesamt-btn" data-v="1" onclick="setGesamt(1)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
               😖<br><strong>Nicht gut</strong><br><span style="font-size:.8em;color:var(--mid)">Würde ich nochmal anders machen</span>
             </button>
-            <button class="gesamt-btn" data-v="2" onclick="setGesamt(2)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+            <button class="gesamt-btn" data-v="2" onclick="setGesamt(2)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
               😐<br><strong>Geht so</strong><br><span style="font-size:.8em;color:var(--mid)">Trinkbar, aber ausbaufähig</span>
             </button>
-            <button class="gesamt-btn" data-v="3" onclick="setGesamt(3)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+            <button class="gesamt-btn" data-v="3" onclick="setGesamt(3)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
               😊<br><strong>Gut</strong><br><span style="font-size:.8em;color:var(--mid)">Sauber, würde ich wiederholen</span>
             </button>
-            <button class="gesamt-btn" data-v="4" onclick="setGesamt(4)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+            <button class="gesamt-btn" data-v="4" onclick="setGesamt(4)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
               😋<br><strong>Ausgezeichnet</strong><br><span style="font-size:.8em;color:var(--mid)">Referenz-Bezug!</span>
             </button>
           </div>
@@ -369,8 +375,8 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row">
           <div><div class="setting-label">Farbschema</div><div class="setting-sub">Dunkel · Hell · Kontrast</div></div>
           <div class="setting-control">
-            <button class="skin-btn active" id="skin-dark" onclick="setSkin('dark')">🌙</button>
-            <button class="skin-btn" id="skin-light" onclick="setSkin('light')">☀️</button>
+            <button class="skin-btn" id="skin-dark" onclick="setSkin('dark')">🌙</button>
+            <button class="skin-btn active" id="skin-light" onclick="setSkin('light')">☀️</button>
             <button class="skin-btn" id="skin-contrast" onclick="setSkin('contrast')">◐</button>
           </div>
         </div>
@@ -405,7 +411,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.1 · Mai 2026 · Bugfixes: Score-Berechnung, Kimbo, Verkostung</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.5 · Mai 2026 · Bugfixes: Textfarbe, Profil-Startwerte</div></div></div>
       </div>
     </div>
 
@@ -427,8 +433,8 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='15.1';
-const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Espresso","Mehari Espresso","Kimbo Espresso Napoli"];
+const APP_VERSION='15.6';
+const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
 const KEY="espresso_pwa_v2",CUSTOM_KEY="espresso_custom_v1",SETTINGS_KEY="espresso_settings_v1";
@@ -450,8 +456,9 @@ const SLIDERS=[
 // Konvertiert Dot-Skala (1-7) auf Score-Skala (1-10) für Berechnungen
 function dotToScore(v){ return Math.round(v * 10 / 7); }
 
-let data={},customKaffees=[],settings={skin:'dark',fontScale:1};
+let data={},customKaffees=[],settings={skin:'light',fontScale:1};
 let curKaffee=null,curSterne=0,curEmpf=null,curAromen=[],curCrema=null;
+let editingNoteIdx=-1;
 const dotValues={saeure:4,bitter:4,suesse:4,koerper:4,nachklang:4};
 
 try{const s=localStorage.getItem(KEY);if(s)data=JSON.parse(s);}catch(e){}
@@ -572,7 +579,7 @@ function renderVerkStep() {
     <div style="font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--mid);margin-bottom:10px">${step.question}</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
       ${step.options.map((o, i) => `
-        <button onclick="selectVerkOption(${i})" style="padding:8px 6px;border-radius:7px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;text-align:left;line-height:1.4">
+        <button onclick="selectVerkOption(${i})" style="padding:8px 6px;border-radius:7px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;text-align:left;line-height:1.4">
           ${o.label}<br><span style="color:var(--mid);font-size:.85em">${o.hint}</span>
         </button>`).join('')}
     </div>
@@ -610,7 +617,7 @@ function setGesamt(v) {
   document.getElementById('btn-save').disabled = false;
 }
 function calcScore(){
-  if(!curSterne)return 0;
+  if(!curSterne&&!curGesamt)return 0;
   const g=id=>dotToScore(dotValues[id]);
   const ges=(10-g('saeure'))*1.5+(10-g('bitter'))*1.0+g('suesse')*1.5+g('koerper')*1.5+g('nachklang')*1.0;
   const sliderPart=Math.round((ges/65)*70+(curSterne/5)*30);
@@ -623,7 +630,7 @@ function calcScore(){
 }
 function top3Avg(shots){
   const top=[...shots].sort((a,b)=>b.score-a.score).slice(0,3);
-  return Math.round(top.reduce((a,s)=>a+s.score,0)/top.length);
+  return top.length?Math.round(top.reduce((a,s)=>a+s.score,0)/top.length):0;
 }
 
 // ============================================================
@@ -639,6 +646,11 @@ function generateTips(shot){
   const pi=parseFloat(shot.pi)||0;
   const sa=shot.saeure,bi=shot.bitter,su=shot.suesse,ko=shot.koerper,na=shot.nachklang;
   const hasAsche=shot.aromen&&shot.aromen.includes('Asche');
+  const hasTabak=shot.aromen&&shot.aromen.includes('Tabak');
+  const hasHolz=shot.aromen&&shot.aromen.includes('Holz');
+  const beanProfile=curKaffee?getBeanProfile(curKaffee):null;
+  const robustaShare=beanProfile&&beanProfile.blend?parseFloat((beanProfile.blend.match(/(\d+)%\s*Robusta/)||[])[1]||0):0;
+  const isHighRobusta=robustaShare>=40;
 
   // PRE-INFUSION LOGIC (Victoria-specific)
   // Victoria 3-Wege-Ventil ermöglicht 0-8s Pre-Infusion durch Tastenbedienung
@@ -664,6 +676,8 @@ function generateTips(shot){
   if(sa>=6&&bi<=3&&tips.length<2){tips.push({tip:"Sauer ohne Bitterkeit = Unterextraktion. Zuerst: Mahlgrad feiner. Dann: Temperatur +1°C (Victoria TR-Modus). Dann: Pre-Infusion 3s testen. Säure verschwindet oft schon durch 0.5 Mahlgrad-Klick.",followup:"Weniger sauer beim nächsten Bezug?"});}
   if(bi>=7&&su<=3&&tips.length<2){tips.push({tip:"Stark bitter ohne Süße = Überextraktion. Victoria: Temperatur auf 91-92°C senken. Bezugszeit verkürzen auf max. 28s. Dunkle Röstungen (Dinzler, Gorilla) brauchen weniger Hitze als helle.",followup:"Weniger bitter?"});}
   if(hasAsche&&bi>=5&&tips.length<2){tips.push({tip:"Aschig-bitter: Überextraktion bei dunkler Röstung. Victoria auf 91°C. Bezug bei 40g stoppen statt 44g. Pre-Infusion auf max. 3s begrenzen – längere PI überextrahiert dunkle Röstungen.",followup:"Weniger Asche bei niedrigerer Temp?"});}
+  if((hasTabak||hasHolz)&&tips.length<2){tips.push({tip:"Tabak/Holz-Aromen: oft Zeichen einer älteren Bohne (>8 Wochen nach Röstung) oder zu niedriger Extraktion. Prüfe Röstzeitpunkt – Espresso-Optimum 2–6 Wochen. Bei Passalacqua Mehari: etwas feiner mahlen.",followup:"Frischer oder feiner gemahlen probiert?"});}
+  if(isHighRobusta&&bi>=6&&tips.length<2){tips.push({tip:`Hoher Robusta-Anteil (${Math.round(robustaShare)}%): Robusta überextrahiert schneller als Arabica und wird dann stark bitter. Temp auf max. 91°C begrenzen, Mahlgrad 0.5 gröber, Bezug bei 40g stoppen.`,followup:"Weniger bitter mit niedrigerer Temp?"});}
   if(sa>=5&&bi>=5&&tips.length<2){tips.push({tip:"Gleichzeitig sauer UND bitter = Channeling. WDT verbessern: Nadeln wirklich durch alle Schichten. Münztest wiederholen (Headspace). Mahlgrad 0.5 feiner.",followup:"Gleichmäßigerer Geschmack?"});}
   if(ko<=3&&tips.length<2){tips.push({tip:"Dünner Körper: Dose auf 18.5-19g erhöhen (IMS 26.5er verträgt bis 20g Dark). Pre-Infusion 3-4s kann Körper aufbauen. Ratio auf 1:2,1-1:2,2 kürzen.",followup:"War Körper voller?"});}
   if(na<=3&&tips.length<2){tips.push({tip:"Kurzer Nachklang: Ratio auf 1:2-1:2,2 kürzen. Output früher stoppen (~38-40g). Schokoladen-Nachklang entsteht bei knapper Extraktion.",followup:"War Nachklang länger?"});}
@@ -909,6 +923,10 @@ function resetForm(prefill){
   if(prefill&&curKaffee&&data[curKaffee]&&data[curKaffee].length>0){
     const last=data[curKaffee][data[curKaffee].length-1];
     doseIn=last.doseIn||'18';mahlgrad=last.mahlgrad||'';temp=last.temp||'';pi=last.pi||'';
+  } else if(prefill&&curKaffee){
+    const prof=getBeanProfile(curKaffee);
+    if(prof.mahlgrad) mahlgrad=((prof.mahlgrad[0]+prof.mahlgrad[1])/2).toFixed(1);
+    if(prof.temp) temp=Math.round((prof.temp[0]+prof.temp[1])/2).toString();
   }
   ['f-doseIn','f-doseOut','f-zeit','f-mahlgrad','f-temp','f-pi','f-notizen'].forEach(id=>{
     const el=document.getElementById(id);
@@ -970,7 +988,19 @@ function saveShot(){
 }
 
 function deleteShot(k,idx){if(!confirm('Bezug löschen?'))return;data[k].splice(idx,1);if(!data[k].length)delete data[k];saveData();selectKaffee(k);renderRangliste();}
-function answerFollowup(k,idx,tIdx,ans){if(!data[k][idx].tips)return;data[k][idx].tips[tIdx].resolved=ans;saveData();renderHistory();}
+function answerFollowup(k,idx,tIdx,ans){if(!data[k][idx].tips)return;data[k][idx].tips[tIdx].resolved=ans;saveData();renderHistory();renderTrainerRec(k);}
+
+// ============================================================
+// NOTE EDITING
+// ============================================================
+function startEditNote(i){editingNoteIdx=i;renderHistory();}
+function cancelEditNote(){editingNoteIdx=-1;renderHistory();}
+function saveNote(k,i){
+  const ta=document.getElementById('note-edit-'+i);
+  if(ta){data[k][i].notizen=ta.value.trim();saveData();}
+  editingNoteIdx=-1;
+  renderHistory();
+}
 
 // ============================================================
 // RENDER HISTORY
@@ -1009,7 +1039,12 @@ function renderHistory(){
       cmpHtml=`<div class="shot-compare"><strong>vs. Bester</strong>Score ${s.score} vs. ${bestShot.score} <span style="color:var(--red)">(${diff})</span>${items.length?' · '+items.join(' · '):''}</div>`;
     }
 
-    return `<div class="shot-item"><div class="shot-row-top"><div class="shot-info"><div class="shot-main">#${i+1} · ${s.doseIn}g→<strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG${s.mahlgrad||'?'}${s.temp?' · '+s.temp+'°C':''}${s.pi?' · PI'+s.pi+'s':''} · ${'★'.repeat(s.sterne)}</div><div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}</div>${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}</div><button class="shot-del" onclick="deleteShot('${curKaffee.replace(/'/g,"\\'")}',${i})">✕</button></div>${cmpHtml}${tipHtml}</div>`;
+    const kEsc=curKaffee.replace(/'/g,"\\'");
+    const noteHtml = editingNoteIdx===i
+      ? `<div><textarea id="note-edit-${i}" class="note-edit-ta">${(s.notizen||'').replace(/</g,'&lt;')}</textarea><div class="yn-row"><button onclick="saveNote('${kEsc}',${i})" style="color:var(--green)">✓ Speichern</button><button onclick="cancelEditNote()">Abbrechen</button></div></div>`
+      : `${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}
+         <button class="note-edit-btn" onclick="startEditNote(${i})">${s.notizen?'✏':'＋ Notiz'}</button>`;
+    return `<div class="shot-item"><div class="shot-row-top"><div class="shot-info"><div class="shot-main">#${i+1} · ${s.doseIn}g→<strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG${s.mahlgrad||'?'}${s.temp?' · '+s.temp+'°C':''}${s.pi?' · PI'+s.pi+'s':''} · ${'★'.repeat(s.sterne)}</div><div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}</div>${noteHtml}</div><button class="shot-del" onclick="deleteShot('${kEsc}',${i})">✕</button></div>${cmpHtml}${tipHtml}</div>`;
   }).join('');
 
   if(shots.length>1){const avgS=Math.round(shots.reduce((a,s)=>a+s.score,0)/shots.length);list.innerHTML+=`<div class="shots-footer">Ø ${avgS} · Best ${Math.max(...shots.map(s=>s.score))} · Top-3 Ø ${top3Avg(shots)}</div>`;}
@@ -1272,16 +1307,15 @@ const BEAN_PROFILES = {
   "gorilla":           { mahlgrad:[3.5,5], temp:[90,92], output:[38,44], roast:"dark",
     blend:"85% Arabica / 15% Robusta", taste:"Schokolade, Nuss, Karamell",
     notes:"Neigt zu Bitterkeit bei Überextraktion · max 91°C · MG 4-4.5 · Zeit 24-26s · Vorsicht Asche" },
-  // Passalacqua
-  "passalacqua": { mahlgrad:[3,4.5], temp:[91,93], output:[40,44], roast:"dark",
-    blend:"75% Arabica / 25% Robusta", taste:"Schokolade, Haselnuss, dichte Crema",
-    herkunft:"Neapel, seit 1936", inei:true,
-    notes:"Klassisch neapolitanisch · hoher Robusta-Anteil für stabile Crema · säurearm · optimal mit IMS Korb · Pre-Infusion 3-4s empfohlen · Mahlgrad eher fein starten" },
-  // Mehari
-  "mehari": { mahlgrad:[3,4.5], temp:[90,92], output:[38,42], roast:"dark",
-    blend:"60% Arabica / 40% Robusta", taste:"Schokolade, Tabak, Walnuss, kräftig",
-    herkunft:"Süditalien / Neapel-Stil",
-    notes:"Sehr kräftig, hoher Robusta-Anteil · niedriger Mahlgrad nötig · Temp eher 90-91°C · kurze Bezugszeit 25-28s · wenig Pre-Infusion · ähnlich Kimbo Napoli aber würziger" },
+  // Passalacqua Mehari – Mehari ist ein Blend von Passalacqua (Neapel, seit 1948)
+  "passalacqua": { mahlgrad:[3,4.5], temp:[90,92], output:[38,43], roast:"dark",
+    blend:"50% Arabica / 50% Robusta", taste:"Dunkle Schokolade, dichte Crema, vollmundig",
+    herkunft:"Casavatore/Neapel, Passalacqua seit 1948", inei:true,
+    notes:"Mehari ist Passalacquas Klassiker · 50/50 für stabile dichte Crema · säurearm · Temp max 92°C · MG 3-3.5 fein starten · Pre-Infusion 3-4s · kurze Bezugszeit 25-28s" },
+  "mehari": { mahlgrad:[3,4.5], temp:[90,92], output:[38,43], roast:"dark",
+    blend:"50% Arabica / 50% Robusta", taste:"Dunkle Schokolade, dichte Crema, vollmundig",
+    herkunft:"Casavatore/Neapel, Passalacqua seit 1948", inei:true,
+    notes:"Mehari ist Passalacquas Klassiker · 50/50 für stabile dichte Crema · säurearm · Temp max 92°C · MG 3-3.5 fein starten · Pre-Infusion 3-4s · kurze Bezugszeit 25-28s" },
   // Kimbo
   "kimbo": { mahlgrad:[3,4.5], temp:[90,92], output:[38,42], roast:"dark",
     blend:"70% Arabica / 30% Robusta", taste:"Schokolade, Haselnuss, dichte Crema",
@@ -1421,7 +1455,7 @@ function getLernBadge() {
   if (!learned) return '';
   const total = Object.values(data).flat().length;
   const good = learned.basedOn;
-  if (good < 5) return `<span class="badge" style="background:rgba(200,151,74,0.1);border-color:var(--border);color:var(--mid)">Lernend ${good}/5</span>`;
+  if (good < 3) return `<span class="badge" style="background:rgba(200,151,74,0.1);border-color:var(--border);color:var(--mid)">Lernend ${good}/3</span>`;
   return `<span class="badge" style="background:rgba(90,184,58,0.15);border-color:rgba(90,184,58,0.4);color:var(--green)">Gelernt · ${good} Bezüge</span>`;
 }
 
@@ -1429,48 +1463,80 @@ function getLernBadge() {
 function showLearnedInfo(kaffee) {
   const learned = learnFromAllShots();
   const shots = data[kaffee] || [];
-  const goodShots = shots.filter(s => s.score >= 70);
+  const adaptive = calcAdaptiveRec(shots);
+  const goodShots = shots.filter(s => s.score >= 60);
 
-  let html = '';
-  if (!learned || learned.basedOn < 5) {
-    html = `<p style="color:var(--mid)">Noch nicht genug Daten zum Lernen.<br>Mache mindestens 5 Bezüge mit Score ≥70.</p>
-    <p>Aktuelle Bezüge mit Score ≥70: <strong style="color:var(--crema)">${learned?.basedOn||0}</strong></p>`;
+  let html = `<div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.9">`;
+
+  // Bohnen-spezifisch
+  html += `<strong style="color:var(--crema)">📊 ${kaffee}:</strong><br>`;
+  html += `${shots.length} Bezüge · ${goodShots.length} gute (Score ≥60)<br>`;
+  if(adaptive) {
+    html += `<span style="color:var(--green)">✓ Adaptiv aktiv</span> – aus ${adaptive.basedOn} guten Bezügen<br>`;
+    if(adaptive.trend !== null) {
+      const arrow = adaptive.trend > 3 ? '↑ Verbesserung' : adaptive.trend < -3 ? '↓ Rückgang' : '→ Stabil';
+      const col = adaptive.trend > 3 ? 'var(--green)' : adaptive.trend < -3 ? 'var(--red)' : 'var(--mid)';
+      html += `Trend: <span style="color:${col}">${arrow} (${adaptive.trend>0?'+':''}${adaptive.trend} Pkt.)</span><br>`;
+    }
+    if(adaptive.bestShot) {
+      const b = adaptive.bestShot;
+      html += `Bester Bezug: <strong style="color:var(--crema)">${b.score} Pkt.</strong> · MG${b.mahlgrad||'?'} · ${b.temp||'?'}°C${b.pi?' · PI'+b.pi+'s':''} · ${b.doseOut||'?'}g<br>`;
+    }
   } else {
-    html = `<div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.9">
-    <strong style="color:var(--crema);display:block;margin-bottom:8px">Aus ${learned.basedOn} guten Bezügen gelernt:</strong>
-    ${learned.avgMG ? `Dein Ø Mahlgrad: <strong style="color:var(--crema)">${learned.avgMG}</strong><br>` : ''}
-    ${learned.avgTemp ? `Deine Ø Temperatur: <strong style="color:var(--crema)">${learned.avgTemp}°C</strong><br>` : ''}
-    ${learned.avgRatio ? `Deine Ø Ratio: <strong style="color:var(--crema)">1:${learned.avgRatio}</strong><br>` : ''}
-    ${learned.avgPI ? `Deine Ø Pre-Infusion: <strong style="color:var(--crema)">${learned.avgPI}s</strong><br>` : ''}
-    ${learned.topAromen.length ? `<br>Deine Top-Aromen:<br><strong style="color:var(--crema)">${learned.topAromen.join(' · ')}</strong><br>` : ''}
-    ${goodShots.length >= 3 ? `<br>Diese Bohne: <strong style="color:var(--green)">${goodShots.length} gute Bezüge</strong> → Empfehlung ist bohnenspezifisch` : `<br>Diese Bohne: <strong style="color:var(--mid)">${goodShots.length} gute Bezüge</strong> → Empfehlung basiert auf globalen Daten`}
-    </div>`;
+    const missing = Math.max(0, 2 - goodShots.length);
+    html += `<span style="color:var(--mid)">Noch ${missing} gut${missing===1?'en':'e'} Bezug${missing===1?'':'e'} bis adaptive Empfehlung</span><br>`;
   }
-  document.getElementById('modal-title').textContent = '🧠 Selbstlernende Empfehlung';
+
+  // Global
+  html += `<br><strong style="color:var(--crema)">🌍 Über alle Bohnen:</strong><br>`;
+  if(learned && learned.basedOn >= 3) {
+    html += `Aus ${learned.basedOn} guten Bezügen gelernt:<br>`;
+    if(learned.avgMG)    html += `Ø Mahlgrad: <strong style="color:var(--crema)">${learned.avgMG}</strong><br>`;
+    if(learned.avgTemp)  html += `Ø Temp: <strong style="color:var(--crema)">${learned.avgTemp}°C</strong><br>`;
+    if(learned.avgRatio) html += `Ø Ratio: <strong style="color:var(--crema)">1:${learned.avgRatio}</strong><br>`;
+    if(learned.avgPI)    html += `Ø PI: <strong style="color:var(--crema)">${learned.avgPI}s</strong><br>`;
+    if(learned.topAromen.length) html += `Top-Aromen: <strong style="color:var(--crema)">${learned.topAromen.join(' · ')}</strong><br>`;
+  } else {
+    const need = Math.max(0, 3-(learned?.basedOn||0));
+    html += `<span style="color:var(--mid)">Noch ${need} gute Bezüge (über alle Bohnen) nötig</span><br>`;
+  }
+
+  html += `</div>`;
+  document.getElementById('modal-title').textContent = '🧠 Was ich gelernt habe';
   document.getElementById('modal-body').innerHTML = html;
   document.getElementById('modal-bg').classList.add('show');
 }
 
 // Adaptive learning: calculate recommendation from good shots
 function calcAdaptiveRec(shots) {
-  if (!shots || shots.length < 5) return null;
+  if (!shots || shots.length < 3) return null;
 
-  // Take shots with score >= 65, sorted by score desc, up to last 5
+  // Take shots with score >= 60, sorted by score desc, up to 5
   const goodShots = [...shots]
-    .filter(s => s.score >= 65 && s.mahlgrad && s.temp && s.doseOut)
+    .filter(s => s.score >= 60 && s.mahlgrad && s.temp && s.doseOut)
     .sort((a,b) => b.score - a.score)
     .slice(0, 5);
 
-  if (goodShots.length < 3) return null; // need at least 3 good shots
+  if (goodShots.length < 2) return null;
 
-  // Weighted average (higher score = more weight)
-  const totalWeight = goodShots.reduce((a,s) => a + s.score, 0);
+  // Tip-followup weight multiplier: 'ja' → +30%, 'nein' → -30%
+  const tipWeight = (shot) => {
+    if (!shot.tips || !shot.tips.length) return 1.0;
+    const resolved = shot.tips.filter(t => t.followup && t.resolved != null && t.resolved !== undefined);
+    if (!resolved.length) return 1.0;
+    const ja = resolved.filter(t => t.resolved === 'ja').length;
+    const nein = resolved.filter(t => t.resolved === 'nein').length;
+    if (ja > nein) return 1.3;
+    if (nein > ja) return 0.7;
+    return 1.0;
+  };
+
+  // Weighted average (higher score + tip feedback = more weight)
+  const totalWeight = goodShots.reduce((a,s) => a + s.score * tipWeight(s), 0);
   const wAvg = (field) => {
-    const val = goodShots.reduce((a,s) => {
-      const v = parseFloat(s[field]);
-      return isNaN(v) ? a : a + v * s.score;
-    }, 0);
-    const validWeight = goodShots.filter(s => !isNaN(parseFloat(s[field]))).reduce((a,s) => a + s.score, 0);
+    const vals = goodShots.filter(s => !isNaN(parseFloat(s[field])));
+    const val = vals.reduce((a,s) => a + parseFloat(s[field]) * s.score * tipWeight(s), 0);
+    const validWeight = vals.reduce((a,s) => a + s.score * tipWeight(s), 0);
     return validWeight > 0 ? val / validWeight : null;
   };
 
@@ -1478,9 +1544,21 @@ function calcAdaptiveRec(shots) {
   const avgTemp = wAvg('temp');
   const avgOutput = wAvg('doseOut');
   const avgPI = wAvg('pi');
-  const avgScore = Math.round(totalWeight / goodShots.length);
+  const avgScore = Math.round(goodShots.reduce((a,s)=>a+s.score,0) / goodShots.length);
 
-  // Range: ±0.5 for mahlgrad, ±1 for temp, ±2 for output
+  // Trend: Ø Score letzte 3 Bezüge vs. die 3 davor
+  const byTime = [...shots].sort((a,b)=>(a.timestamp||0)-(b.timestamp||0));
+  const recent3 = byTime.slice(-3);
+  const older3 = byTime.slice(-6,-3);
+  let trend = null;
+  if(recent3.length >= 2 && older3.length >= 2) {
+    const rAvg = recent3.reduce((a,s)=>a+s.score,0)/recent3.length;
+    const oAvg = older3.reduce((a,s)=>a+s.score,0)/older3.length;
+    trend = Math.round(rAvg - oAvg);
+  }
+
+  const bestShot = [...shots].sort((a,b)=>b.score-a.score)[0];
+
   return {
     mahlgrad: avgMahlgrad ? [
       Math.round((avgMahlgrad - 0.5) * 2) / 2,
@@ -1497,6 +1575,8 @@ function calcAdaptiveRec(shots) {
     pi: avgPI > 0 ? Math.round(avgPI * 2) / 2 : null,
     basedOn: goodShots.length,
     avgScore,
+    trend,
+    bestShot,
     shots: goodShots
   };
 }
@@ -1550,13 +1630,37 @@ function renderTrainerRec(kaffee) {
     pi: rec.pi || ''
   };
 
+  // Unresolved followups from the last shot → show prominently at top
+  const lastShot = shots.length ? shots[shots.length-1] : null;
+  let followupTopHtml = '';
+  if (lastShot && lastShot.tips) {
+    const kEsc = kaffee.replace(/'/g,"\\'");
+    const lastIdx = shots.length - 1;
+    const pending = lastShot.tips
+      .map((t,tIdx) => ({t,tIdx}))
+      .filter(({t}) => t.followup && (t.resolved===null||t.resolved===undefined));
+    if (pending.length) {
+      followupTopHtml = `<div class="followup-top-card">
+        <div class="followup-top-title">💬 Feedback zum letzten Bezug</div>
+        ${pending.map(({t,tIdx}) => `
+          <div class="followup-top-q">${t.followup}</div>
+          <div class="yn-row">
+            <button onclick="answerFollowup('${kEsc}',${lastIdx},${tIdx},'ja')" style="color:var(--green);border-color:var(--green)">✓ Ja, besser</button>
+            <button onclick="answerFollowup('${kEsc}',${lastIdx},${tIdx},'nein')" style="color:var(--red);border-color:var(--red)">✗ Nein</button>
+            <button onclick="answerFollowup('${kEsc}',${lastIdx},${tIdx},'skip')">— Skip</button>
+          </div>`).join('')}
+      </div>`;
+    }
+  }
+
   el.innerHTML = `
     <div class="trainer-card">
+      ${followupTopHtml}
       <div class="trainer-header">
         <span class="trainer-icon">🎯</span>
         <div>
           <div class="trainer-title">Trainer-Empfehlung</div>
-          <div class="trainer-subtitle">${useAdaptive ? `Adaptiv – aus ${adaptive.basedOn} guten Bezügen (Ø Score ${adaptive.avgScore})` : `Standard-Profil · ${profile.roast === 'dark' ? 'Dark Roast' : 'Medium Roast'}`}</div>
+          <div class="trainer-subtitle">${useAdaptive ? `Adaptiv – aus ${adaptive.basedOn} guten Bezügen (Ø ${adaptive.avgScore})${adaptive.trend !== null ? (adaptive.trend > 3 ? ' <span style="color:var(--green)">↑ +'+adaptive.trend+'Pkt</span>' : adaptive.trend < -3 ? ' <span style="color:var(--red)">↓ '+adaptive.trend+'Pkt</span>' : '') : ''}` : `Standard-Profil · ${profile.roast === 'dark' ? 'Dark Roast' : 'Medium Roast'}`}</div>
         </div>
         <button class="info-btn" style="margin-left:auto;width:22px;height:22px;font-size:.7rem" onclick="showLearnedInfo('${kaffee.replace(/'/g,"\\'")}')">🧠</button>
       </div>

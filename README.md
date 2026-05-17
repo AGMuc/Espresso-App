@@ -1,6 +1,6 @@
 # Espresso Trainer
 
-**v15** · Progressive Web App für die Lelit Victoria PL91T
+**v15.6** · Progressive Web App für die Lelit Victoria PL91T
 
 Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezügen. Läuft vollständig im Browser, ohne Server oder Framework – alle Daten bleiben lokal im `localStorage`.
 
@@ -12,12 +12,15 @@ Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezüge
 
 - **Bezug erfassen** – Dose, Yield, Mahlgrad, Temperatur, Pre-Infusion, Bezugszeit
 - **Geführte Verkostung** – Säure, Bitterkeit, Süße, Körper, Nachklang (7-Punkt-Skala)
-- **Automatische Tipps** – regelbasierte Empfehlungen aus deinem konkreten Bezug
-- **Adaptiver Trainer** – lernt aus deinen guten Bezügen (Score ≥ 70) und gibt personalisierte Startpunkte
+- **Automatische Tipps** – regelbasiert, bohnenspezifisch (inkl. Robusta-Anteil, Tabak/Holz-Aromen)
+- **Adaptiver Trainer** – lernt ab 3 guten Bezügen (Score ≥ 60), zeigt Trend ↑/→/↓
+- **Profil-Startwerte** – bei neuer Bohne werden Mahlgrad & Temp aus dem Bohnen-Profil vorgeschlagen
+- **Selbstlern-Übersicht** – 🧠-Button zeigt besten Bezug, Trend, globale Präferenzen
 - **Rangliste** – Top-3 Score pro Kaffeesorte mit CSV/Text-Export
 - **KI-Hilfe** – JSON-Prompt Export für Claude/ChatGPT-Analyse
 - **Backup/Restore** – JSON Export & Import aller Daten
-- **Themes** – Dunkel, Hell, Hochkontrast
+- **Themes** – Hell (Standard), Dunkel, Hochkontrast
+- **Auto-Update** – neue Version wird automatisch geladen, kein Cache-Clear nötig
 - **PWA** – als App auf Homescreen speicherbar
 
 ---
@@ -36,7 +39,7 @@ Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezüge
 
 ---
 
-## Unterstützte Kaffeesorten
+## Kaffeesorten
 
 | Kaffee | Röstung | Blend | Mahlgrad | Temp |
 |---|---|---|---|---|
@@ -47,8 +50,7 @@ Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezüge
 | Dinzler Lazise | Medium | 100% Arabica | 4–5 | 92–93°C |
 | Dinzler Venezia | Medium | 100% Arabica | 4–5 | 92–93°C |
 | Geisenhofer House Blend | Dark | 60% A / 40% R | 3,5–4,5 | 91–92°C |
-| Passalacqua Espresso | Dark | 75% A / 25% R | 3–4,5 | 91–93°C |
-| Mehari Espresso | Dark | 60% A / 40% R | 3–4,5 | 90–92°C |
+| **Passalacqua Mehari** | Dark | 50% A / 50% R | 3–4,5 | 90–92°C |
 | Kimbo Espresso Napoli | Dark | 70% A / 30% R | 3–4,5 | 90–92°C |
 | Oh Harvey (Quijote) | Medium | 80% A / 20% R | 4–5,5 | 92–94°C |
 | Geisenhofer First Roast | Medium | 100% Arabica | 4–5,5 | 92–94°C |
@@ -63,6 +65,7 @@ Eigene Kaffeesorten können in der App hinzugefügt werden (langer Druck zum Lö
 - `localStorage` für alle Daten (kein Server, kein Account)
 - GitHub Pages Deployment via GitHub Actions (Branch: `main`)
 - Service Worker deaktiviert (kein Cache-Problem)
+- Auto-Update via `version.json` – wird bei jedem Deploy mit Git-SHA überschrieben
 - Konfigurationsdokumentation: [`espresso-app-config.json`](espresso-app-config.json)
 
 ---
@@ -71,5 +74,11 @@ Eigene Kaffeesorten können in der App hinzugefügt werden (langer Druck zum Lö
 
 | Version | Datum | Änderungen |
 |---|---|---|
-| v15 | Mai 2026 | Erweiterte Bohnen-Profile (blend/taste/herkunft), Kimbo Espresso Napoli, Cache-Busting-Toast |
+| **v15.6** | Mai 2026 | Nachträgliche Notizen zu Bezügen editierbar (✏-Button); Tipp-Followup (Ja/Nein) jetzt am Kopf des Formulars statt in der Historie; Followup-Antworten beeinflussen den Lernalgorithmus direkt (×1.3/×0.7 Gewichtung) |
+| v15.5 | Mai 2026 | Bugfix: `var(--fg)` → Gesamteindruck- & Verkostungs-Buttons zeigten keinen Text; Bohnen-Profil als Startwert bei neuem Eintrag; `top3Avg` NaN-Fix; `calcScore` robuster |
+| v15.4 | Mai 2026 | Verbessertes Selbstlern-System: Trend ↑/→/↓, adaptiv ab 3 Bezügen, Tabak/Holz- & Robusta-Tipps, 🧠-Button mit Fortschritt & bestem Bezug |
+| v15.3 | Mai 2026 | Passalacqua Mehari korrigiert: Mehari ist ein Blend von Passalacqua (50/50 A/R, Neapel seit 1948) |
+| v15.2 | Mai 2026 | Passalacqua/Mehari zu einem Eintrag zusammengeführt, Hell als Standard-Theme, README aktualisiert |
+| v15.1 | Mai 2026 | Kritische Bugfixes: `dotToScore()` definiert, Division-by-Zero, Kimbo in Standard-Liste |
+| v15.0 | Mai 2026 | Erweiterte Bohnen-Profile (blend/taste/herkunft), Kimbo Espresso Napoli, Auto-Update ohne Cache-Clear, README |
 | v14 | Mai 2026 | Service Worker entfernt, Geführte Verkostung, Selbstlernend |
