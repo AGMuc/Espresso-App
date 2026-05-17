@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v15.4</title>
+<title>Espresso Trainer v15.5</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -314,16 +314,16 @@ textarea:focus{border-color:var(--crema);}
           <div class="sl" style="margin-top:14px">Gesamteindruck</div>
           <!-- 4 Optionen statt Sterne -->
           <div id="gesamt-row" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-            <button class="gesamt-btn" data-v="1" onclick="setGesamt(1)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+            <button class="gesamt-btn" data-v="1" onclick="setGesamt(1)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
               😖<br><strong>Nicht gut</strong><br><span style="font-size:.8em;color:var(--mid)">Würde ich nochmal anders machen</span>
             </button>
-            <button class="gesamt-btn" data-v="2" onclick="setGesamt(2)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+            <button class="gesamt-btn" data-v="2" onclick="setGesamt(2)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
               😐<br><strong>Geht so</strong><br><span style="font-size:.8em;color:var(--mid)">Trinkbar, aber ausbaufähig</span>
             </button>
-            <button class="gesamt-btn" data-v="3" onclick="setGesamt(3)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+            <button class="gesamt-btn" data-v="3" onclick="setGesamt(3)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
               😊<br><strong>Gut</strong><br><span style="font-size:.8em;color:var(--mid)">Sauber, würde ich wiederholen</span>
             </button>
-            <button class="gesamt-btn" data-v="4" onclick="setGesamt(4)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
+            <button class="gesamt-btn" data-v="4" onclick="setGesamt(4)" style="padding:10px 6px;border-radius:9px;border:1.5px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale));cursor:pointer;transition:all .2s">
               😋<br><strong>Ausgezeichnet</strong><br><span style="font-size:.8em;color:var(--mid)">Referenz-Bezug!</span>
             </button>
           </div>
@@ -405,7 +405,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.4 · Mai 2026 · Verbessertes Selbstlern-System · Trend-Anzeige</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.5 · Mai 2026 · Bugfixes: Textfarbe, Profil-Startwerte</div></div></div>
       </div>
     </div>
 
@@ -427,7 +427,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='15.4';
+const APP_VERSION='15.5';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -572,7 +572,7 @@ function renderVerkStep() {
     <div style="font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--mid);margin-bottom:10px">${step.question}</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
       ${step.options.map((o, i) => `
-        <button onclick="selectVerkOption(${i})" style="padding:8px 6px;border-radius:7px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;text-align:left;line-height:1.4">
+        <button onclick="selectVerkOption(${i})" style="padding:8px 6px;border-radius:7px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;text-align:left;line-height:1.4">
           ${o.label}<br><span style="color:var(--mid);font-size:.85em">${o.hint}</span>
         </button>`).join('')}
     </div>
@@ -610,7 +610,7 @@ function setGesamt(v) {
   document.getElementById('btn-save').disabled = false;
 }
 function calcScore(){
-  if(!curSterne)return 0;
+  if(!curSterne&&!curGesamt)return 0;
   const g=id=>dotToScore(dotValues[id]);
   const ges=(10-g('saeure'))*1.5+(10-g('bitter'))*1.0+g('suesse')*1.5+g('koerper')*1.5+g('nachklang')*1.0;
   const sliderPart=Math.round((ges/65)*70+(curSterne/5)*30);
@@ -623,7 +623,7 @@ function calcScore(){
 }
 function top3Avg(shots){
   const top=[...shots].sort((a,b)=>b.score-a.score).slice(0,3);
-  return Math.round(top.reduce((a,s)=>a+s.score,0)/top.length);
+  return top.length?Math.round(top.reduce((a,s)=>a+s.score,0)/top.length):0;
 }
 
 // ============================================================
@@ -916,6 +916,10 @@ function resetForm(prefill){
   if(prefill&&curKaffee&&data[curKaffee]&&data[curKaffee].length>0){
     const last=data[curKaffee][data[curKaffee].length-1];
     doseIn=last.doseIn||'18';mahlgrad=last.mahlgrad||'';temp=last.temp||'';pi=last.pi||'';
+  } else if(prefill&&curKaffee){
+    const prof=getBeanProfile(curKaffee);
+    if(prof.mahlgrad) mahlgrad=((prof.mahlgrad[0]+prof.mahlgrad[1])/2).toFixed(1);
+    if(prof.temp) temp=Math.round((prof.temp[0]+prof.temp[1])/2).toString();
   }
   ['f-doseIn','f-doseOut','f-zeit','f-mahlgrad','f-temp','f-pi','f-notizen'].forEach(id=>{
     const el=document.getElementById(id);
