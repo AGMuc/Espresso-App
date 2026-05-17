@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v15.3</title>
+<title>Espresso Trainer v15.4</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -405,7 +405,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.3 · Mai 2026 · Passalacqua Mehari korrigiert · 50/50 Blend</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.4 · Mai 2026 · Verbessertes Selbstlern-System · Trend-Anzeige</div></div></div>
       </div>
     </div>
 
@@ -427,7 +427,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='15.3';
+const APP_VERSION='15.4';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -639,6 +639,11 @@ function generateTips(shot){
   const pi=parseFloat(shot.pi)||0;
   const sa=shot.saeure,bi=shot.bitter,su=shot.suesse,ko=shot.koerper,na=shot.nachklang;
   const hasAsche=shot.aromen&&shot.aromen.includes('Asche');
+  const hasTabak=shot.aromen&&shot.aromen.includes('Tabak');
+  const hasHolz=shot.aromen&&shot.aromen.includes('Holz');
+  const beanProfile=curKaffee?getBeanProfile(curKaffee):null;
+  const robustaShare=beanProfile&&beanProfile.blend?parseFloat((beanProfile.blend.match(/(\d+)%\s*Robusta/)||[])[1]||0):0;
+  const isHighRobusta=robustaShare>=40;
 
   // PRE-INFUSION LOGIC (Victoria-specific)
   // Victoria 3-Wege-Ventil ermöglicht 0-8s Pre-Infusion durch Tastenbedienung
@@ -664,6 +669,8 @@ function generateTips(shot){
   if(sa>=6&&bi<=3&&tips.length<2){tips.push({tip:"Sauer ohne Bitterkeit = Unterextraktion. Zuerst: Mahlgrad feiner. Dann: Temperatur +1°C (Victoria TR-Modus). Dann: Pre-Infusion 3s testen. Säure verschwindet oft schon durch 0.5 Mahlgrad-Klick.",followup:"Weniger sauer beim nächsten Bezug?"});}
   if(bi>=7&&su<=3&&tips.length<2){tips.push({tip:"Stark bitter ohne Süße = Überextraktion. Victoria: Temperatur auf 91-92°C senken. Bezugszeit verkürzen auf max. 28s. Dunkle Röstungen (Dinzler, Gorilla) brauchen weniger Hitze als helle.",followup:"Weniger bitter?"});}
   if(hasAsche&&bi>=5&&tips.length<2){tips.push({tip:"Aschig-bitter: Überextraktion bei dunkler Röstung. Victoria auf 91°C. Bezug bei 40g stoppen statt 44g. Pre-Infusion auf max. 3s begrenzen – längere PI überextrahiert dunkle Röstungen.",followup:"Weniger Asche bei niedrigerer Temp?"});}
+  if((hasTabak||hasHolz)&&tips.length<2){tips.push({tip:"Tabak/Holz-Aromen: oft Zeichen einer älteren Bohne (>8 Wochen nach Röstung) oder zu niedriger Extraktion. Prüfe Röstzeitpunkt – Espresso-Optimum 2–6 Wochen. Bei Passalacqua Mehari: etwas feiner mahlen.",followup:"Frischer oder feiner gemahlen probiert?"});}
+  if(isHighRobusta&&bi>=6&&tips.length<2){tips.push({tip:`Hoher Robusta-Anteil (${Math.round(robustaShare)}%): Robusta überextrahiert schneller als Arabica und wird dann stark bitter. Temp auf max. 91°C begrenzen, Mahlgrad 0.5 gröber, Bezug bei 40g stoppen.`,followup:"Weniger bitter mit niedrigerer Temp?"});}
   if(sa>=5&&bi>=5&&tips.length<2){tips.push({tip:"Gleichzeitig sauer UND bitter = Channeling. WDT verbessern: Nadeln wirklich durch alle Schichten. Münztest wiederholen (Headspace). Mahlgrad 0.5 feiner.",followup:"Gleichmäßigerer Geschmack?"});}
   if(ko<=3&&tips.length<2){tips.push({tip:"Dünner Körper: Dose auf 18.5-19g erhöhen (IMS 26.5er verträgt bis 20g Dark). Pre-Infusion 3-4s kann Körper aufbauen. Ratio auf 1:2,1-1:2,2 kürzen.",followup:"War Körper voller?"});}
   if(na<=3&&tips.length<2){tips.push({tip:"Kurzer Nachklang: Ratio auf 1:2-1:2,2 kürzen. Output früher stoppen (~38-40g). Schokoladen-Nachklang entsteht bei knapper Extraktion.",followup:"War Nachklang länger?"});}
@@ -1420,7 +1427,7 @@ function getLernBadge() {
   if (!learned) return '';
   const total = Object.values(data).flat().length;
   const good = learned.basedOn;
-  if (good < 5) return `<span class="badge" style="background:rgba(200,151,74,0.1);border-color:var(--border);color:var(--mid)">Lernend ${good}/5</span>`;
+  if (good < 3) return `<span class="badge" style="background:rgba(200,151,74,0.1);border-color:var(--border);color:var(--mid)">Lernend ${good}/3</span>`;
   return `<span class="badge" style="background:rgba(90,184,58,0.15);border-color:rgba(90,184,58,0.4);color:var(--green)">Gelernt · ${good} Bezüge</span>`;
 }
 
@@ -1428,39 +1435,61 @@ function getLernBadge() {
 function showLearnedInfo(kaffee) {
   const learned = learnFromAllShots();
   const shots = data[kaffee] || [];
-  const goodShots = shots.filter(s => s.score >= 70);
+  const adaptive = calcAdaptiveRec(shots);
+  const goodShots = shots.filter(s => s.score >= 60);
 
-  let html = '';
-  if (!learned || learned.basedOn < 5) {
-    html = `<p style="color:var(--mid)">Noch nicht genug Daten zum Lernen.<br>Mache mindestens 5 Bezüge mit Score ≥70.</p>
-    <p>Aktuelle Bezüge mit Score ≥70: <strong style="color:var(--crema)">${learned?.basedOn||0}</strong></p>`;
+  let html = `<div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.9">`;
+
+  // Bohnen-spezifisch
+  html += `<strong style="color:var(--crema)">📊 ${kaffee}:</strong><br>`;
+  html += `${shots.length} Bezüge · ${goodShots.length} gute (Score ≥60)<br>`;
+  if(adaptive) {
+    html += `<span style="color:var(--green)">✓ Adaptiv aktiv</span> – aus ${adaptive.basedOn} guten Bezügen<br>`;
+    if(adaptive.trend !== null) {
+      const arrow = adaptive.trend > 3 ? '↑ Verbesserung' : adaptive.trend < -3 ? '↓ Rückgang' : '→ Stabil';
+      const col = adaptive.trend > 3 ? 'var(--green)' : adaptive.trend < -3 ? 'var(--red)' : 'var(--mid)';
+      html += `Trend: <span style="color:${col}">${arrow} (${adaptive.trend>0?'+':''}${adaptive.trend} Pkt.)</span><br>`;
+    }
+    if(adaptive.bestShot) {
+      const b = adaptive.bestShot;
+      html += `Bester Bezug: <strong style="color:var(--crema)">${b.score} Pkt.</strong> · MG${b.mahlgrad||'?'} · ${b.temp||'?'}°C${b.pi?' · PI'+b.pi+'s':''} · ${b.doseOut||'?'}g<br>`;
+    }
   } else {
-    html = `<div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.9">
-    <strong style="color:var(--crema);display:block;margin-bottom:8px">Aus ${learned.basedOn} guten Bezügen gelernt:</strong>
-    ${learned.avgMG ? `Dein Ø Mahlgrad: <strong style="color:var(--crema)">${learned.avgMG}</strong><br>` : ''}
-    ${learned.avgTemp ? `Deine Ø Temperatur: <strong style="color:var(--crema)">${learned.avgTemp}°C</strong><br>` : ''}
-    ${learned.avgRatio ? `Deine Ø Ratio: <strong style="color:var(--crema)">1:${learned.avgRatio}</strong><br>` : ''}
-    ${learned.avgPI ? `Deine Ø Pre-Infusion: <strong style="color:var(--crema)">${learned.avgPI}s</strong><br>` : ''}
-    ${learned.topAromen.length ? `<br>Deine Top-Aromen:<br><strong style="color:var(--crema)">${learned.topAromen.join(' · ')}</strong><br>` : ''}
-    ${goodShots.length >= 3 ? `<br>Diese Bohne: <strong style="color:var(--green)">${goodShots.length} gute Bezüge</strong> → Empfehlung ist bohnenspezifisch` : `<br>Diese Bohne: <strong style="color:var(--mid)">${goodShots.length} gute Bezüge</strong> → Empfehlung basiert auf globalen Daten`}
-    </div>`;
+    const missing = Math.max(0, 2 - goodShots.length);
+    html += `<span style="color:var(--mid)">Noch ${missing} gut${missing===1?'en':'e'} Bezug${missing===1?'':'e'} bis adaptive Empfehlung</span><br>`;
   }
-  document.getElementById('modal-title').textContent = '🧠 Selbstlernende Empfehlung';
+
+  // Global
+  html += `<br><strong style="color:var(--crema)">🌍 Über alle Bohnen:</strong><br>`;
+  if(learned && learned.basedOn >= 3) {
+    html += `Aus ${learned.basedOn} guten Bezügen gelernt:<br>`;
+    if(learned.avgMG)    html += `Ø Mahlgrad: <strong style="color:var(--crema)">${learned.avgMG}</strong><br>`;
+    if(learned.avgTemp)  html += `Ø Temp: <strong style="color:var(--crema)">${learned.avgTemp}°C</strong><br>`;
+    if(learned.avgRatio) html += `Ø Ratio: <strong style="color:var(--crema)">1:${learned.avgRatio}</strong><br>`;
+    if(learned.avgPI)    html += `Ø PI: <strong style="color:var(--crema)">${learned.avgPI}s</strong><br>`;
+    if(learned.topAromen.length) html += `Top-Aromen: <strong style="color:var(--crema)">${learned.topAromen.join(' · ')}</strong><br>`;
+  } else {
+    const need = Math.max(0, 3-(learned?.basedOn||0));
+    html += `<span style="color:var(--mid)">Noch ${need} gute Bezüge (über alle Bohnen) nötig</span><br>`;
+  }
+
+  html += `</div>`;
+  document.getElementById('modal-title').textContent = '🧠 Was ich gelernt habe';
   document.getElementById('modal-body').innerHTML = html;
   document.getElementById('modal-bg').classList.add('show');
 }
 
 // Adaptive learning: calculate recommendation from good shots
 function calcAdaptiveRec(shots) {
-  if (!shots || shots.length < 5) return null;
+  if (!shots || shots.length < 3) return null;
 
-  // Take shots with score >= 65, sorted by score desc, up to last 5
+  // Take shots with score >= 60, sorted by score desc, up to 5
   const goodShots = [...shots]
-    .filter(s => s.score >= 65 && s.mahlgrad && s.temp && s.doseOut)
+    .filter(s => s.score >= 60 && s.mahlgrad && s.temp && s.doseOut)
     .sort((a,b) => b.score - a.score)
     .slice(0, 5);
 
-  if (goodShots.length < 3) return null; // need at least 3 good shots
+  if (goodShots.length < 2) return null;
 
   // Weighted average (higher score = more weight)
   const totalWeight = goodShots.reduce((a,s) => a + s.score, 0);
@@ -1479,7 +1508,19 @@ function calcAdaptiveRec(shots) {
   const avgPI = wAvg('pi');
   const avgScore = Math.round(totalWeight / goodShots.length);
 
-  // Range: ±0.5 for mahlgrad, ±1 for temp, ±2 for output
+  // Trend: Ø Score letzte 3 Bezüge vs. die 3 davor
+  const byTime = [...shots].sort((a,b)=>(a.timestamp||0)-(b.timestamp||0));
+  const recent3 = byTime.slice(-3);
+  const older3 = byTime.slice(-6,-3);
+  let trend = null;
+  if(recent3.length >= 2 && older3.length >= 2) {
+    const rAvg = recent3.reduce((a,s)=>a+s.score,0)/recent3.length;
+    const oAvg = older3.reduce((a,s)=>a+s.score,0)/older3.length;
+    trend = Math.round(rAvg - oAvg);
+  }
+
+  const bestShot = [...shots].sort((a,b)=>b.score-a.score)[0];
+
   return {
     mahlgrad: avgMahlgrad ? [
       Math.round((avgMahlgrad - 0.5) * 2) / 2,
@@ -1496,6 +1537,8 @@ function calcAdaptiveRec(shots) {
     pi: avgPI > 0 ? Math.round(avgPI * 2) / 2 : null,
     basedOn: goodShots.length,
     avgScore,
+    trend,
+    bestShot,
     shots: goodShots
   };
 }
@@ -1555,7 +1598,7 @@ function renderTrainerRec(kaffee) {
         <span class="trainer-icon">🎯</span>
         <div>
           <div class="trainer-title">Trainer-Empfehlung</div>
-          <div class="trainer-subtitle">${useAdaptive ? `Adaptiv – aus ${adaptive.basedOn} guten Bezügen (Ø Score ${adaptive.avgScore})` : `Standard-Profil · ${profile.roast === 'dark' ? 'Dark Roast' : 'Medium Roast'}`}</div>
+          <div class="trainer-subtitle">${useAdaptive ? `Adaptiv – aus ${adaptive.basedOn} guten Bezügen (Ø ${adaptive.avgScore})${adaptive.trend !== null ? (adaptive.trend > 3 ? ' <span style="color:var(--green)">↑ +'+adaptive.trend+'Pkt</span>' : adaptive.trend < -3 ? ' <span style="color:var(--red)">↓ '+adaptive.trend+'Pkt</span>' : '') : ''}` : `Standard-Profil · ${profile.roast === 'dark' ? 'Dark Roast' : 'Medium Roast'}`}</div>
         </div>
         <button class="info-btn" style="margin-left:auto;width:22px;height:22px;font-size:.7rem" onclick="showLearnedInfo('${kaffee.replace(/'/g,"\\'")}')">🧠</button>
       </div>
