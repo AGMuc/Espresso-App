@@ -1,6 +1,6 @@
 # Espresso Trainer
 
-**v15** · Progressive Web App für die Lelit Victoria PL91T
+**v15.2** · Progressive Web App für die Lelit Victoria PL91T
 
 Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezügen. Läuft vollständig im Browser, ohne Server oder Framework – alle Daten bleiben lokal im `localStorage`.
 
@@ -17,7 +17,8 @@ Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezüge
 - **Rangliste** – Top-3 Score pro Kaffeesorte mit CSV/Text-Export
 - **KI-Hilfe** – JSON-Prompt Export für Claude/ChatGPT-Analyse
 - **Backup/Restore** – JSON Export & Import aller Daten
-- **Themes** – Dunkel, Hell, Hochkontrast
+- **Themes** – Hell (Standard), Dunkel, Hochkontrast
+- **Auto-Update** – neue Version wird automatisch geladen, kein Cache-Clear nötig
 - **PWA** – als App auf Homescreen speicherbar
 
 ---
@@ -36,7 +37,7 @@ Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezüge
 
 ---
 
-## Unterstützte Kaffeesorten
+## Kaffeesorten
 
 | Kaffee | Röstung | Blend | Mahlgrad | Temp |
 |---|---|---|---|---|
@@ -47,8 +48,7 @@ Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezüge
 | Dinzler Lazise | Medium | 100% Arabica | 4–5 | 92–93°C |
 | Dinzler Venezia | Medium | 100% Arabica | 4–5 | 92–93°C |
 | Geisenhofer House Blend | Dark | 60% A / 40% R | 3,5–4,5 | 91–92°C |
-| Passalacqua Espresso | Dark | 75% A / 25% R | 3–4,5 | 91–93°C |
-| Mehari Espresso | Dark | 60% A / 40% R | 3–4,5 | 90–92°C |
+| **Passalacqua / Mehari Espresso** | Dark | 65–75% A / 25–35% R | 3–4,5 | 90–93°C |
 | Kimbo Espresso Napoli | Dark | 70% A / 30% R | 3–4,5 | 90–92°C |
 | Oh Harvey (Quijote) | Medium | 80% A / 20% R | 4–5,5 | 92–94°C |
 | Geisenhofer First Roast | Medium | 100% Arabica | 4–5,5 | 92–94°C |
@@ -63,6 +63,7 @@ Eigene Kaffeesorten können in der App hinzugefügt werden (langer Druck zum Lö
 - `localStorage` für alle Daten (kein Server, kein Account)
 - GitHub Pages Deployment via GitHub Actions (Branch: `main`)
 - Service Worker deaktiviert (kein Cache-Problem)
+- Auto-Update via `version.json` – wird bei jedem Deploy mit Git-SHA überschrieben
 - Konfigurationsdokumentation: [`espresso-app-config.json`](espresso-app-config.json)
 
 ---
@@ -71,5 +72,7 @@ Eigene Kaffeesorten können in der App hinzugefügt werden (langer Druck zum Lö
 
 | Version | Datum | Änderungen |
 |---|---|---|
-| v15 | Mai 2026 | Erweiterte Bohnen-Profile (blend/taste/herkunft), Kimbo Espresso Napoli, Cache-Busting-Toast |
+| v15.2 | Mai 2026 | Passalacqua/Mehari zu einem Profil zusammengeführt, Hell als Standard-Theme |
+| v15.1 | Mai 2026 | Kritische Bugfixes: `dotToScore()` definiert, Division-by-Zero, Kimbo in Liste |
+| v15.0 | Mai 2026 | Erweiterte Bohnen-Profile (blend/taste/herkunft), Kimbo Espresso Napoli, Auto-Update ohne Cache-Clear |
 | v14 | Mai 2026 | Service Worker entfernt, Geführte Verkostung, Selbstlernend |
