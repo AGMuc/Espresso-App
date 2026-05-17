@@ -1,6 +1,6 @@
 # Espresso Trainer
 
-**v15.5** · Progressive Web App für die Lelit Victoria PL91T
+**v15.6** · Progressive Web App für die Lelit Victoria PL91T
 
 Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezügen. Läuft vollständig im Browser, ohne Server oder Framework – alle Daten bleiben lokal im `localStorage`.
 
@@ -74,7 +74,8 @@ Eigene Kaffeesorten können in der App hinzugefügt werden (langer Druck zum Lö
 
 | Version | Datum | Änderungen |
 |---|---|---|
-| **v15.5** | Mai 2026 | Bugfix: `var(--fg)` → Gesamteindruck- & Verkostungs-Buttons zeigten keinen Text; Bohnen-Profil als Startwert bei neuem Eintrag; `top3Avg` NaN-Fix; `calcScore` robuster |
+| **v15.6** | Mai 2026 | Nachträgliche Notizen zu Bezügen editierbar (✏-Button); Tipp-Followup (Ja/Nein) jetzt am Kopf des Formulars statt in der Historie; Followup-Antworten beeinflussen den Lernalgorithmus direkt (×1.3/×0.7 Gewichtung) |
+| v15.5 | Mai 2026 | Bugfix: `var(--fg)` → Gesamteindruck- & Verkostungs-Buttons zeigten keinen Text; Bohnen-Profil als Startwert bei neuem Eintrag; `top3Avg` NaN-Fix; `calcScore` robuster |
 | v15.4 | Mai 2026 | Verbessertes Selbstlern-System: Trend ↑/→/↓, adaptiv ab 3 Bezügen, Tabak/Holz- & Robusta-Tipps, 🧠-Button mit Fortschritt & bestem Bezug |
 | v15.3 | Mai 2026 | Passalacqua Mehari korrigiert: Mehari ist ein Blend von Passalacqua (50/50 A/R, Neapel seit 1948) |
 | v15.2 | Mai 2026 | Passalacqua/Mehari zu einem Eintrag zusammengeführt, Hell als Standard-Theme, README aktualisiert |
