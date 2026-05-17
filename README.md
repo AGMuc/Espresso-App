@@ -48,7 +48,7 @@ Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezüge
 | Dinzler Lazise | Medium | 100% Arabica | 4–5 | 92–93°C |
 | Dinzler Venezia | Medium | 100% Arabica | 4–5 | 92–93°C |
 | Geisenhofer House Blend | Dark | 60% A / 40% R | 3,5–4,5 | 91–92°C |
-| **Passalacqua / Mehari Espresso** | Dark | 65–75% A / 25–35% R | 3–4,5 | 90–93°C |
+| **Passalacqua Mehari** | Dark | 50% A / 50% R | 3–4,5 | 90–92°C |
 | Kimbo Espresso Napoli | Dark | 70% A / 30% R | 3–4,5 | 90–92°C |
 | Oh Harvey (Quijote) | Medium | 80% A / 20% R | 4–5,5 | 92–94°C |
 | Geisenhofer First Roast | Medium | 100% Arabica | 4–5,5 | 92–94°C |

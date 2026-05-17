@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v15.2</title>
+<title>Espresso Trainer v15.3</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -405,7 +405,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.2 · Mai 2026 · Passalacqua/Mehari zusammengeführt · Hell-Theme</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.3 · Mai 2026 · Passalacqua Mehari korrigiert · 50/50 Blend</div></div></div>
       </div>
     </div>
 
@@ -427,8 +427,8 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='15.2';
-const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua / Mehari Espresso","Kimbo Espresso Napoli"];
+const APP_VERSION='15.3';
+const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
 const KEY="espresso_pwa_v2",CUSTOM_KEY="espresso_custom_v1",SETTINGS_KEY="espresso_settings_v1";
@@ -1272,15 +1272,15 @@ const BEAN_PROFILES = {
   "gorilla":           { mahlgrad:[3.5,5], temp:[90,92], output:[38,44], roast:"dark",
     blend:"85% Arabica / 15% Robusta", taste:"Schokolade, Nuss, Karamell",
     notes:"Neigt zu Bitterkeit bei Überextraktion · max 91°C · MG 4-4.5 · Zeit 24-26s · Vorsicht Asche" },
-  // Passalacqua / Mehari (kombiniertes Profil)
-  "passalacqua": { mahlgrad:[3,4.5], temp:[90,93], output:[38,44], roast:"dark",
-    blend:"65-75% Arabica / 25-35% Robusta", taste:"Schokolade, Haselnuss, Walnuss, kräftig",
-    herkunft:"Neapel / Süditalien", inei:true,
-    notes:"Klassisch neapolitanisch · hoher Robusta für stabile Crema · säurearm · Temp 90-92°C · Pre-Infusion 3-4s · Mahlgrad fein starten · Passalacqua eher 91-93°C, Mehari eher 90-91°C" },
-  "mehari": { mahlgrad:[3,4.5], temp:[90,93], output:[38,44], roast:"dark",
-    blend:"65-75% Arabica / 25-35% Robusta", taste:"Schokolade, Haselnuss, Walnuss, kräftig",
-    herkunft:"Neapel / Süditalien", inei:true,
-    notes:"Klassisch neapolitanisch · hoher Robusta für stabile Crema · säurearm · Temp 90-92°C · Pre-Infusion 3-4s · Mahlgrad fein starten · Passalacqua eher 91-93°C, Mehari eher 90-91°C" },
+  // Passalacqua Mehari – Mehari ist ein Blend von Passalacqua (Neapel, seit 1948)
+  "passalacqua": { mahlgrad:[3,4.5], temp:[90,92], output:[38,43], roast:"dark",
+    blend:"50% Arabica / 50% Robusta", taste:"Dunkle Schokolade, dichte Crema, vollmundig",
+    herkunft:"Casavatore/Neapel, Passalacqua seit 1948", inei:true,
+    notes:"Mehari ist Passalacquas Klassiker · 50/50 für stabile dichte Crema · säurearm · Temp max 92°C · MG 3-3.5 fein starten · Pre-Infusion 3-4s · kurze Bezugszeit 25-28s" },
+  "mehari": { mahlgrad:[3,4.5], temp:[90,92], output:[38,43], roast:"dark",
+    blend:"50% Arabica / 50% Robusta", taste:"Dunkle Schokolade, dichte Crema, vollmundig",
+    herkunft:"Casavatore/Neapel, Passalacqua seit 1948", inei:true,
+    notes:"Mehari ist Passalacquas Klassiker · 50/50 für stabile dichte Crema · säurearm · Temp max 92°C · MG 3-3.5 fein starten · Pre-Infusion 3-4s · kurze Bezugszeit 25-28s" },
   // Kimbo
   "kimbo": { mahlgrad:[3,4.5], temp:[90,92], output:[38,42], roast:"dark",
     blend:"70% Arabica / 30% Robusta", taste:"Schokolade, Haselnuss, dichte Crema",
