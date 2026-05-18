@@ -256,6 +256,18 @@ textarea:focus{border-color:var(--crema);}
 .trainer-shot-bar{height:100%;border-radius:3px;transition:width .4s;}
 .trainer-shot-info{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);min-width:80px;text-align:right;}
 .trainer-apply-btn{width:100%;padding:8px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-top:8px;}
+/* WEIGHMYBRU² */
+.scale-bar{background:var(--crema2);border:1px solid rgba(90,184,58,0.35);border-radius:10px;padding:10px 12px;margin-bottom:10px;}
+.scale-live{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.scale-live-group{text-align:center;flex:1;}
+.scale-live-label{font-family:'Courier New',monospace;font-size:calc(.48rem*var(--font-scale));color:var(--mid);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
+.scale-live-val{font-size:calc(1.05rem*var(--font-scale));color:var(--green);font-weight:bold;}
+.scale-btns{display:flex;gap:6px;}
+.scale-btn{flex:1;padding:8px 4px;border-radius:7px;border:1px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;}
+.scale-btn.start{border-color:var(--green);color:var(--green);}
+.scale-btn.stop{border-color:var(--red);color:var(--red);}
+.scale-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle;}
+.scale-dot.on{background:var(--green);}.scale-dot.off{background:var(--mid);}
 </style>
 </head>
 <body class="theme-dark">
@@ -291,6 +303,7 @@ textarea:focus{border-color:var(--crema);}
             <span id="form-badge" class="badge" style="display:none"></span>
           </div>
           <div class="sl">Bezug</div>
+          <div id="scale-brew-bar" style="display:none"></div>
           <div class="grid2">
             <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="18" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
             <div class="field"><label>Yield Aus (g)</label><input type="number" id="f-doseOut" placeholder="z.B. 42" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
@@ -412,6 +425,17 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v3.7 · Mai 2026 · SW Auto-Update, Notizen, Followup oben</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">WeighMyBru² Waage</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Verbindung</div><div class="setting-sub" id="scale-conn-status"><span class="scale-dot off"></span>Nicht verbunden</div></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+          <input id="scale-ip-input" type="text" placeholder="weighmybru.local" inputmode="url" autocomplete="off" style="flex:1;padding:9px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale))">
+          <button class="action-btn" onclick="scaleConnect()">Verbinden</button>
+        </div>
+        <div id="scale-conn-err" style="font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--red);margin-top:6px;min-height:16px"></div>
       </div>
     </div>
 
@@ -1765,12 +1789,135 @@ function applyTrainerRec(values) {
 })();
 
 // ============================================================
+// WEIGHMYBRU² WAAGE
+// ============================================================
+const scale = {
+  url: null, connected: false,
+  weight: 0, timerMs: 0, timerRunning: false, _poll: null,
+
+  async _req(path, method) {
+    const r = await fetch(this.url + path, {
+      method: method || 'GET', mode: 'cors',
+      signal: AbortSignal.timeout(2500)
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r;
+  },
+  async dashboard() { return (await this._req('/api/dashboard')).json(); },
+  async tare()       { return this._req('/api/tare',         'POST'); },
+  async startTimer() { return this._req('/api/timer/start',  'POST'); },
+  async stopTimer()  { return this._req('/api/timer/stop',   'POST'); },
+  async resetTimer() { return this._req('/api/timer/reset',  'POST'); },
+
+  startPoll() {
+    if (this._poll) return;
+    this._poll = setInterval(async () => {
+      try {
+        const d = await this.dashboard();
+        this.weight = d.weight || 0;
+        this.timerMs = d.timer_elapsed || 0;
+        this.timerRunning = !!d.timer_running;
+        scaleUpdateLive();
+      } catch(e) {}
+    }, 200);
+  },
+  stopPoll() { if (this._poll) { clearInterval(this._poll); this._poll = null; } }
+};
+
+function scaleConnect() {
+  const raw = (document.getElementById('scale-ip-input').value.trim()) || 'weighmybru.local';
+  scale.url = raw.startsWith('http') ? raw : 'http://' + raw;
+  const err = document.getElementById('scale-conn-err');
+  const sta = document.getElementById('scale-conn-status');
+  err.textContent = 'Verbinde…';
+  scale.dashboard()
+    .then(() => {
+      scale.connected = true;
+      settings.scaleUrl = scale.url;
+      saveSettings();
+      err.textContent = '';
+      sta.innerHTML = `<span class="scale-dot on"></span>Verbunden · ${raw}`;
+      scaleRenderBrewBar();
+    })
+    .catch(e => {
+      scale.connected = false;
+      err.textContent = 'Fehler: ' + e.message + ' · Manuelle Eingabe weiterhin möglich';
+      sta.innerHTML = `<span class="scale-dot off"></span>Nicht verbunden`;
+      scaleRenderBrewBar();
+    });
+}
+
+async function scaleStartBrew() {
+  try {
+    await scale.tare();
+    await scale.resetTimer();
+    await scale.startTimer();
+    scale.startPoll();
+    scaleRenderBrewBar();
+  } catch(e) {
+    const s = document.getElementById('scale-brew-status');
+    if (s) s.textContent = 'Fehler: ' + e.message;
+  }
+}
+
+async function scaleStopBrew() {
+  try {
+    await scale.stopTimer();
+    scale.stopPoll();
+    if (scale.weight > 0) document.getElementById('f-doseOut').value = scale.weight.toFixed(1);
+    if (scale.timerMs > 0) document.getElementById('f-zeit').value = Math.round(scale.timerMs / 1000);
+    updateRatio(); updateLiveTip();
+    scaleRenderBrewBar();
+  } catch(e) {
+    const s = document.getElementById('scale-brew-status');
+    if (s) s.textContent = 'Fehler: ' + e.message;
+  }
+}
+
+async function scaleTare() { try { await scale.tare(); } catch(e) {} }
+
+function scaleRenderBrewBar() {
+  const bar = document.getElementById('scale-brew-bar');
+  if (!bar) return;
+  if (!scale.connected) { bar.style.display = 'none'; return; }
+  bar.innerHTML = `<div class="scale-bar">
+    <div class="scale-live">
+      <div class="scale-live-group"><div class="scale-live-label">Yield Aus</div><div class="scale-live-val" id="scale-w">—</div></div>
+      <div class="scale-live-group"><div class="scale-live-label">Zeit</div><div class="scale-live-val" id="scale-t">—</div></div>
+      <div class="scale-live-group"><div class="scale-live-label">Status</div><div class="scale-live-val" id="scale-brew-status" style="font-size:calc(.68rem*var(--font-scale));color:var(--mid)">bereit</div></div>
+    </div>
+    <div class="scale-btns">
+      <button class="scale-btn" onclick="scaleTare()">⊘ Tara</button>
+      <button class="scale-btn start" onclick="scaleStartBrew()">▶ Start</button>
+      <button class="scale-btn stop" onclick="scaleStopBrew()">■ Stopp & übernehmen</button>
+    </div>
+  </div>`;
+  bar.style.display = 'block';
+}
+
+function scaleUpdateLive() {
+  const w = document.getElementById('scale-w');
+  const t = document.getElementById('scale-t');
+  const s = document.getElementById('scale-brew-status');
+  if (w) w.textContent = scale.weight.toFixed(1) + 'g';
+  if (t) t.textContent = (scale.timerMs / 1000).toFixed(1) + 's';
+  if (s) s.textContent = scale.timerRunning ? '⏱ läuft' : '■ gestoppt';
+}
+
+// ============================================================
 // INIT
 // ============================================================
 buildPills();
 renderDashboard();
 // Versionsnummer in Einstellungen dynamisch setzen
 (function(){const el=document.getElementById('version-display');if(el)el.textContent='v'+APP_VERSION+' · Mai 2026';})();
+// Waage aus Settings wiederherstellen
+(function(){
+  if(settings.scaleUrl){
+    const ipEl=document.getElementById('scale-ip-input');
+    if(ipEl) ipEl.value=settings.scaleUrl.replace(/^https?:\/\//,'');
+  }
+})();
 </script>
 </body>
 </html>
