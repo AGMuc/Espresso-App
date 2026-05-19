@@ -661,7 +661,7 @@ function generateTips(shot){
     tips.push({tip:`Pre-Infusion ${pi}s ist sehr kurz. Für gleichmäßige Benetzung bei dunklen Röstungen: 3-5s PI. Länger als 5s kann bei dunklen Röstungen überextrahieren.`,followup:"War 3-5s PI besser?"});
   }
   if(pi>6&&bi>=5&&tips.length<2){
-    tips.push({tip:`Pre-Infusion ${pi}s ist sehr lang für dunkle Röstungen. Bitterkeit könnte daher kommen. Für Dinzler/Gorilla-Profil: max. 4-5s PI empfohlen.`,followup:"Weniger Bitterkeit bei kürzerer PI?"});
+    tips.push({tip:`Pre-Infusion ${pi}s ist sehr lang für dunkle Röstungen. Bitterkeit könnte daher kommen. Für ${curKaffee?curKaffee.split(' ')[0]:'Dark Roast'}: max. 4-5s PI empfohlen.`,followup:"Weniger Bitterkeit bei kürzerer PI?"});
   }
 
   // FLOW PROBLEMS
@@ -696,7 +696,7 @@ function generateTips(shot){
   // MEDIUM SCORE OPTIMIZATION
   if(tips.length===0&&shot.score>=60&&shot.score<80){
     const candidates=[];
-    if(su<=5)candidates.push({s:10-su,tip:"Süße ausbaufähig: Mahlgrad 0.5 feiner oder Temp +1°C. Sweetspot für Dinzler/Passalacqua: 91-92°C, Ratio 1:2,2-1:2,4, 29-31s.",followup:"Süße ausgeprägter?"});
+    if(su<=5){const dose=parseFloat(shot.doseIn)||18.5;const bNames=curKaffee?curKaffee.split(' ').slice(0,2).join(' '):'';const sweetspot=beanProfile&&beanProfile.temp&&beanProfile.output&&bNames?`Sweetspot ${bNames}: ${beanProfile.temp[0]}–${beanProfile.temp[1]}°C, Ratio 1:${(beanProfile.output[0]/dose).toFixed(1)}–1:${(beanProfile.output[1]/dose).toFixed(1)}.`:"Sweetspot: 91–93°C, Ratio 1:2,1–1:2,4.";candidates.push({s:10-su,tip:`Süße ausbaufähig: Mahlgrad 0.5 feiner oder Temp +1°C. ${sweetspot}`,followup:"Süße ausgeprägter?"});}
     if(ko<=5)candidates.push({s:10-ko,tip:"Körper dünn: Dose auf 18.5g erhöhen oder Ratio auf 1:2-1:2,2 kürzen. Pre-Infusion 3-4s kann Körper verbessern.",followup:"Körper voller?"});
     if(na<=5)candidates.push({s:10-na,tip:"Kurzer Nachklang: Output früher bei ~40g stoppen. Schokoladiger Nachklang entsteht bei etwas knapperer Ratio.",followup:"Nachklang länger?"});
     if(pi===0)candidates.push({s:6,tip:"Pre-Infusion noch nicht getestet: 3-4s PI für gleichmäßigere Extraktion und mehr Körper. Victoria: Taste kurz antippen, dann 3-4s warten, dann normaler Bezug.",followup:"Mit PI gleichmäßiger?"});
@@ -1005,6 +1005,13 @@ function saveNote(k,i){
 // ============================================================
 // RENDER HISTORY
 // ============================================================
+function fixTipLegacy(tip){
+  if(!tip||!tip.includes('Dinzler/Passalacqua')||!curKaffee)return tip;
+  const bp=getBeanProfile(curKaffee);
+  if(!bp||!bp.temp||!bp.output)return tip;
+  const bNames=curKaffee.split(' ').slice(0,2).join(' ');
+  return tip.replace('Sweetspot für Dinzler/Passalacqua: 91-92°C, Ratio 1:2,2-1:2,4, 29-31s.',`Sweetspot ${bNames}: ${bp.temp[0]}–${bp.temp[1]}°C, Ratio 1:${(bp.output[0]/18.5).toFixed(1)}–1:${(bp.output[1]/18.5).toFixed(1)}.`);
+}
 function renderHistory(){
   const shots=data[curKaffee]||[];
   const card=document.getElementById('history-card'),list=document.getElementById('history-list');
@@ -1024,7 +1031,7 @@ function renderHistory(){
           if(t.resolved===null||t.resolved===undefined){fHtml=`<div class="shot-tip-followup">${t.followup}<div class="yn-row"><button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'ja')">Ja, besser</button><button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'nein')">Nein</button><button onclick="answerFollowup('${curKaffee.replace(/'/g,"\\'")}',${i},${tIdx},'skip')">Skip</button></div></div>`;}
           else{const lbl=t.resolved==='ja'?'✓ Verbessert':t.resolved==='nein'?'✗ Nicht besser':'— Skip';fHtml=`<div class="shot-tip-followup shot-tip-resolved">${lbl}</div>`;}
         }
-        return `<div class="shot-tip"><strong>Tipp${tipsArr.length>1?' '+(tIdx+1)+'/'+tipsArr.length:''}</strong>${t.tip}${fHtml}</div>`;
+        return `<div class="shot-tip"><strong>Tipp${tipsArr.length>1?' '+(tIdx+1)+'/'+tipsArr.length:''}</strong>${fixTipLegacy(t.tip)}${fHtml}</div>`;
       }).join('');
     }
 
@@ -1044,7 +1051,8 @@ function renderHistory(){
       ? `<div><textarea id="note-edit-${i}" class="note-edit-ta">${(s.notizen||'').replace(/</g,'&lt;')}</textarea><div class="yn-row"><button onclick="saveNote('${kEsc}',${i})" style="color:var(--green)">✓ Speichern</button><button onclick="cancelEditNote()">Abbrechen</button></div></div>`
       : `${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}
          <button class="note-edit-btn" onclick="startEditNote(${i})">${s.notizen?'✏':'＋ Notiz'}</button>`;
-    return `<div class="shot-item"><div class="shot-row-top"><div class="shot-info"><div class="shot-main">#${i+1} · ${s.doseIn}g→<strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG${s.mahlgrad||'?'}${s.temp?' · '+s.temp+'°C':''}${s.pi?' · PI'+s.pi+'s':''} · ${'★'.repeat(s.sterne)}</div><div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}</div>${noteHtml}</div><button class="shot-del" onclick="deleteShot('${kEsc}',${i})">✕</button></div>${cmpHtml}${tipHtml}</div>`;
+    const empfBadge=s.empfehlung==='ja'?'<span style="color:#8fdc5a"> · ✓ Kaufen</span>':s.empfehlung==='nein'?'<span style="color:#dc5a5a"> · ✗ Nicht kaufen</span>':s.empfehlung==='vl'?'<span style="color:var(--crema)"> · ? Evtl.</span>':'';
+    return `<div class="shot-item"><div class="shot-row-top"><div class="shot-info"><div class="shot-main">#${i+1} · ${s.doseIn}g→<strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG${s.mahlgrad||'?'}${s.temp?' · '+s.temp+'°C':''}${s.pi?' · PI'+s.pi+'s':''} · ${'★'.repeat(s.sterne)}</div><div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}${empfBadge}</div>${noteHtml}</div><button class="shot-del" onclick="deleteShot('${kEsc}',${i})">✕</button></div>${cmpHtml}${tipHtml}</div>`;
   }).join('');
 
   if(shots.length>1){const avgS=Math.round(shots.reduce((a,s)=>a+s.score,0)/shots.length);list.innerHTML+=`<div class="shots-footer">Ø ${avgS} · Best ${Math.max(...shots.map(s=>s.score))} · Top-3 Ø ${top3Avg(shots)}</div>`;}
