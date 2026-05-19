@@ -162,6 +162,15 @@ textarea:focus{border-color:var(--crema);}
 .rank-goto-btn:active{background:var(--crema2);}
 .rank-calib-header{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);letter-spacing:.08em;text-transform:uppercase;margin:10px 0 6px;opacity:.6;}
 .rank-unranked{opacity:.65;}
+.rank-item-open{border-color:var(--crema);}
+.rank-expand{display:none;margin-top:8px;padding-top:8px;border-top:1px solid var(--border2);}
+.rank-expand-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+.rank-expand-label{font-family:'Courier New',monospace;font-size:calc(.47rem*var(--font-scale));color:var(--mid);letter-spacing:.07em;text-transform:uppercase;margin-bottom:2px;}
+.rank-expand-meta{font-family:'Courier New',monospace;font-size:calc(.54rem*var(--font-scale));color:var(--text);line-height:1.6;}
+.rank-expand-btns{display:flex;gap:6px;}
+.rank-expand-btn{flex:1;padding:6px 4px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--crema);font-family:'Courier New',monospace;font-size:calc(.55rem*var(--font-scale));cursor:pointer;}
+.rank-expand-btn:active{background:var(--crema2);}
+.rank-expand-btn.goto{color:var(--mid);}
 
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -1161,6 +1170,15 @@ function renderDashboard(){
 // ============================================================
 // RANGLISTE
 // ============================================================
+function toggleRankDetail(nEsc, el){
+  const expand=el.querySelector('.rank-expand');
+  if(!expand)return;
+  const open=expand.style.display!=='none';
+  document.querySelectorAll('.rank-expand').forEach(e=>e.style.display='none');
+  document.querySelectorAll('.rank-item').forEach(e=>e.classList.remove('rank-item-open'));
+  if(!open){expand.style.display='block';el.classList.add('rank-item-open');}
+}
+
 function renderRangliste(){
   const el=document.getElementById('rank-list');
   const entries=Object.entries(data).map(([name,shots])=>{
@@ -1180,15 +1198,25 @@ function renderRangliste(){
   let html='';
   cal.forEach(({name,best,last,rankScore,count,avgRatio,topCount},i)=>{
     const nEsc=name.replace(/'/g,"\\'");
-    const lastMeta=last?`MG${last.mahlgrad||'?'} · ${last.doseOut||'?'}g · Score ${last.score} · ${last.ts}`:'–';
+    const bestMeta=`Score ${best.score} · MG${best.mahlgrad||'?'} · ${best.temp||'?'}°C · ${best.doseOut||'?'}g · ${best.zeit||'?'}s`;
+    const lastMeta=last&&last!==best?`Score ${last.score} · MG${last.mahlgrad||'?'} · ${last.doseOut||'?'}g · ${last.ts}`:'–';
     html+=`
-    <div class="rank-item${i===0?' top':''}" onclick="showBestShot('${nEsc}')">
+    <div class="rank-item${i===0?' top':''}" onclick="toggleRankDetail('${nEsc}',this)">
       <div class="rank-num">${i+1}</div>
       <div class="rank-info">
         <div class="rank-name">${name}</div>
-        <div class="rank-detail">⭐ ${best.doseIn}g→${best.doseOut||'?'}g · ${best.zeit||'?'}s${best.temp?' · '+best.temp+'°C':''}${best.pi?' · PI'+best.pi+'s':''}<br>${count} Bezüge · Top-${topCount} Ø <strong style="color:var(--crema)">${rankScore}</strong>${avgRatio?' · Ø 1:'+avgRatio:''}</div>
-        <div class="rank-last-row"><span class="rank-last-label">Letzter:</span><span class="rank-last-meta">${lastMeta}</span><button class="rank-goto-btn" onclick="event.stopPropagation();selectKaffee('${nEsc}');switchTab('bewertung')">→ Bezug</button></div>
+        <div class="rank-detail">${count} Bezüge · Top-${topCount} Ø <strong style="color:var(--crema)">${rankScore}</strong>${avgRatio?' · Ø 1:'+avgRatio:''}</div>
         <div class="rank-bar-wrap"><div class="rank-bar" style="width:${(rankScore/max)*100}%"></div></div>
+        <div class="rank-expand">
+          <div class="rank-expand-cols">
+            <div><div class="rank-expand-label">Bester Bezug</div><div class="rank-expand-meta">${bestMeta}</div></div>
+            <div><div class="rank-expand-label">Letzter Bezug</div><div class="rank-expand-meta">${lastMeta}</div></div>
+          </div>
+          <div class="rank-expand-btns">
+            <button class="rank-expand-btn" onclick="event.stopPropagation();showBestShot('${nEsc}')">⭐ Bester Bezug</button>
+            <button class="rank-expand-btn goto" onclick="event.stopPropagation();selectKaffee('${nEsc}');switchTab('bewertung')">→ Bezug öffnen</button>
+          </div>
+        </div>
       </div>
       <div class="rank-score">${rankScore}</div>
     </div>`;
@@ -1199,14 +1227,23 @@ function renderRangliste(){
     uncal.forEach(({name,last,count})=>{
       const nEsc=name.replace(/'/g,"\\'");
       const pct=Math.round((count/3)*100);
-      const lastMeta=last?`Letzter: Score ${last.score} · ${last.ts}`:'Noch kein Bezug';
+      const lastMeta=last?`Score ${last.score} · ${last.ts}`:'–';
       html+=`
-      <div class="rank-item rank-unranked" onclick="selectKaffee('${nEsc}');switchTab('bewertung')">
+      <div class="rank-item rank-unranked" onclick="toggleRankDetail('${nEsc}',this)">
         <div class="rank-num" style="color:var(--mid)">–</div>
         <div class="rank-info">
           <div class="rank-name">${name}</div>
-          <div class="rank-detail" style="color:var(--mid)">${lastMeta}<br>${count}/3 Bezüge bis Kalibrierung</div>
+          <div class="rank-detail" style="color:var(--mid)">${count}/3 Bezüge bis Kalibrierung</div>
           <div class="rank-bar-wrap"><div class="rank-bar" style="width:${pct}%;background:var(--mid)"></div></div>
+          <div class="rank-expand">
+            <div class="rank-expand-cols">
+              <div><div class="rank-expand-label">Letzter Bezug</div><div class="rank-expand-meta">${lastMeta}</div></div>
+              <div><div class="rank-expand-label">Noch fehlen</div><div class="rank-expand-meta">${3-count} Bezug${3-count===1?'':'e'}</div></div>
+            </div>
+            <div class="rank-expand-btns">
+              <button class="rank-expand-btn" onclick="event.stopPropagation();selectKaffee('${nEsc}');switchTab('bewertung')">→ Bezug öffnen</button>
+            </div>
+          </div>
         </div>
         <div class="rank-score" style="font-size:calc(1rem*var(--font-scale));color:var(--mid)">⏳</div>
       </div>`;
