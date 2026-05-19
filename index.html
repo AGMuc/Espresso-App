@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v15.5</title>
+<title>Espresso Trainer v4.1</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -155,6 +155,13 @@ textarea:focus{border-color:var(--crema);}
 .rank-bar-wrap{height:3px;background:var(--border2);border-radius:2px;margin-top:5px;}
 .rank-bar{height:100%;background:var(--crema);border-radius:2px;transition:width .6s;}
 .warn{font-family:'Courier New',monospace;font-size:calc(.51rem*var(--font-scale));color:var(--mid);margin-top:2px;}
+.rank-last-row{display:flex;align-items:center;gap:5px;margin-top:4px;}
+.rank-last-label{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);white-space:nowrap;}
+.rank-last-meta{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rank-goto-btn{padding:2px 8px;border-radius:5px;border:1px solid var(--border);background:none;color:var(--crema);font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.rank-goto-btn:active{background:var(--crema2);}
+.rank-calib-header{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);letter-spacing:.08em;text-transform:uppercase;margin:10px 0 6px;opacity:.6;}
+.rank-unranked{opacity:.65;}
 
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -411,7 +418,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v15.5 · Mai 2026 · Bugfixes: Textfarbe, Profil-Startwerte</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v4.1 · Mai 2026 · Rangliste: Kalibrierung, Letzter Bezug; Sweetspot selbstlernend</div></div></div>
       </div>
     </div>
 
@@ -433,7 +440,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='15.6';
+const APP_VERSION='4.1';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -696,7 +703,20 @@ function generateTips(shot){
   // MEDIUM SCORE OPTIMIZATION
   if(tips.length===0&&shot.score>=60&&shot.score<80){
     const candidates=[];
-    if(su<=5){const dose=parseFloat(shot.doseIn)||18.5;const bNames=curKaffee?curKaffee.split(' ').slice(0,2).join(' '):'';const sweetspot=beanProfile&&beanProfile.temp&&beanProfile.output&&bNames?`Sweetspot ${bNames}: ${beanProfile.temp[0]}–${beanProfile.temp[1]}°C, Ratio 1:${(beanProfile.output[0]/dose).toFixed(1)}–1:${(beanProfile.output[1]/dose).toFixed(1)}.`:"Sweetspot: 91–93°C, Ratio 1:2,1–1:2,4.";candidates.push({s:10-su,tip:`Süße ausbaufähig: Mahlgrad 0.5 feiner oder Temp +1°C. ${sweetspot}`,followup:"Süße ausgeprägter?"});}
+    if(su<=5){
+      const dose=parseFloat(shot.doseIn)||18.5;
+      const bShots=curKaffee?data[curKaffee]||[]:[];
+      const adaptive=calcAdaptiveRec(bShots);
+      let sweetspot;
+      if(adaptive&&adaptive.temp&&adaptive.output){
+        const rMin=(adaptive.output[0]/dose).toFixed(1),rMax=(adaptive.output[1]/dose).toFixed(1);
+        sweetspot=`Dein Sweetspot (${adaptive.basedOn} gute Bezüge): ${adaptive.temp[0]}–${adaptive.temp[1]}°C, Ratio 1:${rMin}–1:${rMax}.`;
+      } else if(beanProfile&&beanProfile.temp&&beanProfile.output&&curKaffee){
+        const bNames=curKaffee.split(' ').slice(0,2).join(' ');
+        sweetspot=`Sweetspot ${bNames}: ${beanProfile.temp[0]}–${beanProfile.temp[1]}°C, Ratio 1:${(beanProfile.output[0]/dose).toFixed(1)}–1:${(beanProfile.output[1]/dose).toFixed(1)}.`;
+      } else {sweetspot="Sweetspot: 91–93°C, Ratio 1:2,1–1:2,4.";}
+      candidates.push({s:10-su,tip:`Süße ausbaufähig: Mahlgrad 0.5 feiner oder Temp +1°C. ${sweetspot}`,followup:"Süße ausgeprägter?"});
+    }
     if(ko<=5)candidates.push({s:10-ko,tip:"Körper dünn: Dose auf 18.5g erhöhen oder Ratio auf 1:2-1:2,2 kürzen. Pre-Infusion 3-4s kann Körper verbessern.",followup:"Körper voller?"});
     if(na<=5)candidates.push({s:10-na,tip:"Kurzer Nachklang: Output früher bei ~40g stoppen. Schokoladiger Nachklang entsteht bei etwas knapperer Ratio.",followup:"Nachklang länger?"});
     if(pi===0)candidates.push({s:6,tip:"Pre-Infusion noch nicht getestet: 3-4s PI für gleichmäßigere Extraktion und mehr Körper. Victoria: Taste kurz antippen, dann 3-4s warten, dann normaler Bezug.",followup:"Mit PI gleichmäßiger?"});
@@ -1148,21 +1168,52 @@ function renderRangliste(){
     const top=sorted.slice(0,3);const rankScore=top3Avg(shots);const best=sorted[0];
     const ratios=top.map(s=>s.ratio).filter(Boolean);
     const avgRatio=ratios.length?(ratios.reduce((a,r)=>a+parseFloat(r),0)/ratios.length).toFixed(2):null;
-    return {name,best,rankScore,count:shots.length,avgRatio,topCount:top.length};
+    const last=[...shots].sort((a,b)=>(b.timestamp||0)-(a.timestamp||0))[0];
+    return {name,best,last,rankScore,count:shots.length,avgRatio,topCount:top.length};
   }).sort((a,b)=>b.rankScore-a.rankScore);
   if(!entries.length){el.innerHTML='<div class="empty">Noch keine Bewertungen.</div>';return;}
-  const max=entries[0].rankScore;
-  el.innerHTML=entries.map(({name,best,rankScore,count,avgRatio,topCount},i)=>`
-    <div class="rank-item${i===0?' top':''}" onclick="showBestShot('${name.replace(/'/g,"\\'")}')">
+
+  const cal=entries.filter(e=>e.count>=3);
+  const uncal=entries.filter(e=>e.count<3);
+  const max=cal.length?cal[0].rankScore:100;
+
+  let html='';
+  cal.forEach(({name,best,last,rankScore,count,avgRatio,topCount},i)=>{
+    const nEsc=name.replace(/'/g,"\\'");
+    const lastMeta=last?`MG${last.mahlgrad||'?'} · ${last.doseOut||'?'}g · Score ${last.score} · ${last.ts}`:'–';
+    html+=`
+    <div class="rank-item${i===0?' top':''}" onclick="showBestShot('${nEsc}')">
       <div class="rank-num">${i+1}</div>
       <div class="rank-info">
         <div class="rank-name">${name}</div>
-        <div class="rank-detail">Bester: ${best.doseIn}g→${best.doseOut||'?'}g · ${best.zeit||'?'}s${best.temp?' · '+best.temp+'°C':''}${best.pi?' · PI'+best.pi+'s':''} · ${'★'.repeat(best.sterne)}<br>${count} Bezug${count>1?'e':''} · Top-${topCount} Ø <strong style="color:var(--crema)">${rankScore}</strong>${avgRatio?' · Ø 1:'+avgRatio:''}</div>
-        ${count<3?`<div class="warn">⚠ Noch ${3-count} für Top-3</div>`:''}
+        <div class="rank-detail">⭐ ${best.doseIn}g→${best.doseOut||'?'}g · ${best.zeit||'?'}s${best.temp?' · '+best.temp+'°C':''}${best.pi?' · PI'+best.pi+'s':''}<br>${count} Bezüge · Top-${topCount} Ø <strong style="color:var(--crema)">${rankScore}</strong>${avgRatio?' · Ø 1:'+avgRatio:''}</div>
+        <div class="rank-last-row"><span class="rank-last-label">Letzter:</span><span class="rank-last-meta">${lastMeta}</span><button class="rank-goto-btn" onclick="event.stopPropagation();selectKaffee('${nEsc}');switchTab('bewertung')">→ Bezug</button></div>
         <div class="rank-bar-wrap"><div class="rank-bar" style="width:${(rankScore/max)*100}%"></div></div>
       </div>
       <div class="rank-score">${rankScore}</div>
-    </div>`).join('');
+    </div>`;
+  });
+
+  if(uncal.length){
+    html+=`<div class="rank-calib-header">Kalibrierung läuft…</div>`;
+    uncal.forEach(({name,last,count})=>{
+      const nEsc=name.replace(/'/g,"\\'");
+      const pct=Math.round((count/3)*100);
+      const lastMeta=last?`Letzter: Score ${last.score} · ${last.ts}`:'Noch kein Bezug';
+      html+=`
+      <div class="rank-item rank-unranked" onclick="selectKaffee('${nEsc}');switchTab('bewertung')">
+        <div class="rank-num" style="color:var(--mid)">–</div>
+        <div class="rank-info">
+          <div class="rank-name">${name}</div>
+          <div class="rank-detail" style="color:var(--mid)">${lastMeta}<br>${count}/3 Bezüge bis Kalibrierung</div>
+          <div class="rank-bar-wrap"><div class="rank-bar" style="width:${pct}%;background:var(--mid)"></div></div>
+        </div>
+        <div class="rank-score" style="font-size:calc(1rem*var(--font-scale));color:var(--mid)">⏳</div>
+      </div>`;
+    });
+  }
+
+  el.innerHTML=html;
 }
 
 function showBestShot(name){
