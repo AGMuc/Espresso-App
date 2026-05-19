@@ -1,6 +1,6 @@
 # Espresso Trainer
 
-**v3.8** · Progressive Web App für die Lelit Victoria PL91T
+**v3.9** · Progressive Web App für die Lelit Victoria PL91T
 
 Eine mobile App zum Protokollieren, Bewerten und Optimieren von Espresso-Bezügen. Läuft vollständig im Browser, ohne Server oder Framework – alle Daten bleiben lokal im `localStorage`.
 
@@ -74,7 +74,8 @@ Eigene Kaffeesorten können in der App hinzugefügt werden (langer Druck zum Lö
 
 | Version | Datum | Änderungen |
 |---|---|---|
-| **v3.8** | Mai 2026 | WeighMyBru² Waage-Integration: Verbindung via REST-API (HTTP), Live-Anzeige Gewicht & Zeit im Formular, ▶ Start / ■ Stopp & übernehmen, Tara-Button; Fallback manuelle Eingabe |
+| **v3.9** | Mai 2026 | Geführte Verkostung überarbeitet: 5 statt 4 Schritte, eigener Bitterkeit-Schritt, Reset auf Neutral beim Start, realistischere Süße-Werte, Abschluss-Zusammenfassung |
+| v3.8 | Mai 2026 | WeighMyBru² Waage-Integration: Verbindung via REST-API (HTTP), Live-Anzeige Gewicht & Zeit im Formular, ▶ Start / ■ Stopp & übernehmen, Tara-Button; Fallback manuelle Eingabe |
 | v3.7 | Mai 2026 | Service Worker (Network-First) reaktiviert: PWA vom Homescreen aktualisiert sich automatisch ohne Cache-Clear; `controllerchange` → sofortiger Reload auf neue Version |
 | v3.6 | Mai 2026 | Nachträgliche Notizen zu Bezügen editierbar (✏-Button); Tipp-Followup (Ja/Nein) jetzt am Kopf des Formulars statt in der Historie; Followup-Antworten beeinflussen den Lernalgorithmus direkt (×1.3/×0.7 Gewichtung) |
 | v3.5 | Mai 2026 | Bugfix: Textfarbe Gesamteindruck- & Verkostungs-Buttons; Bohnen-Profil als Startwert; `top3Avg` NaN-Fix; `calcScore` robuster |

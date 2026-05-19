@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v3.8</title>
+<title>Espresso Trainer v3.9</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -424,7 +424,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v3.8 · Mai 2026 · WeighMyBru² Waage-Integration</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v3.9 · Mai 2026 · Verkostung verbessert² Waage-Integration</div></div></div>
       </div>
       <div class="card">
         <div class="card-title">WeighMyBru² Waage</div>
@@ -457,7 +457,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='3.8';
+const APP_VERSION='3.9';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -526,43 +526,54 @@ const VERK_STEPS = [
     title: '☕ Schritt 1: Crema beurteilen',
     question: 'Wie sieht die Crema aus?',
     options: [
-      { label: '🟤 Dunkelbraun, dünn', action: () => { dotValues.koerper = Math.max(1, dotValues.koerper - 1); }, hint: 'Hinweis auf Unterextraktion oder zu grober Mahlgrad' },
-      { label: '🍯 Goldbraun, stabil', action: () => { }, hint: 'Ideal – gut extrahiert' },
-      { label: '⬜ Hell, wässrig', action: () => { dotValues.saeure = Math.min(6, dotValues.saeure + 1); }, hint: 'Zu wenig Extraktion' },
-      { label: '⬛ Sehr dunkel, bitter', action: () => { dotValues.bitter = Math.min(6, dotValues.bitter + 1); }, hint: 'Überextraktion oder zu heiß' },
+      { label: '🍯 Goldbraun, stabil, cremig', action: () => { dotValues.koerper = 5; }, hint: 'Ideal – gut extrahiert' },
+      { label: '🟤 Dunkelbraun, dünn, flüchtig', action: () => { dotValues.koerper = 3; }, hint: 'Unterextraktion – Mahlgrad feiner' },
+      { label: '⬜ Hell, wässrig, kaum Crema', action: () => { dotValues.koerper = 2; dotValues.saeure = 5; }, hint: 'Stark unterextrahiert' },
+      { label: '⬛ Sehr dunkel, ölig, bricht schnell', action: () => { dotValues.koerper = 4; dotValues.bitter = 5; }, hint: 'Überextraktion oder zu heiß' },
     ]
   },
   {
     id: 'saeure_check',
-    title: '🍋 Schritt 2: Erster Schluck',
-    question: 'Was merkst du beim ersten Schluck?',
+    title: '🍋 Schritt 2: Erster Schluck – Säure',
+    question: 'Was nimmst du beim ersten Schluck wahr?',
     options: [
-      { label: '😣 Stark sauer, beißend', action: () => { dotValues.saeure = 6; }, hint: 'Mahlgrad feiner oder Temp höher' },
-      { label: '🍋 Leicht säuerlich', action: () => { dotValues.saeure = 4; }, hint: 'Leichte Unterextraktion' },
-      { label: '✅ Ausgewogen, angenehm', action: () => { dotValues.saeure = 2; }, hint: 'Gut!' },
-      { label: '😑 Flach, kein Geschmack', action: () => { dotValues.saeure = 3; dotValues.suesse = Math.max(1, dotValues.suesse - 1); }, hint: 'Evtl. Unterextraktion' },
+      { label: '✅ Rund, angenehm, kein Stich', action: () => { dotValues.saeure = 2; }, hint: 'Ideal für Dark Roast' },
+      { label: '🍋 Leicht säuerlich, belebend', action: () => { dotValues.saeure = 4; }, hint: 'Noch im grünen Bereich' },
+      { label: '😣 Stark sauer, beißend', action: () => { dotValues.saeure = 6; }, hint: 'Unterextraktion – feiner mahlen oder wärmer' },
+      { label: '😑 Flach, kein Auftakt', action: () => { dotValues.saeure = 3; }, hint: 'Evtl. alte Bohne oder zu kurz' },
     ]
   },
   {
     id: 'suesse_check',
-    title: '🍫 Schritt 3: Mitte & Körper',
+    title: '🍫 Schritt 3: Mitte – Süße & Körper',
     question: 'Was schmeckst du in der Mitte des Schlucks?',
     options: [
-      { label: '🍫 Schokolade / Nuss', action: () => { dotValues.suesse = 6; dotValues.koerper = 5; if (!curAromen.includes('Schokolade')) curAromen.push('Schokolade'); }, hint: 'Perfekt für Dark Roast!' },
-      { label: '🍬 Leicht süßlich', action: () => { dotValues.suesse = 4; dotValues.koerper = 4; }, hint: 'Gut, noch Potenzial' },
-      { label: '💧 Wässrig, dünn', action: () => { dotValues.koerper = 2; dotValues.suesse = 2; }, hint: 'Ratio kürzen oder Dose erhöhen' },
-      { label: '🔥 Bitter, verbrannt', action: () => { dotValues.bitter = 6; dotValues.suesse = 1; }, hint: 'Überextraktion' },
+      { label: '🍫 Deutlich süßlich, Schokolade/Nuss', action: () => { dotValues.suesse = 5; dotValues.koerper = Math.max(dotValues.koerper, 5); if (!curAromen.includes('Schokolade')) curAromen.push('Schokolade'); }, hint: 'Sehr gut für Dark Roast' },
+      { label: '🍬 Leicht süßlich, angenehm', action: () => { dotValues.suesse = 4; dotValues.koerper = Math.max(dotValues.koerper, 4); }, hint: 'Gut – noch etwas Potenzial' },
+      { label: '💧 Wenig Eigengeschmack, wässrig', action: () => { dotValues.suesse = 2; dotValues.koerper = Math.min(dotValues.koerper, 3); }, hint: 'Ratio kürzen oder Dose erhöhen' },
+      { label: '🔥 Bitter dominiert, kaum Süße', action: () => { dotValues.suesse = 1; dotValues.bitter = Math.max(dotValues.bitter, 5); dotValues.koerper = Math.min(dotValues.koerper, 4); }, hint: 'Überextraktion – gröber mahlen' },
+    ]
+  },
+  {
+    id: 'bitter_check',
+    title: '☕ Schritt 4: Bitterkeit',
+    question: 'Wie stark ist die Bitterkeit?',
+    options: [
+      { label: '😊 Kaum bitter, sehr harmonisch', action: () => { dotValues.bitter = Math.min(dotValues.bitter, 2); }, hint: 'Ideal, besonders bei leichteren Röstungen' },
+      { label: '✅ Angenehm mild-bitter', action: () => { dotValues.bitter = Math.max(Math.min(dotValues.bitter, 3), 2); }, hint: 'Normal für Dark Roast' },
+      { label: '⚠️ Spürbar, leicht unangenehm', action: () => { dotValues.bitter = Math.max(dotValues.bitter, 4); }, hint: 'Temp leicht senken' },
+      { label: '😖 Stark bitter, aschig', action: () => { dotValues.bitter = Math.max(dotValues.bitter, 6); dotValues.suesse = Math.min(dotValues.suesse, 2); }, hint: 'Überextraktion – Temp senken, gröber mahlen' },
     ]
   },
   {
     id: 'nachklang_check',
-    title: '⏱ Schritt 4: Abgang',
+    title: '⏱ Schritt 5: Abgang & Nachklang',
     question: 'Was bleibt nach dem Schlucken?',
     options: [
-      { label: '🍫 Langer Schokoladenabgang', action: () => { dotValues.nachklang = 6; }, hint: 'Ausgezeichnet!' },
-      { label: '✅ Angenehm, 20-30s', action: () => { dotValues.nachklang = 4; }, hint: 'Gut' },
-      { label: '⚡ Kurz, verschwindet sofort', action: () => { dotValues.nachklang = 2; }, hint: 'Ratio etwas kürzen' },
-      { label: '😖 Bitter, unangenehm lang', action: () => { dotValues.nachklang = 3; dotValues.bitter = Math.max(dotValues.bitter, 5); }, hint: 'Überextraktion' },
+      { label: '🍫 Lang, Schokolade/Karamell, 45s+', action: () => { dotValues.nachklang = 6; }, hint: 'Ausgezeichnet!' },
+      { label: '✅ Angenehm, 20-40s', action: () => { dotValues.nachklang = 4; }, hint: 'Gut' },
+      { label: '⚡ Kurz, unter 15s', action: () => { dotValues.nachklang = 2; }, hint: 'Ratio etwas kürzen, Bohne frischer?' },
+      { label: '😖 Bitter oder metallisch, lang', action: () => { dotValues.nachklang = 3; dotValues.bitter = Math.max(dotValues.bitter, 5); }, hint: 'Überextraktion oder Gerät reinigen' },
     ]
   }
 ];
@@ -573,6 +584,10 @@ function toggleVerkostung() {
   const box = document.getElementById('verk-assistant');
   if (verkActive) {
     verkStep = 0;
+    // Alle Slider auf Neutral zurücksetzen – sauberer Start
+    dotValues.saeure = 4; dotValues.bitter = 4; dotValues.suesse = 4;
+    dotValues.koerper = 4; dotValues.nachklang = 4;
+    updateDotDisplayAll();
     btn.textContent = '✕ beenden';
     box.style.display = 'block';
     renderVerkStep();
@@ -586,9 +601,13 @@ function toggleVerkostung() {
 function renderVerkStep() {
   const box = document.getElementById('verk-assistant');
   if (verkStep >= VERK_STEPS.length) {
+    const names = {saeure:'Säure',bitter:'Bitterkeit',suesse:'Süße',koerper:'Körper',nachklang:'Nachklang'};
+    const summary = ['saeure','bitter','suesse','koerper','nachklang']
+      .map(id => `${names[id]}: ${dotValues[id]}/7`).join(' · ');
     box.innerHTML = `<div style="background:rgba(90,184,58,0.1);border:1px solid rgba(90,184,58,0.3);border-radius:9px;padding:12px;font-family:'Courier New',monospace;font-size:calc(.65rem*var(--font-scale))">
       <strong style="color:var(--green)">✓ Verkostung abgeschlossen!</strong><br>
-      <span style="color:var(--mid)">Slider wurden angepasst. Bitte prüfe und korrigiere falls nötig.</span><br>
+      <span style="color:var(--mid);font-size:.9em">${summary}</span><br>
+      <span style="color:var(--mid);font-size:.85em">Slider prüfen & bei Bedarf manuell korrigieren.</span><br>
       <span style="color:var(--crema);font-size:.9em">↓ Jetzt noch Gesamteindruck wählen um zu speichern</span><br>
       <button onclick="toggleVerkostung()" style="margin-top:8px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);padding:4px 12px;border-radius:6px;font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer">Schließen</button>
     </div>`;
