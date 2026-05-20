@@ -155,11 +155,6 @@ textarea:focus{border-color:var(--crema);}
 .rank-bar-wrap{height:3px;background:var(--border2);border-radius:2px;margin-top:5px;}
 .rank-bar{height:100%;background:var(--crema);border-radius:2px;transition:width .6s;}
 .warn{font-family:'Courier New',monospace;font-size:calc(.51rem*var(--font-scale));color:var(--mid);margin-top:2px;}
-.rank-last-row{display:flex;align-items:center;gap:5px;margin-top:4px;}
-.rank-last-label{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);white-space:nowrap;}
-.rank-last-meta{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.rank-goto-btn{padding:2px 8px;border-radius:5px;border:1px solid var(--border);background:none;color:var(--crema);font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));cursor:pointer;white-space:nowrap;flex-shrink:0;}
-.rank-goto-btn:active{background:var(--crema2);}
 .rank-calib-header{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);letter-spacing:.08em;text-transform:uppercase;margin:10px 0 6px;opacity:.6;}
 .rank-unranked{opacity:.65;}
 .rank-item-open{border-color:var(--crema);}
@@ -272,6 +267,45 @@ textarea:focus{border-color:var(--crema);}
 .trainer-shot-bar{height:100%;border-radius:3px;transition:width .4s;}
 .trainer-shot-info{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);min-width:80px;text-align:right;}
 .trainer-apply-btn{width:100%;padding:8px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-top:8px;}
+/* WEIGHMYBRU² */
+.scale-bar{background:var(--crema2);border:1px solid rgba(90,184,58,0.35);border-radius:10px;padding:10px 12px;margin-bottom:10px;}
+.scale-live{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.scale-live-group{text-align:center;flex:1;}
+.scale-live-label{font-family:'Courier New',monospace;font-size:calc(.48rem*var(--font-scale));color:var(--mid);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
+.scale-live-val{font-size:calc(1.05rem*var(--font-scale));color:var(--green);font-weight:bold;}
+.scale-btns{display:flex;gap:6px;}
+.scale-btn{flex:1;padding:8px 4px;border-radius:7px;border:1px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;}
+.scale-btn.start{border-color:var(--green);color:var(--green);}
+.scale-btn.stop{border-color:var(--red);color:var(--red);}
+.scale-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle;}
+.scale-dot.on{background:var(--green);}.scale-dot.off{background:var(--mid);}
+/* INFO-VISUALS */
+.info-visual{margin:10px 0;padding:10px;background:var(--crema2);border:1px solid var(--border);border-radius:8px;}
+.info-visual-title{font-family:'Courier New',monospace;font-size:calc(.55rem*var(--font-scale));color:var(--mid);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;}
+.info-scale{display:flex;align-items:center;gap:2px;height:28px;border-radius:6px;overflow:hidden;}
+.info-scale-seg{flex:1;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:calc(.55rem*var(--font-scale));color:#fff;font-weight:bold;}
+.info-scale-labels{display:flex;justify-content:space-between;font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);margin-top:3px;}
+.info-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));}
+.info-row:last-child{border-bottom:none;}
+.info-row-emoji{font-size:1.1rem;flex-shrink:0;width:26px;text-align:center;}
+.info-row-label{font-weight:bold;color:var(--crema);min-width:60px;}
+.info-row-text{flex:1;color:var(--text);}
+.info-target{background:rgba(90,184,58,0.15);border-left:3px solid var(--green);padding:7px 10px;border-radius:5px;font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));margin:8px 0;}
+.info-warn{background:rgba(192,57,43,0.1);border-left:3px solid var(--red);padding:7px 10px;border-radius:5px;font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));margin:8px 0;}
+/* VERKOSTUNG */
+.verk-card{background:linear-gradient(135deg,rgba(200,151,74,0.18),rgba(200,151,74,0.05));border:1px solid var(--crema);border-radius:10px;padding:12px;margin-bottom:8px;}
+.verk-title{font-family:'Courier New',monospace;font-size:calc(.66rem*var(--font-scale));color:var(--crema);font-weight:bold;margin-bottom:4px;}
+.verk-context{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);margin-bottom:8px;font-style:italic;}
+.verk-question{font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--mid);margin-bottom:10px;}
+.verk-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.verk-opt{padding:9px 7px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;text-align:left;line-height:1.4;transition:all .15s;}
+.verk-opt:hover,.verk-opt:active{border-color:var(--crema);background:var(--crema2);}
+.verk-opt.ideal{border-color:rgba(90,184,58,0.5);}
+.verk-opt-hint{color:var(--mid);font-size:.85em;display:block;margin-top:3px;}
+.verk-progress{display:flex;gap:3px;margin-top:10px;}
+.verk-prog-dot{flex:1;height:4px;border-radius:2px;background:var(--border2);}
+.verk-prog-dot.done{background:var(--green);}
+.verk-prog-dot.current{background:var(--crema);}
 </style>
 </head>
 <body class="theme-dark">
@@ -307,6 +341,7 @@ textarea:focus{border-color:var(--crema);}
             <span id="form-badge" class="badge" style="display:none"></span>
           </div>
           <div class="sl">Bezug</div>
+          <div id="scale-brew-bar" style="display:none"></div>
           <div class="grid2">
             <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="18" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
             <div class="field"><label>Yield Aus (g)</label><input type="number" id="f-doseOut" placeholder="z.B. 42" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
@@ -317,7 +352,12 @@ textarea:focus{border-color:var(--crema);}
           </div>
           <div id="ratio-display"></div>
           <div id="live-tip"></div>
-          <div class="sl">Geschmack</div>
+
+          <!-- GEFÜHRTE VERKOSTUNG (zuerst – setzt Slider/Aromen/Crema vor) -->
+          <div class="sl" style="margin-top:14px">Geführte Verkostung <button class="info-btn" onclick="toggleVerkostung()" id="verk-toggle-btn" style="margin-left:6px;font-size:.7rem;padding:2px 7px">▶ starten</button><button class="info-btn" onclick="showVerkInfo()" style="margin-left:4px">i</button></div>
+          <div id="verk-assistant" style="display:none"></div>
+
+          <div class="sl" style="margin-top:14px">Geschmack <span style="font-size:.65em;color:var(--mid);font-weight:normal">– nach Verkostung anpassen</span></div>
           <div id="sliders"></div>
           <div class="chips-header">
             <span class="chips-label">Aromen</span>
@@ -329,9 +369,6 @@ textarea:focus{border-color:var(--crema);}
             <button class="info-btn" onclick="showCremaInfo()">i</button>
           </div>
           <div class="chips" id="crema-chips"></div>
-          <!-- GEFÜHRTE VERKOSTUNG -->
-          <div class="sl" style="margin-top:14px">Geführte Verkostung <button class="info-btn" onclick="toggleVerkostung()" id="verk-toggle-btn" style="margin-left:6px;font-size:.7rem;padding:2px 7px">▶ starten</button></div>
-          <div id="verk-assistant" style="display:none"></div>
 
           <div class="sl" style="margin-top:14px">Gesamteindruck</div>
           <!-- 4 Optionen statt Sterne -->
@@ -427,7 +464,18 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub">v4.1 · Mai 2026 · Rangliste: Kalibrierung, Letzter Bezug; Sweetspot selbstlernend</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.1 · Mai 2026 · Rangliste: Kalibrierung, Letzter Bezug; Sweetspot selbstlernend</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">WeighMyBru² Waage</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Verbindung</div><div class="setting-sub" id="scale-conn-status"><span class="scale-dot off"></span>Nicht verbunden</div></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+          <input id="scale-ip-input" type="text" placeholder="weighmybru.local" inputmode="url" autocomplete="off" style="flex:1;padding:9px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale))">
+          <button class="action-btn" onclick="scaleConnect()">Verbinden</button>
+        </div>
+        <div id="scale-conn-err" style="font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--red);margin-top:6px;min-height:16px"></div>
       </div>
     </div>
 
@@ -458,15 +506,115 @@ const DOT_SCALE=7;
 
 const SLIDERS=[
   {id:"saeure",label:"Säure",lo:"niedrig",hi:"hoch",
-   info:{title:"Säure",text:`<strong style="color:var(--crema)">Was ist Säure beim Espresso?</strong><br>Wahrgenommene Säure beim ersten Schluck – nicht negativ, aber für Dark Roast unerwünscht.<br><br><strong style="color:var(--crema)">Ursachen hoher Säure:</strong><br>• Unterextraktion: Mahlgrad zu grob, Zeit zu kurz (&lt;25s), Temp zu kalt<br>• Helle Röstung: naturgemäß mehr Säure<br>• Dose zu niedrig (&lt;18g)<br><br><strong style="color:var(--crema)">Dein Ziel (Dark Roast, IMS):</strong><br>Säure 1-3 · alles über 4 = Problem<br><br><strong style="color:var(--crema)">Lösung:</strong><br>Säure >4 → Mahlgrad 0.5 feiner oder Temp +1°C oder Zeit auf 28-30s verlängern`}},
+   info:{title:"Säure (Acidity)",text:`
+<strong style="color:var(--crema)">Was ist Säure?</strong><br>
+Nach SCAA-Definition: helle, lebendige Geschmacksqualität beim ersten Schluck – nicht zu verwechseln mit "sauer". Quelle: Chlorogen-, Apfel-, Zitronen- und Essigsäure aus der Bohne.<br>
+<div class="info-visual">
+<div class="info-visual-title">Säure-Skala (Dot-Wert)</div>
+<div class="info-scale">
+<div class="info-scale-seg" style="background:#7CB342">1</div>
+<div class="info-scale-seg" style="background:#9CCC65">2</div>
+<div class="info-scale-seg" style="background:#C0CA33">3</div>
+<div class="info-scale-seg" style="background:#FBC02D">4</div>
+<div class="info-scale-seg" style="background:#F57C00">5</div>
+<div class="info-scale-seg" style="background:#E64A19">6</div>
+<div class="info-scale-seg" style="background:#B71C1C">7</div>
+</div>
+<div class="info-scale-labels"><span>flach</span><span>ausgewogen</span><span>spitz/sauer</span></div>
+</div>
+<div class="info-row"><span class="info-row-emoji">🍇</span><span class="info-row-label">Weintraube</span><span class="info-row-text">runde, fruchtige Säure – ideal</span></div>
+<div class="info-row"><span class="info-row-emoji">🍋</span><span class="info-row-label">Zitrone</span><span class="info-row-text">spitz, aber angenehm bei Medium Roast</span></div>
+<div class="info-row"><span class="info-row-emoji">🍏</span><span class="info-row-label">Apfel</span><span class="info-row-text">trocken-sauer → eher Unterextraktion</span></div>
+<div class="info-row"><span class="info-row-emoji">⚠️</span><span class="info-row-label">Essig</span><span class="info-row-text">scharf-stechend → klar Unterextraktion</span></div>
+<div class="info-target"><strong>Ziel:</strong> Dark Roast 1–3 · Medium 2–4 · Light 3–5</div>
+<strong style="color:var(--crema)">Ursachen hoher Säure:</strong><br>
+• Unterextraktion (Mahlgrad zu grob, Zeit &lt;25s, Temp &lt;90°C)<br>
+• Helle Röstung naturgemäß säurelastig<br>
+• Dose zu niedrig (Channeling)<br><br>
+<strong style="color:var(--crema)">Lösung bei zu viel Säure:</strong><br>
+→ Mahlgrad 0,5 feiner · Temp +1°C · Zeit auf 28–32s · Pre-Infusion 3–5s
+`}},
   {id:"bitter",label:"Bitterkeit",lo:"mild",hi:"stark",
-   info:{title:"Bitterkeit",text:`<strong style="color:var(--crema)">Normale vs. problematische Bitterkeit:</strong><br>Leichte Bitterkeit (2-4) ist bei Dark Roast normal und erwünscht.<br><br><strong style="color:var(--crema)">Problematische Bitterkeit (>5):</strong><br>• Aschig-bitter → Überextraktion (zu fein, zu heiß, zu lang)<br>• Verbrannt-bitter → Röstfehler oder >94°C bei dunkler Bohne<br>• Gummiartig-bitter → altes Öl im Siebträger (reinigen!)<br><br><strong style="color:var(--crema)">Lelit Victoria spezifisch:</strong><br>Bei 93°C + Passalacqua/Dinzler Roma ist Bitterkeit 2-4 ideal.<br>Über 94°C → Bitterkeit steigt schnell.<br><br><strong style="color:var(--crema)">Lösung:</strong><br>Bitter >5 → Temp -1°C oder Mahlgrad gröber oder Zeit kürzen`}},
+   info:{title:"Bitterkeit (Bitterness)",text:`
+<strong style="color:var(--crema)">Was ist Bitterkeit?</strong><br>
+Aus Chlorogensäure-Abbauprodukten und Trigonellin der Röstung. Leichte Bitterkeit (2–4) ist Teil eines balancierten Espresso – starke Bitterkeit (&gt;5) ist fast immer Überextraktion oder Defekt.<br>
+<div class="info-visual">
+<div class="info-visual-title">Bitterkeit-Spektrum</div>
+<div class="info-row"><span class="info-row-emoji">🍫</span><span class="info-row-label">Kakao</span><span class="info-row-text">edle Bitterkeit, harmonisch – ideal</span></div>
+<div class="info-row"><span class="info-row-emoji">🌰</span><span class="info-row-label">Walnussschale</span><span class="info-row-text">trocken-bitter, noch okay</span></div>
+<div class="info-row"><span class="info-row-emoji">🥬</span><span class="info-row-label">Endivie</span><span class="info-row-text">vegetativ-bitter → leichte Überextraktion</span></div>
+<div class="info-row"><span class="info-row-emoji">🚬</span><span class="info-row-label">Asche</span><span class="info-row-text">verbrannt, stechend → klar überextrahiert</span></div>
+</div>
+<div class="info-target"><strong>Ziel:</strong> Dark Roast 3–5 · Medium 2–4 · mit Robusta-Anteil +1</div>
+<div class="info-warn"><strong>Problembitter:</strong> aschig, verbrannt, gummiartig → meist Temp zu hoch (&gt;94°C) oder verschmutzter Siebträger</div>
+<strong style="color:var(--crema)">Lelit Victoria spezifisch:</strong><br>
+93°C ist Sweet Spot für Dark Roast. Ab 94,5°C kippt Bitter rasch in aschig.<br><br>
+<strong style="color:var(--crema)">Lösung bei zu viel Bitterkeit:</strong><br>
+→ Temp -1°C · Mahlgrad 0,5 gröber · Zeit kürzen auf 25–28s · Backflush mit Blindsieb täglich
+`}},
   {id:"suesse",label:"Süße",lo:"kaum",hi:"ausgeprägt",
-   info:{title:"Süße",text:`<strong style="color:var(--crema)">Woher kommt Süße?</strong><br>Karamellisierte Zucker aus der Röstung – entsteht nur bei optimaler Extraktion.<br><br><strong style="color:var(--crema)">Süße fehlt bei:</strong><br>• Unterextraktion: zu grob, zu kurz, zu kalt<br>• Überextraktion: zu fein, zu lang, zu heiß<br>• Zu frische Bohne (&lt;5 Tage nach Röstung)<br>• Zu alte Bohne (&gt;6 Wochen nach Öffnung)<br><br><strong style="color:var(--crema)">Sweet Spot für dein Setup:</strong><br>19g · 44g Output · 28-32s · 91-92°C · IMS Korb<br>→ Karamell + Nuss + Schokolade = Ziel<br><br><strong style="color:var(--crema)">Dein Ziel:</strong> Süße 4-7`}},
+   info:{title:"Süße (Sweetness)",text:`
+<strong style="color:var(--crema)">Was ist Süße?</strong><br>
+SCAA-Indikator für korrekte Extraktion: karamellisierte Zucker (Maillard-Reaktion) lösen sich nur im optimalen Fenster (EY 18–22%). Süße ist <em>der</em> Marker für gut gemachten Espresso (James Hoffmann).<br>
+<div class="info-visual">
+<div class="info-visual-title">Süße-Profile</div>
+<div class="info-row"><span class="info-row-emoji">🍯</span><span class="info-row-label">Honig</span><span class="info-row-text">fließend, blumig – Top für Medium</span></div>
+<div class="info-row"><span class="info-row-emoji">🍮</span><span class="info-row-label">Karamell</span><span class="info-row-text">dunkler, gebrannter Zucker – Dark Roast</span></div>
+<div class="info-row"><span class="info-row-emoji">🍫</span><span class="info-row-label">Schokolade</span><span class="info-row-text">vollmundig-süß → klassischer Italiener</span></div>
+<div class="info-row"><span class="info-row-emoji">🍒</span><span class="info-row-label">Trockenfrucht</span><span class="info-row-text">Datteln, Rosinen – Robusta-Blends</span></div>
+</div>
+<div class="info-target"><strong>Ziel:</strong> 4–6 · alles ≥6 ist exzellent</div>
+<strong style="color:var(--crema)">Süße fehlt bei:</strong><br>
+• Unterextraktion (zu grob, zu kurz, zu kalt) → flach, sauer<br>
+• Überextraktion (zu fein, zu lang, zu heiß) → bitter, trocken<br>
+• Zu frische Bohne (&lt;5 Tage nach Röstung) → CO2 verdrängt Aromen<br>
+• Zu alte Bohne (&gt;6 Wochen nach Öffnung) → oxidiert<br><br>
+<strong style="color:var(--crema)">Sweet Spot Lelit Victoria + IMS:</strong><br>
+18g Dose · 40–44g Yield · 28–32s · 91–93°C · PI 3–5s<br><br>
+<em style="color:var(--mid)">Tipp: Süße steigt fast immer durch +1°C Temp und Ratio auf 1:2,3.</em>
+`}},
   {id:"koerper",label:"Körper",lo:"dünn",hi:"vollmundig",
-   info:{title:"Körper",text:`<strong style="color:var(--crema)">Was ist Körper?</strong><br>Textur, Gewicht und Fülle im Mund – ein guter Espresso fühlt sich ölig-cremig an, nicht wässrig.<br><br><strong style="color:var(--crema)">Dünner Körper entsteht durch:</strong><br>• Ratio zu hoch (>1:2,6) → zu viel Wasser<br>• Dose zu niedrig (&lt;17g)<br>• Extraktion zu kurz (&lt;25s)<br>• Zu grober Mahlgrad<br><br><strong style="color:var(--crema)">Voller Körper durch:</strong><br>• Robusta-Anteil (Passalacqua, Mehari, Geisenhofer)<br>• Pre-Infusion 3-5s (Lelit Victoria einstellbar)<br>• Ratio 1:2,1-1:2,4<br>• IMS Korb (du hast ihn ✓)<br><br><strong style="color:var(--crema)">Dein Ziel:</strong> Körper 4-6`}},
+   info:{title:"Körper (Body / Mouthfeel)",text:`
+<strong style="color:var(--crema)">Was ist Körper?</strong><br>
+Mouthfeel: Viskosität, Gewicht, Textur. Entsteht durch Öle (Lipide) und feine Schwebstoffe. Ein guter Espresso fühlt sich ölig-cremig, nie wässrig an.<br>
+<div class="info-visual">
+<div class="info-visual-title">Körper-Skala</div>
+<div class="info-row"><span class="info-row-emoji">💧</span><span class="info-row-label">Tee</span><span class="info-row-text">dünn, wässrig → 1–2</span></div>
+<div class="info-row"><span class="info-row-emoji">🥛</span><span class="info-row-label">Milch</span><span class="info-row-text">leicht-cremig → 3–4</span></div>
+<div class="info-row"><span class="info-row-emoji">🍶</span><span class="info-row-label">Sahne</span><span class="info-row-text">vollmundig, ölig → 5–6 (ideal)</span></div>
+<div class="info-row"><span class="info-row-emoji">🍯</span><span class="info-row-label">Sirup</span><span class="info-row-text">extrem dicht, fast klebrig → 7</span></div>
+</div>
+<div class="info-target"><strong>Ziel:</strong> 4–6 · Robusta-Blends gerne 5–7</div>
+<strong style="color:var(--crema)">Dünner Körper entsteht durch:</strong><br>
+• Ratio zu hoch (&gt;1:2,6) → zu viel Wasser<br>
+• Dose zu niedrig (&lt;17g im 18g-Korb)<br>
+• Extraktion zu kurz (&lt;25s)<br>
+• Zu grober Mahlgrad → Wasser läuft durch<br><br>
+<strong style="color:var(--crema)">Voller Körper durch:</strong><br>
+• Robusta-Anteil (Passalacqua, Mehari, Geisenhofer)<br>
+• Pre-Infusion 3–5s (sättigt Puck gleichmäßig)<br>
+• Ratio 1:2,1–1:2,3<br>
+• IMS Sieb (gleichmäßiger Fluss → mehr Öle)
+`}},
   {id:"nachklang",label:"Nachklang",lo:"kurz",hi:"lang",
-   info:{title:"Nachklang",text:`<strong style="color:var(--crema)">Was ist Nachklang?</strong><br>Wie lange und wie angenehm der Geschmack nach dem Schlucken anhält.<br><br><strong style="color:var(--crema)">Guter Nachklang:</strong><br>30-60 Sekunden Schokolade/Nuss/Karamell<br>→ Zeichen guter Extraktion und guter Bohne<br><br><strong style="color:var(--crema)">Probleme:</strong><br>• Kurzer Nachklang (&lt;15s) → Unterextraktion oder alte Bohne<br>• Bitterer langer Nachklang → Überextraktion<br>• Metallischer Nachklang → Gerät reinigen (Brühgruppe!)<br>• Wässriger Abgang → Ratio zu hoch oder Dose zu niedrig<br><br><strong style="color:var(--crema)">Tipp:</strong><br>Ratio auf 1:2,1-1:2,3 kürzen verbessert Nachklang meist deutlich.<br>Blindsieb-Backflush täglich hält Nachklang sauber.`}}
+   info:{title:"Nachklang (Aftertaste / Finish)",text:`
+<strong style="color:var(--crema)">Was ist Nachklang?</strong><br>
+Wie lange und wie angenehm der Geschmack nach dem Schlucken anhält. SCAA: "linger and finish". Zeigt Bohnenqualität und Extraktionsgüte gleichzeitig.<br>
+<div class="info-visual">
+<div class="info-visual-title">Dauer & Qualität</div>
+<div class="info-row"><span class="info-row-emoji">⚡</span><span class="info-row-label">&lt;15s</span><span class="info-row-text">kurz, leer → Unterextraktion / alte Bohne</span></div>
+<div class="info-row"><span class="info-row-emoji">✅</span><span class="info-row-label">20–40s</span><span class="info-row-text">angenehmer Klang → solide</span></div>
+<div class="info-row"><span class="info-row-emoji">🍫</span><span class="info-row-label">45–60s</span><span class="info-row-text">Schokolade, Karamell, Nuss → exzellent</span></div>
+<div class="info-row"><span class="info-row-emoji">😖</span><span class="info-row-label">bitter lang</span><span class="info-row-text">verbrannt, aschig → Überextraktion</span></div>
+</div>
+<div class="info-target"><strong>Ziel:</strong> 4–6 · ein 60s-Schokoladenabgang ist Referenz</div>
+<strong style="color:var(--crema)">Problembilder:</strong><br>
+• Wässriger Abgang → Ratio zu hoch oder Dose zu niedrig<br>
+• Metallisch → Brühgruppe entkalken<br>
+• Astringent, trocken → Überextraktion<br><br>
+<strong style="color:var(--crema)">Tipp:</strong><br>
+Ratio auf 1:2,1–1:2,3 kürzen verbessert Nachklang meist deutlich. Täglicher Blindsieb-Backflush hält ihn sauber.
+`}}
 ];
 
 // Konvertiert Dot-Skala (1-7) auf Score-Skala (1-10) für Berechnungen
@@ -512,52 +660,177 @@ applyTheme();
 let verkActive = false;
 let verkStep = 0;
 
-const VERK_STEPS = [
-  {
-    id: 'crema_check',
-    title: '☕ Schritt 1: Crema beurteilen',
-    question: 'Wie sieht die Crema aus?',
-    options: [
-      { label: '🟤 Dunkelbraun, dünn', action: () => { dotValues.koerper = Math.max(1, dotValues.koerper - 1); }, hint: 'Hinweis auf Unterextraktion oder zu grober Mahlgrad' },
-      { label: '🍯 Goldbraun, stabil', action: () => { }, hint: 'Ideal – gut extrahiert' },
-      { label: '⬜ Hell, wässrig', action: () => { dotValues.saeure = Math.min(6, dotValues.saeure + 1); }, hint: 'Zu wenig Extraktion' },
-      { label: '⬛ Sehr dunkel, bitter', action: () => { dotValues.bitter = Math.min(6, dotValues.bitter + 1); }, hint: 'Überextraktion oder zu heiß' },
-    ]
-  },
-  {
-    id: 'saeure_check',
-    title: '🍋 Schritt 2: Erster Schluck',
-    question: 'Was merkst du beim ersten Schluck?',
-    options: [
-      { label: '😣 Stark sauer, beißend', action: () => { dotValues.saeure = 6; }, hint: 'Mahlgrad feiner oder Temp höher' },
-      { label: '🍋 Leicht säuerlich', action: () => { dotValues.saeure = 4; }, hint: 'Leichte Unterextraktion' },
-      { label: '✅ Ausgewogen, angenehm', action: () => { dotValues.saeure = 2; }, hint: 'Gut!' },
-      { label: '😑 Flach, kein Geschmack', action: () => { dotValues.saeure = 3; dotValues.suesse = Math.max(1, dotValues.suesse - 1); }, hint: 'Evtl. Unterextraktion' },
-    ]
-  },
-  {
-    id: 'suesse_check',
-    title: '🍫 Schritt 3: Mitte & Körper',
-    question: 'Was schmeckst du in der Mitte des Schlucks?',
-    options: [
-      { label: '🍫 Schokolade / Nuss', action: () => { dotValues.suesse = 6; dotValues.koerper = 5; if (!curAromen.includes('Schokolade')) curAromen.push('Schokolade'); }, hint: 'Perfekt für Dark Roast!' },
-      { label: '🍬 Leicht süßlich', action: () => { dotValues.suesse = 4; dotValues.koerper = 4; }, hint: 'Gut, noch Potenzial' },
-      { label: '💧 Wässrig, dünn', action: () => { dotValues.koerper = 2; dotValues.suesse = 2; }, hint: 'Ratio kürzen oder Dose erhöhen' },
-      { label: '🔥 Bitter, verbrannt', action: () => { dotValues.bitter = 6; dotValues.suesse = 1; }, hint: 'Überextraktion' },
-    ]
-  },
-  {
-    id: 'nachklang_check',
-    title: '⏱ Schritt 4: Abgang',
-    question: 'Was bleibt nach dem Schlucken?',
-    options: [
-      { label: '🍫 Langer Schokoladenabgang', action: () => { dotValues.nachklang = 6; }, hint: 'Ausgezeichnet!' },
-      { label: '✅ Angenehm, 20-30s', action: () => { dotValues.nachklang = 4; }, hint: 'Gut' },
-      { label: '⚡ Kurz, verschwindet sofort', action: () => { dotValues.nachklang = 2; }, hint: 'Ratio etwas kürzen' },
-      { label: '😖 Bitter, unangenehm lang', action: () => { dotValues.nachklang = 3; dotValues.bitter = Math.max(dotValues.bitter, 5); }, hint: 'Überextraktion' },
-    ]
-  }
-];
+// Liefert bohnenspezifische Verkostungs-Kontext-Infos
+function getVerkContext() {
+  if (!curKaffee) return { roast: 'dark', robusta: 0, beanLabel: '–', acidTarget: 2, bitterTarget: 3, bodyTarget: 5 };
+  const p = getBeanProfile(curKaffee);
+  const blend = (p.blend || '').toLowerCase();
+  const m = blend.match(/(\d+)\s*%\s*r/);
+  const robusta = m ? parseInt(m[1]) : 0;
+  const roast = p.roast || 'medium';
+  // Erwartete Zielwerte je Profil (SCAA-orientiert)
+  return {
+    roast, robusta,
+    beanLabel: curKaffee,
+    // Dark Roast: weniger Säure, mehr Körper, mehr Bitter erlaubt
+    // Robusta: mehr Bitter & Körper, weniger Säure
+    acidTarget: roast === 'dark' ? 2 : robusta > 30 ? 2 : 3,
+    bitterTarget: roast === 'dark' ? (robusta > 20 ? 4 : 3) : 3,
+    bodyTarget: robusta > 30 ? 6 : roast === 'dark' ? 5 : 4,
+    sweetTarget: 5,
+    nachklangTarget: 5
+  };
+}
+
+// Verkostung adaptiert sich pro Schritt an Bohne
+function buildVerkSteps() {
+  const ctx = getVerkContext();
+  const roastTxt = ctx.roast === 'dark' ? 'Dark Roast' : 'Medium Roast';
+  const robTxt = ctx.robusta > 0 ? `, ${ctx.robusta}% Robusta` : '';
+  const context = `${ctx.beanLabel} · ${roastTxt}${robTxt}`;
+
+  return [
+    {
+      id: 'aroma',
+      title: '👃 Schritt 1: Aroma (vor dem Trinken)',
+      context,
+      question: 'Halte die Tasse unter die Nase. Was riechst du primär?',
+      options: [
+        { label: '🍫 Schokolade / Kakao', ideal: ctx.roast === 'dark', hint: 'Klassisches Dark-Roast-Aroma',
+          action: () => { addAroma('Schokolade'); } },
+        { label: '🥜 Nuss / Karamell / Toast', ideal: true, hint: 'Maillard-Aromen, sehr typisch',
+          action: () => { addAroma('Karamell'); addAroma('Nuss'); } },
+        { label: '🍓 Frucht / Beere / Zitrus', ideal: ctx.roast === 'medium', hint: 'Helle Röstung, schöne Säure',
+          action: () => { addAroma('Beere'); addAroma('Frucht'); } },
+        { label: '🚬 Tabak / Holz / würzig', ideal: ctx.robusta > 30, hint: 'Robusta-typisch, ölig',
+          action: () => { addAroma('Tabak'); } },
+        { label: '🔥 Verbrannt / aschig', ideal: false, hint: 'Hinweis auf Überröstung oder zu heiß gebrüht',
+          action: () => { dotValues.bitter = Math.max(dotValues.bitter, 5); } },
+        { label: '💨 Schwach / leer', ideal: false, hint: 'Alte Bohne oder Unterextraktion',
+          action: () => { dotValues.suesse = Math.min(dotValues.suesse, 3); dotValues.nachklang = Math.min(dotValues.nachklang, 3); } }
+      ]
+    },
+    {
+      id: 'crema',
+      title: '☕ Schritt 2: Crema (visuell)',
+      context,
+      question: 'Wie sieht die Crema aus, bevor du umrührst?',
+      options: [
+        { label: '🍯 Dicht & Haselnuss, 3–5mm', ideal: true, hint: 'Ideal – gleichmäßige Extraktion',
+          action: () => { dotValues.koerper = ctx.bodyTarget; setCrema('Dicht & Haselnuss ✓'); } },
+        { label: '🐯 Tigerstreifen / marmoriert', ideal: true, hint: 'Sehr gut – gleichmäßiger Fluss',
+          action: () => { dotValues.koerper = ctx.bodyTarget; setCrema('Tigerstreifig ★'); } },
+        { label: '🟤 Dunkelbraun, ölig (Robusta)', ideal: ctx.robusta > 20, hint: 'Robusta-Charakter – ok',
+          action: () => { dotValues.koerper = Math.min(7, ctx.bodyTarget + 1); setCrema('Dunkel & Stark'); } },
+        { label: '🤍 Hell, dünn, schnell weg', ideal: false, hint: 'Unterextraktion oder zu grob',
+          action: () => { dotValues.koerper = 2; dotValues.saeure = Math.max(dotValues.saeure, 5); setCrema('Hell & Dünn'); } },
+        { label: '🕳 Löchrig / Channeling', ideal: false, hint: 'WDT/Tampen prüfen',
+          action: () => { dotValues.koerper = 3; setCrema('Grobporig'); } }
+      ]
+    },
+    {
+      id: 'saeure',
+      title: '🍋 Schritt 3: Erster Schluck – Säure',
+      context,
+      question: ctx.roast === 'dark'
+        ? 'Bei Dark Roast erwartest du wenig Säure. Was nimmst du wahr?'
+        : 'Medium Roast darf etwas Säure haben. Wie ist sie?',
+      options: [
+        { label: '✅ Rund, kaum spürbar', ideal: ctx.roast === 'dark', hint: 'Perfekt für Dark Roast',
+          action: () => { dotValues.saeure = 2; } },
+        { label: '🍇 Fruchtig-belebend', ideal: ctx.roast === 'medium', hint: 'Schöne Säure – ideal Medium',
+          action: () => { dotValues.saeure = 4; } },
+        { label: '🍋 Spitz-zitronig', ideal: false, hint: 'Tendenz Unterextraktion',
+          action: () => { dotValues.saeure = 5; } },
+        { label: '😣 Stechend, essigartig', ideal: false, hint: 'Klar unterextrahiert',
+          action: () => { dotValues.saeure = 7; dotValues.suesse = Math.min(dotValues.suesse, 2); } },
+        { label: '😑 Flach, kein Auftakt', ideal: false, hint: 'Alte Bohne oder zu kurz',
+          action: () => { dotValues.saeure = 2; dotValues.suesse = Math.min(dotValues.suesse, 2); dotValues.nachklang = Math.min(dotValues.nachklang, 3); } }
+      ]
+    },
+    {
+      id: 'suesse_koerper',
+      title: '🍫 Schritt 4: Mitte – Süße & Körper',
+      context,
+      question: 'Schluck halten. Wie fühlt sich der Espresso im Mund an und wie süß?',
+      options: [
+        { label: '🍫 Schokoladig-süß, vollmundig', ideal: ctx.roast === 'dark', hint: 'Top für Dark Roast',
+          action: () => { dotValues.suesse = 5; dotValues.koerper = ctx.bodyTarget; addAroma('Schokolade'); } },
+        { label: '🍯 Honig-süß, sirupartig', ideal: true, hint: 'Karamellisierte Zucker – sehr gut',
+          action: () => { dotValues.suesse = 6; dotValues.koerper = ctx.bodyTarget; addAroma('Karamell'); } },
+        { label: '🍬 Leicht süß, mittlerer Körper', ideal: true, hint: 'Solide, Spielraum nach oben',
+          action: () => { dotValues.suesse = 4; dotValues.koerper = 4; } },
+        { label: '💧 Wässrig, fast keine Süße', ideal: false, hint: 'Ratio kürzen oder Dose erhöhen',
+          action: () => { dotValues.suesse = 2; dotValues.koerper = 2; } },
+        { label: '🌰 Trocken, wenig Süße, viel Bitter', ideal: false, hint: 'Überextraktion',
+          action: () => { dotValues.suesse = 1; dotValues.koerper = 3; dotValues.bitter = Math.max(dotValues.bitter, 5); } }
+      ]
+    },
+    {
+      id: 'bitter',
+      title: '☕ Schritt 5: Bitterkeit',
+      context,
+      question: ctx.robusta > 20
+        ? 'Robusta bringt Bitter – sollte aber edel sein, nicht aschig.'
+        : 'Wie ist die Bitterkeit ausgeprägt?',
+      options: [
+        { label: '😊 Sehr mild, harmonisch', ideal: ctx.roast === 'medium' && ctx.robusta < 20, hint: 'Top für Medium ohne Robusta',
+          action: () => { dotValues.bitter = 2; } },
+        { label: '🍫 Edel-bitter (Kakao)', ideal: true, hint: 'Ideal für Dark Roast',
+          action: () => { dotValues.bitter = ctx.bitterTarget; } },
+        { label: '🥬 Vegetativ, etwas trocken', ideal: false, hint: 'Leichte Überextraktion',
+          action: () => { dotValues.bitter = 5; } },
+        { label: '🚬 Aschig, verbrannt', ideal: false, hint: 'Klar überextrahiert oder Temp zu hoch',
+          action: () => { dotValues.bitter = 7; dotValues.suesse = Math.min(dotValues.suesse, 2); } },
+        { label: '🛢 Gummiartig, ranzig', ideal: false, hint: 'Verschmutzte Brühgruppe – backflushen',
+          action: () => { dotValues.bitter = 6; dotValues.nachklang = 3; } }
+      ]
+    },
+    {
+      id: 'nachklang',
+      title: '⏱ Schritt 6: Abgang & Nachklang',
+      context,
+      question: '15–60 Sekunden nach dem Schluck: was bleibt im Mund?',
+      options: [
+        { label: '🍫 Lang & schokoladig (45s+)', ideal: true, hint: 'Referenz-Espresso',
+          action: () => { dotValues.nachklang = 7; } },
+        { label: '🍮 Karamell/Nuss, ~30s', ideal: true, hint: 'Sehr gut',
+          action: () => { dotValues.nachklang = ctx.nachklangTarget; } },
+        { label: '✅ Sauber, neutral, 20s', ideal: false, hint: 'Solide, etwas mehr Süße wäre besser',
+          action: () => { dotValues.nachklang = 4; } },
+        { label: '⚡ Kurz, leer (<15s)', ideal: false, hint: 'Unterextraktion oder alte Bohne',
+          action: () => { dotValues.nachklang = 2; } },
+        { label: '😖 Bitter/aschig lang', ideal: false, hint: 'Überextraktion',
+          action: () => { dotValues.nachklang = 3; dotValues.bitter = Math.max(dotValues.bitter, 5); } },
+        { label: '⚙ Metallisch / chemisch', ideal: false, hint: 'Brühgruppe entkalken / reinigen',
+          action: () => { dotValues.nachklang = 2; dotValues.bitter = Math.max(dotValues.bitter, 4); } }
+      ]
+    }
+  ];
+}
+
+// Helper: Aroma hinzufügen ohne Duplikat, syncen mit Chip-UI
+function addAroma(name) {
+  if (!curAromen.includes(name)) curAromen.push(name);
+  syncAromenChips();
+}
+function syncAromenChips() {
+  document.querySelectorAll('#aromen-chips .chip').forEach(b => {
+    b.classList.toggle('on', curAromen.includes(b.dataset.val));
+  });
+}
+function setCrema(label) {
+  curCrema = label;
+  syncCremaChips();
+}
+function syncCremaChips() {
+  document.querySelectorAll('#crema-chips .chip').forEach(b => {
+    b.classList.toggle('on', b.dataset.val === curCrema);
+  });
+}
+
+// Dynamische Steps – werden bei Start gebaut
+let VERK_STEPS = [];
 
 function toggleVerkostung() {
   verkActive = !verkActive;
@@ -565,6 +838,12 @@ function toggleVerkostung() {
   const box = document.getElementById('verk-assistant');
   if (verkActive) {
     verkStep = 0;
+    // Bohnenspezifische Steps bauen (Targets, Hints, Fragen passen sich an)
+    VERK_STEPS = buildVerkSteps();
+    // Reset auf Neutral (4) – Verkostung setzt absolute Werte
+    dotValues.saeure = 4; dotValues.bitter = 4; dotValues.suesse = 4;
+    dotValues.koerper = 4; dotValues.nachklang = 4;
+    updateDotDisplayAll();
     btn.textContent = '✕ beenden';
     box.style.display = 'block';
     renderVerkStep();
@@ -578,10 +857,18 @@ function toggleVerkostung() {
 function renderVerkStep() {
   const box = document.getElementById('verk-assistant');
   if (verkStep >= VERK_STEPS.length) {
+    const names = {saeure:'Säure',bitter:'Bitterkeit',suesse:'Süße',koerper:'Körper',nachklang:'Nachklang'};
+    const summary = ['saeure','bitter','suesse','koerper','nachklang']
+      .map(id => `${names[id]}: ${dotValues[id]}/7`).join(' · ');
+    const aromaSummary = curAromen.length ? `Aromen: ${curAromen.join(', ')}` : '';
+    const cremaSummary = curCrema ? `Crema: ${curCrema}` : '';
     box.innerHTML = `<div style="background:rgba(90,184,58,0.1);border:1px solid rgba(90,184,58,0.3);border-radius:9px;padding:12px;font-family:'Courier New',monospace;font-size:calc(.65rem*var(--font-scale))">
       <strong style="color:var(--green)">✓ Verkostung abgeschlossen!</strong><br>
-      <span style="color:var(--mid)">Slider wurden angepasst. Bitte prüfe und korrigiere falls nötig.</span><br>
-      <span style="color:var(--crema);font-size:.9em">↓ Jetzt noch Gesamteindruck wählen um zu speichern</span><br>
+      <div style="color:var(--mid);font-size:.9em;margin-top:4px;line-height:1.6">${summary}</div>
+      ${aromaSummary ? `<div style="color:var(--mid);font-size:.85em;margin-top:3px">${aromaSummary}</div>` : ''}
+      ${cremaSummary ? `<div style="color:var(--mid);font-size:.85em">${cremaSummary}</div>` : ''}
+      <div style="color:var(--mid);font-size:.85em;margin-top:6px">Slider unten prüfen & bei Bedarf manuell korrigieren.</div>
+      <div style="color:var(--crema);font-size:.9em;margin-top:4px">↓ Jetzt noch Gesamteindruck wählen um zu speichern</div>
       <button onclick="toggleVerkostung()" style="margin-top:8px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);padding:4px 12px;border-radius:6px;font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer">Schließen</button>
     </div>`;
     updateDotDisplayAll();
@@ -590,17 +877,46 @@ function renderVerkStep() {
     return;
   }
   const step = VERK_STEPS[verkStep];
-  box.innerHTML = `<div style="background:var(--crema2);border:1px solid var(--border);border-radius:9px;padding:12px;margin-bottom:8px">
-    <div style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));color:var(--crema);font-weight:bold;margin-bottom:6px">${step.title}</div>
-    <div style="font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--mid);margin-bottom:10px">${step.question}</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+  const progressDots = VERK_STEPS.map((_, i) =>
+    `<div class="verk-prog-dot ${i < verkStep ? 'done' : i === verkStep ? 'current' : ''}"></div>`
+  ).join('');
+  box.innerHTML = `<div class="verk-card">
+    <div class="verk-title">${step.title}</div>
+    ${step.context ? `<div class="verk-context">${step.context}</div>` : ''}
+    <div class="verk-question">${step.question}</div>
+    <div class="verk-opts">
       ${step.options.map((o, i) => `
-        <button onclick="selectVerkOption(${i})" style="padding:8px 6px;border-radius:7px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;text-align:left;line-height:1.4">
-          ${o.label}<br><span style="color:var(--mid);font-size:.85em">${o.hint}</span>
+        <button class="verk-opt${o.ideal ? ' ideal' : ''}" onclick="selectVerkOption(${i})">
+          ${o.label}${o.ideal ? ' ✓' : ''}<span class="verk-opt-hint">${o.hint}</span>
         </button>`).join('')}
     </div>
-    <div style="margin-top:8px;font-family:'Courier New',monospace;font-size:calc(.55rem*var(--font-scale));color:var(--mid)">Schritt ${verkStep + 1} von ${VERK_STEPS.length}</div>
+    <div class="verk-progress">${progressDots}</div>
+    <div style="font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);margin-top:5px;text-align:center">Schritt ${verkStep + 1} von ${VERK_STEPS.length} · ✓ = ideal für deine Bohne</div>
   </div>`;
+}
+
+function showVerkInfo() {
+  document.getElementById('modal-title').textContent = '👃 Geführte Verkostung';
+  document.getElementById('modal-body').innerHTML = `
+<p style="font-family:'Courier New',monospace;font-size:calc(.65rem*var(--font-scale));line-height:1.6">
+<strong style="color:var(--crema)">Was macht die geführte Verkostung?</strong><br>
+6 Schritte nach SCAA-Cupping-Protokoll, angepasst an dein Bohnenprofil:<br><br>
+<strong>1. Aroma</strong> – Was riechst du? (vor dem Trinken)<br>
+<strong>2. Crema</strong> – Visuelle Beurteilung<br>
+<strong>3. Säure</strong> – Erster Schluck<br>
+<strong>4. Süße &amp; Körper</strong> – Mitte des Schlucks<br>
+<strong>5. Bitterkeit</strong> – Gesamteindruck<br>
+<strong>6. Nachklang</strong> – 15–60s danach<br><br>
+<div class="info-target">Optionen mit <strong>✓</strong> sind für die aktuell gewählte Bohne ideal (Dark/Medium Roast, Robusta-Anteil).</div>
+<strong style="color:var(--crema)">Was passiert mit den Antworten?</strong><br>
+• Slider werden automatisch gesetzt (Säure, Bitter, Süße, Körper, Nachklang)<br>
+• Aromen-Chips werden vorausgewählt<br>
+• Crema-Typ wird markiert<br>
+• Danach kannst du alle Werte manuell feinjustieren<br><br>
+<strong style="color:var(--crema)">Quellen:</strong><br>
+SCAA Coffee Taster's Flavor Wheel · James Hoffmann (The World Atlas of Coffee) · Scott Rao (Espresso Extraction)
+</p>`;
+  document.getElementById('modal-bg').classList.add('show');
 }
 
 function selectVerkOption(i) {
@@ -943,6 +1259,15 @@ function selectKaffee(k){
 // ============================================================
 function resetForm(prefill){
   curSterne=0;curEmpf=null;curAromen=[];curCrema=null;curGesamt=0;
+  // Verkostung schließen falls offen (z.B. nach Bohnenwechsel)
+  if(verkActive){
+    verkActive=false;
+    verkStep=0;
+    const vb=document.getElementById('verk-assistant');
+    if(vb){vb.innerHTML='';vb.style.display='none';}
+    const vt=document.getElementById('verk-toggle-btn');
+    if(vt)vt.textContent='▶ starten';
+  }
   // Reset Gesamteindruck Buttons
   document.querySelectorAll('.gesamt-btn').forEach(btn => {
     btn.style.border = '1.5px solid var(--border)';
@@ -1289,22 +1614,55 @@ function showBohnenInfo(kaffee) {
 }
 
 function showAromaInfo(){
-  document.getElementById('modal-title').textContent='Aromen';
-  document.getElementById('modal-body').innerHTML=`<p><strong style="color:var(--crema)">Dein Ziel-Profil (Dark Roast):</strong><br>Schokolade · Nuss · Karamell</p><p><strong style="color:var(--crema)">Helle/mittlere Röstungen:</strong><br>Frucht · Blume · Zitrus · Beere</p><p><strong style="color:var(--crema)">Überextraktion / Probleme:</strong><br>Asche · Rauch → Temp senken, kürzer extrahieren</p><p><strong style="color:var(--crema)">Robusta / alt:</strong><br>Tabak · Holz → andere Bohne oder frischer</p><p>Für Dinzler Roma & Passalacqua: Schokolade + Nuss + Karamell sind die Zielaromen bei optimalem Bezug.</p>`;
+  document.getElementById('modal-title').textContent='Aromen – SCAA Flavor Wheel';
+  document.getElementById('modal-body').innerHTML=`
+<p style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.6">
+<strong style="color:var(--crema)">Aroma-Kategorien (vereinfacht nach SCAA):</strong></p>
+<div class="info-visual">
+<div class="info-visual-title">Positive Aromen</div>
+<div class="info-row"><span class="info-row-emoji">🍫</span><span class="info-row-label">Schokolade</span><span class="info-row-text">Kakao, dunkle Schokolade – Dark Roast</span></div>
+<div class="info-row"><span class="info-row-emoji">🥜</span><span class="info-row-label">Nuss</span><span class="info-row-text">Mandel, Haselnuss – Maillard</span></div>
+<div class="info-row"><span class="info-row-emoji">🍮</span><span class="info-row-label">Karamell</span><span class="info-row-text">Zucker, Toffee – ideale Süße</span></div>
+<div class="info-row"><span class="info-row-emoji">🍒</span><span class="info-row-label">Frucht/Beere</span><span class="info-row-text">Kirsche, Beere – Medium/Light Roast</span></div>
+<div class="info-row"><span class="info-row-emoji">🌸</span><span class="info-row-label">Blume</span><span class="info-row-text">Jasmin – sehr helle Röstungen</span></div>
+<div class="info-row"><span class="info-row-emoji">🍋</span><span class="info-row-label">Zitrus</span><span class="info-row-text">Bergamotte – belebende Säure</span></div>
+<div class="info-row"><span class="info-row-emoji">🌶</span><span class="info-row-label">Gewürz/Vanille</span><span class="info-row-text">Zimt, Vanille – komplexe Bohnen</span></div>
+</div>
+<div class="info-visual">
+<div class="info-visual-title">Warn-Aromen</div>
+<div class="info-row"><span class="info-row-emoji">🚬</span><span class="info-row-label">Asche/Rauch</span><span class="info-row-text">Überextraktion oder Röstfehler</span></div>
+<div class="info-row"><span class="info-row-emoji">🌳</span><span class="info-row-label">Holz/Tabak</span><span class="info-row-text">Alte Bohne oder hoher Robusta-Anteil</span></div>
+</div>
+<div class="info-target"><strong>Ziel Dark Roast (Lelit Victoria + IMS):</strong> Schokolade + Nuss + Karamell – die drei klassischen Maillard-Marker</div>
+<p style="font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--mid)">Tipp: Beim Verkosten erst <strong>riechen</strong>, dann schlucken, dann nachschmecken. Aromen treten in 3 Phasen auf (Nase → Mund → Nachklang).</p>`;
   document.getElementById('modal-bg').classList.add('show');
 }
 
 function showCremaInfo(){
   document.getElementById('modal-title').textContent='Crema – Beurteilung';
   document.getElementById('modal-body').innerHTML=`
-    <div class="crema-examples">
-      <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#8B4513,#C8974A)">🟫</div><div class="crema-ex-label">Dicht & Haselnuss ✓<br>Ideal</div></div>
-      <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#5c3317,#8B4513,#C8974A,#8B4513)">🐯</div><div class="crema-ex-label">Tigerstreifig ★<br>Perfekt – frische Bohne</div></div>
-      <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#2d0d00,#5c1a00)">⬛</div><div class="crema-ex-label">Dunkel & Stark<br>Überextraktion</div></div>
-      <div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#d4a96a,#f0d5a0)">🟨</div><div class="crema-ex-label">Hell & Dünn<br>Unterextr. / alte Bohne</div></div>
-    </div>
-    <p><strong style="color:var(--crema)">Grobporig:</strong> Löcher/Blasen in der Crema = Channeling oder zu hoher Druck (OPV checken).</p>
-    <p>Crema sollte 3-4mm dick sein und 1-2 Min halten. Tigerstreifig = Zeichen bester Frische und Extraktion.</p>`;
+<p style="font-family:'Courier New',monospace;font-size:calc(.62rem*var(--font-scale));line-height:1.6">
+<strong style="color:var(--crema)">Was zeigt die Crema?</strong><br>
+Crema ist eine Emulsion aus CO₂, Wasser und Ölen. Sie ist Indikator für:<br>
+• Frische der Bohne (CO₂)<br>
+• Gleichmäßigkeit der Extraktion<br>
+• Druck der Maschine<br>
+• Korbqualität</p>
+<div class="crema-examples">
+<div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#8B4513,#C8974A)">🟫</div><div class="crema-ex-label">Dicht & Haselnuss ✓<br><strong style="color:var(--green)">Ideal</strong></div></div>
+<div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#5c3317,#8B4513,#C8974A,#8B4513)">🐯</div><div class="crema-ex-label">Tigerstreifig ★<br><strong style="color:var(--green)">Perfekt</strong></div></div>
+<div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#2d0d00,#5c1a00)">⬛</div><div class="crema-ex-label">Dunkel & Stark<br><strong style="color:var(--red)">Überextr.</strong></div></div>
+<div class="crema-ex"><div class="crema-ex-img" style="background:linear-gradient(135deg,#d4a96a,#f0d5a0)">🟨</div><div class="crema-ex-label">Hell & Dünn<br><strong style="color:var(--red)">Unterextr.</strong></div></div>
+</div>
+<div class="info-visual">
+<div class="info-visual-title">Diagnose nach Bild</div>
+<div class="info-row"><span class="info-row-emoji">🐯</span><span class="info-row-label">Tigerstreifen</span><span class="info-row-text">Dunkle Streifen auf hellem Grund = frische Bohne, gleichmäßiger Fluss</span></div>
+<div class="info-row"><span class="info-row-emoji">🟫</span><span class="info-row-label">Goldbraun</span><span class="info-row-text">3–5mm dick, hält 1–2 min = solide Extraktion</span></div>
+<div class="info-row"><span class="info-row-emoji">🤍</span><span class="info-row-label">Hell/dünn</span><span class="info-row-text">Bohne alt, Mahlgrad zu grob oder Wasser zu kalt</span></div>
+<div class="info-row"><span class="info-row-emoji">⬛</span><span class="info-row-label">Sehr dunkel/ölig</span><span class="info-row-text">Überextraktion, Temp zu hoch oder zu fein gemahlen</span></div>
+<div class="info-row"><span class="info-row-emoji">🕳</span><span class="info-row-label">Grobporig</span><span class="info-row-text">Channeling – WDT-Tool + sauberes Tampen</span></div>
+</div>
+<p style="font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--mid)">Crema verschwindet nach 1–3 min vollständig – das ist normal. Halten die Bläschen ungewöhnlich lang, war zu viel Robusta im Spiel.</p>`;
   document.getElementById('modal-bg').classList.add('show');
 }
 
@@ -1364,12 +1722,22 @@ function switchTab(t){
 // ============================================================
 // SERVICE WORKER
 // ============================================================
-// Service Worker deregistrieren (kein Caching mehr)
+// SERVICE WORKER – Network-First für automatisches Update
+// ============================================================
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.getRegistrations().then(regs=>{
-    regs.forEach(reg=>reg.unregister());
-  });
-  caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
+  navigator.serviceWorker.register('./sw.js')
+    .then(reg=>{
+      // Wenn ein neuer SW gefunden wird: sofort aktivieren
+      reg.addEventListener('updatefound',()=>{
+        const sw=reg.installing;
+        sw.addEventListener('statechange',()=>{
+          if(sw.state==='installed') sw.postMessage({type:'SKIP_WAITING'});
+        });
+      });
+    })
+    .catch(()=>{});
+  // Wenn neuer SW übernimmt → Seite neu laden (holt frisches index.html)
+  navigator.serviceWorker.addEventListener('controllerchange',()=>location.reload());
 }
 
 // ============================================================
@@ -1760,7 +2128,6 @@ function renderTrainerRec(kaffee) {
         </div>
         <button class="info-btn" style="margin-left:auto;width:22px;height:22px;font-size:.7rem" onclick="showLearnedInfo('${kaffee.replace(/'/g,"\\'")}')">🧠</button>
       </div>
-      ${getLernBadge()}
       <div class="trainer-grid">
         <div class="trainer-param">
           <div class="trainer-param-label">Mahlgrad</div>
@@ -1815,29 +2182,35 @@ function applyTrainerRec(values) {
 // ============================================================
 // AUTO-UPDATE CHECK
 // version.json wird bei jedem GitHub-Deploy neu geschrieben.
-// Der ?t= Parameter verhindert, dass der Browser version.json selbst cached.
-// Falls Build-Hash != gespeicherter Hash → hard reload → user bekommt
-// automatisch die neue Version ohne manuellen Cache-Clear.
+// iOS PWA ignoriert location.reload(true) → stattdessen location.replace()
+// mit Timestamp: zwingt WKWebView zu echter Netzwerk-Anfrage.
 // ============================================================
 (function(){
-  const BUILD_KEY = 'app_build';
-  fetch('./version.json?t=' + Date.now())
-    .then(r => r.json())
+  // Cache-Buster-Parameter aus URL entfernen (nach Update-Redirect)
+  if(location.search.match(/_r=\d+/)){
+    history.replaceState(null,'',location.pathname);
+  }
+
+  const BUILD_KEY='app_build';
+  fetch('./version.json?t='+Date.now())
+    .then(r=>r.json())
     .then(function(json){
-      const newBuild = json.v || APP_VERSION;
-      const stored = localStorage.getItem(BUILD_KEY);
-      if(stored && stored !== newBuild){
-        localStorage.setItem(BUILD_KEY, newBuild);
-        caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); });
-        location.reload(true);
+      const newBuild=json.v||APP_VERSION;
+      const stored=localStorage.getItem(BUILD_KEY);
+      if(stored && stored!==newBuild){
+        localStorage.setItem(BUILD_KEY,newBuild);
+        // Alle Caches löschen
+        if(window.caches) caches.keys().then(function(keys){keys.forEach(function(k){caches.delete(k);});});
+        // location.replace mit Timestamp: umgeht iOS PWA Cache zuverlässig
+        location.replace(location.pathname+'?_r='+Date.now());
       } else {
         if(!stored){
-          const t = document.getElementById('sw-toast');
-          t.textContent = 'v' + APP_VERSION + ' geladen ✓';
-          t.style.display = 'block';
-          setTimeout(function(){ t.style.display='none'; }, 3000);
+          const t=document.getElementById('sw-toast');
+          t.textContent='v'+APP_VERSION+' geladen ✓';
+          t.style.display='block';
+          setTimeout(function(){t.style.display='none';},3000);
         }
-        localStorage.setItem(BUILD_KEY, newBuild);
+        localStorage.setItem(BUILD_KEY,newBuild);
       }
     })
     .catch(function(){
@@ -1846,10 +2219,135 @@ function applyTrainerRec(values) {
 })();
 
 // ============================================================
+// WEIGHMYBRU² WAAGE
+// ============================================================
+const scale = {
+  url: null, connected: false,
+  weight: 0, timerMs: 0, timerRunning: false, _poll: null,
+
+  async _req(path, method) {
+    const r = await fetch(this.url + path, {
+      method: method || 'GET', mode: 'cors',
+      signal: AbortSignal.timeout(2500)
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r;
+  },
+  async dashboard() { return (await this._req('/api/dashboard')).json(); },
+  async tare()       { return this._req('/api/tare',         'POST'); },
+  async startTimer() { return this._req('/api/timer/start',  'POST'); },
+  async stopTimer()  { return this._req('/api/timer/stop',   'POST'); },
+  async resetTimer() { return this._req('/api/timer/reset',  'POST'); },
+
+  startPoll() {
+    if (this._poll) return;
+    this._poll = setInterval(async () => {
+      try {
+        const d = await this.dashboard();
+        this.weight = d.weight || 0;
+        this.timerMs = d.timer_elapsed || 0;
+        this.timerRunning = !!d.timer_running;
+        scaleUpdateLive();
+      } catch(e) {}
+    }, 200);
+  },
+  stopPoll() { if (this._poll) { clearInterval(this._poll); this._poll = null; } }
+};
+
+function scaleConnect() {
+  const raw = (document.getElementById('scale-ip-input').value.trim()) || 'weighmybru.local';
+  scale.url = raw.startsWith('http') ? raw : 'http://' + raw;
+  const err = document.getElementById('scale-conn-err');
+  const sta = document.getElementById('scale-conn-status');
+  err.textContent = 'Verbinde…';
+  scale.dashboard()
+    .then(() => {
+      scale.connected = true;
+      settings.scaleUrl = scale.url;
+      saveSettings();
+      err.textContent = '';
+      sta.innerHTML = `<span class="scale-dot on"></span>Verbunden · ${raw}`;
+      scaleRenderBrewBar();
+    })
+    .catch(e => {
+      scale.connected = false;
+      err.textContent = 'Fehler: ' + e.message + ' · Manuelle Eingabe weiterhin möglich';
+      sta.innerHTML = `<span class="scale-dot off"></span>Nicht verbunden`;
+      scaleRenderBrewBar();
+    });
+}
+
+async function scaleStartBrew() {
+  try {
+    await scale.tare();
+    await scale.resetTimer();
+    await scale.startTimer();
+    scale.startPoll();
+    scaleRenderBrewBar();
+  } catch(e) {
+    const s = document.getElementById('scale-brew-status');
+    if (s) s.textContent = 'Fehler: ' + e.message;
+  }
+}
+
+async function scaleStopBrew() {
+  try {
+    await scale.stopTimer();
+    scale.stopPoll();
+    if (scale.weight > 0) document.getElementById('f-doseOut').value = scale.weight.toFixed(1);
+    if (scale.timerMs > 0) document.getElementById('f-zeit').value = Math.round(scale.timerMs / 1000);
+    updateRatio(); updateLiveTip();
+    scaleRenderBrewBar();
+  } catch(e) {
+    const s = document.getElementById('scale-brew-status');
+    if (s) s.textContent = 'Fehler: ' + e.message;
+  }
+}
+
+async function scaleTare() { try { await scale.tare(); } catch(e) {} }
+
+function scaleRenderBrewBar() {
+  const bar = document.getElementById('scale-brew-bar');
+  if (!bar) return;
+  if (!scale.connected) { bar.style.display = 'none'; return; }
+  bar.innerHTML = `<div class="scale-bar">
+    <div class="scale-live">
+      <div class="scale-live-group"><div class="scale-live-label">Yield Aus</div><div class="scale-live-val" id="scale-w">—</div></div>
+      <div class="scale-live-group"><div class="scale-live-label">Zeit</div><div class="scale-live-val" id="scale-t">—</div></div>
+      <div class="scale-live-group"><div class="scale-live-label">Status</div><div class="scale-live-val" id="scale-brew-status" style="font-size:calc(.68rem*var(--font-scale));color:var(--mid)">bereit</div></div>
+    </div>
+    <div class="scale-btns">
+      <button class="scale-btn" onclick="scaleTare()">⊘ Tara</button>
+      <button class="scale-btn start" onclick="scaleStartBrew()">▶ Start</button>
+      <button class="scale-btn stop" onclick="scaleStopBrew()">■ Stopp & übernehmen</button>
+    </div>
+  </div>`;
+  bar.style.display = 'block';
+}
+
+function scaleUpdateLive() {
+  const w = document.getElementById('scale-w');
+  const t = document.getElementById('scale-t');
+  const s = document.getElementById('scale-brew-status');
+  if (w) w.textContent = scale.weight.toFixed(1) + 'g';
+  if (t) t.textContent = (scale.timerMs / 1000).toFixed(1) + 's';
+  if (s) s.textContent = scale.timerRunning ? '⏱ läuft' : '■ gestoppt';
+}
+
+// ============================================================
 // INIT
 // ============================================================
 buildPills();
 renderDashboard();
+// Versionsnummer in Einstellungen dynamisch setzen
+(function(){const el=document.getElementById('version-display');if(el)el.textContent='v'+APP_VERSION+' · Mai 2026';})();
+// Waage aus Settings wiederherstellen
+(function(){
+  if(settings.scaleUrl){
+    const ipEl=document.getElementById('scale-ip-input');
+    if(ipEl) ipEl.value=settings.scaleUrl.replace(/^https?:\/\//,'');
+  }
+})();
 </script>
 </body>
 </html>
