@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v4.2</title>
+<title>Espresso Trainer v4.3</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -306,6 +306,9 @@ textarea:focus{border-color:var(--crema);}
 .verk-prog-dot{flex:1;height:4px;border-radius:2px;background:var(--border2);}
 .verk-prog-dot.done{background:var(--green);}
 .verk-prog-dot.current{background:var(--crema);}
+.verk-skip-btn{width:100%;margin-top:8px;padding:7px;background:none;border:1px dashed var(--border);color:var(--mid);border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.55rem*var(--font-scale));cursor:pointer;}
+.verk-skip-btn:active{background:var(--crema2);}
+.verk-hint-line{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));color:var(--mid);margin-bottom:8px;font-style:italic;line-height:1.5;}
 </style>
 </head>
 <body class="theme-dark">
@@ -464,7 +467,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.2 · Mai 2026 · Tipps röststufen-spezifisch; KI-Hilfe pro Bezug in Historie</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.3 · Mai 2026 · Verkostung: Schritte überspringbar; generische Bohnen-Verweise entfernt</div></div></div>
       </div>
       <div class="card">
         <div class="card-title">WeighMyBru² Waage</div>
@@ -497,7 +500,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='4.2';
+const APP_VERSION='4.3';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -591,7 +594,7 @@ Mouthfeel: Viskosität, Gewicht, Textur. Entsteht durch Öle (Lipide) und feine 
 • Extraktion zu kurz (&lt;25s)<br>
 • Zu grober Mahlgrad → Wasser läuft durch<br><br>
 <strong style="color:var(--crema)">Voller Körper durch:</strong><br>
-• Robusta-Anteil (Passalacqua, Mehari, Geisenhofer)<br>
+• Höherer Robusta-Anteil im Blend (mehr Crema-Öle)<br>
 • Pre-Infusion 3–5s (sättigt Puck gleichmäßig)<br>
 • Ratio 1:2,1–1:2,3<br>
 • IMS Sieb (gleichmäßiger Fluss → mehr Öle)
@@ -692,9 +695,10 @@ function buildVerkSteps() {
   return [
     {
       id: 'aroma',
-      title: '👃 Schritt 1: Aroma (vor dem Trinken)',
+      title: '👃 Schritt 1: Aroma (optional)',
       context,
-      question: 'Halte die Tasse unter die Nase. Was riechst du primär?',
+      question: 'Rieche kurz an Crema und Tasse. Was nimmst du am ehesten wahr?',
+      hint: 'Riechen ist Übungssache – wenn du unsicher bist, überspring den Schritt einfach unten. Das senkt deine Bewertung nicht.',
       options: [
         { label: '🍫 Schokolade / Kakao', ideal: ctx.roast === 'dark', hint: 'Klassisches Dark-Roast-Aroma',
           action: () => { addAroma('Schokolade'); } },
@@ -884,15 +888,22 @@ function renderVerkStep() {
     <div class="verk-title">${step.title}</div>
     ${step.context ? `<div class="verk-context">${step.context}</div>` : ''}
     <div class="verk-question">${step.question}</div>
+    ${step.hint ? `<div class="verk-hint-line">${step.hint}</div>` : ''}
     <div class="verk-opts">
       ${step.options.map((o, i) => `
         <button class="verk-opt${o.ideal ? ' ideal' : ''}" onclick="selectVerkOption(${i})">
           ${o.label}${o.ideal ? ' ✓' : ''}<span class="verk-opt-hint">${o.hint}</span>
         </button>`).join('')}
     </div>
+    <button class="verk-skip-btn" onclick="skipVerkStep()">Unsicher? Diesen Schritt überspringen →</button>
     <div class="verk-progress">${progressDots}</div>
     <div style="font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);margin-top:5px;text-align:center">Schritt ${verkStep + 1} von ${VERK_STEPS.length} · ✓ = ideal für deine Bohne</div>
   </div>`;
+}
+
+function skipVerkStep() {
+  verkStep++;
+  renderVerkStep();
 }
 
 function showVerkInfo() {
@@ -901,12 +912,13 @@ function showVerkInfo() {
 <p style="font-family:'Courier New',monospace;font-size:calc(.65rem*var(--font-scale));line-height:1.6">
 <strong style="color:var(--crema)">Was macht die geführte Verkostung?</strong><br>
 6 Schritte nach SCAA-Cupping-Protokoll, angepasst an dein Bohnenprofil:<br><br>
-<strong>1. Aroma</strong> – Was riechst du? (vor dem Trinken)<br>
+<strong>1. Aroma</strong> – Was riechst du? (optional)<br>
 <strong>2. Crema</strong> – Visuelle Beurteilung<br>
 <strong>3. Säure</strong> – Erster Schluck<br>
 <strong>4. Süße &amp; Körper</strong> – Mitte des Schlucks<br>
 <strong>5. Bitterkeit</strong> – Gesamteindruck<br>
 <strong>6. Nachklang</strong> – 15–60s danach<br><br>
+<div class="info-target">Jeder Schritt hat einen <strong>„Überspringen"</strong>-Button. Wenn du dir bei etwas unsicher bist – z.B. beim Riechen – einfach überspringen. Übersprungene Schritte lassen den Slider neutral (4) und senken die Bewertung nicht.</div>
 <div class="info-target">Optionen mit <strong>✓</strong> sind für die aktuell gewählte Bohne ideal (Dark/Medium Roast, Robusta-Anteil).</div>
 <strong style="color:var(--crema)">Was passiert mit den Antworten?</strong><br>
 • Slider werden automatisch gesetzt (Säure, Bitter, Süße, Körper, Nachklang)<br>
@@ -1069,6 +1081,14 @@ function generateAIPrompt(shot,context){
   const best=all.length?all.reduce((a,b)=>b.score>a.score?b:a):null;
   const kShotsSorted=curKaffee&&data[curKaffee]?[...data[curKaffee]].sort((a,b)=>b.score-a.score):[];
 
+  // Lieblings-/Problembohnen aus echten Daten ableiten (kein Hardcoding)
+  const beanStats=Object.entries(data)
+    .map(([n,sh])=>({n,avg:sh.length?Math.round(sh.reduce((a,s)=>a+s.score,0)/sh.length):0,count:sh.length}))
+    .filter(b=>b.count>=2)
+    .sort((a,b)=>b.avg-a.avg);
+  const besteBohnen=beanStats.slice(0,3).map(b=>`${b.n} (Ø ${b.avg})`);
+  const schwierigeBohnen=beanStats.filter(b=>b.avg<55).map(b=>`${b.n} (Ø ${b.avg})`);
+
   const payload={
     meta:{
       tool:"Espresso Trainer v"+APP_VERSION,
@@ -1078,7 +1098,7 @@ function generateAIPrompt(shot,context){
     setup:{
       maschine:"Lelit Victoria PL91T",
       muehle:"Eureka Mignon Libra mit Finecoar Dial (0-60)",
-      korb:"IMS B702TH26.5M (26.5mm, Medium, 18-20g Dark Roast)",
+      korb:"IMS B702TH26.5M (26.5mm, Medium, 18-20g)",
       ovp:"~9 Bar (eingestellt mit Manometer)",
       pid:"KP 0.6 / KI 0.01 / KD 4.5 / TR-Modus aktiv (Ist-Temperatur sichtbar)",
       puck_screen:"Ja, ~1.7mm",
@@ -1087,9 +1107,8 @@ function generateAIPrompt(shot,context){
     },
     profil:{
       geschmacksziel:"Klassisch-cremiger Doppio, wenig Säure, wenig Asche, Schokolade/Nuss",
-      bevorzugte_roeststufe:"Dark bis Medium-Dark",
-      referenz_bohnen:["Dinzler Roma","Passalacqua","Dinzler il Gustoso"],
-      abgelehnt:["Gorilla (zu aschig)"]
+      beste_bohnen_bisher:besteBohnen.length?besteBohnen:["noch zu wenig Daten"],
+      schwierige_bohnen:schwierigeBohnen.length?schwierigeBohnen:[]
     },
     aktueller_bezug:shot?{
       kaffee:curKaffee,
@@ -1793,17 +1812,17 @@ const BEAN_PROFILES = {
   "kimbo": { mahlgrad:[3,4.5], temp:[90,92], output:[38,42], roast:"dark",
     blend:"70% Arabica / 30% Robusta", taste:"Schokolade, Haselnuss, dichte Crema",
     herkunft:"Neapel, seit 1963",
-    notes:"Klassisch neapolitanisch · hoher Robusta für stabile Crema · säurearm · Temp max 92°C · ähnlich Passalacqua · MG 3-4 · kurze Bezugszeit" },
+    notes:"Klassisch neapolitanisch · hoher Robusta für stabile Crema · säurearm · Temp max 92°C · MG 3-4 · kurze Bezugszeit" },
   // Oh Harvey
   "oh harvey": { mahlgrad:[4,5.5], temp:[92,94], output:[42,46], roast:"medium",
     blend:"80% Arabica / 20% Robusta", taste:"Schokolade, Würze, mild-kräftig",
     herkunft:"Hamburg, Quijote Rösterei",
-    notes:"Testsieger mehrerer Tests · Specialty-orientiert · etwas mehr Säure als Dinzler · höhere Temp nötig · Ratio 1:2,4-1:2,6 · gut für Cappuccino" },
+    notes:"Testsieger mehrerer Tests · Specialty-orientiert · leichte helle Fruchtsäure · höhere Temp nötig (92-94°C) · Ratio 1:2,4-1:2,6 · gut für Cappuccino" },
   // Geisenhofer
   "geisenhofer house blend": { mahlgrad:[3.5,4.5], temp:[91,92], output:[40,44], roast:"dark",
     blend:"60% Arabica / 40% Robusta", taste:"Nuss, Schokolade, cremig",
     herkunft:"München, lokale Rösterei",
-    notes:"60/40 Arabica/Robusta · säurearm · ähnlich Passalacqua · Sweet Spot MG 3.5-4 · 19g Dose · lokaler Liebling" },
+    notes:"60/40 Arabica/Robusta · säurearm · kräftige dichte Crema · Sweet Spot MG 3.5-4 · 19g Dose · lokaler Liebling" },
   "geisenhofer first roast": { mahlgrad:[4,5.5], temp:[92,94], output:[42,46], roast:"medium",
     blend:"100% Arabica", taste:"fruchtig, hell, Karamell",
     herkunft:"München, lokale Rösterei",
