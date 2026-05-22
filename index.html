@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v4.3</title>
+<title>Espresso Trainer v4.4</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -266,6 +266,13 @@ textarea:focus{border-color:var(--crema);}
 .trainer-shot-bar-wrap{flex:1;height:5px;background:var(--border2);border-radius:3px;}
 .trainer-shot-bar{height:100%;border-radius:3px;transition:width .4s;}
 .trainer-shot-info{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);min-width:80px;text-align:right;}
+.trainer-trends{margin-top:8px;padding-top:8px;border-top:1px solid var(--border2);}
+.trainer-trend-row{margin-bottom:7px;}
+.trainer-trend-row:last-child{margin-bottom:0;}
+.trainer-trend-head{display:flex;justify-content:space-between;align-items:baseline;gap:6px;}
+.trainer-trend-param{font-family:'Courier New',monospace;font-size:calc(.56rem*var(--font-scale));color:var(--text);}
+.trainer-trend-verdict{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));font-weight:bold;}
+.trainer-trend-detail{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);margin-top:2px;}
 .trainer-apply-btn{width:100%;padding:8px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-top:8px;}
 /* WEIGHMYBRU² */
 .scale-bar{background:var(--crema2);border:1px solid rgba(90,184,58,0.35);border-radius:10px;padding:10px 12px;margin-bottom:10px;}
@@ -467,7 +474,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.3 · Mai 2026 · Verkostung: Schritte überspringbar; generische Bohnen-Verweise entfernt</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.4 · Mai 2026 · Verlaufs-Analyse: Mahlgrad/Temp-Änderungen → Score-Wirkung</div></div></div>
       </div>
       <div class="card">
         <div class="card-title">WeighMyBru² Waage</div>
@@ -500,7 +507,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='4.3';
+const APP_VERSION='4.4';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -2073,6 +2080,78 @@ function calcAdaptiveRec(shots) {
   };
 }
 
+// ============================================================
+// VERLAUFS-ANALYSE
+// Wertet aus, wie sich vergangene Mahlgrad-/Temperatur-Änderungen
+// auf den Score ausgewirkt haben (Bezug zu Bezug, chronologisch).
+// ============================================================
+function analyzeParamTrends(shots) {
+  if (!shots || shots.length < 3) return null;
+  const byTime = [...shots].filter(s => s.timestamp).sort((a,b) => a.timestamp - b.timestamp);
+  if (byTime.length < 3) return null;
+
+  const mgPairs = [], tempPairs = [];
+  for (let i = 1; i < byTime.length; i++) {
+    const prev = byTime[i-1], cur = byTime[i];
+    if (typeof cur.score !== 'number' || typeof prev.score !== 'number') continue;
+    const dScore = cur.score - prev.score;
+    const mgP = parseFloat(prev.mahlgrad), mgC = parseFloat(cur.mahlgrad);
+    const tP = parseFloat(prev.temp), tC = parseFloat(cur.temp);
+    if (!isNaN(mgP) && !isNaN(mgC) && Math.abs(mgC - mgP) >= 0.3) mgPairs.push({ d: mgC - mgP, dScore });
+    if (!isNaN(tP) && !isNaN(tC) && Math.abs(tC - tP) >= 0.5) tempPairs.push({ d: tC - tP, dScore });
+  }
+
+  const summarize = (pairs) => {
+    if (pairs.length < 2) return null;
+    const up = pairs.filter(p => p.d > 0), down = pairs.filter(p => p.d < 0);
+    const avg = (arr) => arr.length ? Math.round(arr.reduce((a,p) => a + p.dScore, 0) / arr.length) : null;
+    return { n: pairs.length, upN: up.length, downN: down.length, avgUp: avg(up), avgDown: avg(down) };
+  };
+
+  const mg = summarize(mgPairs), temp = summarize(tempPairs);
+  if (!mg && !temp) return null;
+  return { mg, temp };
+}
+
+// Baut eine Verlaufs-Analyse-Zeile für einen Parameter
+function trendRowHtml(sum, paramLabel, upTxt, downTxt) {
+  if (!sum) return '';
+  const seg = [];
+  if (sum.downN) seg.push(`${downTxt}: Ø ${sum.avgDown > 0 ? '+' : ''}${sum.avgDown} Pkt (${sum.downN}×)`);
+  if (sum.upN) seg.push(`${upTxt}: Ø ${sum.avgUp > 0 ? '+' : ''}${sum.avgUp} Pkt (${sum.upN}×)`);
+  let verdict, vcol;
+  if (sum.upN && sum.downN) {
+    if (sum.avgDown > sum.avgUp + 1) { verdict = `→ eher ${downTxt}`; vcol = 'var(--green)'; }
+    else if (sum.avgUp > sum.avgDown + 1) { verdict = `→ eher ${upTxt}`; vcol = 'var(--green)'; }
+    else { verdict = 'kein klarer Effekt'; vcol = 'var(--mid)'; }
+  } else if (sum.downN) {
+    verdict = sum.avgDown > 1 ? `→ ${downTxt} half` : sum.avgDown < -1 ? `→ ${downTxt} war schlechter` : 'noch unklar';
+    vcol = sum.avgDown > 1 ? 'var(--green)' : sum.avgDown < -1 ? 'var(--red)' : 'var(--mid)';
+  } else {
+    verdict = sum.avgUp > 1 ? `→ ${upTxt} half` : sum.avgUp < -1 ? `→ ${upTxt} war schlechter` : 'noch unklar';
+    vcol = sum.avgUp > 1 ? 'var(--green)' : sum.avgUp < -1 ? 'var(--red)' : 'var(--mid)';
+  }
+  return `<div class="trainer-trend-row">
+    <div class="trainer-trend-head">
+      <span class="trainer-trend-param">${paramLabel}</span>
+      <span class="trainer-trend-verdict" style="color:${vcol}">${verdict}</span>
+    </div>
+    <div class="trainer-trend-detail">${seg.join(' · ')}</div>
+  </div>`;
+}
+
+function renderParamTrends(shots) {
+  const t = analyzeParamTrends(shots);
+  if (!t) return '';
+  const mgHtml = trendRowHtml(t.mg, 'Mahlgrad', 'gröber', 'feiner');
+  const tempHtml = trendRowHtml(t.temp, 'Temperatur', 'wärmer', 'kühler');
+  if (!mgHtml && !tempHtml) return '';
+  return `<div class="trainer-trends">
+    <div class="trainer-history-title">📈 Verlaufs-Analyse · Änderung → Score</div>
+    ${mgHtml}${tempHtml}
+  </div>`;
+}
+
 function renderTrainerRec(kaffee) {
   const el = document.getElementById('trainer-rec');
   if (!el) return;
@@ -2181,6 +2260,7 @@ function renderTrainerRec(kaffee) {
         ${profile.blend || profile.herkunft ? `<br><button style="margin-top:6px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);padding:3px 10px;border-radius:6px;font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));cursor:pointer" onclick="showBohnenInfo('${kaffee.replace(/'/g,"\\'")}')">ℹ Bohnen-Details</button>` : ''}
       </div>
       ${historyHtml}
+      ${renderParamTrends(shots)}
       <button class="trainer-apply-btn" onclick="applyTrainerRec(${JSON.stringify(applyValues).replace(/"/g,'&quot;')})">
         ↓ Mittelwert ins Formular übernehmen
       </button>
