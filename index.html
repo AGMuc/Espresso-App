@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v4.1</title>
+<title>Espresso Trainer v4.2</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -464,7 +464,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.1 · Mai 2026 · Rangliste: Kalibrierung, Letzter Bezug; Sweetspot selbstlernend</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.2 · Mai 2026 · Tipps röststufen-spezifisch; KI-Hilfe pro Bezug in Historie</div></div></div>
       </div>
       <div class="card">
         <div class="card-title">WeighMyBru² Waage</div>
@@ -497,7 +497,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='4.1';
+const APP_VERSION='4.2';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -983,6 +983,11 @@ function generateTips(shot){
   const beanProfile=curKaffee?getBeanProfile(curKaffee):null;
   const robustaShare=beanProfile&&beanProfile.blend?parseFloat((beanProfile.blend.match(/(\d+)%\s*Robusta/)||[])[1]||0):0;
   const isHighRobusta=robustaShare>=40;
+  // Röststufe & Temperatur-Profil dieser Bohne (kein pauschales "Dark Roast")
+  const roast=beanProfile&&beanProfile.roast?beanProfile.roast:'dark';
+  const tProfile=beanProfile&&beanProfile.temp?beanProfile.temp:(roast==='medium'?[92,94]:[91,93]);
+  const tLo=tProfile[0],tHi=tProfile[1];
+  const roastLabel=roast==='medium'?'Medium Roast':'Dark Roast';
 
   // PRE-INFUSION LOGIC (Victoria-specific)
   // Victoria 3-Wege-Ventil ermöglicht 0-8s Pre-Infusion durch Tastenbedienung
@@ -990,10 +995,10 @@ function generateTips(shot){
     tips.push({tip:"Pre-Infusion (PI) testen: 3-5s Vordruck vor Bezugsbeginn. Bei der Victoria: Bezugstaste kurz antippen, 3-5s warten, dann normaler Bezug. Reduziert Channeling und verbessert gleichmäßige Benetzung des Pucks – besonders bei dunklen trockenen Röstungen.",followup:"War der Bezug gleichmäßiger mit PI?"});
   }
   if(pi>0&&pi<3&&bi>=6&&tips.length<2){
-    tips.push({tip:`Pre-Infusion ${pi}s ist sehr kurz. Für gleichmäßige Benetzung bei dunklen Röstungen: 3-5s PI. Länger als 5s kann bei dunklen Röstungen überextrahieren.`,followup:"War 3-5s PI besser?"});
+    tips.push({tip:`Pre-Infusion ${pi}s ist sehr kurz. Für gleichmäßige Puck-Benetzung: 3-5s PI. Länger als 5s kann überextrahieren.`,followup:"War 3-5s PI besser?"});
   }
   if(pi>6&&bi>=5&&tips.length<2){
-    tips.push({tip:`Pre-Infusion ${pi}s ist sehr lang für dunkle Röstungen. Bitterkeit könnte daher kommen. Für ${curKaffee?curKaffee.split(' ')[0]:'Dark Roast'}: max. 4-5s PI empfohlen.`,followup:"Weniger Bitterkeit bei kürzerer PI?"});
+    tips.push({tip:`Pre-Infusion ${pi}s ist sehr lang. Bitterkeit könnte daher kommen – bei ${roastLabel} max. 4-5s PI empfohlen.`,followup:"Weniger Bitterkeit bei kürzerer PI?"});
   }
 
   // FLOW PROBLEMS
@@ -1006,17 +1011,17 @@ function generateTips(shot){
 
   // TASTE ANALYSIS (r/espresso methodology)
   if(sa>=6&&bi<=3&&tips.length<2){tips.push({tip:"Sauer ohne Bitterkeit = Unterextraktion. Zuerst: Mahlgrad feiner. Dann: Temperatur +1°C (Victoria TR-Modus). Dann: Pre-Infusion 3s testen. Säure verschwindet oft schon durch 0.5 Mahlgrad-Klick.",followup:"Weniger sauer beim nächsten Bezug?"});}
-  if(bi>=7&&su<=3&&tips.length<2){tips.push({tip:"Stark bitter ohne Süße = Überextraktion. Victoria: Temperatur auf 91-92°C senken. Bezugszeit verkürzen auf max. 28s. Dunkle Röstungen (Dinzler, Gorilla) brauchen weniger Hitze als helle.",followup:"Weniger bitter?"});}
-  if(hasAsche&&bi>=5&&tips.length<2){tips.push({tip:"Aschig-bitter: Überextraktion bei dunkler Röstung. Victoria auf 91°C. Bezug bei 40g stoppen statt 44g. Pre-Infusion auf max. 3s begrenzen – längere PI überextrahiert dunkle Röstungen.",followup:"Weniger Asche bei niedrigerer Temp?"});}
-  if((hasTabak||hasHolz)&&tips.length<2){tips.push({tip:"Tabak/Holz-Aromen: oft Zeichen einer älteren Bohne (>8 Wochen nach Röstung) oder zu niedriger Extraktion. Prüfe Röstzeitpunkt – Espresso-Optimum 2–6 Wochen. Bei Passalacqua Mehari: etwas feiner mahlen.",followup:"Frischer oder feiner gemahlen probiert?"});}
-  if(isHighRobusta&&bi>=6&&tips.length<2){tips.push({tip:`Hoher Robusta-Anteil (${Math.round(robustaShare)}%): Robusta überextrahiert schneller als Arabica und wird dann stark bitter. Temp auf max. 91°C begrenzen, Mahlgrad 0.5 gröber, Bezug bei 40g stoppen.`,followup:"Weniger bitter mit niedrigerer Temp?"});}
+  if(bi>=7&&su<=3&&tips.length<2){tips.push({tip:`Stark bitter ohne Süße = Überextraktion. Temperatur Richtung ${tLo}°C senken (unteres Profil-Ende, ${roastLabel} ${tLo}-${tHi}°C), Bezugszeit auf max. 28s verkürzen, Mahlgrad 0.5 gröber.`,followup:"Weniger bitter?"});}
+  if(hasAsche&&bi>=5&&tips.length<2){tips.push({tip:`Aschig-bitter = deutliche Überextraktion. Temperatur auf ${tLo}°C senken, Bezug früher bei ~40g stoppen, Pre-Infusion auf max. 3s begrenzen.`,followup:"Weniger Asche bei niedrigerer Temp?"});}
+  if((hasTabak||hasHolz)&&tips.length<2){tips.push({tip:"Tabak/Holz-Aromen: oft Zeichen einer älteren Bohne (>8 Wochen nach Röstung) oder zu niedriger Extraktion. Prüfe Röstzeitpunkt – Espresso-Optimum 2–6 Wochen. Sonst Mahlgrad 0.5 feiner.",followup:"Frischer oder feiner gemahlen probiert?"});}
+  if(isHighRobusta&&bi>=6&&tips.length<2){tips.push({tip:`Hoher Robusta-Anteil (${Math.round(robustaShare)}%): Robusta überextrahiert schneller als Arabica und wird dann stark bitter. Temp Richtung ${tLo}°C begrenzen, Mahlgrad 0.5 gröber, Bezug bei 40g stoppen.`,followup:"Weniger bitter mit niedrigerer Temp?"});}
   if(sa>=5&&bi>=5&&tips.length<2){tips.push({tip:"Gleichzeitig sauer UND bitter = Channeling. WDT verbessern: Nadeln wirklich durch alle Schichten. Münztest wiederholen (Headspace). Mahlgrad 0.5 feiner.",followup:"Gleichmäßigerer Geschmack?"});}
   if(ko<=3&&tips.length<2){tips.push({tip:"Dünner Körper: Dose auf 18.5-19g erhöhen (IMS 26.5er verträgt bis 20g Dark). Pre-Infusion 3-4s kann Körper aufbauen. Ratio auf 1:2,1-1:2,2 kürzen.",followup:"War Körper voller?"});}
   if(na<=3&&tips.length<2){tips.push({tip:"Kurzer Nachklang: Ratio auf 1:2-1:2,2 kürzen. Output früher stoppen (~38-40g). Schokoladen-Nachklang entsteht bei knapper Extraktion.",followup:"War Nachklang länger?"});}
 
   // TEMPERATURE (Victoria-specific)
-  if(temp&&temp<90&&tips.length<2){tips.push({tip:`Brühtemp ${temp}°C ist zu niedrig für Espresso. Victoria TR-Modus: Zieltemperatur erhöhen. Für dunkle Röstungen optimal: 91-93°C. Für helle: 93-96°C.`,followup:"Runder bei höherer Temp?"});}
-  if(temp&&temp>95&&tips.length<2){tips.push({tip:`Brühtemp ${temp}°C ist hoch für dunkle Röstungen. Victoria: auf 91-92°C senken. Dunkle Röstungen brauchen weniger Hitze – die Aromastoffe sind bereits freigesetzt.`,followup:"Weniger Bitterkeit bei niedrigerer Temp?"});}
+  if(temp&&temp<tLo-1&&tips.length<2){tips.push({tip:`Brühtemp ${temp}°C liegt unter dem Profil für ${curKaffee||'diese Bohne'} (${roastLabel}: ${tLo}-${tHi}°C). Victoria TR-Modus: Zieltemperatur Richtung ${tLo}°C erhöhen.`,followup:"Runder bei höherer Temp?"});}
+  if(temp&&temp>tHi+1.5&&tips.length<2){tips.push({tip:`Brühtemp ${temp}°C liegt über dem Profil (${roastLabel}: ${tLo}-${tHi}°C). Auf ${tHi}°C senken – höhere Temp kippt leicht in bittere/aschige Noten.`,followup:"Weniger Bitterkeit bei niedrigerer Temp?"});}
 
   // RATIO OPTIMIZATION
   if(ratio&&ratio<2.1&&!tips.some(t=>t.tip.includes('Mahlgrad'))&&tips.length<2){tips.push({tip:`Ratio 1:${ratio.toFixed(2)} = Ristretto-Bereich. Für klassischen Doppio mehr Output anstreben: ~42g bei 18g. Bezug länger laufen lassen oder Mahlgrad 0.5 gröber.`,followup:"Ausgewogener mit mehr Output?"});}
@@ -1066,7 +1071,7 @@ function generateAIPrompt(shot,context){
 
   const payload={
     meta:{
-      tool:"Espresso Trainer v7",
+      tool:"Espresso Trainer v"+APP_VERSION,
       erstellt:new Date().toLocaleString('de-DE'),
       kontext:context||"Verbesserung eines Bezugs"
     },
@@ -1088,9 +1093,10 @@ function generateAIPrompt(shot,context){
     },
     aktueller_bezug:shot?{
       kaffee:curKaffee,
+      roeststufe:(getBeanProfile(curKaffee||'').roast==='medium'?'Medium Roast':'Dark Roast'),
       dose_ein:shot.doseIn+'g',
       yield_aus:shot.doseOut?shot.doseOut+'g':'nicht angegeben',
-      ratio:shot.doseOut?(1/shot.doseOut*shot.doseIn).toFixed(2):null,
+      ratio:shot.ratio?'1:'+shot.ratio:(shot.doseOut&&shot.doseIn?'1:'+(shot.doseOut/shot.doseIn).toFixed(2):null),
       zeit:shot.zeit?shot.zeit+'s':'nicht angegeben',
       mahlgrad_finecoar:shot.mahlgrad||'nicht angegeben',
       bruehtempteratur:shot.temp?shot.temp+'°C':'nicht angegeben',
@@ -1128,11 +1134,13 @@ function generateAIPrompt(shot,context){
   return JSON.stringify(payload,null,2);
 }
 
-function showAIPrompt(context){
+function showAIPrompt(context,shotIdx){
   let shot=null;
   if(context==='rangliste'){
     // Alle Bezüge als Kontext
     shot={doseIn:18,doseOut:42,sterne:0,score:0,aromen:[],notizen:'Ranglisten-Analyse',pi:0};
+  } else if(shotIdx!=null&&curKaffee&&data[curKaffee]&&data[curKaffee][shotIdx]){
+    shot=data[curKaffee][shotIdx];
   } else if(curKaffee&&data[curKaffee]&&data[curKaffee].length>0){
     shot=data[curKaffee][data[curKaffee].length-1];
   }
@@ -1404,7 +1412,8 @@ function renderHistory(){
     const noteHtml = editingNoteIdx===i
       ? `<div><textarea id="note-edit-${i}" class="note-edit-ta">${(s.notizen||'').replace(/</g,'&lt;')}</textarea><div class="yn-row"><button onclick="saveNote('${kEsc}',${i})" style="color:var(--green)">✓ Speichern</button><button onclick="cancelEditNote()">Abbrechen</button></div></div>`
       : `${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}
-         <button class="note-edit-btn" onclick="startEditNote(${i})">${s.notizen?'✏':'＋ Notiz'}</button>`;
+         <button class="note-edit-btn" onclick="startEditNote(${i})">${s.notizen?'✏':'＋ Notiz'}</button>
+         <button class="note-edit-btn" onclick="showAIPrompt(null,${i})">🤖 KI-Hilfe</button>`;
     const empfBadge=s.empfehlung==='ja'?'<span style="color:#8fdc5a"> · ✓ Kaufen</span>':s.empfehlung==='nein'?'<span style="color:#dc5a5a"> · ✗ Nicht kaufen</span>':s.empfehlung==='vl'?'<span style="color:var(--crema)"> · ? Evtl.</span>':'';
     return `<div class="shot-item"><div class="shot-row-top"><div class="shot-info"><div class="shot-main">#${i+1} · ${s.doseIn}g→<strong style="color:var(--crema)">${s.doseOut||'?'}g</strong> · ${s.zeit||'?'}s · MG${s.mahlgrad||'?'}${s.temp?' · '+s.temp+'°C':''}${s.pi?' · PI'+s.pi+'s':''} · ${'★'.repeat(s.sterne)}</div><div class="shot-meta">1:${s.ratio||'?'} · Score ${s.score} · ${s.ts}${empfBadge}</div>${noteHtml}</div><button class="shot-del" onclick="deleteShot('${kEsc}',${i})">✕</button></div>${cmpHtml}${tipHtml}</div>`;
   }).join('');
