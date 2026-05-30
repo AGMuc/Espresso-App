@@ -2331,7 +2331,13 @@ function applyTrainerRec(values) {
 // ============================================================
 const scale = {
   url: null, connected: false,
-  weight: 0, timerMs: 0, timerRunning: false, _poll: null,
+  weight: 0, timerMs: 0, timerRunning: false, flowrate: 0, _poll: null,
+  // Auto-detect state
+  autoMode: true,
+  autoState: 'idle',   // 'idle' | 'brewing' | 'done'
+  _flowHigh: 0,        // consecutive readings above start threshold
+  _flowLow: 0,         // consecutive readings near zero during brew
+  _cooldown: 0,        // frames to skip after done (prevents immediate re-trigger)
 
   async _req(path, method) {
     const r = await fetch(this.url + path, {
@@ -2355,11 +2361,54 @@ const scale = {
         this.weight = d.weight || 0;
         this.timerMs = d.timer_elapsed || 0;
         this.timerRunning = !!d.timer_running;
+        this.flowrate = d.flowrate || 0;
+
+        if (this.autoMode) {
+          if (this._cooldown > 0) {
+            this._cooldown--;
+          } else if (this.autoState === 'idle') {
+            if (this.flowrate > 0.3) {
+              this._flowHigh++;
+              if (this._flowHigh >= 2) {
+                // First drops detected → auto-start
+                this.autoState = 'brewing';
+                this._flowLow = 0;
+                this._flowHigh = 0;
+                try {
+                  await this.tare();
+                  await this.resetTimer();
+                  await this.startTimer();
+                } catch(e) {}
+                scaleRenderBrewBar();
+              }
+            } else {
+              this._flowHigh = 0;
+            }
+          } else if (this.autoState === 'brewing') {
+            if (this.flowrate < 0.1) {
+              this._flowLow++;
+              if (this._flowLow >= 15) {
+                // Flow stopped for ~3s → auto-stop
+                this.autoState = 'done';
+                try { await this.stopTimer(); } catch(e) {}
+                if (this.weight !== 0) document.getElementById('f-doseOut').value = this.weight.toFixed(1);
+                if (this.timerMs > 0) document.getElementById('f-zeit').value = Math.round(this.timerMs / 1000);
+                updateRatio(); updateLiveTip();
+                this._cooldown = 30; // 6s cooldown before next auto-start
+                scaleRenderBrewBar();
+              }
+            } else {
+              this._flowLow = 0;
+            }
+          }
+        }
+
         scaleUpdateLive();
       } catch(e) {}
     }, 200);
   },
-  stopPoll() { if (this._poll) { clearInterval(this._poll); this._poll = null; } }
+  stopPoll() { if (this._poll) { clearInterval(this._poll); this._poll = null; } },
+  resetAuto() { this.autoState = 'idle'; this._flowHigh = 0; this._flowLow = 0; this._cooldown = 0; scaleRenderBrewBar(); }
 };
 
 function scaleConnect() {
@@ -2375,6 +2424,8 @@ function scaleConnect() {
       saveSettings();
       err.textContent = '';
       sta.innerHTML = `<span class="scale-dot on"></span>Verbunden · ${raw}`;
+      scale.resetAuto();
+      scale.startPoll(); // Polling sofort starten für Auto-Detect
       scaleRenderBrewBar();
     })
     .catch(e => {
@@ -2390,7 +2441,10 @@ async function scaleStartBrew() {
     await scale.tare();
     await scale.resetTimer();
     await scale.startTimer();
-    scale.startPoll();
+    scale.autoState = 'brewing';
+    scale._flowLow = 0;
+    scale._cooldown = 0;
+    scale.startPoll(); // no-op if already polling
     scaleRenderBrewBar();
   } catch(e) {
     const s = document.getElementById('scale-brew-status');
@@ -2401,10 +2455,11 @@ async function scaleStartBrew() {
 async function scaleStopBrew() {
   try {
     await scale.stopTimer();
-    scale.stopPoll();
-    if (scale.weight > 0) document.getElementById('f-doseOut').value = scale.weight.toFixed(1);
+    if (scale.weight !== 0) document.getElementById('f-doseOut').value = scale.weight.toFixed(1);
     if (scale.timerMs > 0) document.getElementById('f-zeit').value = Math.round(scale.timerMs / 1000);
     updateRatio(); updateLiveTip();
+    scale.autoState = 'done';
+    scale._cooldown = 30;
     scaleRenderBrewBar();
   } catch(e) {
     const s = document.getElementById('scale-brew-status');
@@ -2418,16 +2473,31 @@ function scaleRenderBrewBar() {
   const bar = document.getElementById('scale-brew-bar');
   if (!bar) return;
   if (!scale.connected) { bar.style.display = 'none'; return; }
+  const st = scale.autoState;
+  const autoLabel = st === 'idle'    ? '<span style="color:var(--mid)">⏳ Warte auf ersten Tropfen…</span>'
+                  : st === 'brewing' ? '<span style="color:var(--green)">⏱ Bezug läuft (Auto)</span>'
+                  : st === 'done'    ? '<span style="color:var(--crema)">✓ Fertig · Werte übernommen</span>'
+                  : '';
+  const autoToggle = `<button class="scale-btn" style="font-size:calc(.48rem*var(--font-scale));opacity:.7" onclick="scale.autoMode=!scale.autoMode;scaleRenderBrewBar()">${scale.autoMode ? '🤖 AUTO AN' : '👤 MANUELL'}</button>`;
+  const manualBtns = !scale.autoMode
+    ? `<button class="scale-btn start" onclick="scaleStartBrew()">▶ Start</button>
+       <button class="scale-btn stop" onclick="scaleStopBrew()">■ Stopp & übernehmen</button>`
+    : st === 'brewing'
+      ? `<button class="scale-btn stop" onclick="scaleStopBrew()">■ Stopp & übernehmen</button>`
+      : st === 'done'
+        ? `<button class="scale-btn start" onclick="scale.resetAuto()">↺ Neuer Bezug</button>`
+        : '';
   bar.innerHTML = `<div class="scale-bar">
     <div class="scale-live">
       <div class="scale-live-group"><div class="scale-live-label">Yield Aus</div><div class="scale-live-val" id="scale-w">—</div></div>
       <div class="scale-live-group"><div class="scale-live-label">Zeit</div><div class="scale-live-val" id="scale-t">—</div></div>
-      <div class="scale-live-group"><div class="scale-live-label">Status</div><div class="scale-live-val" id="scale-brew-status" style="font-size:calc(.68rem*var(--font-scale));color:var(--mid)">bereit</div></div>
+      <div class="scale-live-group"><div class="scale-live-label">Flow</div><div class="scale-live-val" id="scale-f" style="font-size:calc(.68rem*var(--font-scale))">—</div></div>
     </div>
+    <div style="font-family:'Courier New',monospace;font-size:calc(.56rem*var(--font-scale));margin:4px 0 6px;text-align:center">${autoLabel}</div>
     <div class="scale-btns">
       <button class="scale-btn" onclick="scaleTare()">⊘ Tara</button>
-      <button class="scale-btn start" onclick="scaleStartBrew()">▶ Start</button>
-      <button class="scale-btn stop" onclick="scaleStopBrew()">■ Stopp & übernehmen</button>
+      ${autoToggle}
+      ${manualBtns}
     </div>
   </div>`;
   bar.style.display = 'block';
@@ -2436,10 +2506,10 @@ function scaleRenderBrewBar() {
 function scaleUpdateLive() {
   const w = document.getElementById('scale-w');
   const t = document.getElementById('scale-t');
-  const s = document.getElementById('scale-brew-status');
+  const f = document.getElementById('scale-f');
   if (w) w.textContent = scale.weight.toFixed(1) + 'g';
-  if (t) t.textContent = (scale.timerMs / 1000).toFixed(1) + 's';
-  if (s) s.textContent = scale.timerRunning ? '⏱ läuft' : '■ gestoppt';
+  if (t) t.textContent = scale.timerRunning || scale.timerMs > 0 ? (scale.timerMs / 1000).toFixed(1) + 's' : '—';
+  if (f) f.textContent = scale.flowrate > 0 ? scale.flowrate.toFixed(2) + 'g/s' : '—';
 }
 
 // ============================================================
