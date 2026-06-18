@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v4.4.2</title>
+<title>Espresso Trainer v4.4.3</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -461,7 +461,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.4.2 · Mai 2026 · Sicherheit & Robustheit: Escaping, Restore-Validierung</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.4.3 · Juni 2026</div></div></div>
       </div>
     </div>
 
@@ -483,7 +483,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='4.4.2';
+const APP_VERSION='4.4.3';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli","Manaresi Gran Bar Oro","Hausbrandt Nonnetti"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -624,6 +624,8 @@ function getAllKaffees(){return[...KAFFEES_DEFAULT,...customKaffees];}
 function escHtml(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 // Escaping für JS-String-Arg in einem doppelt-gequoteten onclick-Attribut: erst JS-escapen, dann HTML-escapen
 function escArg(s){return escHtml(String(s==null?'':s).replace(/\\/g,'\\\\').replace(/'/g,"\\'"));}
+// Normalisiert Komma-Dezimalzahlen ("92,5" → "92.5") für Backup-Import & Eingaben
+function normNum(s){return typeof s==='string'?s.replace(',','.'):s;}
 
 // ============================================================
 // THEME
@@ -828,6 +830,11 @@ function toggleVerkostung() {
   const btn = document.getElementById('verk-toggle-btn');
   const box = document.getElementById('verk-assistant');
   if (verkActive) {
+    // Rückfrage wenn Nutzer bereits Dots manuell gesetzt hat
+    const hasManualDots = Object.values(dotValues).some(v => v !== 4);
+    if (hasManualDots && !confirm('Geführte Verkostung setzt alle Slider zurück. Fortfahren?')) {
+      verkActive = false; return;
+    }
     verkStep = 0;
     // Bohnenspezifische Steps bauen (Targets, Hints, Fragen passen sich an)
     VERK_STEPS = buildVerkSteps();
@@ -951,7 +958,7 @@ function calcScore(){
   if(!curSterne&&!curGesamt)return 0;
   const g=id=>dotToScore(dotValues[id]);
   const ges=(10-g('saeure'))*1.5+(10-g('bitter'))*1.0+g('suesse')*1.5+g('koerper')*1.5+g('nachklang')*1.0;
-  const sliderPart=Math.round((ges/65)*70+(curSterne/5)*30);
+  const sliderPart=Math.round((ges/62.5)*70+(curSterne/5)*30);
   // Gesamteindruck korrigiert Score wenn stark abweichend
   if(curGesamt===1) return Math.min(sliderPart, 45);   // Nicht gut → max 45
   if(curGesamt===2) return Math.min(Math.max(sliderPart,40), 65); // Geht so → 40-65
@@ -1181,10 +1188,10 @@ function updateLiveTip(){
   const dOut=parseFloat(document.getElementById('f-doseOut').value)||0;
   const preview={
     doseIn:dIn,doseOut:dOut,ratio:dOut?(dOut/dIn).toFixed(2):null,
-    zeit:document.getElementById('f-zeit').value,
-    mahlgrad:document.getElementById('f-mahlgrad').value,
-    temp:document.getElementById('f-temp').value,
-    pi:document.getElementById('f-pi').value,
+    zeit:normNum(document.getElementById('f-zeit').value),
+    mahlgrad:normNum(document.getElementById('f-mahlgrad').value),
+    temp:normNum(document.getElementById('f-temp').value),
+    pi:normNum(document.getElementById('f-pi').value),
     saeure:dotToScore(dotValues.saeure),bitter:dotToScore(dotValues.bitter),
     suesse:dotToScore(dotValues.suesse),koerper:dotToScore(dotValues.koerper),
     nachklang:dotToScore(dotValues.nachklang),
@@ -1326,13 +1333,15 @@ function saveShot(){
   if(!curKaffee||(!curSterne && !curGesamt))return;
   const doseIn=parseFloat(document.getElementById('f-doseIn').value)||18;
   const doseOut=parseFloat(document.getElementById('f-doseOut').value)||0;
+  const zeitRaw=document.getElementById('f-zeit').value.trim();
+  if(!doseOut && !zeitRaw){alert('Bitte mindestens Yield (g) oder Zeit (s) eintragen.');return;}
   const now=new Date();
   const shot={
     doseIn,doseOut,
-    zeit:document.getElementById('f-zeit').value,
-    mahlgrad:document.getElementById('f-mahlgrad').value,
-    temp:document.getElementById('f-temp').value,
-    pi:document.getElementById('f-pi').value,
+    zeit:normNum(document.getElementById('f-zeit').value),
+    mahlgrad:normNum(document.getElementById('f-mahlgrad').value),
+    temp:normNum(document.getElementById('f-temp').value),
+    pi:normNum(document.getElementById('f-pi').value),
     ratio:doseOut?(doseOut/doseIn).toFixed(2):null,
     saeure:dotToScore(dotValues.saeure),bitter:dotToScore(dotValues.bitter),
     suesse:dotToScore(dotValues.suesse),koerper:dotToScore(dotValues.koerper),
@@ -1717,7 +1726,10 @@ function restoreData(event){
     if(!Object.values(backup.data).every(v=>Array.isArray(v)))throw new Error('Ungültiges Backup (Bezüge nicht im Listenformat)');
     const cnt=Object.values(backup.data).reduce((a,s)=>a+s.length,0);
     if(!confirm(`Backup: ${cnt} Bezüge. Aktuelle Daten überschreiben?`))return;
-    data=backup.data;if(Array.isArray(backup.customKaffees)){customKaffees=backup.customKaffees;saveCustom();}
+    data=backup.data;
+    // Komma-Dezimalzahlen in importierten Bezügen normalisieren
+    Object.values(data).forEach(shots=>shots.forEach(s=>{['zeit','mahlgrad','temp','pi'].forEach(f=>{if(s[f])s[f]=normNum(s[f]);});}));
+    if(Array.isArray(backup.customKaffees)){customKaffees=backup.customKaffees;saveCustom();}
     if(backup.settings){settings={...settings,...backup.settings};saveSettings();applyTheme();}
     saveData();buildPills();renderDashboard();alert(`✓ ${cnt} Bezüge wiederhergestellt.`);
     }catch(err){alert('Fehler: '+err.message);}event.target.value='';
@@ -2090,8 +2102,11 @@ function analyzeParamTrends(shots) {
     const dScore = cur.score - prev.score;
     const mgP = parseFloat(prev.mahlgrad), mgC = parseFloat(cur.mahlgrad);
     const tP = parseFloat(prev.temp), tC = parseFloat(cur.temp);
-    if (!isNaN(mgP) && !isNaN(mgC) && Math.abs(mgC - mgP) >= 0.3) mgPairs.push({ d: mgC - mgP, dScore });
-    if (!isNaN(tP) && !isNaN(tC) && Math.abs(tC - tP) >= 0.5) tempPairs.push({ d: tC - tP, dScore });
+    const mgChanged = !isNaN(mgP) && !isNaN(mgC) && Math.abs(mgC - mgP) >= 0.3;
+    const tempChanged = !isNaN(tP) && !isNaN(tC) && Math.abs(tC - tP) >= 0.5;
+    // Bei Doppeländerung (MG + Temp) ist unklar welcher Parameter half → nicht zuschreiben
+    if (mgChanged && !tempChanged) mgPairs.push({ d: mgC - mgP, dScore });
+    if (tempChanged && !mgChanged) tempPairs.push({ d: tC - tP, dScore });
   }
 
   const summarize = (pairs) => {

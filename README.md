@@ -74,6 +74,7 @@ Eigene Kaffeesorten können in der App hinzugefügt werden (langer Druck zum Lö
 
 | Version | Datum | Änderungen |
 |---|---|---|
+| **v4.4.3** | Juni 2026 | **5 Fixes aus vollständigem Review:** Verkostungs-Start fragt nach bevor manuelle Slider überschrieben werden; Leer-Speichern verhindert (mind. Yield oder Zeit nötig); Komma-Dezimalzahlen (`"92,5"`) in Backup-Import und Feldern normalisiert; Trend-Analyse wertet Doppeländerungen (MG+Temp gleichzeitig) nicht mehr als Einzelursache; Score-Divisor korrigiert (max. 70 Punkte aus Sensorik erreichbar) |
 | **v4.4.2** | Juni 2026 | **Robustheit & Sicherheit:** HTML-Escaping für Kaffeenamen & Notizen (Sonderzeichen wie `&`, `"`, `'`, `<` zerschießen nicht mehr Darstellung/Buttons); `editingNoteIdx` wird beim Kaffeewechsel zurückgesetzt (kein Bearbeiten des falschen Bezugs mehr); `restoreData` validiert jetzt die Backup-Struktur (Schutz vor korrupten/alten Dateien) |
 | **v4.4.1** | Juni 2026 | WeighMyBru-Integration entfernt (Projekt pausiert); neue Kaffeesorten: Manaresi Gran Bar Oro, Hausbrandt Nonnetti; INIT-Regression behoben |
 | **v4.4** | Mai 2026 | **Verlaufs-Analyse** in der Trainer-Empfehlung: wertet aus, wie sich vergangene Mahlgrad- & Temperatur-Änderungen auf den Score ausgewirkt haben (Bezug zu Bezug) und zeigt eine Tendenz (feiner/gröber, wärmer/kühler) |
