@@ -2312,6 +2312,14 @@ function applyTrainerRec(values) {
     });
 })();
 
+// ============================================================
+// INIT
+// ============================================================
+buildPills();
+renderDashboard();
+// Versionsnummer in Einstellungen dynamisch setzen
+(function(){const el=document.getElementById('version-display');if(el)el.textContent='v'+APP_VERSION+' · Mai 2026';})();
+
 </script>
 </body>
 </html>
