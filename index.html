@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v4.4</title>
+<title>Espresso Trainer v4.4.1</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -274,18 +274,6 @@ textarea:focus{border-color:var(--crema);}
 .trainer-trend-verdict{font-family:'Courier New',monospace;font-size:calc(.52rem*var(--font-scale));font-weight:bold;}
 .trainer-trend-detail{font-family:'Courier New',monospace;font-size:calc(.5rem*var(--font-scale));color:var(--mid);margin-top:2px;}
 .trainer-apply-btn{width:100%;padding:8px;background:var(--crema2);border:1px solid var(--border);color:var(--crema);border-radius:7px;font-family:'Courier New',monospace;font-size:calc(.58rem*var(--font-scale));letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-top:8px;}
-/* WEIGHMYBRU² */
-.scale-bar{background:var(--crema2);border:1px solid rgba(90,184,58,0.35);border-radius:10px;padding:10px 12px;margin-bottom:10px;}
-.scale-live{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
-.scale-live-group{text-align:center;flex:1;}
-.scale-live-label{font-family:'Courier New',monospace;font-size:calc(.48rem*var(--font-scale));color:var(--mid);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
-.scale-live-val{font-size:calc(1.05rem*var(--font-scale));color:var(--green);font-weight:bold;}
-.scale-btns{display:flex;gap:6px;}
-.scale-btn{flex:1;padding:8px 4px;border-radius:7px;border:1px solid var(--border);background:var(--crema2);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));cursor:pointer;}
-.scale-btn.start{border-color:var(--green);color:var(--green);}
-.scale-btn.stop{border-color:var(--red);color:var(--red);}
-.scale-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle;}
-.scale-dot.on{background:var(--green);}.scale-dot.off{background:var(--mid);}
 /* INFO-VISUALS */
 .info-visual{margin:10px 0;padding:10px;background:var(--crema2);border:1px solid var(--border);border-radius:8px;}
 .info-visual-title{font-family:'Courier New',monospace;font-size:calc(.55rem*var(--font-scale));color:var(--mid);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;}
@@ -351,7 +339,6 @@ textarea:focus{border-color:var(--crema);}
             <span id="form-badge" class="badge" style="display:none"></span>
           </div>
           <div class="sl">Bezug</div>
-          <div id="scale-brew-bar" style="display:none"></div>
           <div class="grid2">
             <div class="field"><label>Dose Ein (g)</label><input type="number" id="f-doseIn" value="18" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
             <div class="field"><label>Yield Aus (g)</label><input type="number" id="f-doseOut" placeholder="z.B. 42" step="0.1" inputmode="decimal" oninput="updateRatio()"></div>
@@ -476,17 +463,6 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.4 · Mai 2026 · Verlaufs-Analyse: Mahlgrad/Temp-Änderungen → Score-Wirkung</div></div></div>
       </div>
-      <div class="card">
-        <div class="card-title">WeighMyBru² Waage</div>
-        <div class="setting-row">
-          <div><div class="setting-label">Verbindung</div><div class="setting-sub" id="scale-conn-status"><span class="scale-dot off"></span>Nicht verbunden</div></div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
-          <input id="scale-ip-input" type="text" placeholder="weighmybru.local" inputmode="url" autocomplete="off" style="flex:1;padding:9px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:'Courier New',monospace;font-size:calc(.7rem*var(--font-scale))">
-          <button class="action-btn" onclick="scaleConnect()">Verbinden</button>
-        </div>
-        <div id="scale-conn-err" style="font-family:'Courier New',monospace;font-size:calc(.6rem*var(--font-scale));color:var(--red);margin-top:6px;min-height:16px"></div>
-      </div>
     </div>
 
   </div>
@@ -507,8 +483,8 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='4.4';
-const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli"];
+const APP_VERSION='4.4.1';
+const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli","Manaresi Gran Bar Oro","Hausbrandt Nonnetti"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
 const KEY="espresso_pwa_v2",CUSTOM_KEY="espresso_custom_v1",SETTINGS_KEY="espresso_settings_v1";
@@ -1820,6 +1796,16 @@ const BEAN_PROFILES = {
     blend:"70% Arabica / 30% Robusta", taste:"Schokolade, Haselnuss, dichte Crema",
     herkunft:"Neapel, seit 1963",
     notes:"Klassisch neapolitanisch · hoher Robusta für stabile Crema · säurearm · Temp max 92°C · MG 3-4 · kurze Bezugszeit" },
+  // Manaresi
+  "manaresi": { mahlgrad:[3,4.5], temp:[91,93], output:[38,43], roast:"dark",
+    blend:"70% Arabica / 30% Robusta", taste:"Schokolade, Karamell, nussig, vollmundig",
+    herkunft:"Bologna, Torrefazione Manaresi seit 1930",
+    notes:"Traditioneller Bolognese Bar-Blend · säurearm · dichte goldene Crema · MG 3-4 fein starten · Bezugszeit 25-28s" },
+  // Hausbrandt
+  "hausbrandt": { mahlgrad:[3,4.5], temp:[90,92], output:[38,43], roast:"dark",
+    blend:"70% Arabica / 30% Robusta", taste:"Schokolade, Haselnuss, samtig, wenig Säure",
+    herkunft:"Triest, Hausbrandt seit 1892",
+    notes:"Historische Triestiner Rösterei · Nonnetti klassisch-samtig · MG 3-3.5 fein starten · säurearm · Temp max 92°C" },
   // Oh Harvey
   "oh harvey": { mahlgrad:[4,5.5], temp:[92,94], output:[42,46], roast:"medium",
     blend:"80% Arabica / 20% Robusta", taste:"Schokolade, Würze, mild-kräftig",
@@ -2326,206 +2312,6 @@ function applyTrainerRec(values) {
     });
 })();
 
-// ============================================================
-// WEIGHMYBRU² WAAGE
-// ============================================================
-const scale = {
-  url: null, connected: false,
-  weight: 0, timerMs: 0, timerRunning: false, flowrate: 0, _poll: null,
-  // Auto-detect state
-  autoMode: true,
-  autoState: 'idle',   // 'idle' | 'brewing' | 'done'
-  _flowHigh: 0,        // consecutive readings above start threshold
-  _flowLow: 0,         // consecutive readings near zero during brew
-  _cooldown: 0,        // frames to skip after done (prevents immediate re-trigger)
-
-  async _req(path, method) {
-    const r = await fetch(this.url + path, {
-      method: method || 'GET', mode: 'cors',
-      signal: AbortSignal.timeout(2500)
-    });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r;
-  },
-  async dashboard() { return (await this._req('/api/dashboard')).json(); },
-  async tare()       { return this._req('/api/tare',         'POST'); },
-  async startTimer() { return this._req('/api/timer/start',  'POST'); },
-  async stopTimer()  { return this._req('/api/timer/stop',   'POST'); },
-  async resetTimer() { return this._req('/api/timer/reset',  'POST'); },
-
-  startPoll() {
-    if (this._poll) return;
-    this._poll = setInterval(async () => {
-      try {
-        const d = await this.dashboard();
-        this.weight = d.weight || 0;
-        this.timerMs = d.timer_elapsed || 0;
-        this.timerRunning = !!d.timer_running;
-        this.flowrate = d.flowrate || 0;
-
-        if (this.autoMode) {
-          if (this._cooldown > 0) {
-            this._cooldown--;
-          } else if (this.autoState === 'idle') {
-            if (this.flowrate > 0.3) {
-              this._flowHigh++;
-              if (this._flowHigh >= 2) {
-                // First drops detected → auto-start
-                this.autoState = 'brewing';
-                this._flowLow = 0;
-                this._flowHigh = 0;
-                try {
-                  await this.tare();
-                  await this.resetTimer();
-                  await this.startTimer();
-                } catch(e) {}
-                scaleRenderBrewBar();
-              }
-            } else {
-              this._flowHigh = 0;
-            }
-          } else if (this.autoState === 'brewing') {
-            if (this.flowrate < 0.1) {
-              this._flowLow++;
-              if (this._flowLow >= 15) {
-                // Flow stopped for ~3s → auto-stop
-                this.autoState = 'done';
-                try { await this.stopTimer(); } catch(e) {}
-                if (this.weight !== 0) document.getElementById('f-doseOut').value = this.weight.toFixed(1);
-                if (this.timerMs > 0) document.getElementById('f-zeit').value = Math.round(this.timerMs / 1000);
-                updateRatio(); updateLiveTip();
-                this._cooldown = 30; // 6s cooldown before next auto-start
-                scaleRenderBrewBar();
-              }
-            } else {
-              this._flowLow = 0;
-            }
-          }
-        }
-
-        scaleUpdateLive();
-      } catch(e) {}
-    }, 200);
-  },
-  stopPoll() { if (this._poll) { clearInterval(this._poll); this._poll = null; } },
-  resetAuto() { this.autoState = 'idle'; this._flowHigh = 0; this._flowLow = 0; this._cooldown = 0; scaleRenderBrewBar(); }
-};
-
-function scaleConnect() {
-  const raw = (document.getElementById('scale-ip-input').value.trim()) || 'weighmybru.local';
-  scale.url = raw.startsWith('http') ? raw : 'http://' + raw;
-  const err = document.getElementById('scale-conn-err');
-  const sta = document.getElementById('scale-conn-status');
-  err.textContent = 'Verbinde…';
-  scale.dashboard()
-    .then(() => {
-      scale.connected = true;
-      settings.scaleUrl = scale.url;
-      saveSettings();
-      err.textContent = '';
-      sta.innerHTML = `<span class="scale-dot on"></span>Verbunden · ${raw}`;
-      scale.resetAuto();
-      scale.startPoll(); // Polling sofort starten für Auto-Detect
-      scaleRenderBrewBar();
-    })
-    .catch(e => {
-      scale.connected = false;
-      err.textContent = 'Fehler: ' + e.message + ' · Manuelle Eingabe weiterhin möglich';
-      sta.innerHTML = `<span class="scale-dot off"></span>Nicht verbunden`;
-      scaleRenderBrewBar();
-    });
-}
-
-async function scaleStartBrew() {
-  try {
-    await scale.tare();
-    await scale.resetTimer();
-    await scale.startTimer();
-    scale.autoState = 'brewing';
-    scale._flowLow = 0;
-    scale._cooldown = 0;
-    scale.startPoll(); // no-op if already polling
-    scaleRenderBrewBar();
-  } catch(e) {
-    const s = document.getElementById('scale-brew-status');
-    if (s) s.textContent = 'Fehler: ' + e.message;
-  }
-}
-
-async function scaleStopBrew() {
-  try {
-    await scale.stopTimer();
-    if (scale.weight !== 0) document.getElementById('f-doseOut').value = scale.weight.toFixed(1);
-    if (scale.timerMs > 0) document.getElementById('f-zeit').value = Math.round(scale.timerMs / 1000);
-    updateRatio(); updateLiveTip();
-    scale.autoState = 'done';
-    scale._cooldown = 30;
-    scaleRenderBrewBar();
-  } catch(e) {
-    const s = document.getElementById('scale-brew-status');
-    if (s) s.textContent = 'Fehler: ' + e.message;
-  }
-}
-
-async function scaleTare() { try { await scale.tare(); } catch(e) {} }
-
-function scaleRenderBrewBar() {
-  const bar = document.getElementById('scale-brew-bar');
-  if (!bar) return;
-  if (!scale.connected) { bar.style.display = 'none'; return; }
-  const st = scale.autoState;
-  const autoLabel = st === 'idle'    ? '<span style="color:var(--mid)">⏳ Warte auf ersten Tropfen…</span>'
-                  : st === 'brewing' ? '<span style="color:var(--green)">⏱ Bezug läuft (Auto)</span>'
-                  : st === 'done'    ? '<span style="color:var(--crema)">✓ Fertig · Werte übernommen</span>'
-                  : '';
-  const autoToggle = `<button class="scale-btn" style="font-size:calc(.48rem*var(--font-scale));opacity:.7" onclick="scale.autoMode=!scale.autoMode;scaleRenderBrewBar()">${scale.autoMode ? '🤖 AUTO AN' : '👤 MANUELL'}</button>`;
-  const manualBtns = !scale.autoMode
-    ? `<button class="scale-btn start" onclick="scaleStartBrew()">▶ Start</button>
-       <button class="scale-btn stop" onclick="scaleStopBrew()">■ Stopp & übernehmen</button>`
-    : st === 'brewing'
-      ? `<button class="scale-btn stop" onclick="scaleStopBrew()">■ Stopp & übernehmen</button>`
-      : st === 'done'
-        ? `<button class="scale-btn start" onclick="scale.resetAuto()">↺ Neuer Bezug</button>`
-        : '';
-  bar.innerHTML = `<div class="scale-bar">
-    <div class="scale-live">
-      <div class="scale-live-group"><div class="scale-live-label">Yield Aus</div><div class="scale-live-val" id="scale-w">—</div></div>
-      <div class="scale-live-group"><div class="scale-live-label">Zeit</div><div class="scale-live-val" id="scale-t">—</div></div>
-      <div class="scale-live-group"><div class="scale-live-label">Flow</div><div class="scale-live-val" id="scale-f" style="font-size:calc(.68rem*var(--font-scale))">—</div></div>
-    </div>
-    <div style="font-family:'Courier New',monospace;font-size:calc(.56rem*var(--font-scale));margin:4px 0 6px;text-align:center">${autoLabel}</div>
-    <div class="scale-btns">
-      <button class="scale-btn" onclick="scaleTare()">⊘ Tara</button>
-      ${autoToggle}
-      ${manualBtns}
-    </div>
-  </div>`;
-  bar.style.display = 'block';
-}
-
-function scaleUpdateLive() {
-  const w = document.getElementById('scale-w');
-  const t = document.getElementById('scale-t');
-  const f = document.getElementById('scale-f');
-  if (w) w.textContent = scale.weight.toFixed(1) + 'g';
-  if (t) t.textContent = scale.timerRunning || scale.timerMs > 0 ? (scale.timerMs / 1000).toFixed(1) + 's' : '—';
-  if (f) f.textContent = scale.flowrate > 0 ? scale.flowrate.toFixed(2) + 'g/s' : '—';
-}
-
-// ============================================================
-// INIT
-// ============================================================
-buildPills();
-renderDashboard();
-// Versionsnummer in Einstellungen dynamisch setzen
-(function(){const el=document.getElementById('version-display');if(el)el.textContent='v'+APP_VERSION+' · Mai 2026';})();
-// Waage aus Settings wiederherstellen
-(function(){
-  if(settings.scaleUrl){
-    const ipEl=document.getElementById('scale-ip-input');
-    if(ipEl) ipEl.value=settings.scaleUrl.replace(/^https?:\/\//,'');
-  }
-})();
 </script>
 </body>
 </html>
