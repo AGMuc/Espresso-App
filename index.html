@@ -10,7 +10,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Espresso Trainer v4.4.1</title>
+<title>Espresso Trainer v4.4.2</title>
 <style>
 :root { --font-scale:1; --safe-top:env(safe-area-inset-top,44px); --safe-bot:env(safe-area-inset-bottom,20px); }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -461,7 +461,7 @@ textarea:focus{border-color:var(--crema);}
         <div class="setting-row"><div><div class="setting-label">Mühle</div><div class="setting-sub">Eureka Mignon Libra · Finecoar Dial</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Korb</div><div class="setting-sub">IMS B702TH26.5M · 18-20g Dark</div></div></div>
         <div class="setting-row"><div><div class="setting-label">Pre-Infusion</div><div class="setting-sub">Victoria: 0-8s durch Bezugstaste geregelt</div></div></div>
-        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.4 · Mai 2026 · Verlaufs-Analyse: Mahlgrad/Temp-Änderungen → Score-Wirkung</div></div></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-sub" id="version-display">v4.4.2 · Mai 2026 · Sicherheit & Robustheit: Escaping, Restore-Validierung</div></div></div>
       </div>
     </div>
 
@@ -483,7 +483,7 @@ textarea:focus{border-color:var(--crema);}
 // ============================================================
 // CONSTANTS & DATA
 // ============================================================
-const APP_VERSION='4.4.1';
+const APP_VERSION='4.4.2';
 const KAFFEES_DEFAULT=["Gorilla Superbar Crema","Dinzler Roma","Dinzler il Gustoso","Dinzler Lazise","Dinzler Modena","Dinzler Venezia","Geisenhofer House Blend","Passalacqua Mehari","Kimbo Espresso Napoli","Manaresi Gran Bar Oro","Hausbrandt Nonnetti"];
 const AROMEN=["Schokolade","Nuss","Karamell","Frucht","Blume","Asche","Rauch","Gewürz","Tabak","Holz","Zitrus","Beere","Vanille"];
 const CREMAS=["Dicht & Haselnuss ✓","Tigerstreifig ★","Dunkel & Stark","Hell & Dünn","Grobporig"];
@@ -620,6 +620,10 @@ function saveData(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e)
 function saveCustom(){try{localStorage.setItem(CUSTOM_KEY,JSON.stringify(customKaffees));}catch(e){}}
 function saveSettings(){try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}catch(e){}}
 function getAllKaffees(){return[...KAFFEES_DEFAULT,...customKaffees];}
+// HTML-Escaping für Nutzer-Eingaben (Kaffeenamen, Notizen) in innerHTML-Kontext
+function escHtml(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+// Escaping für JS-String-Arg in einem doppelt-gequoteten onclick-Attribut: erst JS-escapen, dann HTML-escapen
+function escArg(s){return escHtml(String(s==null?'':s).replace(/\\/g,'\\\\').replace(/'/g,"\\'"));}
 
 // ============================================================
 // THEME
@@ -1268,7 +1272,7 @@ function selectKaffee(k){
 // FORM
 // ============================================================
 function resetForm(prefill){
-  curSterne=0;curEmpf=null;curAromen=[];curCrema=null;curGesamt=0;
+  curSterne=0;curEmpf=null;curAromen=[];curCrema=null;curGesamt=0;editingNoteIdx=-1;
   // Verkostung schließen falls offen (z.B. nach Bohnenwechsel)
   if(verkActive){
     verkActive=false;
@@ -1410,10 +1414,10 @@ function renderHistory(){
       cmpHtml=`<div class="shot-compare"><strong>vs. Bester</strong>Score ${s.score} vs. ${bestShot.score} <span style="color:var(--red)">(${diff})</span>${items.length?' · '+items.join(' · '):''}</div>`;
     }
 
-    const kEsc=curKaffee.replace(/'/g,"\\'");
+    const kEsc=escArg(curKaffee);
     const noteHtml = editingNoteIdx===i
-      ? `<div><textarea id="note-edit-${i}" class="note-edit-ta">${(s.notizen||'').replace(/</g,'&lt;')}</textarea><div class="yn-row"><button onclick="saveNote('${kEsc}',${i})" style="color:var(--green)">✓ Speichern</button><button onclick="cancelEditNote()">Abbrechen</button></div></div>`
-      : `${s.notizen?`<div class="shot-note">"${s.notizen}"</div>`:''}
+      ? `<div><textarea id="note-edit-${i}" class="note-edit-ta">${escHtml(s.notizen)}</textarea><div class="yn-row"><button onclick="saveNote('${kEsc}',${i})" style="color:var(--green)">✓ Speichern</button><button onclick="cancelEditNote()">Abbrechen</button></div></div>`
+      : `${s.notizen?`<div class="shot-note">"${escHtml(s.notizen)}"</div>`:''}
          <button class="note-edit-btn" onclick="startEditNote(${i})">${s.notizen?'✏':'＋ Notiz'}</button>
          <button class="note-edit-btn" onclick="showAIPrompt(null,${i})">🤖 KI-Hilfe</button>`;
     const empfBadge=s.empfehlung==='ja'?'<span style="color:#8fdc5a"> · ✓ Kaufen</span>':s.empfehlung==='nein'?'<span style="color:#dc5a5a"> · ✗ Nicht kaufen</span>':s.empfehlung==='vl'?'<span style="color:var(--crema)"> · ? Evtl.</span>':'';
@@ -1454,7 +1458,7 @@ function renderDashboard(){
   const trendBars=recentShots.map(s=>{
     const h=Math.max(8,Math.round((s.score/maxScore)*55));
     const isBest=s===bestShot;
-    return `<div class="trend-bar${isBest?' best':''}" style="height:${h}px" title="${s.kaffee}: ${s.score}pt"></div>`;
+    return `<div class="trend-bar${isBest?' best':''}" style="height:${h}px" title="${escHtml(s.kaffee)}: ${s.score}pt"></div>`;
   }).join('');
 
   // Calibration status per kaffee
@@ -1462,7 +1466,7 @@ function renderDashboard(){
     const cnt=shots.length;const pct=Math.min(100,cnt/5*100);
     const col=pct>=100?'var(--green)':pct>=60?'var(--crema)':'var(--mid)';
     const label=pct>=100?'Kalibriert':''+cnt+'/5';
-    return `<div class="cal-row"><div class="cal-name">${name}</div><div class="cal-bar-wrap"><div class="cal-bar" style="width:${pct}%;background:${col}"></div></div><div class="cal-count">${label}</div></div>`;
+    return `<div class="cal-row"><div class="cal-name">${escHtml(name)}</div><div class="cal-bar-wrap"><div class="cal-bar" style="width:${pct}%;background:${col}"></div></div><div class="cal-count">${label}</div></div>`;
   }).join('');
 
   // Last shot summary
@@ -1533,14 +1537,14 @@ function renderRangliste(){
 
   let html='';
   cal.forEach(({name,best,last,rankScore,count,avgRatio,topCount},i)=>{
-    const nEsc=name.replace(/'/g,"\\'");
+    const nEsc=escArg(name);
     const bestMeta=`Score ${best.score} · MG${best.mahlgrad||'?'} · ${best.temp||'?'}°C · ${best.doseOut||'?'}g · ${best.zeit||'?'}s`;
     const lastMeta=last&&last!==best?`Score ${last.score} · MG${last.mahlgrad||'?'} · ${last.doseOut||'?'}g · ${last.ts}`:'–';
     html+=`
     <div class="rank-item${i===0?' top':''}" onclick="toggleRankDetail('${nEsc}',this)">
       <div class="rank-num">${i+1}</div>
       <div class="rank-info">
-        <div class="rank-name">${name}</div>
+        <div class="rank-name">${escHtml(name)}</div>
         <div class="rank-detail">${count} Bezüge · Top-${topCount} Ø <strong style="color:var(--crema)">${rankScore}</strong>${avgRatio?' · Ø 1:'+avgRatio:''}</div>
         <div class="rank-bar-wrap"><div class="rank-bar" style="width:${(rankScore/max)*100}%"></div></div>
         <div class="rank-expand">
@@ -1561,14 +1565,14 @@ function renderRangliste(){
   if(uncal.length){
     html+=`<div class="rank-calib-header">Kalibrierung läuft…</div>`;
     uncal.forEach(({name,last,count})=>{
-      const nEsc=name.replace(/'/g,"\\'");
+      const nEsc=escArg(name);
       const pct=Math.round((count/3)*100);
       const lastMeta=last?`Score ${last.score} · ${last.ts}`:'–';
       html+=`
       <div class="rank-item rank-unranked" onclick="toggleRankDetail('${nEsc}',this)">
         <div class="rank-num" style="color:var(--mid)">–</div>
         <div class="rank-info">
-          <div class="rank-name">${name}</div>
+          <div class="rank-name">${escHtml(name)}</div>
           <div class="rank-detail" style="color:var(--mid)">${count}/3 Bezüge bis Kalibrierung</div>
           <div class="rank-bar-wrap"><div class="rank-bar" style="width:${pct}%;background:var(--mid)"></div></div>
           <div class="rank-expand">
@@ -1593,7 +1597,7 @@ function showBestShot(name){
   const shots=data[name]||[];if(!shots.length)return;
   const best=shots.reduce((a,b)=>b.score>a.score?b:a);
   document.getElementById('modal-title').textContent=`⭐ Bester Bezug: ${name}`;
-  document.getElementById('modal-body').innerHTML=`<div style="font-family:'Courier New',monospace;font-size:calc(.66rem*var(--font-scale));color:var(--text);line-height:2"><strong style="color:var(--crema);display:block;margin-bottom:7px">Score ${best.score}/100 · ${'★'.repeat(best.sterne)}</strong>Dose: ${best.doseIn}g → ${best.doseOut||'?'}g (1:${best.ratio||'?'})<br>Zeit: ${best.zeit||'?'}s · Mahlgrad: ${best.mahlgrad||'?'}${best.temp?`<br>Temp: ${best.temp}°C`:''}${best.pi?`<br>Pre-Infusion: ${best.pi}s`:''}<br>${best.aromen&&best.aromen.length?`Aromen: ${best.aromen.join(', ')}<br>`:''}${best.crema?`Crema: ${best.crema}<br>`:''}${best.notizen?`<em style="color:var(--mid)">"${best.notizen}"</em><br>`:''}<span style="color:var(--mid);font-size:.9em">${best.ts}</span></div>`;
+  document.getElementById('modal-body').innerHTML=`<div style="font-family:'Courier New',monospace;font-size:calc(.66rem*var(--font-scale));color:var(--text);line-height:2"><strong style="color:var(--crema);display:block;margin-bottom:7px">Score ${best.score}/100 · ${'★'.repeat(best.sterne)}</strong>Dose: ${best.doseIn}g → ${best.doseOut||'?'}g (1:${best.ratio||'?'})<br>Zeit: ${best.zeit||'?'}s · Mahlgrad: ${best.mahlgrad||'?'}${best.temp?`<br>Temp: ${best.temp}°C`:''}${best.pi?`<br>Pre-Infusion: ${best.pi}s`:''}<br>${best.aromen&&best.aromen.length?`Aromen: ${best.aromen.join(', ')}<br>`:''}${best.crema?`Crema: ${best.crema}<br>`:''}${best.notizen?`<em style="color:var(--mid)">"${escHtml(best.notizen)}"</em><br>`:''}<span style="color:var(--mid);font-size:.9em">${best.ts}</span></div>`;
   document.getElementById('modal-bg').classList.add('show');
 }
 
@@ -1707,10 +1711,13 @@ function restoreData(event){
   const file=event.target.files[0];if(!file)return;
   const reader=new FileReader();
   reader.onload=e=>{
-    try{const backup=JSON.parse(e.target.result);if(!backup.data)throw new Error('Ungültiges Backup');
+    try{const backup=JSON.parse(e.target.result);
+    if(!backup.data||typeof backup.data!=='object'||Array.isArray(backup.data))throw new Error('Ungültiges Backup (data fehlt)');
+    // Struktur prüfen: alle Werte müssen Arrays von Bezügen sein
+    if(!Object.values(backup.data).every(v=>Array.isArray(v)))throw new Error('Ungültiges Backup (Bezüge nicht im Listenformat)');
     const cnt=Object.values(backup.data).reduce((a,s)=>a+s.length,0);
     if(!confirm(`Backup: ${cnt} Bezüge. Aktuelle Daten überschreiben?`))return;
-    data=backup.data;if(backup.customKaffees){customKaffees=backup.customKaffees;saveCustom();}
+    data=backup.data;if(Array.isArray(backup.customKaffees)){customKaffees=backup.customKaffees;saveCustom();}
     if(backup.settings){settings={...settings,...backup.settings};saveSettings();applyTheme();}
     saveData();buildPills();renderDashboard();alert(`✓ ${cnt} Bezüge wiederhergestellt.`);
     }catch(err){alert('Fehler: '+err.message);}event.target.value='';
